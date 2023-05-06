@@ -15,3 +15,10 @@ class AboutUsView(TemplateView):
         messages.warning(request, 'Warning message.')
         messages.error(request, 'Error message.')
         return super().get(request, args, kwargs)
+class Contact(TemplateView):
+     template_name = 'pages/contact.html'
+     
+class TermAndCondition(TemplateView):
+     template_name = 'pages/TermAndCondition.html'
+    
+    
