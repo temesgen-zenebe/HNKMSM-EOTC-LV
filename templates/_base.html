@@ -12,40 +12,67 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://getbootstrap.com/docs/5.2/assets/css/docs.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 <link rel="stylesheet" href="ehttps://cdn.jsdlivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <link rel="stylesheet" href="{% static 'css/main.css' %}">
 {% block javascript %}{% endblock %}
 <!--<link rel="shortcut icon" type="image/png" href="{% static 'images/favicon1.png' %}"> -->
 <title>{% block title %}{% endblock %} | HNKMSM-EOTC-LV</title>
+
 </head>
 <body>
 <header>
-  <nav class="fixed-top navbar navbar-expand-lg navbar-dark bg-dark text-warning px-3">
-    <a class="navbar-brand" href="{% url 'pages:homepage' %}"> <Span class="strong text-warning">HNKMSM-EOTC-LV</span>
-     <!-- <img src="{% static 'images/logo.png' %}" alt="Logo" class="img-fluid"/>-->
+  <nav class="fixed-top navbar navbar-dark bg-dark navbar-expand-lg text-white">
+    
+    <a class="navbar-brand d-flex px-2" href="{% url 'pages:homepage' %}">
+      <img src="{% static 'images/logo.png' %}" class="rounded-circle " alt="HNKMSM" width="40" height="40">
+      <div class="">
+        <span class="strong text-white m-small px-1">Hamere Noah Kidane Mihret & Saint Michaels EOTC </span>
+        <p class="text-white v-small"><small>ሐመረ ኖአ ቅዳኔ ሚህረት እና ቅድስት ሚካኤል ኢትዮጵያዊ ኦርቶዶክስ ተዋዶ ቤተክርስትያን</small></p>
+      </div>
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse"
       data-target="#navbarSupportedContent" aria-expanded="false"
       aria-controls="navbarSupportedContent" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-  
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+    <div class="collapse navbar-collapse px-1" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mx-2 px-3 mb-lg-0 ">
         <li class="nav-item active">
-          <a class="nav-link" href="{% url 'pages:homepage' %}">Home 
+          <a class="nav-link text-white" href="{% url 'pages:homepage' %}">Home 
             <span class="sr-only">(current)</span>
           </a>
         </li>
         <li class="nav-item active">
-            <a class="nav-link" href="{% url 'pages:about-us' %}">About</a>
+            <a class="nav-link text-dark-50" href="{% url 'pages:about-us' %}">About</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Mambership</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Next payment</a></li>
+            <li><a class="dropdown-item" href="#">payment history</a></li>
+            <li><a class="dropdown-item" href="#">update profile </a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Separated link</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Services</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">preche</a></li>
+            <li><a class="dropdown-item" href="#">babtize</a></li>
+            <li><a class="dropdown-item" href="#">Kurban</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">wedding</a></li>
+            <li><a class="dropdown-item" href="#">fetute</a></li>
+          </ul>
         </li>
       </ul>
      
     </div>
   </nav>
 </header>
-<main class="m-4 pb-5 bg-light p-1">
+<main class="m-4 pb-5 my-5 bg-light p-1">
     <!--
   {% if messages %}
     <ul>
@@ -62,176 +89,24 @@
   {% endif %}-->
   {% block main %}{% endblock %}
 </main>
-<footer class="row text-dark" style="max-width: 100%; background-color:rgb(255, 215, 0);">
-    
-            
-      <div class="container-fluid m-auto p-3 rounded" style="max-width: 100%;">
-          <div class=" text-center text-white">
-              <!-- Grid container -->
-              <div class=" text-white">
-                  <ul class="nav justify-content-center">
 
-                      <li class="nav-item">
-                          <a class="nav-link text-white" href="{% url 'pages:homepage' %}">Home</a>
-                      </li>
-                      
-                      
-                      <li class="nav-item">
-                          <a href="#" type="button" class="nav-link text-white">
-                              comments
-                          </a>
-                          
-                      </li>
-                      
-                      <li class="nav-item">
-                      <a class="nav-link  text-white" href="{% url 'pages:contact-us' %}">Contact</a>
-                      </li>
-                  </ul>
-                  <hr>
-              </div>
-              
-              <div class="row my-2 mx-auto px-2" >
-                  <div class="col-12 col-sm-6 text-white bg-primary mx-auto">
-                      <div class="card text-white bg-primary border-0">
-                          <div class="card-body">
-                              <p class="font-tickers">We’ll never share your email address with a third-party.<p>
-                              <div class="input-group input-group-sm">
-                                  <input type="text" id="" name="" class="form-control" placeholder="Your email address" />
-                                  <div class="input-group-append">
-                                      <button class="btn btn-sm btn-outline-light" type="button">Subscribe</button>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                  <hr>
-                  <div class="col-12 col-sm-12 text-white bg-primary">
-                      <div class="card text-white bg-primary border-0">
-                          <div class="card-body px-2">
-                              <p class="font-tickers text-center">Connact with us via<p>
-                              <div class="gap-4 d-flex justify-content-center">
-                                  <a class="hover-target pe-5" href="https://www.facebook.com/temesgen.tshome"><i
-                                          class="bi bi-facebook text-white"></i></a>
-                                  <a class="hover-target pe-5" href="https://www.linkedin.com/in/temesgen-t-zenebe-9a7980183"><i
-                                          class="bi bi-linkedin text-white"></i></a>
-                                  <a class="hover-target pe-5" href="https://www.github.com/"><i
-                                          class="bi bi-github text-white"></i></a>
-                                  <a class="hover-target pe-5" href="https://www.pinterest.com/"><i
-                                          class="bi bi-pinterest text-white"></i></a>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-              <!-- Copyright -->
-              <hr>
-              <div class="row my-2 mx-2 px-2 ">
-                  <div class="col-6 col-md-2 text-white bg-primary">
-                      <div class="card text-white bg-primary border-0">
-                          <div class="card-title text-start px-5 ">Corporate</div>
-                          <ul class="list-group text-start px-5  list-group-flush ">
-                              <li class="list-group-item p-2 text-white bg-primary font-tickers">About Us</li>
-                              <li class="list-group-item p-2 text-white bg-primary font-tickers">Company Profile</li>
-                              <li class="list-group-item p-2 text-white bg-primary font-tickers">Blog</li>
-                              <li class="list-group-item p-2 text-white bg-primary font-tickers">Site Maps</li>
-                              <li class="list-group-item p-2 text-white bg-primary font-tickers">Contact Us</li>
-                          </ul>
-                      </div>
-                  </div>
-                  <div class="col-6 col-md-2 text-white bg-primary">
-                      <div class="card text-white bg-primary border-0">
-                          <div class="card-title text-start px-5 ">Services</div>
-                          <ul class="list-group text-start px-5  list-group-flush">
-                              <li class="list-group-item p-2 text-white bg-primary font-tickers">Discounts</li>
-                              <li class="list-group-item p-2 text-white bg-primary font-tickers">Campaigns</li>
-                              <li class="list-group-item p-2 text-white bg-primary font-tickers">Brands</li>
-                              <li class="list-group-item p-2 text-white bg-primary font-tickers">Gift Certificates</li>
-                              <li class="list-group-item p-2 text-white bg-primary font-tickers">Returns</li>
-                          </ul>
-                      </div>
-                  </div>
-                  <div class="col-6 col-md-2 text-white bg-primary">
-                      <div class="card text-white bg-primary border-0">
-                          <div class="card-title text-start px-5 ">Account</div>
-                          <ul class="list-group text-start px-5  list-group-flush">
-                              <li class="list-group-item p-2 text-white bg-primary font-tickers">Sign In</li>
-                              <li class="list-group-item p-2 text-white bg-primary font-tickers">Sign up</li>
-                              <li class="list-group-item p-2 text-white bg-primary font-tickers">My Account</li>
-                              <li class="list-group-item p-2 text-white bg-primary font-tickers">Order History</li>
-                              <li class="list-group-item p-2 text-white bg-primary font-tickers">Wish List</li>
-                          </ul>
-                      </div>
-                  </div>
-                  <div class="col-6 col-md-2 text-white bg-primary">
-                      <div class="card text-white bg-primary border-0">
-                          <div class="card-title text-start px-5 ">Support</div>
-                          <ul class="list-group text-start px-5  list-group-flush">
-                              <li class="list-group-item p-2 text-white bg-primary font-tickers">FAQ</li>
-                              <li class="list-group-item p-2 text-white bg-primary font-tickers">Ticket</li>
-                              <li class="list-group-item p-2 text-white bg-primary font-tickers">Feedback</li>
-                          </ul>
-                      </div>
-                  </div>
-                  <div class="col-12 col-md-4 text-center pt-2 text-white bg-primary">
-                      <div class="card text-white bg-primary border-0">
-                          <div class="card-title text-start px-5 ">Contact Us</div>
-                          <div class="text-start px-5 text-white bg-primary font-tickers">
-                              <p >We are a team that create high quality </p>
-                              <p class="m-0"><strong>Address</strong></p>
-                              <p>Addis ababa,bola St, Ethiopia, autoZoom BUilding #401</p>
-                              <p class="m-0"><strong>Need Help?</strong></p>
-                              <p>Call: +251-911-456789</p>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-              <hr>
-              <div class="d-flex justify-content-center bg-primary"
-                  style="background-color: rgba(0, 0, 0, 0.2); font-size: 13; color: rgb(217, 233, 217);">
-                  <div class="small font-tickers">
-                      <a class=" text-white " style="text-decoration: none;" href="{% url 'pages:terms-polices' %}">
-                          Terms & Conditions</a> | 
-                      <a class=" text-white " style="text-decoration: none;" href="{% url 'pages:terms-polices' %}">
-                          Privacy Policy</a> | 
-                      <a class=" text-white " style="text-decoration: none;" href="{% url 'pages:terms-polices' %}">
-                          Site Map</a>
-                  </div>
-              </div>
-              <hr>
-              <div class="justify-content-between bg-primary my-2 "
-                  style="background-color: rgba(0, 0, 0, 0.2); font-size: 12; color: rgb(217, 233, 217);">
-                  <div class="small font-tickers">
-                      <a class="text-white " style="text-decoration: none;" href="{% url 'pages:homepage' %}">
-                          copyright &copy; {% now 'Y' %} @autoZoom.com All Right Reserved.</a>
-                  </div>
-              </div>
-              <!-- Copyright -->
-            </div>
+ 
+<div class="container " style="max-width: 100%; background-color:#7F6B00;">
+  <footer class="pt-5">
+    <div class="row px-4">
+      <div class="col-5 col-md-2 mb-3">
+        <h6 class="text-dark">Corporate</h6>
+        <ul class="nav flex-column">
+          <li class="nav-item mb-2 px-1"><a href="{% url 'pages:homepage' %}" class="nav-link p-0 text-white-50">Home</a></li>
+          <li class="nav-item mb-2 px-1"><a href="{% url 'pages:about-us' %}" class="nav-link p-0 text-white-50">About</a></li>
+          <li class="nav-item mb-2 px-1"><a href="{% url 'pages:contact-us' %}" class="nav-link p-0 text-white-50">contact</a></li>
+          <li class="nav-item mb-2 px-1"><a href="{% url 'pages:terms-polices' %}" class="nav-link p-0 text-white-50 ">Terms</a></li>
+          <li class="nav-item mb-2 px-1"><a href="#" class="nav-link p-0 text-white-50">FAQs</a></li>
+        </ul>
+      </div>
 
-      </div>
-  </footer>
-      <div class="col">
-        <nav>
-          <ul class="nav d-flex justify-content-center">
-            {% if  user.is_staff %}
-              <li class="nav-item "><a class="nav-link text-light " href="/admin/">Admin</a></li>
-            {% endif %}
-            <li class="nav-item">
-              <a class="nav-link " href="{% url 'pages:contact-us' %}">Contact</a>
-            </li>
-            <li class="nav-item "><a class="nav-link text-light " href="#">Content</a></li>
-            
-          </ul>
-        </nav>
-        <div class="float-right m-1 text-light text-center mr-2"><small>Copyright &copy; {% now 'Y' %}, HNKMSM-EOTC-LV</small></div>
-      </div>
-      
-</footer>
-<div class="container" style="max-width: 100%; background-color:#7F6B00;">
-  <footer class="py-5">
-    <div class="row px-3">
-      <div class="col-6 col-md-2 mb-3">
-        <h6 class="text-dark">Navigation</h6>
+      <div class="col-5 col-md-2 mb-3">
+        <h6 class="text-dark">Services</h6>
         <ul class="nav flex-column">
           <li class="nav-item mb-2 px-1"><a href="#" class="nav-link p-0 text-white-50">Home</a></li>
           <li class="nav-item mb-2 px-1"><a href="#" class="nav-link p-0 text-white-50">Features</a></li>
@@ -241,8 +116,8 @@
         </ul>
       </div>
 
-      <div class="col-6 col-md-2 mb-3">
-        <h6 class="text-dark">Navigation</h6>
+      <div class="col-5 col-md-2 mb-3">
+        <h6 class="text-dark">Account</h6>
         <ul class="nav flex-column">
           <li class="nav-item mb-2 px-1"><a href="#" class="nav-link p-0 text-white-50">Home</a></li>
           <li class="nav-item mb-2 px-1"><a href="#" class="nav-link p-0 text-white-50">Features</a></li>
@@ -251,38 +126,29 @@
           <li class="nav-item mb-2 px-1"><a href="#" class="nav-link p-0 text-white-50">About</a></li>
         </ul>
       </div>
-
-      <div class="col-6 col-md-2 mb-3">
-        <h6 class="text-dark">Navigation</h6>
-        <ul class="nav flex-column">
-          <li class="nav-item mb-2 px-1"><a href="#" class="nav-link p-0 text-white-50">Home</a></li>
-          <li class="nav-item mb-2 px-1"><a href="#" class="nav-link p-0 text-white-50">Features</a></li>
-          <li class="nav-item mb-2 px-1"><a href="#" class="nav-link p-0 text-white-50 ">Pricing</a></li>
-          <li class="nav-item mb-2 px-1"><a href="#" class="nav-link p-0 text-white-50">FAQs</a></li>
-          <li class="nav-item mb-2 px-1"><a href="#" class="nav-link p-0 text-white-50">About</a></li>
-        </ul>
-      </div>
-
       <div class="col-md-5 offset-md-1 mb-3">
         <form>
           <h5>Subscribe to our newsletter</h5>
           <p>Monthly digest of what's new and exciting from us.</p>
           <div class="d-flex flex-column flex-sm-row w-100 gap-2">
             <label for="newsletter1" class="visually-hidden">Email address</label>
-            <input id="newsletter1" type="text" class="form-control" placeholder="Email address">
-            <button class="btn btn-primary" type="button">Subscribe</button>
+            <input id="newsletter1" type="text" class="form-control form-control-sm" placeholder="Email address">
+            <button class="btn btn-sm btn-outline-light" type="button">Subscribe</button>
           </div>
         </form>
+        <div class="m-auto" style="max-width:100%" >
+          <ul class="nav gap-4  text-center my-2 px-5">
+            <li class="nav-item "><a class="link-dark" href="#"><i class="bi bi-twitter text-white-50" width="27" height="27"></i></a></li>
+            <li class="nav-item "><a class="link-dark" href="#"><i class="bi bi-instagram text-white-50" width="24" height="24"></i></a></li>
+            <li class="nav-item "><a class="link-dark" href="#"><i class="bi bi-facebook text-white-50" width="24" height="24"></i></a></li>
+          </ul>
+        </div>
       </div>
     </div>
 
-    <div class="d-flex flex-column flex-sm-row justify-content-between py-2 my-1 border-top">
-      <p>© 2022 Company, Inc. All rights reserved.</p>
-      <ul class="list-unstyled d-flex">
-        <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"></use></svg></a></li>
-        <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"></use></svg></a></li>
-        <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"></use></svg></a></li>
-      </ul>
+    <div class="d-flex flex-column flex-sm-row justify-content-between py-2 px-2 border-top text-white-50">
+      <div class="text-white-50 text-center mr-2"><small>Copyright &copy; {% now 'Y' %}, HNKMSM-EOTC-LV All Right Reserved.</small></div>
+      
     </div>
   </footer>
 </div>
