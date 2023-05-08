@@ -1,0 +1,39 @@
+{% extends "_base.html" %}
+{% block title %}user Dashboard{% endblock %}
+{% block main %}
+<div class="mx-5 my-5">
+    
+    <div class="card text-center">
+        <div class="card-header" style="max-width: 100%; background-color:#7F6B00;">
+            <h3 class="text-light"> Project under constaraction </h3>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title"> childcare service project </h5>
+            <p class="card-text text-start">
+                A church daycare is a type of childcare service that is operated by a church or religious organization. It provides a safe and nurturing environment for children of various ages while their parents are at work,
+                attending church services or participating in other church-related activities.A church daycare may offer a range of services such as educational programs, recreational activities, snacks and meals, and spiritual teachings.
+                The curriculum of a church daycare may be designed to incorporate religious teachings, values, and traditions in addition to secular education.
+                The church daycare may be operated as a non-profit organization, and the staff may include qualified childcare providers, teachers, and volunteers who are committed to providing quality care and education to the children. The fees charged for the service may be competitive with those of other daycare centers,
+                and financial assistance may be available to families in need.
+            
+            </p>
+            <hr>
+            <p class="card-text text-start ">
+                የቤተ ክርስቲያን መዋለ ሕጻናት በቤተክርስቲያን ወይም በሃይማኖት ድርጅት የሚተዳደር የሕጻናት አገልግሎት ዓይነት ነው። 
+                ወላጆቻቸው በሥራ ላይ እያሉ፣ የቤተ ክርስቲያን አገልግሎቶችን ሲከታተሉ ወይም ከቤተ ክርስቲያን ጋር በተያያዙ ሌሎች ተግባራት ላይ በሚሳተፉበት ጊዜ ለተለያዩ ዕድሜ ላሉ ልጆች ደህንነቱ የተጠበቀ እና የመንከባከብ አካባቢን ይሰጣል።
+                የቤተ ክርስቲያን መዋለ ሕጻናት እንደ ትምህርታዊ ፕሮግራሞች፣ የመዝናኛ እንቅስቃሴዎች፣ መክሰስ እና ምግቦች፣ እና መንፈሳዊ ትምህርቶች ያሉ አገልግሎቶችን ሊሰጥ ይችላል። የቤተ ክርስቲያን መዋለ ሕጻናት ሥርዓተ ትምህርት ከዓለማዊ ትምህርት በተጨማሪ ሃይማኖታዊ ትምህርቶችን፣ እሴቶችን እና ወጎችን ለማካተት ሊዘጋጅ ይችላል።
+                የቤተክርስቲያኑ መዋእለ ሕጻናት እንደ ለትርፍ ያልተቋቋመ ድርጅት ሊሰራ ይችላል፣ እና ሰራተኞቹ ብቃት ያላቸውን የሕጻናት እንክብካቤ አቅራቢዎችን፣ አስተማሪዎች እና በጎ ፈቃደኞችን ለልጆች ጥራት ያለው እንክብካቤ እና ትምህርት ለመስጠት ቁርጠኛ ሊሆኑ ይችላሉ። ለአገልግሎቱ የሚከፈለው ክፍያ ከሌሎች የመዋዕለ ሕፃናት ማእከላት ጋር ተወዳዳሪ ሊሆን ይችላል፣ እና የገንዘብ እርዳታ ለተቸገሩ ቤተሰቦች ሊሰጥ ይችላል።
+            </p> 
+            
+            <div class="btn-group gap-2" role="group" aria-label="Basic mixed styles example">
+                <a href="{% url 'projectVote:proposal_list' %}" type="button" class="btn btn-sm btn-outline-warning">I vote to support </a> 
+                <a href="{% url 'pages:contact-us' %}" type="button" class="btn btn-sm btn-outline-success">conatct us</a> 
+            </div>
+            
+        </div>
+        <div class="card-footer text-muted">
+          2 days ago
+        </div>
+      </div>
+</div>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends "_base.html" %}
+
+{% block title %}ProposalListView{% endblock %}
+{% block main %}
+<div class="mx-5 my-5">
+    <h2>Welcome! ProposalListView</h2>
+    <h1>Project Proposals</h1>
+    {% if user.is_authenticated %}
+        <a href="{% url 'projectVote:proposal_create' %}" class="btn btn-primary mb-3">Create New Proposal</a>
+    {% endif %}
+    <ul>
+    {% for proposal in proposals %}
+        <li><a href="{% url 'projectVote:proposal_detail' proposal.id %}">{{ proposal.title }}</a></li>
+    {% empty %}
+        <li>No proposals yet.</li>
+    {% endfor %}
+    </ul>
+</div>
+{% endblock %}

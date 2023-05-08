@@ -19,6 +19,12 @@ class Contact(TemplateView):
      template_name = 'pages/contact.html'
      
 class TermAndCondition(TemplateView):
-     template_name = 'pages/TermAndCondition.html'
+     template_name = 'pages/termAndCondition.html'
+     
+class UserDashboard(TemplateView):
+     template_name = 'pages/userDashboard.html' 
+     
+class ChildCare(TemplateView):
+     template_name = 'pages/childCare.html'
     
     

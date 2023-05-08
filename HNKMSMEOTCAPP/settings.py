@@ -30,7 +30,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     
     # local
-    'pages.apps.PagesConfig', 
+    'pages.apps.PagesConfig',
+    'projectVote.apps.ProjectvoteConfig',
 ]
 
 MIDDLEWARE = [
