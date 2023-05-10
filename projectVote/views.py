@@ -19,7 +19,7 @@ class ProposalDetailView(DetailView):
 class ProposalCreateView(LoginRequiredMixin, CreateView):
     model = ProjectProposal
     template_name = 'projectVote/proposal_form.html'
-    fields = ['title', 'description']
+    fields = ['title', 'description','image']
     success_url = reverse_lazy('projectVote:proposal_list')
 
     def form_valid(self, form):
@@ -29,7 +29,7 @@ class ProposalCreateView(LoginRequiredMixin, CreateView):
 class ProposalUpdateView(LoginRequiredMixin, UpdateView):
     model = ProjectProposal
     template_name = 'projectVote/proposal_form.html'
-    fields = ['title', 'description']
+    fields = ['title', 'description','image']
 
 class ProposalDeleteView(LoginRequiredMixin, DeleteView):
     model = ProjectProposal

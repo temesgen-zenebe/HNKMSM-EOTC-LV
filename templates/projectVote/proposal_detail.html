@@ -2,21 +2,42 @@
 
 {% block title %}ProposalDetail{% endblock %}
 {% block main %}
-<div class="mx-5 my-5">
-    <h1>{{ proposal.title }}</h1>
-    <p>{{ proposal.description }}</p>
-    <div class="btn-group gap-2" role="group" aria-label="Basic mixed styles example">
-        <form action="{% url 'projectVote:proposal_vote' proposal.id %}" method="post">
-            {% csrf_token %}
-            {% if user.is_authenticated %}
-                <button type="submit" class="btn btn-sm {% if vote and vote.vote == 'LIKE' %}btn-success{% else %}btn-outline-success{% endif %}" name="vote" value="LIKE">Like</button>
-                <button type="submit" class="btn btn-sm {% if vote and vote.vote == 'SUPPORT' %}btn-warning{% else %}btn-outline-warning{% endif %}" name="vote" value="SUPPORT">I support</button>
-                <button type="submit" class="btn btn-sm {% if vote and vote.vote == 'UNLIKE' %}btn-danger{% else %}btn-outline-danger{% endif %}" name="vote" value="UNLIKE">Unlike</button>
-                <button type="submit" class="btn btn-sm {% if vote and vote.vote == 'UNSURE' %}btn-secondary{% else %}btn-outline-secondary{% endif %}" name="vote" value="UNSURE">Unsure</button>
-            {% endif %}
-        </form>
+<div class="mx-1 my-5">
+    <div class="text-start">
+        <div class="row">
+          <div class="col-sm-8">
+            <div class="card">
+                <h5 class="card-header">{{ proposal.title|title }}</h5>
+                <div class="card-body">
+                  <p class="card-text">{{ proposal.description }}</p>   
+            </div>
+            <div class="card-footer text-muted text-center">
+                <div class="btn-group gap-1 " role="group" aria-label="Basic mixed styles example">
+                    <form action="{% url 'projectVote:proposal_vote' proposal.id %}" method="post">
+                        {% csrf_token %}
+                        {% if user.is_authenticated %}
+                            <button type="submit" class="btn btn-sm {% if vote and vote.vote == 'LIKE' %}btn-success{% else %}btn-outline-success{% endif %}" name="vote" value="LIKE">Like</button>
+                            <button type="submit" class="btn btn-sm {% if vote and vote.vote == 'SUPPORT' %}btn-warning{% else %}btn-outline-warning{% endif %}" name="vote" value="SUPPORT">I support</button>
+                            <button type="submit" class="btn btn-sm {% if vote and vote.vote == 'UNLIKE' %}btn-danger{% else %}btn-outline-danger{% endif %}" name="vote" value="UNLIKE">Unlike</button>
+                            <button type="submit" class="btn btn-sm {% if vote and vote.vote == 'UNSURE' %}btn-secondary{% else %}btn-outline-secondary{% endif %}" name="vote" value="UNSURE">Unsure</button>
+                            <a type="button" href="{% url 'projectVote:proposal_list' %}" class="btn btn-sm btn-outline-secondary">Back</a>
+                        {% endif %}
+                    </form>
+                </div>
+              </div>
+          </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="card">
+                <h5 class="card-header">Vote Result</h5>
+                <div class="card-body">
+                  <h5 class="card-title">Special title treatment</h5>
+                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+              </div>
+          </div>
+        </div>
     </div>
-    
-
 </div>
 {% endblock %}
