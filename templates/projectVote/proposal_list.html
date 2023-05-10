@@ -2,10 +2,10 @@
 
 {% block title %}Proposal List Project{% endblock %}
 {% block main %}
-<div class="mx-3 my-5">
+<div class="mx-2 my-5">
         <section class="py-1 text-center container bg-warning">
           <div class="row py-lg-3">
-            <div class="col-lg-6 col-md-8 mx-auto">
+            <div class="col-lg-10 col-md-8 mx-auto">
               <h1 class="fw-light py-2">Welcome!user</h1>
               <h4 class="fw-light py-1">Cherche Fucher Project Proposals</h4>
               <small class="text-white text-start my-2">
@@ -16,7 +16,7 @@
                </small>
                <hr>
                 {% if user.is_authenticated %}
-                 <a href="{% url 'projectVote:proposal_create' %}" class="btn btn-sm btn-success my-2">Create New Proposal</a>
+                 <a href="{% url 'projectVote:proposal_create' %}" class="btn btn-sm btn-outline-success my-2">Create New Proposal</a>
                 {% endif %}
                 <a href="{% url 'pages:contact-us' %}" class="btn btn-sm btn-outline-light my-2">conatct us</a>
               
@@ -38,7 +38,7 @@
                         {% endif %}
                         
                         <div class="card-body">
-                            <h6 class="card-title"><a href="{% url 'projectVote:proposal_detail' proposal.id %}">{{ proposal.title|title }}</a></h6>
+                            <h5 class="card-title" ><a href="{% url 'projectVote:proposal_detail' proposal.id %}" style="color:#7F6B00;">{{ proposal.title|title }}</a></h5>
                             <p class="card-text">{{ proposal.description}}</p>
                             <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group gap-2">
@@ -48,7 +48,7 @@
                                 <a href="{% url 'projectVote:proposal_delete' proposal.id %}" type="button" class="btn btn-sm btn-outline-danger">Delete</a>
                                 {% endif %}
                             </div>
-                            <small class="text-muted">9 mins</small>
+                            <small class="text-muted">{{ proposal.updated}}</small>
                             </div>
                         </div>
                         </div>

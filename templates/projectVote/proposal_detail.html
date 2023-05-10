@@ -3,17 +3,17 @@
 {% block title %}ProposalDetail{% endblock %}
 {% block main %}
 <div class="mx-1 my-5">
-    <div class="text-start">
+    <div class="text-start py-3">
         <div class="row">
           <div class="col-sm-8">
             <div class="card">
-                <h5 class="card-header">{{ proposal.title|title }}</h5>
+                <h5 class="card-header text-white" style="max-width: 100%; background-color:#7F6B00;">{{ object.title|title }}</h5>
                 <div class="card-body">
-                  <p class="card-text">{{ proposal.description }}</p>   
+                  <p class="card-text">{{ object.description }}</p>   
             </div>
             <div class="card-footer text-muted text-center">
                 <div class="btn-group gap-1 " role="group" aria-label="Basic mixed styles example">
-                    <form action="{% url 'projectVote:proposal_vote' proposal.id %}" method="post">
+                    <form action="{% url 'projectVote:proposal_vote' object.id %}" method="post">
                         {% csrf_token %}
                         {% if user.is_authenticated %}
                             <button type="submit" class="btn btn-sm {% if vote and vote.vote == 'LIKE' %}btn-success{% else %}btn-outline-success{% endif %}" name="vote" value="LIKE">Like</button>
@@ -29,15 +29,53 @@
           </div>
           <div class="col-sm-4">
             <div class="card">
-                <h5 class="card-header">Vote Result</h5>
+                <h5 class="card-header">Vote Result chart </h5>
                 <div class="card-body">
-                  <h5 class="card-title">Special title treatment</h5>
-                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <div calss="m-auto" style="width: 80%;">
+                        <canvas id="vote-chart"></canvas>
+                    </div>
                 </div>
               </div>
           </div>
         </div>
     </div>
+<!-- Load Chart.js library -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.3.2"></script>
+<!-- Initialize the pie chart with the votes data -->
+<script>
+    var votes_data = {{ votes_data|safe }};
+    var vote_labels = votes_data.map(function(vote) {
+      return vote.vote;
+    });
+    var vote_counts = votes_data.map(function(vote) {
+      return vote.count;
+    });
+
+    var vote_chart = new Chart('vote-chart', {
+      type: 'doughnut',
+      data: {
+        labels: vote_labels,
+        datasets: [{
+          data: vote_counts,
+          backgroundColor: [
+            '#28a745',
+            '#ffc107',
+            '#dc3545',
+            '#6c757d',
+            '#28a745'
+          ]
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            position: 'bottom'
+          }
+        }
+      }
+    });
+</script>
 </div>
 {% endblock %}

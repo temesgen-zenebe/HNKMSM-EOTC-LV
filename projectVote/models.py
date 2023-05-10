@@ -14,7 +14,7 @@ class ProjectProposal(models.Model):
         return self.title 
     
     def get_absolute_url(self):
-        return reverse('proposal_detail', args=[str(self.id)])
+        return reverse('projectVote:proposal_detail', args=[str(self.id)])
 
 
 class Vote(models.Model):
