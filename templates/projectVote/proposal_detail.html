@@ -7,7 +7,7 @@
         <div class="row">
           <div class="col-sm-8">
             <div class="card">
-                <h5 class="card-header text-white" style="max-width: 100%; background-color:#7F6B00;">{{ object.title|title }}</h5>
+                <h5 class="card-header cardHeder">{{ object.title|title }}</h5>
                 <div class="card-body">
                   <p class="card-text">{{ object.description }}</p>   
             </div>
@@ -29,11 +29,12 @@
           </div>
           <div class="col-sm-4">
             <div class="card">
-                <h5 class="card-header">Vote Result chart </h5>
+                <h6 class="card-header cardHeder" >Vote Result chart </h6>
                 <div class="card-body">
-                    <div calss="m-auto" style="width: 80%;">
+                    <div calss="mx-auto" style="width: 80%;">
                         <canvas id="vote-chart"></canvas>
                     </div>
+                    <small class="text-muted text-center">{{object.updated}}</small>
                 </div>
               </div>
           </div>

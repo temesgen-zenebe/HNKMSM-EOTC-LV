@@ -71,8 +71,14 @@ class ProposalCreateView(LoginRequiredMixin, CreateView):
 
 class ProposalUpdateView(LoginRequiredMixin, UpdateView):
     model = ProjectProposal
-    template_name = 'projectVote/proposal_form.html'
-    fields = ['title', 'description','image']
+    fields = ['title', 'description', 'image']
+    template_name = "projectVote/proposal_form_update.html"
+   
+    success_url = reverse_lazy('projectVote:proposal_list')
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
 
 class ProposalDeleteView(LoginRequiredMixin, DeleteView):
     model = ProjectProposal

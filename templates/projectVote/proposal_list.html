@@ -8,7 +8,7 @@
             <div class="col-lg-10 col-md-8 mx-auto">
               <h1 class="fw-light py-2">Welcome!user</h1>
               <h4 class="fw-light py-1">Cherche Fucher Project Proposals</h4>
-              <small class="text-white text-start my-2">
+              <small class="text-dark text-start my-2">
                 Welcome to the Church's upcoming project proposals list page! We are excited to have you here and hope you find the information provided to be helpful and informative.
                 Thank you for taking the time to visit our Church's upcoming project proposals list page. We value your feedback and look forward to your support as we work towards
                 creating a more service of the Church for everyone.We understand that you may have some questions or concerns about these upcoming projects,
@@ -39,8 +39,10 @@
                         
                         <div class="card-body">
                             <h5 class="card-title" ><a href="{% url 'projectVote:proposal_detail' proposal.id %}" style="color:#7F6B00;">{{ proposal.title|title }}</a></h5>
-                            <p class="card-text">{{ proposal.description}}</p>
-                            <div class="d-flex justify-content-between align-items-center">
+                            <hr>
+                            <p class="card-text">{{ proposal.description|truncatewords:60}} <a href="{% url 'projectVote:proposal_detail' proposal.id %}"   class="text-warning">Red more >></a></p>
+                            <hr>
+                            <div class="d-flex justify-content-between align-items-center pt-3">
                             <div class="btn-group gap-2">
                                 <a href="{% url 'projectVote:proposal_detail' proposal.id %}"  type="button" class="btn btn-sm btn-outline-warning">Detail</a>
                                 {% if user.is_authenticated %}

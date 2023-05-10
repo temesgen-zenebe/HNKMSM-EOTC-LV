@@ -142,135 +142,78 @@
   {% block main %}{% endblock %}
 </main>
 
- 
-<div class="container " style="max-width: 100%; background-color:#7F6B00;">
-  <footer class="pt-5">
-    <div class="row px-5">
-      <div class="col-5 col-md-2 mb-3">
-        <h6 class="text-dark">Church</h6>
-        <ul class="nav flex-column">
-          <li class="nav-item mb-2 px-1"><a href="{% url 'pages:homepage' %}" class="nav-link p-0 text-white-50">Home</a></li>
-          <li class="nav-item mb-2 px-1"><a href="{% url 'pages:about-us' %}" class="nav-link p-0 text-white-50">About</a></li>
-          <li class="nav-item mb-2 px-1"><a href="{% url 'pages:contact-us' %}" class="nav-link p-0 text-white-50">contact</a></li>
-          <li class="nav-item mb-2 px-1"><a href="{% url 'pages:contact-us' %}" class="nav-link p-0 text-white-50">Must Know</a></li>
-          <li class="nav-item mb-2 px-1"><a href="#" class="nav-link p-0 text-white-50">FAQs</a></li>
-          <li class="nav-item mb-2 px-1"><a href="{% url 'projectVote:proposal_list' %}" class="nav-link p-0 text-white-50">New Projects</a></li>
-        </ul>
-      </div>
-
-      <div class="col-5 col-md-2 mb-3">
-        <h6 class="text-dark">Services</h6>
-        <ul class="nav flex-column">
-          
-          <li class="nav-item mb-2 px-1"><a href="#" class="nav-link p-0 text-white-50">Preaching</a></li>
-          <li class="nav-item mb-2 px-1"><a href="#" class="nav-link p-0 text-white-50">Baptize</a></li>
-          <li class="nav-item mb-2 px-1"><a href="#" class="nav-link p-0 text-white-50">Korban</a></li>
-          <li class="nav-item mb-2 px-1"><a href="#" class="nav-link p-0 text-white-50">wedding</a></li>
-          <li class="nav-item mb-2 px-1"><a href="#" class="nav-link p-0 text-white-50">funeral service </a></li>
-          <li class="nav-item mb-2 px-1"><a href="{% url 'pages:childcare' %}" class="nav-link p-0 text-white-50">childcare</a></li>
-        </ul>
-      </div>
-
-      <div class="col-5 col-md-2 mb-3">
-        <h6 class="text-dark">Latest</h6>
-        <ul class="nav flex-column">
-          <li class="nav-item mb-2 px-1"><a href="#" class="nav-link p-0 text-white-50">Even</a></li>
-          <li class="nav-item mb-2 px-1"><a href="#" class="nav-link p-0 text-white-50">Blogs</a></li>
-          <li class="nav-item mb-2 px-1"><a href="#" class="nav-link p-0 text-white-50 ">Catalogs</a></li>
-          <li class="nav-item mb-2 px-1"><a href="#" class="nav-link p-0 text-white-50">News</a></li>
-          <li class="nav-item mb-2 px-1"><a href="#" class="nav-link p-0 text-white-50">Glory</a></li>
-          <li class="nav-item mb-2 px-1"><a href="#" class="nav-link p-0 text-white-50">Shop</a></li>
-        </ul>
-      </div>
-      
-      <div class="col-md-5 offset-md-1 mb-3">
-        <form>
-          <h6>Subscribe to our new Updates</h6>
-          <small class="text-white-50" >we shar what's new and exciting from us.</small>
-          <div class="d-flex flex-column flex-sm-row w-100 gap-2">
-            <label for="newsletter1" class="visually-hidden">Email address</label>
-            <input id="newsletter1" type="text" class="form-control form-control-sm" placeholder="Email address">
-            <button class="btn btn-sm btn-outline-light" type="button">Subscribe</button>
-          </div>
-        </form>
-        
-        <div class="text-white-50 text-center mr-2">
-          <ul class="nav justify-content-center gap-4 my-4">
-            <li class="nav-item "><a class="link-dark" href="#"><i class="bi bi-twitter text-white-50" width="27" height="27"></i></a></li>
-            <li class="nav-item "><a class="link-dark" href="#"><i class="bi bi-instagram text-white-50" width="24" height="24"></i></a></li>
-            <li class="nav-item "><a class="link-dark" href="#"><i class="bi bi-facebook text-white-50" width="24" height="24"></i></a></li>
+  <!--footer section-->
+  <div class="container " style="max-width: 100%; background-color:#7F6B00;">
+    <footer class="pt-5">
+      <div class="row px-5">
+        <div class="col-5 col-md-2 mb-3">
+          <h6 class="text-dark">Church</h6>
+          <ul class="nav flex-column">
+            <li class="nav-item mb-2 px-1"><a href="{% url 'pages:homepage' %}" class="nav-link p-0 text-white-50">Home</a></li>
+            <li class="nav-item mb-2 px-1"><a href="{% url 'pages:about-us' %}" class="nav-link p-0 text-white-50">About</a></li>
+            <li class="nav-item mb-2 px-1"><a href="{% url 'pages:contact-us' %}" class="nav-link p-0 text-white-50">contact</a></li>
+            <li class="nav-item mb-2 px-1"><a href="{% url 'pages:contact-us' %}" class="nav-link p-0 text-white-50">Must Know</a></li>
+            <li class="nav-item mb-2 px-1"><a href="#" class="nav-link p-0 text-white-50">FAQs</a></li>
+            <li class="nav-item mb-2 px-1"><a href="{% url 'projectVote:proposal_list' %}" class="nav-link p-0 text-white-50">New Projects</a></li>
           </ul>
         </div>
+
+        <div class="col-5 col-md-2 mb-3">
+          <h6 class="text-dark">Services</h6>
+          <ul class="nav flex-column">
+            
+            <li class="nav-item mb-2 px-1"><a href="#" class="nav-link p-0 text-white-50">Preaching</a></li>
+            <li class="nav-item mb-2 px-1"><a href="#" class="nav-link p-0 text-white-50">Baptize</a></li>
+            <li class="nav-item mb-2 px-1"><a href="#" class="nav-link p-0 text-white-50">Korban</a></li>
+            <li class="nav-item mb-2 px-1"><a href="#" class="nav-link p-0 text-white-50">wedding</a></li>
+            <li class="nav-item mb-2 px-1"><a href="#" class="nav-link p-0 text-white-50">funeral service </a></li>
+            <li class="nav-item mb-2 px-1"><a href="{% url 'pages:childcare' %}" class="nav-link p-0 text-white-50">childcare</a></li>
+          </ul>
+        </div>
+
+        <div class="col-5 col-md-2 mb-3">
+          <h6 class="text-dark">Latest</h6>
+          <ul class="nav flex-column">
+            <li class="nav-item mb-2 px-1"><a href="#" class="nav-link p-0 text-white-50">Even</a></li>
+            <li class="nav-item mb-2 px-1"><a href="#" class="nav-link p-0 text-white-50">Blogs</a></li>
+            <li class="nav-item mb-2 px-1"><a href="#" class="nav-link p-0 text-white-50 ">Catalogs</a></li>
+            <li class="nav-item mb-2 px-1"><a href="#" class="nav-link p-0 text-white-50">News</a></li>
+            <li class="nav-item mb-2 px-1"><a href="#" class="nav-link p-0 text-white-50">Glory</a></li>
+            <li class="nav-item mb-2 px-1"><a href="#" class="nav-link p-0 text-white-50">Shop</a></li>
+          </ul>
+        </div>
+        
+        <div class="col-md-5 offset-md-1 mb-3">
+          <form>
+            <h6>Subscribe to our new Updates</h6>
+            <small class="text-white-50" >we shar what's new and exciting from us.</small>
+            <div class="d-flex flex-column flex-sm-row w-100 gap-2">
+              <label for="newsletter1" class="visually-hidden">Email address</label>
+              <input id="newsletter1" type="text" class="form-control form-control-sm" placeholder="Email address">
+              <button class="btn btn-sm btn-outline-light" type="button">Subscribe</button>
+            </div>
+          </form>
+          
+          <div class="text-white-50 text-center mr-2">
+            <ul class="nav justify-content-center gap-4 my-4">
+              <li class="nav-item "><a class="link-dark" href="#"><i class="bi bi-twitter text-white-50" width="27" height="27"></i></a></li>
+              <li class="nav-item "><a class="link-dark" href="#"><i class="bi bi-instagram text-white-50" width="24" height="24"></i></a></li>
+              <li class="nav-item "><a class="link-dark" href="#"><i class="bi bi-facebook text-white-50" width="24" height="24"></i></a></li>
+            </ul>
+          </div>
+        </div>
       </div>
-    </div>
 
-    <div class="d-flex flex-column flex-sm-row justify-content-between py-2 px-2 border-top text-white-50">
-      <div class="text-white-50 text-center mr-2"><small>Copyright &copy; {% now 'Y' %}, HNKMSM-EOTC-LV All Right Reserved.</small></div>
-      <div class="text-white-50 text-center mr-2 "><small><a href="{% url 'pages:terms-polices' %}" class="text-white-50 px-1 ">Terms&Conditions</a></small>|<small><a href="{% url 'pages:terms-polices' %}" class="text-white-50 px-1">Privacy Policy </a></small></div>
-    </div>
-  </footer>
-</div>
-<!-- ADD BOOTSTRAP JS FROM https://getbootstrap.com/ -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<!-- Load Chart.js library 
-<script src="https://cdn.jsdelivr.net/npm/chart.js@3.3.2/dist/chart.min.js"></script>
--->
-<!-- Initialize the pie chart with the votes data 
-
-<script>
-  var votes_data = JSON.parse('{{ votes_data|escapejs|safe }}');
-  var vote_chart = new Chart(document.getElementById('vote-chart'), {
-    type: 'pie',
-    data: {
-      labels: votes_data.map(vote => vote.vote),
-      datasets: [{
-        data: votes_data.map(vote => vote.count),
-        backgroundColor: [
-          'rgba(255, 99, 132, 0.6)',
-          'rgba(54, 162, 235, 0.6)',
-          'rgba(255, 206, 86, 0.6)',
-          'rgba(75, 192, 192, 0.6)',
-          'rgba(153, 102, 255, 0.6)',
-        ],
-        borderColor: [
-          'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)',
-        ],
-        borderWidth: 1
-      }]
-    },
-    options: {
-      responsive: true,
-      plugins: {
-        legend: {
-          position: 'right'
-        }
-      }
-    }
-  });
-
-  // Send an AJAX request to create or update a vote when a vote button is clicked
-  $('.btn-group button').click(function() {
-    var vote = $(this).data('vote');
-
-    $.ajax({
-      url: '{{ object.get_absolute_url }}',
-      method: 'POST',
-      data: {'vote': vote},
-      success: function(response) {
-        if (response.success) {
-          // Reload the page to display the updated vote counts
-          window.location.reload();
-        }
-      }
-    });
-  });
-</script>-->
-
+      <div class="d-flex flex-column flex-sm-row justify-content-between py-2 px-2 border-top text-white-50">
+        <div class="text-white-50 text-center mr-2"><small>Copyright &copy; {% now 'Y' %}, HNKMSM-EOTC-LV All Right Reserved.</small></div>
+        <div class="text-white-50 text-center mr-2 "><small><a href="{% url 'pages:terms-polices' %}" class="text-white-50 px-1 ">Terms&Conditions</a></small>|<small><a href="{% url 'pages:terms-polices' %}" class="text-white-50 px-1">Privacy Policy </a></small></div>
+      </div>
+    </footer>
+  </div>
+  <!--end footer-->
+  <!-- ADD BOOTSTRAP JS FROM https://getbootstrap.com/ -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>

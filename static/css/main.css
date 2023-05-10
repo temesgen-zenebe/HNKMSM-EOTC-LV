@@ -22,3 +22,8 @@ a{
     font-size: 13px;
     font-weight: 500;
 }
+.cardHeder{
+    max-width: 100%; 
+    background-color:#7F6B00;
+    color: white;
+}

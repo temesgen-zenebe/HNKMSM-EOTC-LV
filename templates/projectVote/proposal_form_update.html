@@ -1,0 +1,22 @@
+{% extends "_base.html" %}
+
+{% block title %}Proposal creating form{% endblock %}
+{% block main %}
+<div class="mx-4 my-5">
+    
+    <div class="card text-start">
+        <div class="card-header">
+            <h6>Update Proposaled Project </h6>
+        </div>
+        <div class="card-body">
+           
+            <form method="post">
+              {% csrf_token %}
+              {{ form.as_p }}
+              <button type="submit" class="btn btn-primary">Update</button>
+              <a href="{% url 'projectVote:proposal_detail' object.pk %}" class="btn btn-secondary">Cancel</a>
+            </form>
+        </div>
+      </div>
+</div>
+{% endblock %}

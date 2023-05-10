@@ -2,7 +2,20 @@
 
 {% block title %}Proposal creating form{% endblock %}
 {% block main %}
-<div class="mx-5 my-5">
-    <h2>Welcome! proposal_confirm_delete</h2>
+<div class="mx-2 my-5">
+    <div class="card text-center">
+        <div class="card-header">
+            <h5>Confirm Deletion</h5>
+        </div>
+        <div class="card-body">
+            <p>Are you sure you want to delete "{{ object.title }}"?</p>
+            <form method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                <a href="{% url 'projectVote:proposal_detail' object.pk %}" class="btn btn-sm btn-outline-secondary">Cancel</a>
+            </form>
+        </div>
+    </div>
 </div>
+
 {% endblock %}

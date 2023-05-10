@@ -1,8 +1,21 @@
 {% extends "_base.html" %}
+{% load crispy_forms_tags %}
 
 {% block title %}Proposal creating form{% endblock %}
 {% block main %}
-<div class="mx-5 my-5">
-    <h2>Welcome! Proposal Creating form</h2>
+<div class="mx-2 my-5" >
+    
+    <div class="card text-start">
+        <div class="card-header">
+            <h6>Create a New Project Proposal</h6>
+        </div>
+        <div class="card-body">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+      </div>
 </div>
 {% endblock %}
