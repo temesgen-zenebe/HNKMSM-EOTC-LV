@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os
 from pathlib import Path
+import dj_database_url  
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -33,7 +34,8 @@ INSTALLED_APPS = [
     'pages.apps.PagesConfig',
     'projectVote.apps.ProjectvoteConfig',
     'crispy_forms',
-    'crispy_bootstrap5',  
+    'crispy_bootstrap5', 
+    'users.apps.UsersConfig',
 ]
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
@@ -79,7 +81,9 @@ DATABASES = {
     }
 }"""
 
-DATABASES = { 'default' : dj_database_url.config()}
+#DATABASES = { 'default' : dj_database_url.config()}
+DATABASES = { 'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))}
+
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
@@ -98,6 +102,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# AUTHENTICATION SETTINGS
+AUTH_USER_MODEL = 'users.CustomUser'
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/

@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
@@ -6,7 +7,7 @@ class ProjectProposal(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
     image = models.ImageField(upload_to='project/%Y/%m/%d', blank=True, null=True)
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     
@@ -25,7 +26,7 @@ class Vote(models.Model):
         ('UNSURE', 'Unsure'),
         ('CONTACT', 'Contact Us'),
     )
-    voter = models.ForeignKey(User, on_delete=models.CASCADE)
+    voter = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     proposal = models.ForeignKey(ProjectProposal, on_delete=models.CASCADE)
     vote = models.CharField(max_length=10, choices=VOTE_CHOICES)
     created_at = models.DateTimeField(auto_now_add=True)
