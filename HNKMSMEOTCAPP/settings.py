@@ -23,22 +23,34 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Application definition
 
 INSTALLED_APPS = [
+    # Built-in Django apps
     'django.contrib.admin',
     'django.contrib.admindocs',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'django.contrib.sites',
     'django.contrib.staticfiles',
     
+    # Third-party
+    'crispy_forms',
+    'crispy_bootstrap5',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+
+    
     # local
+    'users.apps.UsersConfig',
     'pages.apps.PagesConfig',
     'projectVote.apps.ProjectvoteConfig',
-    'crispy_forms',
-    'crispy_bootstrap5', 
-    'users.apps.UsersConfig',
+    
 ]
+SITE_ID = 1
+
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 MIDDLEWARE = [
@@ -84,6 +96,13 @@ DATABASES = {
 
 #DATABASES = { 'default' : dj_database_url.config()}
 DATABASES = { 'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))}
+
+AUTHENTICATION_BACKENDS = (
+# Needed to login by username in Django admin, even w/o `allauth`
+'django.contrib.auth.backends.ModelBackend',
+# `allauth`-specific auth methods, such as login by e-mail
+'allauth.account.auth_backends.AuthenticationBackend',
+)
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
