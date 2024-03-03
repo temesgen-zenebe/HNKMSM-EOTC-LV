@@ -1,5 +1,8 @@
 {% extends "_base.html" %}
-
+{% load static %}
+{% block javascript %}
+   {% comment %} <script type="text/javascript" src="{% static '' %}" defer ></script> {% endcomment %}
+{% endblock %}
 {% block title %}Proposal List Project{% endblock %}
 {% block main %}
 <div class="mx-2 my-5">

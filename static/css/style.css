@@ -247,7 +247,7 @@ h4, h5, h6, .h4, .h5, .h6 {
     position: relative;
     height: 100%;
     min-height: 400px;
-    background: linear-gradient(rgba(254, 218, 154, 0.1), rgba(254, 218, 154, 0.1)), url(../img/fact.jpg);
+    /*background: linear-gradient(rgba(254, 218, 154, 0.1), rgba(254, 218, 154, 0.1)), url(../img/fact.jpg);*/
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -468,6 +468,266 @@ h4, h5, h6, .h4, .h5, .h6 {
 }
 /*** Footer End ***/
 
+---------------------------------------------
+banner
+--------------------------------------------- 
+*/
 
+.main-banner {
+    position: relative;
+    max-height: 100%;
+    overflow: hidden;
+    margin-bottom: -7px;
+  }
+  
+  #bg-video {
+      min-width: 100%;
+      min-height: 100vh;
+      max-width: 100%;
+      max-height: 100vh;
+      object-fit: cover;
+      z-index: -1;
+  }
+  
+  #bg-video::-webkit-media-controls {
+      display: none !important;
+  }
+  
+  .video-overlay {
+      position: absolute;
+      background-color: rgba(31,39,43,0.75);
+      top: 18%;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+  }
+  
+  .main-banner .caption {
+    position: absolute;
+    top: 50%; 
+    transform: translateY(-50%);
+  }
+  
+  .main-banner .caption h6 {
+    margin-top: 0px;
+    font-size: 15px;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: 1px;
+  }
+  
+  .main-banner .caption h2 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 36px;
+    text-transform: uppercase;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: 1px;
+  }
+  
+  .main-banner .caption h2 em {
+    font-style: normal;
+    color: #f5a425;
+    font-weight: 900;
+  }
+  
+  .main-banner .caption p {
+    color: #fff;
+    font-size: 14px;
+    max-width: 570px;
+  }
+  
+  .main-banner .caption .main-button-red {
+    margin-top: 30px;
+  }
+  
+  @media screen and (max-width: 767px) {
+  
+    .main-banner .caption h6 {
+      font-weight: 500;
+    }
+  
+    .main-banner .caption h2 {
+      font-size: 36px;
+    }
+  
+  }
 
+  .slider-item {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top center;
+    height: calc(100vh);
+    min-height: 700px;
+    position: relative;
+  }
+  
+  .slider-item:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #000;
+    opacity: .4;
+  }
+  
+  .slider-item .slider-text {
+    color: #fff;
+    height: calc(100vh);
+    min-height: 700px;
+  }
+  
+  .slider-item .slider-text h1 {
+    font-size: 5rem;
+    color: #fff;
+    line-height: 1.2;
+    font-weight: 700 !important;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+    margin-left: 0.5em;
+  }
+  
+  .slider-item .slider-text h1 span {
+    color: white;
+    background-color: #20c997;
+    -webkit-box-shadow: 0.5em 0 0 #20c997, -0.5em 0 0 #20c997;
+    box-shadow: 0.5em 0 0 #20c997, -0.5em 0 0 #20c997;
+  }
+  
+  @media (max-width: 991.98px) {
+    .slider-item .slider-text h1 {
+      font-size: 40px;
+    }
+  }
+  
+  .slider-item .slider-text p {
+    font-size: 20px;
+    line-height: 1.5;
+    font-weight: 300;
+    color: white;
+    margin: 0 auto;
+  }
+  
+  .slider-item .slider-text p a {
+    color: #20c997;
+    text-decoration: underline;
+  }
+  
+  .slider-item .slider-text p a:hover {
+    color: #fff;
+    text-decoration: underline;
+  }
 
+  .btn-play {
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    background: #fff;
+    border-radius: 50%;
+    position: relative;
+    position: absolute;
+    -webkit-transition: .3s all ease-in-out;
+    -o-transition: .3s all ease-in-out;
+    transition: .3s all ease-in-out;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
+  
+  .btn-play span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    color: #000;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
+  
+  .btn-play:hover {
+    width: 80px;
+    height: 80px;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
+
+/*---*/
+.hero {
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat; }
+    .hero, .hero > .container > .row {
+      height: 100vh;
+      min-height: 640px; }
+    .hero.overlay:before {
+      position: absolute;
+      content: "";
+      left: 0;
+      right: 0;
+      bottom: 0;
+      top: 0;
+      background: rgba(0, 0, 0, 0.3); }
+    .hero h1, .hero .h1 {
+      color: #fff;
+      font-size: 40px;
+      font-weight: 700; }
+      @media (max-width: 767.98px) {
+        .hero h1, .hero .h1 {
+          font-size: 30px; } }
+    .hero p {
+      color: #fff; }
+    .hero .subheading {
+      text-transform: uppercase;
+      font-size: 12px;
+      letter-spacing: .1rem;
+      color: #fff;
+      display: block;
+      margin-bottom: 30px; }
+    .hero.page-inner, .hero.page-inner > .container > .row {
+      height: 70vh;
+      min-height: 300px; }
+  
+
+  
+.video-bg {
+  display: block;
+  position: relative; }
+  .video-bg .icon {
+    z-index: 99;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    width: 80px;
+    display: inline-block;
+    height: 80px;
+    border-radius: 50%;
+     }
+    .video-bg .icon > span {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      -webkit-transform: translate(-40%, -50%);
+      -ms-transform: translate(-40%, -50%);
+      transform: translate(-40%, -50%);
+      font-size: 30px;
+      color: #ffffff;
+      color:#caa425f1  }
+  .video-bg img {
+    -webkit-box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.2); }
+
+   
