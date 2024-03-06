@@ -34,7 +34,7 @@
         {% comment %} <link href="css/style.css" rel="stylesheet"> {% endcomment %}
         <link rel="stylesheet" href="{% static 'css/style.css' %}">
         {% block javascript %}{% endblock %}
-        <link rel="shortcut icon" type="image/png" href="{% static 'img/favicon.png' %}">
+        <link rel="shortcut icon" type="image/png" href="{% static 'img/favicon3.png' %}">
         <title>{% block title %}{% endblock %} | HNKMSM-EOTC-LV</title>
     </head>
 
@@ -50,9 +50,10 @@
         <!-- Navbar start -->
         <div class="container-fluid nav-bar">
             <div class="container">
-                <nav class="navbar navbar-light navbar-expand-lg py-4  sticky-top">
+                <nav class="navbar navbar-light navbar-expand-lg py-2  sticky-top">
                     <a href="{% url 'pages:homepage' %}" class="navbar-brand">
-                        <h1 class="text-primary fw-bold mb-0">Cater<span class="text-dark">Serv</span> </h1>
+                        {% comment %} <h1 class="text-primary fw-bold mb-0">Cater<span class="text-dark">Serv</span> </h1> {% endcomment %}
+                        <img src="{% static "img/logoNavMain.png" %}" alt="cherchLogo" width="75" height="75">
                     </a>
                     <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                         <span class="fa fa-bars text-primary"></span>
@@ -60,7 +61,7 @@
                     <div class="collapse navbar-collapse" id="navbarCollapse">
                         <div class="navbar-nav mx-auto">
                             <a href="{% url 'pages:homepage' %}" class="nav-item nav-link active">Home</a>
-                            <a href="about.html" class="nav-item nav-link">About</a>
+                            <a href="{% url 'pages:about-us' %}" class="nav-item nav-link">About</a>
                             <a href="service.html" class="nav-item nav-link">Services</a>
                             <a href="event.html" class="nav-item nav-link">Events</a>
                             <a href="menu.html" class="nav-item nav-link">Menu</a>
@@ -77,7 +78,7 @@
                             <a href="contact.html" class="nav-item nav-link">Contact</a>
                         </div>
                         <button class="btn-search btn btn-primary btn-md-square me-4 rounded-circle d-none d-lg-inline-flex" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search"></i></button>
-                        <a href="#" class="btn btn-primary py-2 px-4 d-none d-xl-inline-block rounded-pill">Book Now</a>
+                        <a href="#" class="btn btn-primary py-2 px-4 d-none d-xl-inline-block rounded-pill">Donation</a>
                     </div>
                 </nav>
             </div>
@@ -86,7 +87,7 @@
 
 
         <!-- Modal Search Start -->
-        <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade " id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-fullscreen">
                 <div class="modal-content rounded-0">
                     <div class="modal-header">

@@ -163,7 +163,7 @@ h4, h5, h6, .h4, .h5, .h6 {
     height: 100%;
     top: 0;
     left: 0;
-    background: rgba(212, 167, 98, 0.7);
+    background: rgb(219, 219, 219);  
     border-radius: 8px;
     transition: 0.5s;
     opacity: 0;
@@ -669,7 +669,7 @@ banner
     background-repeat: no-repeat; }
     .hero, .hero > .container > .row {
       height: 100vh;
-      min-height: 640px; }
+      min-height: 600px; }
     .hero.overlay:before {
       position: absolute;
       content: "";
@@ -677,7 +677,7 @@ banner
       right: 0;
       bottom: 0;
       top: 0;
-      background: rgba(0, 0, 0, 0.3); }
+      background: rgba(221, 252, 151, 0.205); }
     .hero h1, .hero .h1 {
       color: #fff;
       font-size: 40px;

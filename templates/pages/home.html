@@ -8,22 +8,23 @@
 
 <div class="hero overlay" style="background-image: url('{% static "img/Church-at-night.png" %}'); ">
     <div class="container">
-    <div class="row align-items-center justify-content-between">
-    <div class="col-lg-6 me-auto text-start">
-    <h4 class="aos-init aos-animate" data-aos="fade-left"><span class="subheading">Welcome</span></h4>
+    <div class="row align-items-top pt-5 justify-content-between">
+    <div class="col-lg-6 me-auto pt-4 text-start">
+       
+    <h4 class="aos-init aos-animate" data-aos="fade-left"><span class="subheading">Welcome To</span></h4>
     <div class="mb-4">
-    <h4 data-aos="fade-left" class="aos-init aos-animate  text-light">በኢ/ኦ/ተ ሐመረ ኖኅ ኪዳነምህረት ወቅዱስ ሚካኤል ወአቡነ ተክለሃይማኖት ካቴድራል ላስ ቬጋስ
-        HAMERE NOAH KIDANE MIHRET, ST MICHAEL & ABUNE TEKLEHIMANOT ETHIOPIAN ORTHODOX TEWAHEDO CATHEDRAL IN LAS VEGAS</h4>
+    <h4 data-aos="fade-left" class="aos-init aos-animate  animated bounceInDown text-light pb-2">በኢ/ኦ/ተ ሐመረ ኖኅ ኪዳነምህረት ወቅዱስ ሚካኤል ወአቡነ ተክለሃይማኖት ካቴድራል ላስ ቬጋስ</h4>
+    <h5 data-aos="fade-left" class="mb-4 animated bounceInDown  text-light">HAMERE NOAH KIDANE MIHRET, ST MICHAEL & ABUNE TEKLEHIMANOT ETHIOPIAN ORTHODOX TEWAHEDO CATHEDRAL IN LAS VEGAS</h5>
     </div>
     <div class="">
-    <p data-aos="fade-left" data-aos-delay="300" class="aos-init aos-animate"><a href="#" class="btn btn-primary">Go to sermons</a></p>
+    <a href="#" class="btn btn-sm btn-primary border-0 rounded-pill py-2 px-2 px-md-5 me-4 animated bounceInLeft">Go to events</a>
     </div>
     </div>
-    <div class="col-lg-5 aos-init aos-animate" data-aos="fade-left">
+    <div class="col-lg-5 pt-5 aos-init aos-animate" data-aos="fade-left">
     <a href="" class="video-bg" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-bs-target="#videoModal-1">
     <span class="icon"><span class="icon-play"><i class="bi bi-play-circle h1"></i></span></span>
    
-    <img src="{% static "img/about_1.png" %} " alt="Image" class="img-fluid rounded">
+    <img src="{% static "img/about_1.png" %} " alt="Image" class="img-fluid rounded shadow">
     </a>
     </div>
     </div>
@@ -32,9 +33,9 @@
 
 
            <!-- Modal Video -->
-      <div class="modal fade" id="videoModal-1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl">
-            <div class="modal-content rounded-0">
+    <div class="modal fade" id="videoModal-1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content rounded-3">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">የትንሳኤ ጥዑመ ዝማሬ</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -42,8 +43,9 @@
                 <div class="modal-body">
                     <!-- 16:9 aspect ratio -->
                     <div class="ratio ratio-16x9">
-                    <iframe width="560" height="315" src="https://www.youtube.com/embed/JlhzT6lFz2Q?si=bGt1mI1sAPHqtffE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                   
+
+                    <iframe width="766" height="431" src="https://www.youtube.com/embed/JlhzT6lFz2Q?rel=0" title="2019 የትንሳኤ ጥዑመ  ዝማሬ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
                     </div>
                 </div>
             </div>
@@ -51,7 +53,7 @@
     </div>
     <!-- Fact End -->
         <!-- Hero Start -->
-        <div class="container-fluid bg-light py-6 my-6 mt-0">
+        {% comment %} <div class="container-fluid bg-light py-6 my-6 mt-0">
           <div class="container">
               <div class="row g-5 align-items-center">
                   <div class="col-lg-7 col-md-12">
@@ -65,7 +67,7 @@
                   </div>
               </div>
           </div>
-        </div>
+        </div> {% endcomment %}
         <!-- Hero End -->
 
 
@@ -78,25 +80,37 @@
                   </div>
                   <div class="col-lg-7 wow bounceInUp" data-wow-delay="0.3s">
                       <small class="d-inline-block fw-bold text-dark text-uppercase bg-light border border-primary rounded-pill px-4 py-1 mb-3">About Us</small>
-                      <h1 class="display-5 mb-4">Trusted By 200 + satisfied clients</h1>
-                      <p class="mb-4">Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore eit esdioilore magna aliqua. Ut enim ad minim veniam, 
-                          quis nostrud exercitation ullaemco laboeeiris nisi ut aliquip ex ea commodo consequat. Duis aute irure 
-                          dolor iesdein reprehendeerit in voluptate velit esse cillum dolore.</p>
+                      <h1 class="display-5 mb-4">Our History </h1>
+                      <p class="mb-4">Established in 1995, Hamere Noah Kidane Mihret, St. Michael & Abune Teklehimanot Ethiopian Orthodox Tewahedo Cathedral in Las Vegas 
+                        embodies the enduring legacy of Ethiopian Orthodox tradition. In that pivotal year, 
+                        a community of devout believers came together, inspired by their unwavering faith and 
+                        determination to establish a spiritual haven in the bustling city of Las Vegas. <a href="{% url 'pages:about-us' %}">read more <i class="fas fa-arrow-right ps-2"></i></a>
+                        {% comment %} With the blessings of the clergy and the support of the faithful, 
+                        the cathedral was consecrated, becoming a beacon of hope and salvation for generations to come. 
+                        Since then, it has served as a sanctuary where believers gather to commune with God, 
+                        uphold the teachings of Orthodox Christianity, and preserve the rich cultural heritage of Ethiopia. {% endcomment %}
+                    </p>
                       <div class="row g-4 text-dark mb-5">
                           <div class="col-sm-6">
-                              <i class="fas fa-share text-primary me-2"></i>Fresh and Fast food Delivery
+                            <a href="{% url 'pages:about-us' %}"> <i class="fas fa-share text-primary me-2"></i>Mission | ተልዕኮ</a>
                           </div>
                           <div class="col-sm-6">
-                              <i class="fas fa-share text-primary me-2"></i>24/7 Customer Support
+                            <a href="{% url 'pages:about-us' %}"> <i class="fas fa-share text-primary me-2"></i>Vision | ራዕይ </a>
                           </div>
                           <div class="col-sm-6">
-                              <i class="fas fa-share text-primary me-2"></i>Easy Customization Options
+                              <a href="{% url 'pages:about-us' %}"> <i class="fas fa-share text-primary me-2"></i>Values | እሴቶች </a>
                           </div>
                           <div class="col-sm-6">
-                              <i class="fas fa-share text-primary me-2"></i>Delicious Deals for Delicious Meals
+                              <a href="{% url 'pages:about-us' %}"><i class="fas fa-share text-primary me-2"></i>Our Beliefs</a>
                           </div>
+                          <div class="col-sm-6">
+                            <a href="{% url 'pages:about-us' %}"> <i class="fas fa-share text-primary me-2"></i>Leadership</a>
+                        </div>
+                        <div class="col-sm-6">
+                            <a href="{% url 'pages:about-us' %}"><i class="fas fa-share text-primary me-2"></i>Sit objectives</a>
+                        </div>
                       </div>
-                      <a href="#" class="btn btn-primary py-3 px-5 rounded-pill">About Us<i class="fas fa-arrow-right ps-2"></i></a>
+                      <a href="{% url 'pages:about-us' %}" class="btn btn-sm btn-primary py-3 px-5 rounded-pill">About Us<i class="fas fa-arrow-right ps-2"></i></a>
                   </div>
               </div>
           </div>

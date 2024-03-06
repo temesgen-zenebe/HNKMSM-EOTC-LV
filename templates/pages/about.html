@@ -1,8 +1,436 @@
 {% extends "_base.html" %}
-
+{% load static %}
+{% block javascript %}
+   {% comment %} <script type="text/javascript" src="{% static '' %}" defer ></script> {% endcomment %}
+{% endblock %}
 {% block title %}About{% endblock %}
 {% block main %}
 <div class="mx-5 my-5">
-    <h2>Welcome! about</h2>
+    <h2>Welcome!</h2>
+      <!-- Menu Start -->
+    
+      <div class="container-fluid menu bg-light ">
+        <div class="container">
+            <div class="text-center wow bounceInUp" data-wow-delay="0.1s">
+                <small class="d-inline-block fw-bold text-dark text-uppercase bg-light border border-primary rounded-pill px-4 py-1 mb-3">About us</small>
+                <h4 class=" mb-3">በስመ አብ ወወልድ ወመንፈስ ቅዱስ አሐዱ አምላክ አሜን</h4>
+                <h3 class=" mb-5">In the name of the Father, the Son, the Holy Spirit, the One God, Amen.</h3>
+            </div>
+            <div class="tab-class text-center">
+                <ul class="nav nav-pills d-inline-flex justify-content-center mb-5 wow bounceInUp" data-wow-delay="0.1s">
+                    <li class="nav-item p-2">
+                        <a class="d-flex py-2 mx-2 border border-primary bg-white rounded-pill active" data-bs-toggle="pill" href="#tab-6">
+                            <span class="text-dark" style="width: 150px;">Vision|ራዕይ </span>
+                        </a>
+                    </li>
+                    <li class="nav-item p-2">
+                        <a class="d-flex py-2 mx-2 border border-primary bg-white rounded-pill" data-bs-toggle="pill" href="#tab-7">
+                            <span class="text-dark" style="width: 150px;">Mission|ተልዕኮ</span>
+                        </a>
+                    </li>
+                    <li class="nav-item p-2">
+                        <a class="d-flex py-2 mx-2 border border-primary bg-white rounded-pill" data-bs-toggle="pill" href="#tab-8">
+                            <span class="text-dark" style="width: 150px;">Values|እሴቶች </span>
+                        </a>
+                    </li>
+                    <li class="nav-item p-2">
+                        <a class="d-flex py-2 mx-2 border border-primary bg-white rounded-pill" data-bs-toggle="pill" href="#tab-9">
+                            <span class="text-dark small" style="width: 150px;">Our History</span>
+                        </a>
+                    </li>
+                    <li class="nav-item p-2">
+                        <a class="d-flex py-2 mx-2 border border-primary bg-white rounded-pill" data-bs-toggle="pill" href="#tab-10">
+                            <span class="text-dark small" style="width: 150px;">አባቶች|Leadership</span>
+                        </a>
+                    </li>
+                    <li class="nav-item p-2">
+                        <a class="d-flex py-2 mx-2 border border-primary bg-white rounded-pill" data-bs-toggle="pill" href="#tab-11">
+                            <span class="text-dark small" style="width: 150px;">Sit objectives</span>
+                        </a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div id="tab-6" class="tab-pane fade show p-0 active">
+                        <div class="row g-4">
+                            <div class="col-lg-12 wow bounceInUp" data-wow-delay="0.1s">
+                                <div class="menu-item d-flex align-items-center">
+                                    {% comment %} <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static "img/logo.png" %}"  width="60" height="60" alt=""> {% endcomment %}
+                                    <div class="w-100 d-flex flex-column text-start ps-4">
+                                        <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
+                                            <h4>Vision</h4>
+                                            <h6 class="text-primary"><i class="bi bi-lightbulb"></i></h6>
+                                        </div>
+                                        <p class="my-2">Our vision is to preserve the sacred teachings of Ethiopian Orthodox Tewahedo Christianity, baptize its believers/children in the name of the Father and Son in the name of the Holy Spirit, preach the gospel, and strive to prepare them to repent and accept the flesh and inherit the kingdom of heaven; To see that spiritual and social services are available to all believers. Fostering spiritual growth, unity and love in our community, preparing them to inherit God's light while sharing it with the world.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 wow bounceInUp" data-wow-delay="0.2s">
+                                <div class="menu-item d-flex align-items-center">
+                                    {% comment %} <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static "img/logoBlanck.png" %}" alt="" width="60" height="60"> {% endcomment %}
+                                    <div class="w-100 d-flex flex-column text-start ps-4">
+                                        <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
+                                            <h4>ራዕይ</h4>
+                                            <h6 class="text-primary"><i class="bi bi-lightbulb"></i></h6>
+                                        </div>
+                                        <p class="my-2">ራዕያችን የኢትዮጵያ ኦርቶዶክስ ተዋሕዶ ክርስትናን የተቀደሰ አስተምህሮ በመጠበቅ ምእመናንን/ልጆቿን በአብ በወልድ በመንፈስ ቅዱስ ስም በማጥመቅ ወንጌለ መንግስትን በመስበክ ንስሐ እንዲገቡና ስጋወ ወደሙን ተቀብለው መንግስተ ሰማያትን እንዲወርሱ ማዘጋጀት ማትጋት ፤ መንፈሳዊና ማኅበራዊ አገልግሎቶችን ለምእመናን ሁሉ ተዳርሶ ማየት። በማህበረሰባችን  ውስጥ መንፈሳዊ እድገትን፣ አንድነትን እና ፍቅርን ማጎልበት የእግዚአብሔርን ብርሃን ለአለም እያካፈልን እንዲወርሱ ማዘጋጀት።</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 wow bounceInUp" data-wow-delay="0.3s">
+                                <div class="menu-item d-flex align-items-center">
+                                    {% comment %} <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static "img/logoBlanck.png" %}" alt="" width="60" height="60"> {% endcomment %}
+                                    <div class="w-100 d-flex flex-column text-start ps-4">
+                                        <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
+                                            <h4>Mul'ata</h4>
+                                            <h6 class="text-primary"><i class="bi bi-lightbulb"></i></h6>
+                                        </div>
+                                        <p class="my-2">Mul’anni keenya barsiisa qulqulluu amantii Kiristaanummaa Ortodoksii Tewaahidoo Itoophiyaa kunuunsuu, 
+                                            amantoota/ijoollee ishee maqaa Abbaa fi Ilmaa maqaa Afuura Qulqulluutiin cuuphuu, wangeela lallabuu, 
+                                            akka isaan gaabbii galanii foon fudhatan qopheessuuf carraaquu dha mootummaa samii dhaaluu; 
+                                            Tajaajilli hafuuraa fi hawaasummaa amantoota hundaaf akka argamu arguuf. Guddina hafuuraa, 
+                                            tokkummaa fi jaalala hawaasa keenya keessatti guddisuu, ifa Waaqayyoo akka dhaalaniif qopheessuun osoo addunyaaf qoodanii.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="tab-7" class="tab-pane fade show p-0">
+                        <div class="row g-4">
+                            <div class="col-lg-12">
+                                <div class="menu-item d-flex align-items-center">
+                                    {% comment %} <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static "img/menu-01.jpg" %}" alt=""> {% endcomment %}
+                                    <div class="w-100 d-flex flex-column text-start ps-4">
+                                        <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
+                                            <h4>ተልዕኮ</h4>
+                                            <h6 class="text-primary"><i class="bi bi-bullseye"></i></h6>
+                                        </div>
+                                        <p class="mb-0">የጌታችን የኢየሱስ ክርስቶስን ወንጌል በማዳረስ ምዕመናን ርትዕት የሆነችውን ተዋህዶ ሐይማኖታቸውን ዶግማዋን ፡ ቀኖናዋንና ትውፊቷን ከምግባር ጋር አስተባብረው እንደ ቃሉ እንዲኖሩ ማስቻል::</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="menu-item d-flex align-items-center">
+                                    {% comment %} <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static "img/menu-03.jpg" %}" alt=""> {% endcomment %}
+                                    <div class="w-100 d-flex flex-column text-start ps-4">
+                                        <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
+                                            <h4>Mission</h4>
+                                            <h6 class="text-primary"><i class="bi bi-bullseye"></i></h6>
+                                        </div>
+                                        <p class="mb-0">By spreading the gospel of our Lord Jesus Christ, enable the believers to unite their religion, dogma, canon and tradition with their morals and live according to the word.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="menu-item d-flex align-items-center">
+                                    {% comment %} <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static "img/menu-05.jpg" %}" alt=""> {% endcomment %}
+                                    <div class="w-100 d-flex flex-column text-start ps-4">
+                                        <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
+                                            <h4>Ergama</h4>
+                                            <h6 class="text-primary"><i class="bi bi-bullseye"></i></h6>
+                                        </div>
+                                        <p class="mb-0">Wangeela Gooftaa keenya Iyyasuus Kiristoos babal’isuun, amantoonni amantii, dogmaa, seera fi duudhaa isaanii amala isaanii waliin tokkummaadhaan akka dubbichaatti akka jiraatan dandeessisuudha.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div id="tab-8" class="tab-pane fade show p-0">
+                        <div class="row g-4">
+                            <div class="col-lg-12">
+                                <div class="menu-item d-flex align-items-center">
+                                    {% comment %} <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static "img/menu-01.jpg" %}" alt=""> {% endcomment %}
+                                    <div class="w-100 d-flex flex-column text-start ps-4">
+                                        <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
+                                            <h4>እሴቶች</h4>
+                                            <h4 class="text-primary"><i class="bi bi-postcard-heart"></i></h4>
+                                        </div>
+                                        <p class="mb-0">እምነት ፣ ቅድስና ፣ መንፈሳዊነት ፣ ጽድቅ
+                                            ትህትና ፣ አገልጋይነት ፣ ፍቅር ፣ ተስፋ ፣ ፍትህ </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="menu-item d-flex align-items-center">
+                                    {% comment %} <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static "img/menu-02.jpg" %}" alt=""> {% endcomment %}
+                                    <div class="w-100 d-flex flex-column text-start ps-4">
+                                        <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
+                                            <h4>Values</h4>
+                                            <h4 class="text-primary"><i class="bi bi-postcard-heart"></i></h4>
+                                        </div>
+                                        <p class="mb-0">Faith , holiness , spirituality , righteousness, Humility , service , love , hope , justice</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="menu-item d-flex align-items-center">
+                                    {% comment %} <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static "img/menu-04.jpg" %}" alt=""> {% endcomment %}
+                                    <div class="w-100 d-flex flex-column text-start ps-4">
+                                        <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
+                                            <h4>Duudhaalee</h4>
+                                            <h4 class="text-primary"><i class="bi bi-postcard-heart"></i></h4>
+                                        </div>
+                                        <p class="mb-0">Amantii, qulqullummaa, afuurummaa, qajeelummaa Gad of qabuu, garbummaa, jaalala, abdii, haqa</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div id="tab-9" class="tab-pane fade show p-0">
+                        <div class="row g-4">
+                            <div class="col-lg-12">
+                                <div class="menu-item d-flex align-items-center">
+                                    {% comment %} <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static "img/menu-06.jpg" %} " alt=""> {% endcomment %}
+                                    <div class="w-100 d-flex flex-column text-start ps-4">
+                                        <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
+                                            <h4>Our History</h4>
+                                            <h4 class="text-primary"><i class="bi bi-clock-history"></i></h4>
+                                        </div>
+                                        <p class="mb-0">
+                                               Established in 1995, Hamere Noah Kidane Mihret, St. Michael & Abune Teklehimanot Ethiopian Orthodox Tewahedo Cathedral in Las Vegas 
+                                              embodies the enduring legacy of Ethiopian Orthodox tradition. In that pivotal year, 
+                                              a community of devout believers came together, inspired by their unwavering faith and 
+                                              determination to establish a spiritual haven in the bustling city of Las Vegas. 
+                                              With the blessings of the clergy and the support of the faithful, 
+                                              the cathedral was consecrated, becoming a beacon of hope and salvation for generations to come. 
+                                              Since then, it has served as a sanctuary where believers gather to commune with God, 
+                                              uphold the teachings of Orthodox Christianity, and preserve the rich cultural heritage of Ethiopia.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="menu-item d-flex align-items-center">
+                                    {% comment %} <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static "img/menu-07.jpg" %}" alt=""> {% endcomment %}
+                                    <div class="w-100 d-flex flex-column text-start ps-4">
+                                        <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
+                                            <h4>ታሪካችን</h4>
+                                            <h4 class="text-primary"><i class="bi bi-clock-history"></i></h4>
+                                        </div>
+                                        <p class="mb-0">በ1995 የተቋቋመው ሐመረ ኖህ ኪዳነ ምሕረት፣ ቅዱስ ሚካኤል እና አቡነ ተክለሃይማኖት በላስቬጋስ የኢትዮጵያ ኦርቶዶክስ ተዋሕዶ ካቴድራል የኢትዮጵያ ኦርቶዶክስ ተዋህዶ ትውፊት ዘለቄታ ያለው ቅርስ ነው። በዚያ ወሳኝ አመት ውስጥ፣ በማይናወጥ እምነት እና በተጨናነቀው የላስ ቬጋስ ከተማ ውስጥ መንፈሳዊ መሸሸጊያ ቦታን ለማቋቋም ባሳዩት ቁርጠኝነት፣ የታማኝ አማኞች ማህበረሰብ ተሰበሰበ። በካህናት ቡራኬ እና በምእመናን ድጋፍ፣ ካቴድራሉ ተቀደሰ፣ ለትውልድ የተስፋና የድኅነት ብርሃን ሆነ። ከዚያን ጊዜ ጀምሮ ምእመናን ከእግዚአብሔር ጋር የሚገናኙበት፣ የኦርቶዶክስ ክርስትናን አስተምህሮ የሚጠብቁበት እና የኢትዮጵያን የበለፀገ የባህል ቅርስ የሚጠብቁበት መቅደስ ሆኖ አገልግሏል።</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="menu-item d-flex align-items-center">
+                                    {% comment %} <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static "img/menu-07.jpg" %}" alt=""> {% endcomment %}
+                                    <div class="w-100 d-flex flex-column text-start ps-4">
+                                        <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
+                                            <h4>Seenaa Keenya</h4>
+                                            <h4 class="text-primary"><i class="bi bi-clock-history"></i></h4>
+                                        </div>
+                                        <p class="mb-0">
+                                            Bara 1995 kan hundeeffame Hamere Noah Kidane Mihret, St. Michael & Abune Teklehimanot Kaatediraalli Ortodoksii Tawaahidoo Itoophiyaa Laas Veegaasitti argamu hambaa bara baraa duudhaa Ortodoksii Itoophiyaa of keessaa qaba. Bara murteessaa sanatti, hawaasni amantoota ciccimoo ta’an, amantii hin sochoonee fi kutannoo isaanii kan hin sochoone magaalaa Laas Veegaas kan sochii guddaa qabdu keessatti bakka hafuuraa hundeessuuf qabaniin kaka’anii walitti dhufan. Eebba abbootii amantaa fi deeggarsa amantootaatiin kaatediraalichi qulqullaa’ee, dhaloota dhufuuf ibsaa abdii fi fayyinaa ta’e. Ergasii amantoonni Waaqayyoo wajjin walitti dhufeenya uumuuf, barsiisa Kiristaanummaa Ortodoksii kabachiisuuf, hambaalee aadaa badhaadhaa Itoophiyaa kunuunsuuf iddoo qulqulluu ta’ee tajaajilaa tureera.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div id="tab-10" class="tab-pane fade show p-0">
+                        <div class="row g-4">
+                            <div class="col-lg-6">
+                                <div class="menu-item d-flex align-items-center">
+                                    <img class="flex-shrink-0 img-fluid rounded-circle" {% static 'img/menu-06.jpg' %} alt="">
+                                    <div class="w-100 d-flex flex-column text-start ps-4">
+                                        <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
+                                            <h4>Sabudana Tikki</h4>
+                                            <h4 class="text-primary">$90</h4>
+                                        </div>
+                                        <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="menu-item d-flex align-items-center">
+                                    <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static 'img/menu-07.jpg' %}" alt="">
+                                    <div class="w-100 d-flex flex-column text-start ps-4">
+                                        <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
+                                            <h4>Crispy</h4>
+                                            <h4 class="text-primary">$90</h4>
+                                        </div>
+                                        <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="menu-item d-flex align-items-center">
+                                    <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static 'img/menu-09.jpg' %}" alt="">
+                                    <div class="w-100 d-flex flex-column text-start ps-4">
+                                        <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
+                                            <h4>Pizza</h4>
+                                            <h4 class="text-primary">$90</h4>
+                                        </div>
+                                        <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="menu-item d-flex align-items-center">
+                                    <img class="flex-shrink-0 img-fluid rounded-circle"  src="{% static 'img/menu-02.jpg' %}" alt="">
+                                    <div class="w-100 d-flex flex-column text-start ps-4">
+                                        <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
+                                            <h4>Bacon</h4>
+                                            <h4 class="text-primary">$90</h4>
+                                        </div>
+                                        <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="menu-item d-flex align-items-center">
+                                    <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static 'img/menu-03.jpg' %}" alt="">
+                                    <div class="w-100 d-flex flex-column text-start ps-4">
+                                        <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
+                                            <h4>Chicken</h4>
+                                            <h4 class="text-primary">$90</h4>
+                                        </div>
+                                        <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="menu-item d-flex align-items-center">
+                                    <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static 'img/menu-05.jpg' %}" alt="">
+                                    <div class="w-100 d-flex flex-column text-start ps-4">
+                                        <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
+                                            <h4>Blooming</h4>
+                                            <h4 class="text-primary">$90</h4>
+                                        </div>
+                                        <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="menu-item d-flex align-items-center">
+                                    <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static 'img/menu-07.jpg' %}" alt="">
+                                    <div class="w-100 d-flex flex-column text-start ps-4">
+                                        <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
+                                            <h4>Sweet</h4>
+                                            <h4 class="text-primary">$90</h4>
+                                        </div>
+                                        <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="menu-item d-flex align-items-center">
+                                    <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static 'img/menu-09.jpg' %}" alt="">
+                                    <div class="w-100 d-flex flex-column text-start ps-4">
+                                        <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
+                                            <h4>Argentinian</h4>
+                                            <h4 class="text-primary">$90</h4>
+                                        </div>
+                                        <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="tab-11" class="tab-pane fade show p-0">
+                        <div class="row g-4">
+                            <div class="col-lg-6">
+                                <div class="menu-item d-flex align-items-center">
+                                    <img class="flex-shrink-0 img-fluid rounded-circle" {% static 'img/menu-06.jpg' %} alt="">
+                                    <div class="w-100 d-flex flex-column text-start ps-4">
+                                        <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
+                                            <h4>Sabudana Tikki</h4>
+                                            <h4 class="text-primary">$90</h4>
+                                        </div>
+                                        <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="menu-item d-flex align-items-center">
+                                    <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static 'img/menu-07.jpg' %}" alt="">
+                                    <div class="w-100 d-flex flex-column text-start ps-4">
+                                        <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
+                                            <h4>Crispy</h4>
+                                            <h4 class="text-primary">$90</h4>
+                                        </div>
+                                        <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="menu-item d-flex align-items-center">
+                                    <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static 'img/menu-09.jpg' %}" alt="">
+                                    <div class="w-100 d-flex flex-column text-start ps-4">
+                                        <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
+                                            <h4>Pizza</h4>
+                                            <h4 class="text-primary">$90</h4>
+                                        </div>
+                                        <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="menu-item d-flex align-items-center">
+                                    <img class="flex-shrink-0 img-fluid rounded-circle"  src="{% static 'img/menu-02.jpg' %}" alt="">
+                                    <div class="w-100 d-flex flex-column text-start ps-4">
+                                        <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
+                                            <h4>Bacon</h4>
+                                            <h4 class="text-primary">$90</h4>
+                                        </div>
+                                        <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="menu-item d-flex align-items-center">
+                                    <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static 'img/menu-03.jpg' %}" alt="">
+                                    <div class="w-100 d-flex flex-column text-start ps-4">
+                                        <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
+                                            <h4>Chicken</h4>
+                                            <h4 class="text-primary">$90</h4>
+                                        </div>
+                                        <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="menu-item d-flex align-items-center">
+                                    <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static 'img/menu-05.jpg' %}" alt="">
+                                    <div class="w-100 d-flex flex-column text-start ps-4">
+                                        <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
+                                            <h4>Blooming</h4>
+                                            <h4 class="text-primary">$90</h4>
+                                        </div>
+                                        <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="menu-item d-flex align-items-center">
+                                    <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static 'img/menu-07.jpg' %}" alt="">
+                                    <div class="w-100 d-flex flex-column text-start ps-4">
+                                        <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
+                                            <h4>Sweet</h4>
+                                            <h4 class="text-primary">$90</h4>
+                                        </div>
+                                        <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="menu-item d-flex align-items-center">
+                                    <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static 'img/menu-09.jpg' %}" alt="">
+                                    <div class="w-100 d-flex flex-column text-start ps-4">
+                                        <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
+                                            <h4>Argentinian</h4>
+                                            <h4 class="text-primary">$90</h4>
+                                        </div>
+                                        <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Menu End -->
 </div>
 {% endblock %}
