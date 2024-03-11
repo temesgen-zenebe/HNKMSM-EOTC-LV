@@ -5,16 +5,16 @@
 {% endblock %}
 {% block title %}About{% endblock %}
 {% block main %}
-<div class="mx-5 my-5">
-    <h2>Welcome!</h2>
+<div class="mx-5 my-1">
       <!-- Menu Start -->
-    
-      <div class="container-fluid menu bg-light ">
+    <div class="container-fluid menu bg-light ">
         <div class="container">
-            <div class="text-center wow bounceInUp" data-wow-delay="0.1s">
+            <div class="text-center wow bounceInUp mb-2" data-wow-delay="0.1s">
                 <small class="d-inline-block fw-bold text-dark text-uppercase bg-light border border-primary rounded-pill px-4 py-1 mb-3">About us</small>
-                <h4 class=" mb-3">በስመ አብ ወወልድ ወመንፈስ ቅዱስ አሐዱ አምላክ አሜን</h4>
-                <h3 class=" mb-5">In the name of the Father, the Son, the Holy Spirit, the One God, Amen.</h3>
+                
+                <h4 class="mb-3">በስመ አብ ወወልድ ወመንፈስ ቅዱስ አሐዱ አምላክ አሜን</h4>
+                <span class="mb-5 text-church-big">In the name of the Father, the Son, the Holy Spirit, the One God, Amen.</span>
+                
             </div>
             <div class="tab-class text-center">
                 <ul class="nav nav-pills d-inline-flex justify-content-center mb-5 wow bounceInUp" data-wow-delay="0.1s">
@@ -40,7 +40,7 @@
                     </li>
                     <li class="nav-item p-2">
                         <a class="d-flex py-2 mx-2 border border-primary bg-white rounded-pill" data-bs-toggle="pill" href="#tab-10">
-                            <span class="text-dark small" style="width: 150px;">አባቶች|Leadership</span>
+                            <span class="text-dark small" style="width: 150px;">አባቶች|Leaders</span>
                         </a>
                     </li>
                     <li class="nav-item p-2">
@@ -228,200 +228,237 @@
                         </div>
                     </div>
                     <div id="tab-10" class="tab-pane fade show p-0">
-                        <div class="row g-4">
-                            <div class="col-lg-6">
-                                <div class="menu-item d-flex align-items-center">
-                                    <img class="flex-shrink-0 img-fluid rounded-circle" {% static 'img/menu-06.jpg' %} alt="">
-                                    <div class="w-100 d-flex flex-column text-start ps-4">
-                                        <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
-                                            <h4>Sabudana Tikki</h4>
-                                            <h4 class="text-primary">$90</h4>
+                        <!-- Blog Start -->
+                        <div class="container-fluid blog py-3">
+                            <div class="container">
+                                <div class="text-center wow bounceInUp py-2" data-wow-delay="0.0s">
+                                    {% comment %} <small class="d-inline-block fw-bold text-dark text-uppercase bg-light border border-primary rounded-pill px-4 py-1 mb-3">Our Blog</small> {% endcomment %}
+                                    <h6 class="mb-2">የቤተክርስቲያናችን አባቶች : መነኮሳት : ካህናት : እንዲሁም : ዲያቆናት::</h6>
+                                    <p class="mb-5 text-church">Fathers monks, priests and deacons of our church.</p>
+                                </div>
+                              
+                                <div class="row g-4 my-3">
+                                    <div class="col-lg-12">
+                                        <div class="row g-4">
+                                           
+                                            <div class="col-md-6 col-lg-3 wow bounceInUp" data-wow-delay="0.0s"> 
+                                               
+                                                <div class="event-img position-relative ">
+                                                    <img class="overflow-hidden img-fluid rounded w-100 " src="{% static "img/aboutUs/leaders-1.png" %}" alt="">
+                                                </div>
+                                                
+                                            </div>
+                                            <div class="col-md-6 col-lg-3 wow bounceInUp" data-wow-delay="0.1s">
+                                                <div class="event-img position-relative">
+                                                    <img class="img-fluid rounded w-100 " src="{% static "img/aboutUs/leaders-15.png" %}" alt="">
+                                                    
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-lg-3 wow bounceInUp" data-wow-delay="0.2s">
+                                                <div class="event-img position-relative">
+                                                    <img class="img-fluid rounded w-100" src="{% static "img/aboutUs/leaders-13.png" %}" alt="">
+                                                    
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-lg-3 wow bounceInUp" data-wow-delay="0.3s">
+                                                <div class="event-img position-relative">
+                                                    <img class="img-fluid rounded w-100" src="{% static "img/aboutUs/leaders-14.png" %}" alt="">
+                                                    
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-lg-3 wow bounceInUp" data-wow-delay="0.3s">
+                                                <div class="event-img position-relative">
+                                                    <img class="img-fluid rounded w-100" src="{% static "img/aboutUs/leaders-12.png" %}" alt="">
+                                                    
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-lg-3 wow bounceInUp" data-wow-delay="0.4s">
+                                                <div class="event-img position-relative">
+                                                    <img class="img-fluid rounded w-100" src="{% static "img/aboutUs/leaders-16.png" %}" alt="">
+                                                    
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-lg-3 wow bounceInUp" data-wow-delay="0.5s">
+                                                <div class="event-img position-relative">
+                                                    <img class="img-fluid rounded w-100" src="{% static "img/aboutUs/leaders-17.png" %}" alt="">
+                                                    
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-lg-3 wow bounceInUp" data-wow-delay="0.7s">
+                                                <div class="event-img position-relative">
+                                                    <img class="img-fluid rounded w-100" src="{% static "img/aboutUs/leaders-18.png" %}" alt="">
+                                                    
+                                                </div>
+                                            </div>
                                         </div>
-                                        <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="menu-item d-flex align-items-center">
-                                    <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static 'img/menu-07.jpg' %}" alt="">
-                                    <div class="w-100 d-flex flex-column text-start ps-4">
-                                        <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
-                                            <h4>Crispy</h4>
-                                            <h4 class="text-primary">$90</h4>
+                                <div class="row g-4 my-3">
+                                    <div class="col-lg-12">
+                                        <div class="row g-4">
+                                           
+                                            <div class="col-md-6 col-lg-3 wow bounceInUp" data-wow-delay="0.0s"> 
+                                               
+                                                <div class="event-img position-relative ">
+                                                    <img class="overflow-hidden img-fluid rounded w-100 " src="{% static "img/aboutUs/leaders-1.png" %}" alt="">
+                                                </div>
+                                                
+                                            </div>
+                                            <div class="col-md-6 col-lg-3 wow bounceInUp" data-wow-delay="0.1s">
+                                                <div class="event-img position-relative">
+                                                    <img class="img-fluid rounded w-100 " src="{% static "img/aboutUs/leaders-15.png" %}" alt="">
+                                                    
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-lg-3 wow bounceInUp" data-wow-delay="0.2s">
+                                                <div class="event-img position-relative">
+                                                    <img class="img-fluid rounded w-100" src="{% static "img/aboutUs/leaders-13.png" %}" alt="">
+                                                    
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-lg-3 wow bounceInUp" data-wow-delay="0.3s">
+                                                <div class="event-img position-relative">
+                                                    <img class="img-fluid rounded w-100" src="{% static "img/aboutUs/leaders-14.png" %}" alt="">
+                                                    
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-lg-3 wow bounceInUp" data-wow-delay="0.3s">
+                                                <div class="event-img position-relative">
+                                                    <img class="img-fluid rounded w-100" src="{% static "img/aboutUs/leaders-12.png" %}" alt="">
+                                                    
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-lg-3 wow bounceInUp" data-wow-delay="0.4s">
+                                                <div class="event-img position-relative">
+                                                    <img class="img-fluid rounded w-100" src="{% static "img/aboutUs/leaders-16.png" %}" alt="">
+                                                    
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-lg-3 wow bounceInUp" data-wow-delay="0.5s">
+                                                <div class="event-img position-relative">
+                                                    <img class="img-fluid rounded w-100" src="{% static "img/aboutUs/leaders-17.png" %}" alt="">
+                                                    
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-lg-3 wow bounceInUp" data-wow-delay="0.7s">
+                                                <div class="event-img position-relative">
+                                                    <img class="img-fluid rounded w-100" src="{% static "img/aboutUs/leaders-18.png" %}" alt="">
+                                                    
+                                                </div>
+                                            </div>
                                         </div>
-                                        <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="menu-item d-flex align-items-center">
-                                    <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static 'img/menu-09.jpg' %}" alt="">
-                                    <div class="w-100 d-flex flex-column text-start ps-4">
-                                        <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
-                                            <h4>Pizza</h4>
-                                            <h4 class="text-primary">$90</h4>
-                                        </div>
-                                        <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="menu-item d-flex align-items-center">
-                                    <img class="flex-shrink-0 img-fluid rounded-circle"  src="{% static 'img/menu-02.jpg' %}" alt="">
-                                    <div class="w-100 d-flex flex-column text-start ps-4">
-                                        <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
-                                            <h4>Bacon</h4>
-                                            <h4 class="text-primary">$90</h4>
-                                        </div>
-                                        <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="menu-item d-flex align-items-center">
-                                    <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static 'img/menu-03.jpg' %}" alt="">
-                                    <div class="w-100 d-flex flex-column text-start ps-4">
-                                        <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
-                                            <h4>Chicken</h4>
-                                            <h4 class="text-primary">$90</h4>
-                                        </div>
-                                        <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="menu-item d-flex align-items-center">
-                                    <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static 'img/menu-05.jpg' %}" alt="">
-                                    <div class="w-100 d-flex flex-column text-start ps-4">
-                                        <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
-                                            <h4>Blooming</h4>
-                                            <h4 class="text-primary">$90</h4>
-                                        </div>
-                                        <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="menu-item d-flex align-items-center">
-                                    <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static 'img/menu-07.jpg' %}" alt="">
-                                    <div class="w-100 d-flex flex-column text-start ps-4">
-                                        <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
-                                            <h4>Sweet</h4>
-                                            <h4 class="text-primary">$90</h4>
-                                        </div>
-                                        <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="menu-item d-flex align-items-center">
-                                    <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static 'img/menu-09.jpg' %}" alt="">
-                                    <div class="w-100 d-flex flex-column text-start ps-4">
-                                        <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
-                                            <h4>Argentinian</h4>
-                                            <h4 class="text-primary">$90</h4>
-                                        </div>
-                                        <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <!-- Blog End -->
                     </div>
                     <div id="tab-11" class="tab-pane fade show p-0">
                         <div class="row g-4">
                             <div class="col-lg-6">
                                 <div class="menu-item d-flex align-items-center">
-                                    <img class="flex-shrink-0 img-fluid rounded-circle" {% static 'img/menu-06.jpg' %} alt="">
                                     <div class="w-100 d-flex flex-column text-start ps-4">
-                                        <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
-                                            <h4>Sabudana Tikki</h4>
-                                            <h4 class="text-primary">$90</h4>
+                                        <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-1">
+                                            <h4 class="text-church-bolder">ተዋሕዶ ክርስትናን መጠበቅ | Preservation</h4>
+                                            <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static 'img/cherchPlaceholder.png' %}" width="40" height="40" alt="">
+
                                         </div>
-                                        <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
+                                        <p class="mb-2">የኢትዮጵያ ኦርቶዶክስ ተዋሕዶ ክርስትናን የተቀደሰ አስተምህሮ በትምህርት ግብአት እና መስተጋብራዊ መድረኮችን ማስጠበቅ።</p>
+                                        <p class="mb-2">Uphold Ethiopian Orthodox Tewahedo Christianity's sacred teachings through educational resources and interactive platforms.</p>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="menu-item d-flex align-items-center">
-                                    <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static 'img/menu-07.jpg' %}" alt="">
                                     <div class="w-100 d-flex flex-column text-start ps-4">
-                                        <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
-                                            <h4>Crispy</h4>
-                                            <h4 class="text-primary">$90</h4>
+                                        <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-1">
+                                            <h4 class="text-church-bolder">ተመስጦ | Inspiration</h4>
+                                            <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static 'img/cherchPlaceholder.png' %}" width="40" height="40" alt="">
+
                                         </div>
-                                        <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
+                                        <p class="mb-2">የወንጌልን መልእክት አካፍሉ፤ ወደንስሐ ማሥገባትን እና የክርስቶስን ትምህርት መንግሥተ ሰማያትን ለመውረስ በጥልቀት መረዳት።</p>
+                                        <p class="mb-2">Share the gospel message, inspiring repentance and acceptance of Christ's teachings for inheriting the kingdom of heaven.</p>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="menu-item d-flex align-items-center">
-                                    <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static 'img/menu-09.jpg' %}" alt="">
                                     <div class="w-100 d-flex flex-column text-start ps-4">
-                                        <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
-                                            <h4>Pizza</h4>
-                                            <h4 class="text-primary">$90</h4>
+                                        <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-1">
+                                            <h4 class="text-church-bolder">ድጋፍ | Support</h4>
+                                            <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static 'img/cherchPlaceholder.png' %}" width="40" height="40" alt="">
+
                                         </div>
-                                        <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
+                                        <p class="mb-2">መንፈሳዊ እና ማህበራዊ ድጋፍ ስርዓቶችን ማዳበር፣ አማኞች ለሁለንተናዊ ደህንነት አስፈላጊ አገልግሎቶችን እንዲያገኙ ማድረግ።</p>
+                                        <p class="mb-2">Cultivate spiritual and social support systems, ensuring believers access necessary services for holistic well-being.
+                                        </p>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="menu-item d-flex align-items-center">
-                                    <img class="flex-shrink-0 img-fluid rounded-circle"  src="{% static 'img/menu-02.jpg' %}" alt="">
                                     <div class="w-100 d-flex flex-column text-start ps-4">
-                                        <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
-                                            <h4>Bacon</h4>
-                                            <h4 class="text-primary">$90</h4>
+                                        <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-1">
+                                            <h4 class="text-church-bolder">አንድነት | Unity</h4>
+                                            <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static 'img/cherchPlaceholder.png' %}" width="40" height="40" alt="">
+
                                         </div>
-                                        <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
+                                        <p class="mb-2">መንፈሳዊ እድገትን ማጎልበት፣በአማኞች መካከል አንድነትንና ፍቅርን በመንከባከብ የእግዚአብሔርን ብርሃን ያበራል።
+                                        </p>
+                                        <p class="mb-2">Foster spiritual development, nurturing unity and love among believers to radiate God's light.
+                                        </p>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="menu-item d-flex align-items-center">
-                                    <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static 'img/menu-03.jpg' %}" alt="">
                                     <div class="w-100 d-flex flex-column text-start ps-4">
-                                        <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
-                                            <h4>Chicken</h4>
-                                            <h4 class="text-primary">$90</h4>
+                                        <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-1">
+                                            <h4 class="text-church-bolder">ተዋሕዶ ክርስትናን መጠበቅ | Preservation</h4>
+                                            <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static 'img/cherchPlaceholder.png' %}" width="40" height="40" alt="">
+
                                         </div>
-                                        <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
+                                        <p class="mb-2">የኢትዮጵያ ኦርቶዶክስ ተዋሕዶ ክርስትናን የተቀደሰ አስተምህሮ በትምህርት ግብአት እና መስተጋብራዊ መድረኮችን ማስጠበቅ።</p>
+                                        <p class="mb-2">Uphold Ethiopian Orthodox Tewahedo Christianity's sacred teachings through educational resources and interactive platforms.</p>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="menu-item d-flex align-items-center">
-                                    <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static 'img/menu-05.jpg' %}" alt="">
                                     <div class="w-100 d-flex flex-column text-start ps-4">
-                                        <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
-                                            <h4>Blooming</h4>
-                                            <h4 class="text-primary">$90</h4>
+                                        <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-1">
+                                            <h4 class="text-church-bolder">ተዋሕዶ ክርስትናን መጠበቅ | Preservation</h4>
+                                            <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static 'img/cherchPlaceholder.png' %}" width="40" height="40" alt="">
+
                                         </div>
-                                        <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
+                                        <p class="mb-2">የኢትዮጵያ ኦርቶዶክስ ተዋሕዶ ክርስትናን የተቀደሰ አስተምህሮ በትምህርት ግብአት እና መስተጋብራዊ መድረኮችን ማስጠበቅ።</p>
+                                        <p class="mb-2">Uphold Ethiopian Orthodox Tewahedo Christianity's sacred teachings through educational resources and interactive platforms.</p>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="menu-item d-flex align-items-center">
-                                    <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static 'img/menu-07.jpg' %}" alt="">
                                     <div class="w-100 d-flex flex-column text-start ps-4">
-                                        <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
-                                            <h4>Sweet</h4>
-                                            <h4 class="text-primary">$90</h4>
+                                        <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-1">
+                                            <h4 class="text-church-bolder">ተዋሕዶ ክርስትናን መጠበቅ | Preservation</h4>
+                                            <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static 'img/cherchPlaceholder.png' %}" width="40" height="40" alt="">
+
                                         </div>
-                                        <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
+                                        <p class="mb-2">የኢትዮጵያ ኦርቶዶክስ ተዋሕዶ ክርስትናን የተቀደሰ አስተምህሮ በትምህርት ግብአት እና መስተጋብራዊ መድረኮችን ማስጠበቅ።</p>
+                                        <p class="mb-2">Uphold Ethiopian Orthodox Tewahedo Christianity's sacred teachings through educational resources and interactive platforms.</p>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="menu-item d-flex align-items-center">
-                                    <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static 'img/menu-09.jpg' %}" alt="">
                                     <div class="w-100 d-flex flex-column text-start ps-4">
-                                        <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
-                                            <h4>Argentinian</h4>
-                                            <h4 class="text-primary">$90</h4>
+                                        <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-1">
+                                            <h4 class="text-church-bolder">ተዋሕዶ ክርስትናን መጠበቅ | Preservation</h4>
+                                            <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static 'img/cherchPlaceholder.png' %}" width="40" height="40" alt="">
+
                                         </div>
-                                        <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
+                                        <p class="mb-2">የኢትዮጵያ ኦርቶዶክስ ተዋሕዶ ክርስትናን የተቀደሰ አስተምህሮ በትምህርት ግብአት እና መስተጋብራዊ መድረኮችን ማስጠበቅ።</p>
+                                        <p class="mb-2">Uphold Ethiopian Orthodox Tewahedo Christianity's sacred teachings through educational resources and interactive platforms.</p>
                                     </div>
                                 </div>
                             </div>
