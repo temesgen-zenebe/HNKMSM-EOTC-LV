@@ -5,7 +5,51 @@
 {% endblock %}
 {% block title %}About{% endblock %}
 {% block main %}
-<div class="mx-5 my-1">
+<div class="my-1">
+    <div class="hero overlay mb-4" style="background-image: url('{% static "img/baner-1.png" %}');" alt="Church-at">
+        <div class="container-fluid">
+            <div class="row align-items-top pt-1 justify-content-between">
+                <div class="col-lg-6 me-auto pt-4 text-start">
+                   
+                    <div class="container btn btn-sm btn-primary  border-0 rounded py-2 px-2 px-md-2 animated bounceInLeft text-light ">
+                        <h3>Welcome To About us</h3>
+                        <p class="">
+                            ስለእኛ የበለጠ ለማወቅ እና መረጃ ለማግኘት ቪዲዮውን ይመልከቱ።</p>
+                        <p class="small text-church">
+                            Watch the video to learn more about us and get informed.</p>
+                    </div>
+                </div>
+                <div class="col-lg-5 pt-3 aos-init aos-animate bolder border-primary shadow" data-aos="fade-left">
+                    
+                    <a href="" class="video-bg" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-bs-target="#videoModal-2">
+                    <span class="icon"><span class="icon-play"><i class="bi bi-play-circle h1"></i></span></span>
+                    <img src="{% static "img/aboutUs/leaders-64.png" %} " alt="Image" class="img-fluid rounded shadow">
+                    
+                    
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+     <!-- Modal Video -->
+     <div class="modal fade" id="videoModal-2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content rounded-3">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">የትንሳኤ ጥዑመ ዝማሬ</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- 16:9 aspect ratio -->
+                    <div class="ratio ratio-16x9">
+
+                    <iframe width="766" height="431" src="https://www.youtube.com/embed/JlhzT6lFz2Q?rel=0" title="2019 የትንሳኤ ጥዑመ  ዝማሬ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
       <!-- Menu Start -->
     <div class="container-fluid menu bg-light ">
         <div class="container">
