@@ -109,27 +109,37 @@
 
         {% block main %}{% endblock %}
         <!-- Footer Start -->
-        <div class="container-fluid footer py-6 my-6 mb-0 bg-light wow bounceInUp" data-wow-delay="0.1s">
+        <div class="container-fluid footer py-4 my-4 mb-0 bg-light wow bounceInUp" data-wow-delay="0.1s">
             <div class="container-fluid mx-4 ">
                 <div class="row g-2">
                     <div class="col-lg-3 col-md-6">
-                        <div class="footer-item">
+                        <div class="footer-item mb-3">
                             <a href="{% url 'pages:homepage' %}" class="navbar-brand">
                                 {% comment %} <h1 class="text-primary fw-bold mb-0">Cater<span class="text-dark">Serv</span> </h1> {% endcomment %}
                                 <img src="{% static "img/logoNavMain.png" %}" alt="cherchLogo" width="75" height="75">
                             </a>
-                            <p class="lh-lg my-4 small">HAMERE NOAH KIDANE MIHRET, ST MICHAEL & ABUNE TEKLEHIMANOT ETHIOPIAN ORTHODOX TEWAHEDO CATHEDRAL IN LAS VEGAS.</p>
+                            <p class="lh-lg my-4 px-3 small">HAMERE NOAH KIDANE MIHRET, ST MICHAEL & ABUNE TEKLEHIMANOT ETHIOPIAN ORTHODOX TEWAHEDO CATHEDRAL IN LAS VEGAS.</p>
                             <div class="footer-icon d-flex">
                                 <a class="btn btn-primary btn-sm-square me-2 rounded-circle" href="#"><i class="fab fa-facebook-f"></i></a>
                                 <a class="btn btn-primary btn-sm-square me-2 rounded-circle" href="#"><i class="fab fa-twitter"></i></a>
                                 <a href="#" class="btn btn-primary btn-sm-square me-2 rounded-circle"><i class="fab fa-instagram"></i></a>
                                 <a href="#" class="btn btn-primary btn-sm-square rounded-circle"><i class="fab fa-linkedin-in"></i></a>
                             </div>
+                            
+                        </div>
+                        <div class="footer-item ">
+                            <h4 class="mb-4">Contact Us</h4>
+                            <div class="d-flex flex-column align-items-start">
+                                <p><i class="fa fa-map-marker-alt text-primary me-2"></i> 123 Street, New York, USA</p>
+                                <p><i class="fa fa-phone-alt text-primary me-2"></i> (+012) 3456 7890 123</p>
+                                <p><i class="fas fa-envelope text-primary me-2"></i> info@example.com</p>
+                                <p><i class="fa fa-clock text-primary me-2"></i> 26/7 Hours Service</p>
+                            </div>
                         </div>
                     </div>
                     <div class="col-lg-2 col-md-6">
                         <div class="footer-item">
-                            <h4 class="mb-4">Get Us Know</h4>
+                            <h4 class="mb-4">Pages</h4>
                             <div class="d-flex flex-column align-items-start">
                                 <a class="text-body mb-3" href="#"><i class="fa fa-check text-primary me-2"></i>Home</a>
                                 <a class="text-body mb-3" href="#"><i class="fa fa-check text-primary me-2"></i>About</a>
@@ -168,15 +178,21 @@
                     </div>
                     <div class="col-lg-3 col-md-6">
                         <div class="footer-item">
-                            <h4 class="mb-4">Contact Us</h4>
+                            <h4 class="mb-4">Members can</h4>
                             <div class="d-flex flex-column align-items-start">
-                                <p><i class="fa fa-map-marker-alt text-primary me-2"></i> 123 Street, New York, USA</p>
-                                <p><i class="fa fa-phone-alt text-primary me-2"></i> (+012) 3456 7890 123</p>
-                                <p><i class="fas fa-envelope text-primary me-2"></i> info@example.com</p>
-                                <p><i class="fa fa-clock text-primary me-2"></i> 26/7 Hours Service</p>
+                                <a class="text-body mb-3" href="#"><i class="fa fa-check text-primary me-2"></i>User Account</a>
+                                <a class="text-body mb-3" href="#"><i class="fa fa-check text-primary me-2"></i>Membership|አባልነት</a>
+                            </div>
+                            <h4 class="mb-4">Online Payment</h4>
+                            <div class="d-flex flex-column align-items-start">
+                                <a class="text-body mb-3" href="#"><i class="fa fa-check text-primary me-2"></i>Donations</a>
+                                <a class="text-body mb-3" href="#"><i class="fa fa-check text-primary me-2"></i>መስጠት</a>
+                                <a class="text-body mb-3" href="#"><i class="fa fa-check text-primary me-2"></i>ስህለት</a>
+                                <a class="text-body mb-3" href="#"><i class="fa fa-check text-primary me-2"></i>አስራት በኩራት | Tithe with pride</a>
                             </div>
                         </div>
                     </div>
+
                     {% comment %} <div class="col-lg-3 col-md-6">
                         <div class="footer-item">
                             <h4 class="mb-4">Social Gallery</h4>
@@ -201,7 +217,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div> {% endcomment %}
+                    </div>  {% endcomment %}
                 </div>
             </div>
         </div>
