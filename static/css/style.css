@@ -378,12 +378,17 @@ h4, h5, h6, .h4, .h5, .h6 {
 
 
 /*** Blog Start ***/
+
 .blog-item {
     position: relative;
 }
 
 .blog-item img {
     transition: 0.5s;
+}
+.blog-item img {
+    max-width: 100%;
+    height: auto;
 }
 
 .blog-item:hover img {
