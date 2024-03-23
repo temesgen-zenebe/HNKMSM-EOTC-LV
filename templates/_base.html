@@ -2,10 +2,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
-    
-<!-- Mirrored from themewagon.github.io/CaterServ/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 13 Feb 2024 21:16:29 GMT -->
-<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
 <head>
         <meta charset="utf-8">
         <title>CaterServ - Catering Services Website Template</title>
@@ -62,20 +59,55 @@
                         <div class="navbar-nav mx-auto">
                             <a href="{% url 'pages:homepage' %}" class="nav-item nav-link active">Home</a>
                             <a href="{% url 'pages:about-us' %}" class="nav-item nav-link">About</a>
-                            <a href="service.html" class="nav-item nav-link">Services</a>
-                            <a href="event.html" class="nav-item nav-link">Events</a>
-                            <a href="menu.html" class="nav-item nav-link">Menu</a>
+                            {% comment %} <a href="{% url 'pages:contact-us' %}" class="nav-item nav-link">Contact</a> {% endcomment %}
                             <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Services</a>
                                 <div class="dropdown-menu bg-light">
-                                    <a href="book.html" class="dropdown-item">Booking</a>
-                                    <a href="blog.html" class="dropdown-item">Our Blog</a>
-                                    <a href="team.html" class="dropdown-item">Our Team</a>
-                                    <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                                    <a href="404.html" class="dropdown-item">404 Page</a>
+                                    <a href="#" class="dropdown-item">Sermon (ስብከት)</a>
+                                    <a href="#" class="dropdown-item">Baptism (ጥምቀት)</a>
+                                    <a href="#" class="dropdown-item">Korban (ቁርባን)</a>
+                                    <a href="#" class="dropdown-item">Wedding (ሰርግ)</a>
+                                    <a href="#" class="dropdown-item">Repentance (ንስሐ)</a>
+                                    <a href="#" class="dropdown-item">ፍተዓት አገልግሎት</a>
                                 </div>
                             </div>
-                            <a href="contact.html" class="nav-item nav-link">Contact</a>
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">School<small>አብነት</small></a>
+                                <div class="dropdown-menu bg-light">
+                                    <a href="#" class="dropdown-item">Sunday School(Youth)</a>
+                                    <a href="#" class="dropdown-item">Sunday School(Children)</a>
+                                    <a href="#" class="dropdown-item">Marriage School</a>
+                                </div>
+                            </div>
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Members</a>
+                                <div class="dropdown-menu bg-light">
+                                    <a href="#" class="dropdown-item">Sunday School(Youth)</a>
+                                    <a href="#" class="dropdown-item">Sunday School(Children)</a>
+                                    <a href="#" class="dropdown-item">Marriage School</a>
+                                </div>
+                            </div>
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Members</a>
+                                <div class="dropdown-menu bg-light">
+                                    <a href="#" class="dropdown-item">Membership</a>
+                                    <a href="#" class="dropdown-item">Accounts</a>
+                                    <a href="#" class="dropdown-item">Payment</a>
+                                </div>
+                            </div>
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Resources</a>
+                                <div class="dropdown-menu bg-light">
+                                    <a href="#" class="dropdown-item">Events</a>
+                                    <a href="#" class="dropdown-item">Multimedia</a>
+                                    <a href="#" class="dropdown-item">Articles|blog</a>
+                                    <a href="#" class="dropdown-item">News & Announcements</a>
+                                </div>
+                            </div>
+                            {% comment %} <a href="contact.html" class="nav-item nav-link "></a>
+                            <a href="service.html" class="nav-item nav-link">Services</a>
+                            <a href="event.html" class="nav-item nav-link">Events</a>
+                            <a href="menu.html" class="nav-item nav-link">Services</a> {% endcomment %}
                         </div>
                         <button class="btn-search btn btn-primary btn-md-square me-4 rounded-circle d-none d-lg-inline-flex" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search"></i></button>
                         <a href="#" class="btn btn-primary py-2 px-4 d-none d-xl-inline-block rounded-pill">Donation</a>
@@ -109,9 +141,9 @@
 
         {% block main %}{% endblock %}
         <!-- Footer Start -->
-        <div class="container-fluid footer py-4 my-4 mb-0 bg-light wow bounceInUp" data-wow-delay="0.1s">
+        <div class="container-fluid footer py-6 my-6 mb-0 bg-light wow bounceInUp" data-wow-delay="0.1s">
             <div class="container-fluid mx-4 ">
-                <div class="row g-2">
+                <div class="row g-3">
                     <div class="col-lg-3 col-md-6">
                         <div class="footer-item mb-3">
                             <a href="{% url 'pages:homepage' %}" class="navbar-brand">
@@ -124,32 +156,10 @@
                                 <a class="btn btn-primary btn-sm-square me-2 rounded-circle" href="#"><i class="fab fa-twitter"></i></a>
                                 <a href="#" class="btn btn-primary btn-sm-square me-2 rounded-circle"><i class="fab fa-instagram"></i></a>
                                 <a href="#" class="btn btn-primary btn-sm-square rounded-circle"><i class="fab fa-linkedin-in"></i></a>
-                            </div>
-                            
-                        </div>
-                        <div class="footer-item ">
-                            <h4 class="mb-4">Contact Us</h4>
-                            <div class="d-flex flex-column align-items-start">
-                                <p><i class="fa fa-map-marker-alt text-primary me-2"></i> 123 Street, New York, USA</p>
-                                <p><i class="fa fa-phone-alt text-primary me-2"></i> (+012) 3456 7890 123</p>
-                                <p><i class="fas fa-envelope text-primary me-2"></i> info@example.com</p>
-                                <p><i class="fa fa-clock text-primary me-2"></i> 26/7 Hours Service</p>
-                            </div>
+                            </div> 
                         </div>
                     </div>
-                    <div class="col-lg-2 col-md-6">
-                        <div class="footer-item">
-                            <h4 class="mb-4">Pages</h4>
-                            <div class="d-flex flex-column align-items-start">
-                                <a class="text-body mb-3" href="#"><i class="fa fa-check text-primary me-2"></i>Home</a>
-                                <a class="text-body mb-3" href="#"><i class="fa fa-check text-primary me-2"></i>About</a>
-                                <a class="text-body mb-3" href="#"><i class="fa fa-check text-primary me-2"></i>contact</a>
-                                <a class="text-body mb-3" href="#"><i class="fa fa-check text-primary me-2"></i>Terms&Conditions</a>
-                                <a class="text-body mb-3" href="#"><i class="fa fa-check text-primary me-2"></i>Projects</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-6">
+                    <div class="col-lg-3 col-md-6">
                         <div class="footer-item">
                             <h4 class="mb-4">Services</h4>
                             <div class="d-flex flex-column align-items-start">
@@ -162,14 +172,14 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-2 col-md-6">
+                    <div class="col-lg-3 col-md-6">
                         <div class="footer-item">
                             <h4 class="mb-4">Resources</h4>
                             <div class="d-flex flex-column align-items-start">
                                 <a class="text-body mb-3" href="#"><i class="fa fa-check text-primary me-2"></i>Sunday School</a>
                                 <a class="text-body mb-3" href="#"><i class="fa fa-check text-primary me-2"></i>Marriage School </a>
                                 <a class="text-body mb-3" href="#"><i class="fa fa-check text-primary me-2"></i>Articles|blog</a>
-                                <a class="text-body mb-3" href="#"><i class="fa fa-check text-primary me-2"></i>News &Announcements</a>
+                                <a class="text-body mb-3" href="#"><i class="fa fa-check text-primary me-2"></i>News & Announcements</a>
                                 <a class="text-body mb-3" href="#"><i class="fa fa-check text-primary me-2"></i>Multimedia</a>
                                 <a class="text-body mb-3" href="#"><i class="fa fa-check text-primary me-2"></i>Event</a>
                                 
@@ -178,47 +188,64 @@
                     </div>
                     <div class="col-lg-3 col-md-6">
                         <div class="footer-item">
-                            <h4 class="mb-4">Members can</h4>
-                            <div class="d-flex flex-column align-items-start">
-                                <a class="text-body mb-3" href="#"><i class="fa fa-check text-primary me-2"></i>User Account</a>
-                                <a class="text-body mb-3" href="#"><i class="fa fa-check text-primary me-2"></i>Membership|አባልነት</a>
-                            </div>
-                            <h4 class="mb-4">Online Payment</h4>
+                            <h4 class="mb-4">Payment</h4>
                             <div class="d-flex flex-column align-items-start">
                                 <a class="text-body mb-3" href="#"><i class="fa fa-check text-primary me-2"></i>Donations</a>
                                 <a class="text-body mb-3" href="#"><i class="fa fa-check text-primary me-2"></i>መስጠት</a>
                                 <a class="text-body mb-3" href="#"><i class="fa fa-check text-primary me-2"></i>ስህለት</a>
-                                <a class="text-body mb-3" href="#"><i class="fa fa-check text-primary me-2"></i>አስራት በኩራት | Tithe with pride</a>
+                                <a class="text-body mb-3" href="#"><i class="fa fa-check text-primary me-2"></i>አስራት በኩራት<small>( Tithe with pride )</small></a>
                             </div>
                         </div>
                     </div>
-
-                    {% comment %} <div class="col-lg-3 col-md-6">
-                        <div class="footer-item">
-                            <h4 class="mb-4">Social Gallery</h4>
-                            <div class="row g-2">
-                                <div class="col-4">
-                                     <img src="{% static 'img/menu-01.jpg' %}" class="img-fluid rounded-circle border border-primary p-2" alt="">
-                                </div>
-                                <div class="col-4">
-                                     <img src="{% static 'img/menu-02.jpg' %}" class="img-fluid rounded-circle border border-primary p-2" alt="">
-                                </div>
-                                <div class="col-4">
-                                     <img src="{% static 'img/menu-03.jpg' %}" class="img-fluid rounded-circle border border-primary p-2" alt="">
-                                </div>
-                                <div class="col-4">
-                                     <img src="{% static 'img/menu-04.jpg' %}" class="img-fluid rounded-circle border border-primary p-2" alt="">
-                                </div>
-                                <div class="col-4">
-                                     <img src="{% static 'img/menu-05.jpg' %}" class="img-fluid rounded-circle border border-primary p-2" alt="">
-                                </div>
-                                <div class="col-4">
-                                     <img src="{% static 'img/menu-06.jpg' %}" class="img-fluid rounded-circle border border-primary p-2" alt="">
-                                </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer-item ">
+                            <h4 class="mb-4">Contact Us</h4>
+                            <div class="d-flex flex-column align-items-start">
+                                <p><i class="fa fa-map-marker-alt text-primary me-2"></i> 123 Street, New York, USA</p>
+                                <p><i class="fa fa-phone-alt text-primary me-2"></i> (+012) 3456 7890 123</p>
+                                <p><i class="fas fa-envelope text-primary me-2"></i> info@example.com</p>
+                                <p><i class="fa fa-clock text-primary me-2"></i> 26/7 Hours Service</p>
                             </div>
                         </div>
-                    </div>  {% endcomment %}
+                    </div> 
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer-item">
+                            <h4 class="mb-4">Accounts</h4>
+                            <div class="d-flex flex-column align-items-start">
+                                <a class="text-body mb-3" href="#"><i class="fa fa-check text-primary me-2"></i>Registration</a>
+                                <a class="text-body mb-3" href="#"><i class="fa fa-check text-primary me-2"></i>Login</a>
+                                <a class="text-body mb-3" href="#"><i class="fa fa-check text-primary me-2"></i>Account management</a>
+                                <a class="text-body mb-3" href="#"><i class="fa fa-check text-primary me-2"></i>user dashboard</a>
+                            </div>  
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer-item">
+                            <h4 class="mb-4">Membership</h4>
+                            <div class="d-flex flex-column align-items-start">
+                                <a class="text-body mb-3" href="#"><i class="fa fa-check text-primary me-2"></i>Be Membership</a>
+                                <a class="text-body mb-3" href="#"><i class="fa fa-check text-primary me-2"></i>Update Membership</a>
+                                <a class="text-body mb-3" href="#"><i class="fa fa-check text-primary me-2"></i>Next payment</a>
+                                <a class="text-body mb-3" href="#"><i class="fa fa-check text-primary me-2"></i>Payment history</a>
+                            </div>
+                            
+                        </div>
+                    </div>                   
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer-item">
+                            <h4 class="mb-4">Pages</h4>
+                            <div class="d-flex flex-column align-items-start">
+                                <a class="text-body mb-3" href="{% url 'pages:homepage' %}"><i class="fa fa-check text-primary me-2"></i>Home</a>
+                                <a class="text-body mb-3" href="{% url 'pages:about-us' %}"><i class="fa fa-check text-primary me-2"></i>About</a>
+                                <a class="text-body mb-3" href="{% url 'pages:contact-us' %}"><i class="fa fa-check text-primary me-2"></i>contact</a>
+                                <a class="text-body mb-3" href="#"><i class="fa fa-check text-primary me-2"></i>Terms&Conditions</a>
+                                <a class="text-body mb-3" href="#"><i class="fa fa-check text-primary me-2"></i>Projects</a>
+                            </div>
+                        </div>
+                    </div>
+                   
                 </div>
+                
             </div>
         </div>
         <!-- Footer End -->

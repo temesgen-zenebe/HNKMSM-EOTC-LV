@@ -2,7 +2,74 @@
 
 {% block title %}contact{% endblock %}
 {% block main %}
-<div class="mx-5 my-5">
-    <h2>Welcome! contact</h2>
+<div class="mx-3 my-5">
+    <div class="container-fluid bg-light pb-2 mb-2 mt-0">
+        <div class="container animated bounceInDown ">
+            <ol class="breadcrumb justify-content-start mb-0 animated bounceInDown">
+                <li class="small"><a href="{% url 'pages:homepage' %}">Home <i class="fa fa-arrow-left px-1"></i></a></li>
+                <li class="text-dark small" aria-current="page"> Contact</li>
+            </ol>
+            
+        </div>
+     
+    </div>
+   
+    <div class="container-fluid contact pt-2 pb-4 wow bounceInUp" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: bounceInUp;">
+        <div class="container">
+            <div class="p-5 bg-light rounded contact-form">
+                <div class="row g-4">
+                    <div class="col-12 text-center">
+                        <small class="d-inline-block fw-bold text-dark text-uppercase bg-light border border-primary rounded-pill px-4 py-1 mb-3">Get in touch</small>
+                    </div>
+                    <div class="col-12 text-center">
+                        <h2 class="pb-2">Contact Us For Any Queries!</h2>
+                        <h5 class="pb-2 mb-0">ለማንኛውም ጥያቄ አግኙን!</h5>
+                        <small class="py-3">If you want to contact us, fill out the form below and we will respond as soon as possible.</small>
+                    </div>
+                    <div class="col-md-6 col-lg-7">
+                       
+                        <form>
+                            <input type="text" class="w-100 form-control p-3 mb-4 border-primary bg-light" placeholder="Your Name">
+                            <input type="email" class="w-100 form-control p-3 mb-4 border-primary bg-light" placeholder="Enter Your Email">
+                            <input type="phone" class="w-100 form-control p-3 mb-4 border-primary bg-light" placeholder="Enter Your phone">
+                            <textarea class="w-100 form-control mb-4 p-3 border-primary bg-light" rows="4" cols="10" placeholder="Your Message"></textarea>
+                            <button class="w-100 btn btn-primary form-control p-3 border-primary bg-primary rounded-pill" type="submit">Submit Now</button>
+                        </form>
+                    </div>
+                    <div class="col-md-6 col-lg-5">
+                        <div>
+                            <div class="d-inline-flex w-100 border border-primary p-4 rounded mb-4">
+                                <i class="fas fa-map-marker-alt fa-2x text-primary me-4"></i>
+                                <div class="">
+                                    <h4>Address</h4>
+                                    <p class="small"><a href="https://maps.app.goo.gl/u9ppF5gEkpGzdpKQ9">5985 Lindell Rd. Las Vegas, NV 89118</a></p>
+                                    
+                                </div>
+                            </div>
+                            <div class="d-inline-flex w-100 border border-primary p-4 rounded mb-4">
+                                <i class="fas fa-envelope fa-2x text-primary me-4"></i>
+                                <div class="">
+                                    <h4>Mail Us</h4>
+                                    <p class="mb-2 small"><a href="mailto:info@hamerenoahlv.org">info@hamerenoahlv.org</a></p>
+                                    <p class="mb-0 small"><a href="mailto:info@hamerenoahlv.org">support@hamerenoahlv.org</a></p>
+                                </div>
+                            </div>
+                            <div class="d-inline-flex w-100 border border-primary p-4 rounded">
+                                <i class="fa fa-phone-alt fa-2x text-primary me-4"></i>
+                                <div class="">
+                                    <h4>Telephone</h4>
+                                    <p class="mb-2 small"><a href="tel:(702)%20444-5667">General Inquiries (702) 444-5667</a></p>
+                                    <p class="mb-0 small"><a href="tel:(702)%20444-5667">Accounts Inquiries (702) 444-5667</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-10 col-lg-12 py-4">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3224.512476601544!2d-115.21958922534152!3d36.08099360791247!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c8c6431339ac23%3A0x39510ddc48df5f1c!2s5985%20S%20Lindell%20Rd%2C%20Las%20Vegas%2C%20NV%2089118!5e0!3m2!1sen!2sus!4v1711224638287!5m2!1sen!2sus" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}
