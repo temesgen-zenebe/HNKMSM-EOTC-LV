@@ -59,11 +59,11 @@
                         <div class="navbar-nav mx-auto">
                             <a href="{% url 'pages:homepage' %}" class="nav-item nav-link active">Home</a>
                             <a href="{% url 'pages:about-us' %}" class="nav-item nav-link">About</a>
-                            {% comment %} <a href="{% url 'pages:contact-us' %}" class="nav-item nav-link">Contact</a> {% endcomment %}
+                            <a href="{% url 'pages:contact-us' %}" class="nav-item nav-link">Contact</a> 
                             <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Services</a>
+                                <a href="{% url "services:service" %}" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Services</a>
                                 <div class="dropdown-menu bg-light">
-                                    <a href="#" class="dropdown-item">Sermon (ስብከት)</a>
+                                    <a href="{% url "services:sermon" %}" class="dropdown-item">Sermon (ስብከት)</a>
                                     <a href="#" class="dropdown-item">Baptism (ጥምቀት)</a>
                                     <a href="#" class="dropdown-item">Korban (ቁርባን)</a>
                                     <a href="#" class="dropdown-item">Wedding (ሰርግ)</a>
@@ -240,7 +240,7 @@
                                 <a class="text-body mb-3" href="{% url 'pages:about-us' %}"><i class="fa fa-check text-primary me-2"></i>About</a>
                                 <a class="text-body mb-3" href="{% url 'pages:contact-us' %}"><i class="fa fa-check text-primary me-2"></i>contact</a>
                                 <a class="text-body mb-3" href="#"><i class="fa fa-check text-primary me-2"></i>Terms&Conditions</a>
-                                <a class="text-body mb-3" href="#"><i class="fa fa-check text-primary me-2"></i>Projects</a>
+                                <a class="text-body mb-3" href="{% url 'projectVote:proposal_list' %}"><i class="fa fa-check text-primary me-2"></i>Projects</a>
                             </div>
                         </div>
                     </div>

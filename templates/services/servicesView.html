@@ -1,0 +1,139 @@
+{% extends "_base.html" %}
+{% load static %}
+{% block javascript %}
+   {% comment %} <script type="text/javascript" src="{% static '' %}" defer ></script> {% endcomment %}
+{% endblock %}
+{% block title %}services list{% endblock %}
+{% block main %}
+<div class="my-1 ">
+    <!-- breadcrumb Start -->
+    <div class="container-fluid bg-light pb-2 mb-2 mt-0">
+        <div class="container animated bounceInDown ">
+            <ol class="breadcrumb justify-content-start mb-0 animated bounceInDown">
+                <li class="small"><a href="{% url 'pages:homepage' %}">Home <i class="fa fa-arrow-left px-1"></i></a></li>
+                <li class="text-dark small" aria-current="page">services</li>
+            </ol>
+        </div>
+    </div>
+    <!-- breadcrumb Start -->
+     <!-- Service Start -->
+     <div class="container-fluid service py-4">
+        <div class="container">
+            <div class="text-center wow bounceInUp" data-wow-delay="0.1s">
+                <small class="d-inline-block fw-bold text-dark text-uppercase bg-light border border-primary rounded-pill px-4 py-1 mb-3">Our Services</small>
+                <h3 class="mb-3 bolder">የምንሰጠው አገልግሎቶች</h3>
+                <h4 class="mb-5 text-church">What We Offer </h4>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6 col-sm-12 wow bounceInUp" data-wow-delay="0.5s">
+                    <div class="bg-light rounded service-item">
+                        <div class="service-content d-flex align-items-center justify-content-center p-4">
+                            <div class="service-content-icon text-center">
+                                <i class="fas fa-church fa-3x text-primary mb-4"></i>
+                                <h5 class="mb-3">Sermon (ስብከት)</h5>
+                                <p class="mb-4 small">
+                                    "እውነትን ማስተማር፣ ልብን አነሳሽ፣ ነፍሳትን ወደ መለኮታዊ ማስተዋል መምራት።" ማቴዎስ 5:2
+                                </p>
+                                <a href="{% url "services:sermon" %}" class="btn btn-primary px-4 py-2 rounded-pill">Start</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-12 wow bounceInUp" data-wow-delay="0.1s">
+                    <div class="bg-light rounded service-item">
+                        <div class="service-content d-flex align-items-center justify-content-center p-4">
+                            <div class="service-content-icon text-center">
+                                <i class="fas fa-cross fa-3x text-primary mb-4"></i>
+                                <h5 class="mb-3">Baptism (ጥምቀት)</h5>
+                                <p class="mb-4 small">የኃጢአት ስርየት እና የመንፈስ ጥምቀት።
+                                    ንስሐ ግቡ እያንዳንዳችሁም ተጠመቁ። የሐዋርያት ሥራ 2:38 </p>
+                                <a href="#" class="btn btn-primary px-4 py-2 rounded-pill">Start</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-12 wow bounceInUp" data-wow-delay="0.3s">
+                    <div class="bg-light rounded service-item">
+                        <div class="service-content d-flex align-items-center justify-content-center p-4">
+                            <div class="service-content-icon text-center">
+                                <i class="fas fa-wine-glass-alt fa-3x text-primary mb-4"></i>
+                                <h5 class="mb-3">Korban (ቁርባን)</h5>
+                                <p class="mb-4 small">ሥጋዬን የሚበላ ደሜንም የሚጠጣ የዘላለም ሕይወት አለው። ዮሐንስ 6:54</p>
+                                <a href="#" class="btn btn-primary px-4 py-2 rounded-pill">Start</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-12 wow bounceInUp" data-wow-delay="0.5s">
+                    <div class="bg-light rounded service-item">
+                        <div class="service-content d-flex align-items-center justify-content-center p-4">
+                            <div class="service-content-icon text-center">
+                                <i class="fas fa-chess-king fa-3x text-primary mb-4"></i>
+                                <h5 class="mb-3">Wedding (ሰርግ)</h5>
+                                <p class="mb-4 small">ሁለት ልቦች አንድ ሆነዋል፣ የፍቅር ቃል ኪዳን ታትሟል፣ ደስታ ለዘላለም ይካፈላል።" ማርቆስ 10:9</p>
+                                <a href="#" class="btn btn-primary px-4 py-2 rounded-pill">Start</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-12 wow bounceInUp" data-wow-delay="0.7s">
+                    <div class="bg-light rounded service-item">
+                        <div class="service-content d-flex align-items-center justify-content-center p-4">
+                            <div class="service-content-icon text-center">
+                                <i class="fas fa-plus-circle fa-3x text-primary mb-4"></i>
+                                <h5 class="mb-3">የንስሐ አባት</h5>
+                                <h5 class="mb-3">Father of repentance</h5>
+                                <p class="mb-4 small">አባካኙ ልጅ በአባት ፍቅር ታቅፎ፣ ያለ ምንም ቅድመ ሁኔታ ይቅርታ ተደረገለት።" ሉቃስ 15:20</p>
+                                <a href="#" class="btn btn-primary px-4 py-2 rounded-pill">Start</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-12 wow bounceInUp" data-wow-delay="0.1s">
+                    <div class="bg-light rounded service-item">
+                        <div class="service-content d-flex align-items-center justify-content-center p-4">
+                            <div class="service-content-icon text-center">
+                                <i class="fas fa-plus-square fa-3x text-primary mb-4"></i>
+                                {% comment %} <img src="{% static 'img/icon/matting_Church_justice_during_the_funeral.png' %}" class="img-fluid rounded text-primary mb-4" alt="">  {% endcomment %}
+                                <h5 class="mb-3">ፍተዓት አገልግሎት Funeral service</h5>
+                                <p class="mb-4 small">የቀብር  ፅሎተ  ፍተዓት  አገልግሎት "ጽድቅን አድርግ፥ ምሕረትን ውደድ፥ ከአምላክህ ጋር በትሕትና ተመላለስ።" ሚክያስ 6:8</p>
+                                <a href="#" class="btn btn-primary px-4 py-2 rounded-pill">Start</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-12 wow bounceInUp" data-wow-delay="0.1s">
+                    <div class="bg-light rounded service-item">
+                        <div class="service-content d-flex align-items-center justify-content-center p-4">
+                            <div class="service-content-icon text-center">
+                                <i class="fas fa-school fa-3x text-primary mb-4"></i>
+                                {% comment %} <img src="{% static 'img/icon/matting_Church_justice_during_the_funeral.png' %}" class="img-fluid rounded text-primary mb-4" alt="">  {% endcomment %}
+                                <h5 class="mb-3">School | አብነት</h5>
+                                <p class="mb-4 small">ካቴድራላችን  ለልጆችና አዋቂዎች ሃይማኖታዊ ትምህርት አገልግሎት እንሰጣለን::</p>
+                                <a href="#" class="btn btn-primary px-4 py-2 rounded-pill">Start</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-12 wow bounceInUp" data-wow-delay="0.1s">
+                    <div class="bg-light rounded service-item">
+                        <div class="service-content d-flex align-items-center justify-content-center p-4">
+                            <div class="service-content-icon text-center">
+                                <i class="fas fa-circle-notch  fa-2x text-primary mb-4"></i>
+                                <i class="fas fa-circle-notch  fa-2x text-primary mb-4"></i>
+                                {% comment %} <img src="{% static 'img/icon/matting_Church_justice_during_the_funeral.png' %}" class="img-fluid rounded text-primary mb-4" alt="">  {% endcomment %}
+                                <h5 class="mb-3">Marriage School</h5>
+                                <p class="mb-4 small"> 
+                                    Pre-Marital and Post-Marital Counseling.<small>"Prepare hearts for union, nurture bonds, uphold vows, seek counsel, sustain love. - Ephesians 5:25-33"</small></p>
+                                <a href="#" class="btn btn-primary px-4 py-2 rounded-pill">Start</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+             
+            </div>
+        </div>
+    </div>
+    <!-- Service End -->
+</div>
+{% endblock %}

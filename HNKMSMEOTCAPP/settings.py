@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'pages.apps.PagesConfig',
     'projectVote.apps.ProjectvoteConfig',
+    'services.apps.ServicesConfig',
     
 ]
 SITE_ID = 1
