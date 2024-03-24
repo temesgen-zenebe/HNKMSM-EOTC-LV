@@ -72,21 +72,21 @@
                                 </div>
                             </div>
                             <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">School<small>[አብነት]</small></a>
+                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">School<small>( አብነት )</small></a>
                                 <div class="dropdown-menu bg-light">
                                     <a href="#" class="dropdown-item">Sunday School(Youth)</a>
                                     <a href="#" class="dropdown-item">Sunday School(Children)</a>
                                     <a href="#" class="dropdown-item">Marriage School</a>
                                 </div>
                             </div>
-                            <div class="nav-item dropdown">
+                            {% comment %} <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Members</a>
                                 <div class="dropdown-menu bg-light">
                                     <a href="#" class="dropdown-item">Sunday School(Youth)</a>
                                     <a href="#" class="dropdown-item">Sunday School(Children)</a>
                                     <a href="#" class="dropdown-item">Marriage School</a>
                                 </div>
-                            </div>
+                            </div> {% endcomment %}
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Members</a>
                                 <div class="dropdown-menu bg-light">
@@ -266,11 +266,12 @@
         <div class="container-fluid copyright bg-dark py-4">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0 small">
-                        <span class="text-light small"><a href="{% url 'pages:homepage' %}"><i class="fas fa-copyright text-light me-2"></i>HNKM & STM-ATEOTC LV</a>,All right reserved.</span>
+                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0 ">
+                        <span class="text-light small">
+                            <a href="{% url 'pages:homepage' %}">&copy; HNKM & STM-ATEOTC LV, {% now 'Y' %} All Right Reserved.</a></span>
                     </div>
                     <div class="col-md-6 my-auto text-center text-md-end text-white small">
-                        <a class="border-bottom text-decoration-none small" href="">Terms&Conditions</a>
+                        <a class="small" href="">Terms&Conditions</a>
                     </div>
                 </div>
             </div>
