@@ -72,7 +72,7 @@
                                 </div>
                             </div>
                             <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">School<small>አብነት</small></a>
+                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">School<small>[አብነት]</small></a>
                                 <div class="dropdown-menu bg-light">
                                     <a href="#" class="dropdown-item">Sunday School(Youth)</a>
                                     <a href="#" class="dropdown-item">Sunday School(Children)</a>
@@ -102,6 +102,7 @@
                                     <a href="#" class="dropdown-item">Multimedia</a>
                                     <a href="#" class="dropdown-item">Articles|blog</a>
                                     <a href="#" class="dropdown-item">News & Announcements</a>
+                                    <a href="#" class="dropdown-item">Archive Links</a>
                                 </div>
                             </div>
                             {% comment %} <a href="contact.html" class="nav-item nav-link "></a>
@@ -201,10 +202,10 @@
                         <div class="footer-item ">
                             <h4 class="mb-4">Contact Us</h4>
                             <div class="d-flex flex-column align-items-start">
-                                <p><i class="fa fa-map-marker-alt text-primary me-2"></i> 123 Street, New York, USA</p>
-                                <p><i class="fa fa-phone-alt text-primary me-2"></i> (+012) 3456 7890 123</p>
-                                <p><i class="fas fa-envelope text-primary me-2"></i> info@example.com</p>
-                                <p><i class="fa fa-clock text-primary me-2"></i> 26/7 Hours Service</p>
+                                <p><i class="fa fa-map-marker-alt text-primary me-2"></i><a href="https://maps.app.goo.gl/u9ppF5gEkpGzdpKQ9">5985 Lindell Rd. Las Vegas, NV 89118</a></p>
+                                <p><i class="fa fa-phone-alt text-primary me-2"></i><a href="tel:(702)%20444-5667">(702) 444-5667</a></p>
+                                <p><i class="fas fa-envelope text-primary me-2"></i> <a href="mailto:info@hamerenoahlv.org">info@hamerenoahlv.org</a></p>
+                                <p><i class="fa fa-comments text-primary me-2"></i><a href="{% url 'pages:contact-us' %}">comment or massge</a></p>
                             </div>
                         </div>
                     </div> 
@@ -243,7 +244,17 @@
                             </div>
                         </div>
                     </div>
-                   
+                    <div class="col-lg-4 col-md-6">
+                        <div class="footer-item ">
+                            <h4 class="mb-4">Business hours</h4>
+                            <div class="d-flex flex-column align-items-start">
+                                <p class="small"><i class="fa fa-calendar-week text-primary me-2"></i>Monday to Sunday Open all day for prayer</p>
+                                <p class="small"><i class="fa fa-clock text-primary me-2"></i>Thursdays - 4am (Non-Fasting) or 7am (When fasting)</p>
+                                <p class="small"><i class="fa fa-clock text-primary me-2"></i>Sunday - 4am</p>
+                                <p class="small"><i class="fa fa-calendar-week text-primary me-2"></i>Monthly on the 12th, 16th & 23rd (Ethiopian Calendar)</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 
             </div>
@@ -256,10 +267,10 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-6 text-center text-md-start mb-3 mb-md-0 small">
-                        <span class="text-light"><a href="#"><i class="fas fa-copyright text-light me-2"></i>Our Site </a>, All right reserved.</span>
+                        <span class="text-light small"><a href="{% url 'pages:homepage' %}"><i class="fas fa-copyright text-light me-2"></i>HNKM & STM-ATEOTC LV</a>,All right reserved.</span>
                     </div>
                     <div class="col-md-6 my-auto text-center text-md-end text-white small">
-                        <a class="border-bottom text-decoration" href="">Terms&Conditions</a>
+                        <a class="border-bottom text-decoration-none small" href="">Terms&Conditions</a>
                     </div>
                 </div>
             </div>
@@ -285,5 +296,5 @@
         <script type="text/javascript"  src="{% static 'js/main.js' %}" async></script>
     </body>
 
-<!-- Mirrored from themewagon.github.io/CaterServ/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 13 Feb 2024 21:16:42 GMT -->
+
 </html>
