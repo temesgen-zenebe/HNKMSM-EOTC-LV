@@ -58,7 +58,7 @@
                         <div class="navbar-nav mx-auto">
                             <a href="{% url 'pages:homepage' %}" class="nav-item nav-link active">Home</a>
                             <a href="{% url 'pages:about-us' %}" class="nav-item nav-link">About</a>
-                            <a href="{% url 'pages:contact-us' %}" class="nav-item nav-link">Contact</a> 
+                            
                             <div class="nav-item dropdown">
                                 <a href="{% url "services:service" %}" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Services</a>
                                 <div class="dropdown-menu bg-light">
@@ -104,11 +104,10 @@
                                     <a href="#" class="dropdown-item">Archive Links</a>
                                 </div>
                             </div>
-                           
+                            <a href="{% url 'pages:contact-us' %}" class="nav-item nav-link me-4">Contact</a> 
                             <button class="nav-item nav-link btn-search btn btn-primary btn-md-square me-4 rounded-circle d-none d-lg-inline-flex" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search"></i></button>
-                            
                             {% if not user.is_authenticated %}
-                            <a href="{% url 'account_login'%}" class="nav-item nav-link btn btn-primary py-2 px-3 me-3 rounded-pill small">Login</a>
+                            <a href="{% url 'account_login'%}" class="nav-item nav-link btn btn-primary py-2 px-3 me-3 rounded-pill small">Log in</a>
                             {% else %}
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle btn btn-sm btn-primary py-2 px-4 me-3 rounded-pill " data-bs-toggle="dropdown">

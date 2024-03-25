@@ -1,24 +1,40 @@
 {% extends '_base.html' %}
 {% load crispy_forms_tags %}
-
+{% load static %}
 {% block title %}Log in{% endblock %}
 {% block main %}
-<div class="my-4">
-  <div class="card border-primary m-auto mb-3" style="max-width: 30rem">
-    <div class="card-header text-center">Log in</div>
+{% comment %} <div class="" style="background: #000000; opacity: 0.5;"> {% endcomment %}
+<div class="hero overlay py-4 px-3" style="background-image: url('{% static "img/Church-at-night-2.png" %}');" alt="Church-at">
+  <div class="card border-primary shadow mx-auto mb-5 wow bounceInUp" data-wow-delay="0.1s" style="max-width: 30rem">
+    <div class="card-header-church text-center rounded">Log in</div>
     <div class="card-body">
       <form method="post" class="m-auto">
         {% csrf_token %}
-        {{ form|crispy }}
-        <button class="form-control btn btn-primary">LOG IN</button>
+        <div id="div_id_login" class="mb-3"> 
+          <label for="id_login" class="form-label requiredField">E-mail<span class="asteriskField">*</span> </label>
+           <input type="email" name="login" placeholder="E-mail address" autocomplete="email" class="w-100 form-control p-2 mb-3 border-primary bg-light" required="" id="id_login"> </div> 
+           <div id="div_id_password" class="mb-3"> 
+            <label for="id_password" class="form-label requiredField">Password<span class="asteriskField">*</span> </label> 
+            <input type="password" name="password" placeholder="Password" autocomplete="current-password" class="passwordinput w-100 form-control p-2 mb-3 border-primary bg-light" required="" id="id_password"> 
+            </div> 
+            <div class="mb-3"> <div id="div_id_remember" class="mb-3 form-check"> 
+              <input type="checkbox" name="remember" class="checkboxinput form-check-input" id="id_remember"> 
+              <label for="id_remember" class="form-check-label">Remember Me</label> 
+            </div> 
+          </div>
+
+        <button class="form-control btn btn-sm btn-outline-primary">Log in</button>
       </form>
+      {% comment %} <form method="post" class="m-auto">
+        {% csrf_token %}
+        {{ form|crispy }} 
+        <button class="form-control btn btn-sm btn-outline-primary">Login</button>
+      </form> {% endcomment %}
     </div>
-    <div class="card-footer">
-      <p>
-        Need a new account?
-        <a href="{% url 'account_signup' %}">Register</a>.<br>
-        Lost your password?
-        <a href="{% url 'account_reset_password' %}">Reset it</a>.
+    <div class="card-footer-church rounded">
+      <p class="">
+        <a href="{% url 'account_signup' %}" class="small my-1"><i class="fa fa-registered px-1"></i> Need a new account ? Register</a>.<br>
+        <a href="{% url 'account_reset_password' %}" class="small"><i class="fa fa-user-edit  px-1"></i>Lost your password ? Reset it</a>.
       </p>
     </div>
   </div>
