@@ -43,7 +43,6 @@
         </div>
         <!-- Spinner End -->
 
-
         <!-- Navbar start -->
         <div class="container-fluid nav-bar">
             <div class="container">
@@ -55,7 +54,7 @@
                     <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                         <span class="fa fa-bars text-primary"></span>
                     </button>
-                    <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="collapse navbar-collapse " id="navbarCollapse">
                         <div class="navbar-nav mx-auto">
                             <a href="{% url 'pages:homepage' %}" class="nav-item nav-link active">Home</a>
                             <a href="{% url 'pages:about-us' %}" class="nav-item nav-link">About</a>
@@ -87,14 +86,14 @@
                                     <a href="#" class="dropdown-item">Marriage School</a>
                                 </div>
                             </div> {% endcomment %}
-                            <div class="nav-item dropdown">
+                            {% comment %} <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Members</a>
                                 <div class="dropdown-menu bg-light">
                                     <a href="#" class="dropdown-item">Membership</a>
                                     <a href="#" class="dropdown-item">Accounts</a>
                                     <a href="#" class="dropdown-item">Payment</a>
                                 </div>
-                            </div>
+                            </div> {% endcomment %}
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Resources</a>
                                 <div class="dropdown-menu bg-light">
@@ -105,19 +104,35 @@
                                     <a href="#" class="dropdown-item">Archive Links</a>
                                 </div>
                             </div>
-                            {% comment %} <a href="contact.html" class="nav-item nav-link "></a>
-                            <a href="service.html" class="nav-item nav-link">Services</a>
-                            <a href="event.html" class="nav-item nav-link">Events</a>
-                            <a href="menu.html" class="nav-item nav-link">Services</a> {% endcomment %}
+                           
+                            <button class="nav-item nav-link btn-search btn btn-primary btn-md-square me-4 rounded-circle d-none d-lg-inline-flex" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search"></i></button>
+                            
+                            {% if not user.is_authenticated %}
+                            <a href="{% url 'account_login'%}" class="nav-item nav-link btn btn-primary py-2 px-3 me-3 rounded-pill small">Login</a>
+                            {% else %}
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle btn btn-sm btn-primary py-2 px-4 me-3 rounded-pill " data-bs-toggle="dropdown">
+                                    <small>{{ user.username|capfirst}}</small> <i class="fas fa-user px-1"></i></a> 
+                                <div class="dropdown-menu bg-light">
+                                    <a href="#" class="dropdown-item">Membership</a>
+                                    <a href="#" class="dropdown-item">Payment</a>
+                                    <a href="{% url 'my-account' %}" class="dropdown-item">my account</a>
+                                    {% comment %} <a  href="{% url 'pages:user-dashboard' %}" class="dropdown-item">dashboard</a></li> {% endcomment %}
+                                    <form action="{% url 'account_logout' %}" method="post">
+                                        {% csrf_token %}
+                                        <button class="btn btn-primary dropdown-item">Logout</button>
+                                    </form>
+                                </div>
+                            </div>
+                            {% endif %}
+                            <a href="#" class="nav-item nav-link btn btn-primary py-2 px-3 d-none d-xl-inline-block rounded-pill small">Donation</a>
                         </div>
-                        <button class="btn-search btn btn-primary btn-md-square me-4 rounded-circle d-none d-lg-inline-flex" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search"></i></button>
-                        <a href="#" class="btn btn-primary py-2 px-4 d-none d-xl-inline-block rounded-pill">Donation</a>
+                       
                     </div>
                 </nav>
             </div>
         </div>
         <!-- Navbar End -->
-
 
         <!-- Modal Search Start -->
         <div class="modal fade " id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -137,8 +152,7 @@
             </div>
         </div>
         <!-- Modal Search End -->
-
-
+        
 
         {% block main %}{% endblock %}
         <!-- Footer Start -->

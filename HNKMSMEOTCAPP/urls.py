@@ -9,6 +9,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     
     # User Management
+    path('account/', include('users.urls')),
     path('account/', include('allauth.urls')),
     
     path('', include('pages.urls')),
