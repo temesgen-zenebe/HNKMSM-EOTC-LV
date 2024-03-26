@@ -1,0 +1,43 @@
+{% extends "_base.html" %}
+{% load static %}
+{% block javascript %}
+   {% comment %} <script type="text/javascript" src="{% static '' %}" defer ></script> {% endcomment %}
+{% endblock %}
+{% block title %}services list{% endblock %}
+{% block main %}
+<div class="my-1 ">
+    <!-- breadcrumb Start -->
+    <div class="container-fluid bg-light pb-2 mb-2 mt-0">
+        <div class="container animated bounceInDown ">
+            <ol class="breadcrumb justify-content-start mb-0 animated bounceInDown">
+                <li class="small"><a href="{% url 'pages:homepage' %}">Home <i class="fa fa-arrow-left px-1"></i></a></li>
+                <li class="text-dark small" aria-current="page">services</li>
+            </ol>
+        </div>
+    </div>
+    <!-- breadcrumb Start -->
+     <!-- Service Start -->
+     <div class="container-fluid service py-2">
+        <div class="container mt-2">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ sermon_media.sermon.title }}</h5>
+                    <p class="card-text">Media Type: {{ sermon_media.media_type }}</p>
+                    <p class="card-text">Media URL: {{ sermon_media.media_url }}</p>
+                    <!-- Add other fields as needed -->
+                </div>
+                <div class="card-body">
+                    <!-- 16:9 aspect ratio -->
+                    <div class="ratio ratio-16x9">
+    
+                    <iframe width="766" height="431" src="{{ sermon_media.media_url }}?rel=0" title="2019 የትንሳኤ ጥዑመ  ዝማሬ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <!-- Service End -->
+</div>
+{% endblock %}

@@ -17,8 +17,8 @@
         </div>
      
     </div>
-       <!-- Events Start -->
-       <div class="container-fluid event py-4">
+    <!-- Events Start -->
+    <div class="container-fluid event py-4">
         <div class="container">
             <div class="text-center wow bounceInUp" data-wow-delay="0.1s">
                 <small class="d-inline-block fw-bold text-dark text-uppercase bg-light border border-primary rounded-pill px-4 py-1 mb-3">Latest Sermon Gallery</small>
@@ -346,5 +346,22 @@
         </div>
     </div>
     <!-- Events End -->
+
+    <div class="container mt-4">
+        <h2>Sermon Media List</h2>
+        <div class="row">
+            {% for sermon_media in sermon_media_list %}
+            <div class="col-md-4 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ sermon_media.sermon.title }}</h5>
+                        <p class="card-text">{{ sermon_media.media_type }}</p>
+                        <a href="{% url 'services:sermon_media_detail' sermon_media.pk %}" class="btn btn-primary">View Details</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
 </div>
 {% endblock %}

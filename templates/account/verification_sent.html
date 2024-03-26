@@ -1,14 +1,16 @@
 {% extends '_base.html' %}
 {% load crispy_forms_tags %}
-
+{% load static %}
 {% block title %}Verify Your Email Address{% endblock %}
 
 {% block main %}
+<div class="py-5 px-3" style="background-image: url('{% static "img/heroAccount-6.png" %}');" alt="Church-at">
 <div class="card border-primary m-auto mb-3" style="max-width: 30rem">
   <div class="card-header text-center">Verify Your Email Address</div>
   <div class="card-body">
     <p class="card-text">We have sent an email to you for verification.
       Follow the link provided to finalize the registration process.</p>
   </div>
+</div>
 </div>
 {% endblock %}
