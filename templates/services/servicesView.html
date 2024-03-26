@@ -7,26 +7,30 @@
 {% block main %}
 <div class="my-1 ">
     <!-- breadcrumb Start -->
-    <div class="container-fluid bg-light pb-2 mb-2 mt-0">
+    <div class="container-fluid bg-light pb- mt-0">
         <div class="container animated bounceInDown ">
             <ol class="breadcrumb justify-content-start mb-0 animated bounceInDown">
-                <li class="small"><a href="{% url 'pages:homepage' %}">Home <i class="fa fa-arrow-left px-1"></i></a></li>
+                <li class="small"><a href="{% url 'pages:homepage' %}">Home <span class="px-1">\</span></a></li>
                 <li class="text-dark small" aria-current="page">services</li>
             </ol>
         </div>
     </div>
     <!-- breadcrumb Start -->
      <!-- Service Start -->
-     <div class="container-fluid service py-4">
-        <div class="container">
-            <div class="text-center wow bounceInUp" data-wow-delay="0.1s">
+     <div class="container-fluid service py-1">
+        <div class="container-fluid mx-0 py-3 rounded-top wow bounceInUp" 
+            style="background-image: url('{% static "img/heroAccount-13.png" %}');background-size: cover; background-position: center center; background-repeat: no-repeat; " alt="Church-at" data-wow-delay="0.1s">
+            <div class="text-center">
                 <small class="d-inline-block fw-bold text-dark text-uppercase bg-light border border-primary rounded-pill px-4 py-1 mb-3">Our Services</small>
-                <h3 class="mb-3 bolder">የምንሰጠው አገልግሎቶች</h3>
-                <h4 class="mb-5 text-church">What We Offer </h4>
+                <h3 class="mb-3 bolder text-light ">የምንሰጠው አገልግሎቶች</h3>
+                <h4 class="mb-5 text-light ">What We Offer </h4>
             </div>
+            
+        </div>
+        <div class="container py-4">
             <div class="row g-4">
-                <div class="col-lg-3 col-md-6 col-sm-12 wow bounceInUp" data-wow-delay="0.5s">
-                    <div class="bg-light rounded service-item">
+                <div class="col-lg-3 col-md-6 col-sm-12 wow bounceInUp " data-wow-delay="0.5s">
+                    <div class="bg-light rounded service-item shadow">
                         <div class="service-content d-flex align-items-center justify-content-center p-4">
                             <div class="service-content-icon text-center">
                                 <i class="fas fa-church fa-3x text-primary mb-4"></i>
@@ -34,13 +38,13 @@
                                 <p class="mb-4 small">
                                     "እውነትን ማስተማር፣ ልብን አነሳሽ፣ ነፍሳትን ወደ መለኮታዊ ማስተዋል መምራት።" ማቴዎስ 5:2
                                 </p>
-                                <a href="{% url "services:sermon" %}" class="btn btn-primary px-4 py-2 rounded-pill">Start</a>
+                                <a href="{% url "services:sermon_media_list" %}" class="btn btn-primary px-4 py-2 rounded-pill">Start</a>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-12 wow bounceInUp" data-wow-delay="0.1s">
-                    <div class="bg-light rounded service-item">
+                    <div class="bg-light rounded service-item shadow">
                         <div class="service-content d-flex align-items-center justify-content-center p-4">
                             <div class="service-content-icon text-center">
                                 <i class="fas fa-cross fa-3x text-primary mb-4"></i>
@@ -53,7 +57,7 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-12 wow bounceInUp" data-wow-delay="0.3s">
-                    <div class="bg-light rounded service-item">
+                    <div class="bg-light rounded service-item shadow">
                         <div class="service-content d-flex align-items-center justify-content-center p-4">
                             <div class="service-content-icon text-center">
                                 <i class="fas fa-wine-glass-alt fa-3x text-primary mb-4"></i>
@@ -65,7 +69,7 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-12 wow bounceInUp" data-wow-delay="0.5s">
-                    <div class="bg-light rounded service-item">
+                    <div class="bg-light rounded service-item shadow">
                         <div class="service-content d-flex align-items-center justify-content-center p-4">
                             <div class="service-content-icon text-center">
                                 <i class="fas fa-chess-king fa-3x text-primary mb-4"></i>
@@ -77,7 +81,7 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-12 wow bounceInUp" data-wow-delay="0.7s">
-                    <div class="bg-light rounded service-item">
+                    <div class="bg-light rounded service-item shadow">
                         <div class="service-content d-flex align-items-center justify-content-center p-4">
                             <div class="service-content-icon text-center">
                                 <i class="fas fa-plus-circle fa-3x text-primary mb-4"></i>
@@ -90,7 +94,7 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-12 wow bounceInUp" data-wow-delay="0.1s">
-                    <div class="bg-light rounded service-item">
+                    <div class="bg-light rounded service-item shadow">
                         <div class="service-content d-flex align-items-center justify-content-center p-4">
                             <div class="service-content-icon text-center">
                                 <i class="fas fa-plus-square fa-3x text-primary mb-4"></i>
@@ -103,7 +107,7 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-12 wow bounceInUp" data-wow-delay="0.1s">
-                    <div class="bg-light rounded service-item">
+                    <div class="bg-light rounded service-item shadow">
                         <div class="service-content d-flex align-items-center justify-content-center p-4">
                             <div class="service-content-icon text-center">
                                 <i class="fas fa-school fa-3x text-primary mb-4"></i>
@@ -116,7 +120,7 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-12 wow bounceInUp" data-wow-delay="0.1s">
-                    <div class="bg-light rounded service-item">
+                    <div class="bg-light rounded service-item shadow">
                         <div class="service-content d-flex align-items-center justify-content-center p-4">
                             <div class="service-content-icon text-center">
                                 <i class="fas fa-circle-notch  fa-2x text-primary mb-4"></i>
