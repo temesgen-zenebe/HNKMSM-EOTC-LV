@@ -26,7 +26,7 @@ class Sermon(models.Model):
     def save(self, *args, **kwargs):
         if not self.slug:
             value = str(self.title)
-            self.slug = unique_slug(value, type(self.title))
+            self.slug = unique_slug(value, type(self))
         super().save(*args, **kwargs)
     
     def __str__(self):

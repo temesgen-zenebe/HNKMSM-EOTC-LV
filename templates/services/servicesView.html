@@ -5,29 +5,41 @@
 {% endblock %}
 {% block title %}services list{% endblock %}
 {% block main %}
-<div class="my-1 ">
+<div class=" ">
     <!-- breadcrumb Start -->
-    <div class="container-fluid bg-light pb- mt-0">
+    {% comment %} <div class="container-fluid bg-light pb- mt-0">
         <div class="container animated bounceInDown ">
             <ol class="breadcrumb justify-content-start mb-0 animated bounceInDown">
                 <li class="small"><a href="{% url 'pages:homepage' %}">Home <span class="px-1">\</span></a></li>
                 <li class="text-dark small" aria-current="page">services</li>
             </ol>
         </div>
-    </div>
+    </div> {% endcomment %}
     <!-- breadcrumb Start -->
      <!-- Service Start -->
-     <div class="container-fluid service py-1">
-        <div class="container-fluid mx-0 py-3 rounded-top wow bounceInUp" 
+     <div class="service ">
+        <div class="mx-0 py-3  wow bounceInUp" height="100%"
             style="background-image: url('{% static "img/heroAccount-13.png" %}');background-size: cover; background-position: center center; background-repeat: no-repeat; " alt="Church-at" data-wow-delay="0.1s">
-            <div class="text-center">
-                <small class="d-inline-block fw-bold text-dark text-uppercase bg-light border border-primary rounded-pill px-4 py-1 mb-3">Our Services</small>
+            <!-- breadcrumb Start -->
+            <div class="container animated bounceInDown py-1 mt-0">
+                <div class=" ">
+                    <ol class="breadcrumb justify-content-start mb-0 ">
+                        <li class="small"><a href="{% url 'pages:homepage' %}">Home <span class="px-1">\</span></a></li>
+                        <li class="small" aria-current="page">services</li>
+                    </ol>
+                </div>
+            </div>
+            <!-- breadcrumb Start -->
+            <div class="text-center py-5">
                 <h3 class="mb-3 bolder text-light ">የምንሰጠው አገልግሎቶች</h3>
-                <h4 class="mb-5 text-light ">What We Offer </h4>
+                <h3 class="mb-5 text-light ">What We Offer </3>
             </div>
             
         </div>
-        <div class="container py-4">
+        <div class="container py-5">
+            <div class="text-center py-4">
+                <small class="d-inline-block fw-bold text-dark text-uppercase bg-light border border-primary rounded-pill px-4 py-1 mb-3">Our Services</small>
+            </div>
             <div class="row g-4">
                 <div class="col-lg-3 col-md-6 col-sm-12 wow bounceInUp " data-wow-delay="0.5s">
                     <div class="bg-light rounded service-item shadow">

@@ -58,18 +58,8 @@
                         <div class="navbar-nav mx-auto">
                             <a href="{% url 'pages:homepage' %}" class="nav-item nav-link active">Home</a>
                             <a href="{% url 'pages:about-us' %}" class="nav-item nav-link">About</a>
+                            <a href="{% url "services:service" %}" class="nav-item nav-link">Services</a> 
                             
-                            <div class="nav-item dropdown">
-                                <a href="{% url "services:service" %}" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Services</a>
-                                <div class="dropdown-menu bg-light">
-                                    <a href="{% url 'services:sermon_media_list' %}" class="dropdown-item">Sermon (ስብከት)</a>
-                                    <a href="#" class="dropdown-item">Baptism (ጥምቀት)</a>
-                                    <a href="#" class="dropdown-item">Korban (ቁርባን)</a>
-                                    <a href="#" class="dropdown-item">Wedding (ሰርግ)</a>
-                                    <a href="#" class="dropdown-item">Repentance (ንስሐ)</a>
-                                    <a href="#" class="dropdown-item">ፍተዓት አገልግሎት</a>
-                                </div>
-                            </div>
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">School<small>( አብነት )</small></a>
                                 <div class="dropdown-menu bg-light">
@@ -78,22 +68,6 @@
                                     <a href="#" class="dropdown-item">Marriage School</a>
                                 </div>
                             </div>
-                            {% comment %} <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Members</a>
-                                <div class="dropdown-menu bg-light">
-                                    <a href="#" class="dropdown-item">Sunday School(Youth)</a>
-                                    <a href="#" class="dropdown-item">Sunday School(Children)</a>
-                                    <a href="#" class="dropdown-item">Marriage School</a>
-                                </div>
-                            </div> {% endcomment %}
-                            {% comment %} <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Members</a>
-                                <div class="dropdown-menu bg-light">
-                                    <a href="#" class="dropdown-item">Membership</a>
-                                    <a href="#" class="dropdown-item">Accounts</a>
-                                    <a href="#" class="dropdown-item">Payment</a>
-                                </div>
-                            </div> {% endcomment %}
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Resources</a>
                                 <div class="dropdown-menu bg-light">

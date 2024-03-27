@@ -5,29 +5,32 @@
 {% endblock %}
 {% block title %}Sermon (ስብከት){% endblock %}
 {% block main %}
-<div class="my-1 ">
-    <div class="container-fluid bg-light pb-1  mt-0">
-        <div class="container animated bounceInDown ">
-            <ol class="breadcrumb justify-content-start mb-0 animated bounceInDown">
-                <li class="small"><a href="{% url 'pages:homepage' %}">Home <span class="px-1">\</span></a></li>
-                <li class="small"> <a href="{% url "services:service" %}">services <span class="px-1">\</span></a></li>
-                <li class="text-dark small" aria-current="page">Sermon</li>
-            </ol>
-            
-        </div>
-     
-    </div>
+<div class="">
     <!-- Events Start -->
-    <div class="container-fluid event pb-5">
-        <div class="container-fluid mx-0 py-3 rounded-top wow bounceInUp" 
-            style="background-image: url('{% static "img/heroAccount-4.png" %}');background-size: cover; background-position: center center; background-repeat: no-repeat; " alt="Church-at" data-wow-delay="0.1s">
-            <div class="text-center">
-                <small class="d-inline-block fw-bold text-dark text-uppercase bg-light border border-primary rounded-pill px-4 py-1 mb-3">Our Sermon Services</small>
+    <div class="event pb-5">
+        <div class="mx-auto wow bounceInUp" 
+            style="background-image: url('{% static "img/heroAccount-13.png" %}');background-size: cover; background-position: center center; background-repeat: no-repeat; " alt="Church-at" data-wow-delay="0.1s">
+            <div class="container py-1 mt-0">
+                <div class="animated bounceInDown ">
+                    <ol class="breadcrumb justify-content-start mb-0 animated bounceInDown">
+                        <li class="small"><a href="{% url 'pages:homepage' %}">Home <span class="px-1">\</span></a></li>
+                        <li class="small"> <a href="{% url "services:service" %}">services <span class="px-1">\</span></a></li>
+                        <li class="small" aria-current="page">Sermon</li>
+                    </ol>
+                    
+                </div>
+             
+            </div>
+            <div class="text-center py-5">
                 <h3 class="mb-3 bolder text-light ">ስብከት የፕሮግራሞች ጋለሪ</h3>
-                <h4 class="mb-5 text-light ">Our Sermon Gallery</h4>
+                <h3 class="mb-5 text-light ">Our Sermon Gallery</h3>
             </div>
         </div>
         <div class="container py-4">
+            <div class="container mx-auto text-center py-5 rounded-top wow bounceInUp" >
+                <small class="d-inline-block fw-bold text-dark text-uppercase bg-light border border-primary rounded-pill px-4 py-1 mb-3">Our Sermon Lists</small>
+            </div>
+            
             <div class="tab-class text-center">
                 <ul class="nav nav-pills d-inline-flex justify-content-center mb-5 wow bounceInUp" data-wow-delay="0.1s">
                     <li class="nav-item p-2">
@@ -45,6 +48,7 @@
                             <span class="text-dark" style="width: 150px;">ስብከት</span>
                         </a>
                     </li>
+                    
                     <li class="nav-item p-2">
                         <a class="d-flex mx-2 py-2 border border-primary bg-light rounded-pill" data-bs-toggle="pill" href="#tab-4">
                             <span class="text-dark" style="width: 150px;">ክብረ በዓላት ስብከት</span>
@@ -67,16 +71,17 @@
                             <div class="col-lg-12">
                                 <div class="row g-4">
                                     {% for sermon_media in sermon_media_list %}
-                                    <div class="col-md-6 col-lg-3 wow bounceInUp" data-wow-delay="0.1s">
-                                        <div class="event-img position-relative">
-                                            <img class="img-fluid rounded w-100" src="{% static "img/aboutUs/leaders-15.png" %}" alt="">
-                                            <small class="me-auto">{{ sermon_media.sermon.title }}</small>
-                                            <div class="event-overlay d-flex flex-column p-3">
-                                                <h4 class="me-auto">{{ sermon_media.sermon.title }}</h4>
-                                                <a href="{% url 'services:sermon_media_detail' sermon_media.pk %}" class="btn btn-primary my-auto">View</a>
+                                    <div class="col-md-6 col-lg-3 wow bounceInUp rounded" data-wow-delay="0.1s">
+                                        <div class="event-img position-relative shadow rounded">
+                                            <img class="img-fluid rounded w-100" src="{{sermon_media.sermon.image.url }}" alt="{{ sermon_media.sermon.title }}">
+                                            <small class="me-auto text-primary">{{ sermon_media.sermon.title }}</small>
+                                            <div class="event-overlay d-flex flex-column ">
+                                                <h4 class="me-auto px-3">{{ sermon_media.sermon.title }}</h4>
+                                                <h4 class="me-auto px-3">{{ sermon_media.sermon.preacher}}</h4>
+                                                <a class="btn btn-sm btn-primary my-auto mx-3" 
+                                                    href="{% url 'services:sermon_media_detail' sermon_media.pk %}">view</a>
                                             </div>
-                                        </div>
-                                        
+                                        </div> 
                                     </div>
                                     {% endfor %}
                                     {% comment %} <div class="col-md-6 col-lg-3 wow bounceInUp" data-wow-delay="0.3s">
@@ -353,6 +358,5 @@
         </div>
     </div>
     <!-- Events End -->
-
 </div>
 {% endblock %}

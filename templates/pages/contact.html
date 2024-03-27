@@ -2,13 +2,20 @@
 {% load static %}
 {% block title %}contact{% endblock %}
 {% block main %}
-<div class="my-1">
-    <div class="container-fluid bg-light pb-2 mb-2 mt-0">
-        <div class="container animated bounceInDown ">
-            <ol class="breadcrumb justify-content-start mb-0 animated bounceInDown">
-                <li class="small"><a href="{% url 'pages:homepage' %}">Home <span class="px-1">\</span></a></li>
-                <li class="text-dark small" aria-current="page"> Contact </li>
-            </ol> 
+<div class="">
+    <div class="mx-0 py-3  wow bounceInUp" height="100%"
+        style="background-image: url('{% static "img/heroAccount-13.png" %}');background-size: cover; background-position: center center; background-repeat: no-repeat; " alt="Church-at" data-wow-delay="0.1s">
+        <div class="container-fluid  pb-2 mb-2 mt-0">
+            <div class="container animated bounceInDown">
+                <ol class="breadcrumb justify-content-start mb-0 animated bounceInDown">
+                    <li class="small"><a href="{% url 'pages:homepage' %}">Home <span class="px-1">\</span></a></li>
+                    <li class="small" aria-current="page"> Contact </li>
+                </ol> 
+            </div>
+            <div class="text-center py-5 animated bounceInDown ">
+                <h3 class="pb-2 text-light  mb-0">ለማንኛውም ጥያቄ አግኙን!</h3>
+                <h3 class="pb-2 text-light ">Contact Us For Any Queries!</h3>  
+            </div>
         </div>
     </div>
     <div class="container-fluid contact pt-2 pb-4 wow bounceInUp" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: bounceInUp;">
@@ -17,12 +24,10 @@
                 <div class="row g-4">
                     <div class="col-12 text-center">
                         <small class="d-inline-block fw-bold text-dark text-uppercase bg-light border border-primary rounded-pill px-4 py-1 mb-3">Get in touch</small>
+                        <h2 class="py-1 small">If you want to contact us, fill out the form below and we will respond as soon as possible.</2>
+                        <h4 class="py-1 small">እኛን ማነጋገር ከፈለጉ ከታች ያለውን ቅጽ ይሙሉ እና በተቻለ ፍጥነት ምላሽ እንሰጣለን እናመሰግናለን::</4>
                     </div>
-                    <div class="col-12 text-center">
-                        <h2 class="pb-2">Contact Us For Any Queries!</h2>
-                        <h5 class="pb-2 mb-0">ለማንኛውም ጥያቄ አግኙን!</h5>
-                        <small class="py-3">If you want to contact us, fill out the form below and we will respond as soon as possible.</small>
-                    </div>
+                    
                     <div class="col-md-6 col-lg-7">
                        
                         <form>
