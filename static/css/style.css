@@ -186,9 +186,10 @@ h4, h5, h6, .h4, .h5, .h6 {
 }
 .event-overlay h4 {
     color: #fff;
-    padding: 10px 10px;
+    padding: 10px 5px;
     justify-content: center;
-    font-size: 12px;
+    font-size: 14px;
+    
 }
 .event .event-img:hover .event-overlay {
     opacity: 1;

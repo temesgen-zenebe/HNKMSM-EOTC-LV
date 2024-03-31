@@ -58,16 +58,14 @@
                         <div class="navbar-nav mx-auto">
                             <a href="{% url 'pages:homepage' %}" class="nav-item nav-link active">Home</a>
                             <a href="{% url 'pages:about-us' %}" class="nav-item nav-link">About</a>
-                            <a href="{% url "services:service" %}" class="nav-item nav-link">Services</a> 
-                            
+                            <a href="{% url "services:service" %}" class="nav-item nav-link">Services</a>  
                             <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">School<small>( አብነት )</small></a>
+                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Schools</a>
                                 <div class="dropdown-menu bg-light">
-                                    <a href="#" class="dropdown-item">Sunday School(Youth)</a>
-                                    <a href="#" class="dropdown-item">Sunday School(Children)</a>
+                                    <a href="{% url "schools:school" %}" class="dropdown-item">Sunday School</a>
                                     <a href="#" class="dropdown-item">Marriage School</a>
                                 </div>
-                            </div>
+                            </div> 
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Resources</a>
                                 <div class="dropdown-menu bg-light">
@@ -85,7 +83,7 @@
                             {% else %}
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle btn btn-sm btn-primary py-2 px-4 me-3 rounded-pill " data-bs-toggle="dropdown">
-                                    <small>{{ user.username|capfirst}}</small> <i class="fas fa-user px-1"></i></a> 
+                                     <i class="fas fa-user px-1"></i><small>welcome {{ user.username|slice:":1"|capfirst }}</small></a> 
                                 <div class="dropdown-menu bg-light">
                                     <a href="#" class="dropdown-item">Membership</a>
                                     <a href="#" class="dropdown-item">Payment</a>

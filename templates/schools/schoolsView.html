@@ -1,0 +1,85 @@
+{% extends "_base.html" %}
+{% load static %}
+{% block javascript %}
+   {% comment %} <script type="text/javascript" src="{% static '' %}" defer ></script> {% endcomment %}
+{% endblock %}
+{% block title %}schools List{% endblock %}
+{% block main %}
+<div class=" ">
+    
+     <!-- Service Start -->
+     <div class="service ">
+        <div class="mx-0 py-2  wow bounceInUp" height="100%"
+            style="background-image: url('{% static "img/heroAccount-13.png" %}');background-size: cover; background-position: center center; background-repeat: no-repeat; " alt="Church-at" data-wow-delay="0.1s">
+            <!-- breadcrumb Start -->
+            <div class="container animated bounceInDown py-1 mt-0">
+                <div class=" ">
+                    <ol class="breadcrumb justify-content-start mb-0 ">
+                        <li class="small"><a href="{% url 'pages:homepage' %}">Home <span class="px-1">\</span></a></li>
+                        <li class="small" aria-current="page">schools</li>
+                    </ol>
+                </div>
+            </div>
+            <!-- breadcrumb Start -->
+            <div class="text-center ">
+                <h3 class="mb-3 bolder text-light">አብነት</h3>
+                <h3 class="mb-3 text-light ">Sunday School</3>
+            </div>
+            
+        </div>
+        <div class="container py-3">
+            <div class="text-center py-4">
+                <small class="d-inline-block fw-bold text-dark text-uppercase bg-light border border-primary rounded-pill px-4 py-1 mb-3">Choose your school</small>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-6 col-md-6 col-sm-12 wow bounceInUp " data-wow-delay="0.5s">
+                    <div class="bg-light rounded service-item shadow">
+                        <div class="service-content d-flex align-items-center justify-content-center p-4">
+                            <div class="service-content-icon text-center">
+                                <i class="fas fa-school fa-3x text-primary mb-4 text-center"></i>
+                                <h5 class="mb-3 text-center">ሰንበት ትምህርት ለወጣቶች</h5>
+                                <h5 class="mb-3 text-center">Sunday School for Youth</h5>
+                                <p class="mb-4 small text-start">Experience profound lessons in scripture, history, and ethics. 
+                                    Our instructors foster faith and character development. Join peers in worship, service, and fellowship, 
+                                    deepening your connection with God and each other. Flourish in a nurturing environment, 
+                                    empowered to contribute positively to our community and beyond.</p>
+                                <p class="mb-4 small text-start">
+                                    በቅዱሳት መጻሕፍት፣ በታሪክ እና በስነምግባር ጥልቅ ትምህርቶችን ተለማመዱ። መምህሮቻችን እምነትን እና የባህርይ እድገትን ያሳድጋሉ። 
+                                    በአምልኮ፣ በአገልግሎት እና በኅብረት እኩዮችን ተቀላቀሉ፣ ከእግዚአብሔር እና እርስ በርሳችሁ ያላችሁን ግንኙነት በማጠናከር። 
+                                    በማህበረሰባችን እና ከዚያም በላይ በጎ አስተዋፅዖ እንዲያበረክቱ የሚያስችል በመንከባከብ አካባቢ ውስጥ ይበቅላል።
+                                </p>
+                                
+                                <a href="{% url 'schools:youthSchool' %}" class="btn btn-primary px-4 py-2 rounded-pill">Start</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 wow bounceInUp " data-wow-delay="0.5s">
+                    <div class="bg-light rounded service-item shadow">
+                        <div class="service-content d-flex align-items-center justify-content-center p-4">
+                            <div class="service-content-icon text-center">
+                                <i class="fas fa-school fa-3x text-primary mb-4 text-center"></i>
+                                <h5 class="mb-3 text-center">ሰንበት ትምህርት ለልጆች </h5>
+                                <h5 class="mb-3 text-center">Sunday School For Children </h5>
+                                <p class="mb-4 small text-start">Explore enriching teachings tailored for children in our Cathedral Sunday School. 
+                                    Engage in vibrant lessons, fostering understanding of scripture and values. Join in fellowship,
+                                    worship, and activities, nurturing young hearts and minds in their faith 
+                                    journey within our Orthodox Tewahedo community.</p>
+                                <p class="mb-4 small text-start">
+                                    በካቴድራል ሰንበት ት/ቤታችን ውስጥ ለልጆች የተዘጋጁ የበለጸጉ ትምህርቶችን ያስሱ። 
+                                    የቅዱሳት መጻህፍትን እና እሴቶችን ግንዛቤን በማጎልበት ንቁ በሆኑ ትምህርቶች ይሳተፉ። 
+                                    በኦርቶዶክስ ተዋሕዶ ማኅበረሰባችን ውስጥ በእምነት ጉዟቸው ውስጥ ወጣቶችን ልብ እና አእምሮን 
+                                    በመንከባከብ ወደ ህብረት፣ አምልኮ እና ተግባር ተቀላቀሉ።
+                                </p>
+                                
+                                <a href="{% url "services:sermon_media_list" %}" class="btn btn-primary px-4 py-2 rounded-pill">Start</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Service End -->
+</div>
+{% endblock %}

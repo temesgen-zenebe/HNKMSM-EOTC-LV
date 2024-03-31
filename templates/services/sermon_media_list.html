@@ -32,7 +32,7 @@
             </div>
             
             <div class="tab-class text-center">
-                <ul class="nav nav-pills d-inline-flex justify-content-center mb-5 wow bounceInUp" data-wow-delay="0.1s">
+                <ul class="nav nav-pills d-inline-flex justify-content-center mb-5 wow bounceInUp small" data-wow-delay="0.1s">
                     <li class="nav-item p-2">
                         <a class="d-flex mx-2 py-2 border border-primary bg-light rounded-pill active" data-bs-toggle="pill" href="#tab-1">
                             <span class="text-dark" style="width: 150px;">All Sermon</span>
@@ -48,7 +48,6 @@
                             <span class="text-dark" style="width: 150px;">ስብከት</span>
                         </a>
                     </li>
-                    
                     <li class="nav-item p-2">
                         <a class="d-flex mx-2 py-2 border border-primary bg-light rounded-pill" data-bs-toggle="pill" href="#tab-4">
                             <span class="text-dark" style="width: 150px;">ክብረ በዓላት ስብከት</span>
@@ -73,7 +72,8 @@
                                     {% for sermon_media in sermon_media_list %}
                                     <div class="col-md-6 col-lg-3 wow bounceInUp rounded" data-wow-delay="0.1s">
                                         <div class="event-img position-relative shadow rounded">
-                                            <img class="img-fluid rounded w-100" src="{{sermon_media.sermon.image.url }}" alt="{{ sermon_media.sermon.title }}">
+                                            <img class="img-fluid rounded w-100" src="{{sermon_media.sermon.image.url }}" 
+                                            alt="{{ sermon_media.sermon.title }}">
                                             <small class="me-auto text-primary">{{ sermon_media.sermon.title }}</small>
                                             <div class="event-overlay d-flex flex-column ">
                                                 <h4 class="me-auto px-3">{{ sermon_media.sermon.title }}</h4>
@@ -358,5 +358,236 @@
         </div>
     </div>
     <!-- Events End -->
+    <div class="container-fluid py-6">
+        <div class="container">
+            <div class="row g-5 align-items-center">
+                <div class="col-lg-5 wow bounceInUp" data-wow-delay="0.1s" 
+                    style="visibility: visible; animation-delay: 0.1s; animation-name: bounceInUp;">
+                    <img src="{% static "img/baner-1.png" %}" class="img-fluid rounded " alt="upcoming sermon event">
+                </div>
+                <div class="col-lg-7 wow bounceInUp px-4" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: bounceInUp;">
+                    <small class="d-inline-block fw-bold text-dark text-uppercase bg-light border border-primary rounded-pill px-4 py-1 mb-3">upcoming sermon Event</small>
+                    <h3 class="mb-2">April 1, 2024, 5:00pm </h3>
+                    <p class="mb-2 small">
+                        ሀመረ ኖህ ኪዳነ ምህረት፣ ቅዱስ ሚካኤል እና አቡነ ተክለሃይማኖት የኢትዮጵያ ኦርቶዶክስ ተዋህዶ 
+                        ካቴድራል ላስቬጋስ ሚያዚያ 7 ቀን 2024 ከቀኑ 5፡00 ሰዓት ላይ ይቀላቀሉን።ለመንፈሳዊ መገለጥ እና የማህበረሰብ ትስስር ምሽት ይቀላቀሉን። እንዳያመልጥዎ!
+                    </p>
+                    <p class="mb-3 small">
+                        Join us at Hamere Noah Kidane Mihret, St. Michael & Abune Teklehimanot Ethiopian Orthodox 
+                        Tewahedo Cathedral in Las Vegas for an upcoming sermon event on April 7, 2024, at 5pm.</p>
+                    <div class="row g-4 text-dark mb-5 small">
+                        <div class="col-sm-6">
+                            <i class="fas fa-share text-primary me-2"></i>የመክፈቻ ጸሎት እና መዝሙሮች፡ ምሽቱን ነፍስን በሚያነቃቁ ጸሎቶች እና ዝማሬ ዝማሬዎች ይጀምሩ።
+                        </div>
+                        <div class="col-sm-6">
+                            <i class="fas fa-share text-primary me-2"></i>ስብከት ቀሲስ ዮሃንስ ግዛው፡ እምነትን ተስፋን ሓያል መልእኽቲ ተመክሮ።
+                        </div>
+                        <div class="col-sm-6">
+                            <i class="fas fa-share text-primary me-2"></i>🌟 የልዩ እንግዶች ማስታወቂያ፡-
+                            ሊቀ ጳጳስ ሳሙኤል ገብርኤልን እንደ ክቡር እንግዳችን አድርገን ስናከብር ክብር ይሰማናል። 
+                        </div>
+                        <div class="col-sm-6">
+                            <i class="fas fa-share text-primary me-2"></i>የመዝጊያ ጸሎት እና ህብረት፡ በጋራ ጸሎት እና ህብረት መደምደም።
+                        </div>
+                    </div>
+                    <a href="#" class="btn btn-primary py-3 px-5 rounded-pill">chackout more events<i class="fas fa-arrow-right ps-2"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+     <!-- Events End -->
+    <div class="container-fluid pb-4">
+        <div class="container">
+            <div class="row g-4 align-items-center py-4">
+                <div class="col-lg-12">
+                    <div class="text-center wow bounceInUp" data-wow-delay="0.1s">
+                        <h4 class="mb-3">አምስቱ አእማደ ምሥጢር</h4>
+                        <h4 class="mb-4 text-church">The Five Pillars of the Mystery</h4>
+                        <p class="px-1 small">የኢትዮጵያ ኦርቶዶክስ ቤተ ክርስቲያን መሠረታዊ ሃይማኖታዊ እምነቷን የምታስተምርባቸውና አምስት አዕማደ ምስጢር አሏት። 
+                        እያንዳንዱም ከቅዱሳት መጻሕፍት የመነጨ ጥልቅ ሥነ-መለኮታዊ ፋይዳ ያለው ነው።</p>
+                        <p class="small text-church">Foundational concepts in Ethiopian Orthodox Tewahedo thought, each imbued with profound theological significance rooted in scripture:</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row align-items-md-stretch g-4 wow bounceInUp">
+                <div class="col-md-6 ">
+                    <div class="h-100 px-4 py-4  text-primary bg-light border rounded-3 shadow">
+                        <nav>
+                            <div class="nav nav-tabs" id="nav-tab-1" role="tablist">
+                              <button class="nav-link active small" id="nav-home-tab-1" data-bs-toggle="tab" data-bs-target="#nav-home-1" type="button" role="tab" aria-controls="nav-home-1" aria-selected="true">ምስጢረ ሥላሴ</button>
+                              <button class="nav-link small" id="nav-profile-tab-1" data-bs-toggle="tab" data-bs-target="#nav-profile-1" type="button" role="tab" aria-controls="nav-profile-1" aria-selected="false">Mystery of the Trinity</button>
+                              
+                            </div>
+                          </nav>
+                          <div class="tab-content" id="nav-tabContent-1">
+                            <div class="tab-pane fade show active p-2" id="nav-home-1" role="tabpanel" aria-labelledby="nav-home-tab-1">
+                                <img src="{% static "img/trinity-and-24-priests-of-heaven.png" %}" class="img-fluid rounded py-1" alt="Mystery of the Trinity">
+                                <h6 class="text-primary py-1">ምስጢረ ሥላሴ</h6>
+                                <p class="small text-primary">
+                                    በዚህ ክፍል ቅድስት የሥላሴ አንድነትና ሦስትነት ምሥጢር ተገልጧል።
+                                    ሥላሴ በስም በተግባርም በአካልም ሦስት ናቸው ብንልም; ሦስቱ በባሕርይ፣ በመለኮት፣ በሕልውና በፈቃድ አንድ ናቸው፤ 
+                                    አንድ አምላክ ነው እንጂ ሦስት አማልክት ማለታችን አይደለም። 
+                                    አብ እና ወልድ እና መንፈስ ቅዱስ በራሳቸው ፍፁም አካል ሲኖሩ በህልውና አንድ ናቸው። </p>
+                            </div>
+                            <div class="tab-pane fade p-2" id="nav-profile-1" role="tabpanel" aria-labelledby="nav-profile-tab-1">
+                                <img src="{% static "img/trinity-and-24-priests-of-heaven.png" %}" class="img-fluid rounded" alt="Mystery of the Trinity">
+                                <h6 class="text-primary py-2">Mystery of the Trinity </h6>
+                                <p class="text-primary small"> Even though we say the Trinity are three in name, in deed and in person; 
+                                    the three are one in essence, in divinity, in existence and in will; we do not mean three Gods but one God. 
+                                    While the Father and the Son and the Holy Spirit exist in their own perfect person, 
+                                    they are one in existence. (Abulidis, Faith of the Father's Chap. 40 verse 4:6) 
+                                </p>
+                            </div>
+                          </div>
+                        <button class="btn btn-sm btn-outline-primary" type="button">More</button>
+                    </div>
+                </div>
+                <div class="col-md-6 ">
+                    <div class="h-100 px-4 py-4  text-primary bg-light border rounded-3 shadow">
+                        <nav>
+                            <div class="nav nav-tabs" id="nav-tab-2" role="tablist">
+                              <button class="nav-link active small" id="nav-home-tab-2" data-bs-toggle="tab" data-bs-target="#nav-home-2" type="button" role="tab" aria-controls="nav-home-2" aria-selected="true">ምሥጢረ ሥጋዌ</button>
+                              <button class="nav-link small" id="nav-profile-tab-2" data-bs-toggle="tab" data-bs-target="#nav-profile-2" type="button" role="tab" aria-controls="nav-profile-2" aria-selected="false">Mystery of Incarnation</button>
+                              
+                            </div>
+                          </nav>
+                          <div class="tab-content" id="nav-tabContent-2">
+                            <div class="tab-pane fade show active p-2" id="nav-home-2" role="tabpanel" aria-labelledby="nav-home-tab-2">
+                                <img src="{% static "img/Mystery-of-Incarnation.png" %}" class="img-fluid rounded py-1" alt="Mystery of the Trinity">
+                                <h6 class="text-primary py-1">ምሥጢረ ሥጋዌ</h6>
+                                <p class="small text-primary">
+                                    ምሥጢረ ሥጋዌ ማለት ከሥላሴ አንዱ ከሰማይ የወረደበት ምሥጢረ ሥጋዌን ሥጋንና ምክንያታዊ ነፍስን ከእመቤታችን ቅድስት ድንግል ማርያም የተቀበለበት ምሥጢረ ሥጋዌ ነው። 
+                                    እግዚአብሔር ሰው የመሆኑና ሰውም አምላክ የመሆኑ ምስጢር ይህ ነው "ቃልም ሥጋ ሆነ በእኛም አደረ"። (ዮሐ. 1:14) </p>
+                            </div>
+                            <div class="tab-pane fade p-2" id="nav-profile-2" role="tabpanel" aria-labelledby="nav-profile-tab">
+                                <img src="{% static "img/Mystery-of-Incarnation.png" %}" class="img-fluid rounded" alt="Mystery-of-Incarnation">
+                                <h6 class="text-primary py-2">Mystery of Incarnation</h6>
+                                <p class="text-primary small"> 
+                                    Mystery of Incarnation means the mystery of the descending of God the Son who is one of the 
+                                    Trinity from heaven and taking up flesh and rational soul from the Holy Virgin Mary.
+                                    This is the mystery of God becoming man and man becoming God 
+                                    "The Word became flesh and dwelt among us". (Jn. 1:14). 
+                                </p>
+                            </div>
+                          </div>
+                        <button class="btn btn-sm btn-outline-primary" type="button">More</button>
+                    </div>
+                </div>
+                <div class="col-md-6 ">
+                    <div class="h-100 px-4 py-4  text-primary bg-light border rounded-3 shadow">
+                        <nav>
+                            <div class="nav nav-tabs" id="nav-tab-3" role="tablist">
+                              <button class="nav-link active small" id="nav-home-tab-3" data-bs-toggle="tab" data-bs-target="#nav-home-3" type="button" role="tab" aria-controls="nav-home-3" aria-selected="true">ምስጢረ ጥምቀት</button>
+                              <button class="nav-link small" id="nav-profile-tab-3" data-bs-toggle="tab" data-bs-target="#nav-profile-3" type="button" role="tab" aria-controls="nav-profile-3" aria-selected="false">Mystery of the Baptism</button>
+                              
+                            </div>
+                          </nav>
+                          <div class="tab-content" id="nav-tabContent-3">
+                            <div class="tab-pane fade show active p-2" id="nav-home-3" role="tabpanel" aria-labelledby="nav-home-tab-3">
+                                <img src="{% static "img/Mystery-of-the-Baptism.png" %}" class="img-fluid rounded py-1" alt="Mystery of the Trinity">
+                                <h6 class="text-primary py-1">ምስጢረ ጥምቀት</h6>
+                                <p class="small text-primary">
+                                    ጥምቀት በምሥጢረ ሥላሴ እና በምሥጢረ ሥጋዌ ለሚያምኑ ሁሉ ለኃጢያት ስርየት ከሥላሴ ዘንድ ልጅነትን ለማግኘት 
+                                    የእግዚአብሔርን መንግሥት ለመውረስ የተሰጠ ቁርባን ነው። ምሥጢር ይባላል ካህኑ የጥምቀትን ጸሎት በውኃ ላይ አንብቦ 
+                                    ሲባርክ ተለውጦ ከጌታችን ከኢየሱስ ክርስቶስ ቀኝ የፈሰሰ ውኃ ይሆናልና አንድ ሰው የማይታየውን የጸጋውን ጸጋ ሊቀበል ይችላልና። 
+                                    የእግዚአብሔር ልጅነት (ዮሐ. 19፡34-35)።</p>
+                            </div>
+                            <div class="tab-pane fade p-2" id="nav-profile-3" role="tabpanel" aria-labelledby="nav-profile-tab-3">
+                                <img src="{% static "img/Mystery-of-the-Baptism.png" %}" class="img-fluid rounded" alt="Mystery of the Trinity">
+                                <h6 class="text-primary py-2">Mystery of the Baptism </h6>
+                                <p class="text-primary small"> Baptism is the sacrament given to all who believe in the Mystery of the Trinity and the Mystery of 
+                                    Incarnation for the remission of sin, to obtain adoption from the Triune God, to inherit the kingdom of God. 
+                                    It is called mystery, because, when the priest recites the prayer of baptism over the water and blesses it, 
+                                    it will be changed and become the water that flowed from the right side of our Lord Jesus Christ and one can 
+                                    receive the invisible grace of the Adopted Son hood of God (Jn. 19:34-35).
+                                </p>
+                            </div>
+                          </div>
+                        <button class="btn btn-sm btn-outline-primary" type="button">More</button>
+                    </div>
+                </div>
+                <div class="col-md-6 ">
+                    <div class="h-100 px-4 py-4  text-primary bg-light border rounded-3 shadow">
+                        <nav>
+                            <div class="nav nav-tabs" id="nav-ta-4" role="tablist">
+                              <button class="nav-link active small" id="nav-home-tab-4" data-bs-toggle="tab" data-bs-target="#nav-home-4" type="button" role="tab" aria-controls="nav-home-4" aria-selected="true">ምስጢረ የቅዱስ ቁርባን </button>
+                              <button class="nav-link small" id="nav-profile-tab-4" data-bs-toggle="tab" data-bs-target="#nav-profile-4" type="button" role="tab" aria-controls="nav-profile-4" aria-selected="false">Mystery of the Holy Communion</button>
+                              
+                            </div>
+                          </nav>
+                          <div class="tab-content" id="nav-tabContent-4">
+                            <div class="tab-pane fade show active p-2" id="nav-home-4" role="tabpanel" aria-labelledby="nav-home-tab-4">
+                                <img src="{% static "img/Mystery-of-the-Holy-Communion1.png" %}" class="img-fluid rounded py-1" alt="Mystery-of-the-Holy-Communion">
+                                <h6 class="text-primary py-1">ምስጢረ የቅዱስ ቁርባን </h6>
+                                <p class="small text-primary">
+                                    የቅዱስ ቁርባን ምሥጢር ከእግዚአብሔር ጋር የጠበቀ ኅብረት የምንይዝበት እና ከእግዚአብሔር ጋር አንድ እንድንሆን የሚያደርገን ከሁሉ የላቀ የሕይወት ተግባር ነው። 
+                                    "እውነት እውነት እላችኋለሁ፥ የሰውን ልጅ ሥጋ ካልበላችሁ ደሙንም ካልጠጣችሁ በራሳችሁ ሕይወት የላችሁም።" 
+                                    "ሥጋዬን የበላ ደሜንም የጠጣ የዘላለም ሕይወትን ያገኛል። ሥጋዬ በእውነት መብል ደሜም መጠጥ ነው፥ 
+                                    እውነተኛ መብል ነውና ሥጋዬን የበላ ደሜንም የጠጣ የዘላለም ሕይወትን ያገኛል። በእኔ ውስጥ፣ እኔም በእሷ/በእሱ። (ዮሃ. 6:53-57) </p>
+                            </div>
+                            <div class="tab-pane fade p-2" id="nav-profile-4" role="tabpanel" aria-labelledby="nav-profile-tab-4">
+                                <img src="{% static "img/Mystery-of-the-Holy-Communion1.png" %}" class="img-fluid rounded" alt="Mystery-of-the-Holy-Communion">
+                                <h6 class="text-primary py-2">Mystery of the Holy Communion</h6>
+                                <p class="text-primary small"> Mystery of the Holy Communion is a supreme act of life through which we can hold intimate 
+                                    communion with God and that which makes us one with God. 
+                                    "Verily, verily, I say unto you, except you eat the flesh of the Son of Man, and drink His blood, you have no life in you." 
+                                    "Who so eat my flesh, and drink my blood will have eternal life. 
+                                    My flesh is meat in deed and my blood is drink indeed, for it is a real food. 
+                                    He/she that eat my flesh, and drink my blood, dwell in me, and I in her/him." (Jn. 6:53-57). 
+                                </p>
+                            </div>
+                          </div>
+                        <button class="btn btn-sm btn-outline-primary" type="button">More</button>
+                    </div>
+                </div>
+                <div class="col-md-6 ">
+                    <div class="h-100 px-4 py-4  text-primary bg-light border rounded-3 shadow">
+                        <nav>
+                            <div class="nav nav-tabs" id="nav-tab-5" role="tablist">
+                              <button class="nav-link active small" id="nav-home-tab-5" data-bs-toggle="tab" data-bs-target="#nav-home-5" type="button" role="tab" aria-controls="nav-home-5" aria-selected="true">ምስጢረ ትንሣኤ</button>
+                              <button class="nav-link small" id="nav-profile-tab-5" data-bs-toggle="tab" data-bs-target="#nav-profile-5" type="button" role="tab" aria-controls="nav-profile-5" aria-selected="false">Mystery of the Resurrection</button>
+                              
+                            </div>
+                          </nav>
+                          <div class="tab-content" id="nav-tabContent-5">
+                            <div class="tab-pane fade show active p-2" id="nav-home-5" role="tabpanel" aria-labelledby="nav-home-tab-5">
+                                <img src="{% static "img/Mystery-of-the-Resurrection.png" %}" class="img-fluid rounded py-1" alt="Mystery of the Resurrection">
+                                <h6 class="text-primary py-1">ምስጢረ ትንሣኤ </h6>
+                                <p class="small text-primary">
+                                    ምስጢረ ትንሣኤ ከሞት በኋላ ያለው የሕይወት ምስጢር ነው። 
+                                    ከአዳም ዘመን የሄዱት እና የሚያልፉትም እስከ ክርስቶስ ዳግም ምጽአት ድረስ በስጋ እና በነፍስ አንድነት ይነሳሉ ።
+                                    የጻድቃን ነፍስ በገነት፣ የኃጢአተኞችም ነፍስ እስከ ዓለም ፍጻሜ ድረስ በገሃነም ትኖራለች። 
+                                    በመጨረሻው ቀን ግን ጌታችን መድኀኒታችን ኢየሱስ ክርስቶስ በሕያዋንና በሙታን ላይ ሊፈርድ 
+                                    በክብሩ በሚመጣበት ቀን ነፍሳት ከሥጋቸው ጋር በትንሣኤ ቀን ተዋሕደው ከምድር አፈር ይነሣሉ:: (ሉቃስ 16:29-31)
+                                    </p>
+                            </div>
+                            <div class="tab-pane fade p-2" id="nav-profile-5" role="tabpanel" aria-labelledby="nav-profile-tab-5">
+                                <img src="{% static "img/Mystery-of-the-Resurrection.png" %}" class="img-fluid rounded" alt="Mystery of the Resurrection">
+                                <h6 class="text-primary py-2">Mystery of the Resurrection </h6>
+                                <p class="text-primary small"> Resurrection is the secret of life after death. 
+                                    From the time of Adam, those who have passed away and those who will pass away 
+                                    until Christ's second coming will rise in the unity of flesh and soul. 
+                                    The souls of the righteous will live in heaven, and the souls of sinners 
+                                    will live in hell until the end of the world. But on the last day, 
+                                    when our Lord Jesus Christ will come in His glory to judge the living and the 
+                                    dead, the souls will be united with their bodies on the resurrection day and rise
+                                    from the dust of the earth. (Luke 16:29-31)
+                                </p>
+                            </div>
+                          </div>
+                        <button class="btn btn-sm btn-outline-primary" type="button">More</button>
+                    </div>
+                </div>
+                {% comment %} <div class="col-md-6 ">
+                    <div class="h-100 px-4 py-4  text-primary bg-light border rounded-3 shadow">
+                        <h2 class="text-primary">Change the background</h2>
+                        <p>Swap the background-color utility and add a `.text-*` color utility to mix up the jumbotron look. 
+                            Then, mix and match with additional component themes and more.</p>
+                        <button class="btn btn-outline-primary" type="button">Read More</button>
+                    </div>
+                </div> {% endcomment %}
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}
