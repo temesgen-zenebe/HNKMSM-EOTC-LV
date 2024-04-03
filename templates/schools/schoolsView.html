@@ -7,9 +7,27 @@
 {% block main %}
 <div class=" ">
     
-     <!-- Service Start -->
-     <div class="service ">
+    <!-- Service Start -->
+    <div class="service ">
         <div class="mx-0 py-2  wow bounceInUp" height="100%"
+         style="background-image: url('{% static "img/heroAccount-13.png" %}');background-size: cover; background-position: center center; background-repeat: no-repeat; " alt="Church-at" data-wow-delay="0.1s">
+         <!-- breadcrumb Start -->
+         <div class="container animated bounceInDown py-1 mt-0">
+            <div class=" ">
+                <ol class="breadcrumb justify-content-start mb-0 ">
+                    <li class="small"><a href="{% url 'pages:homepage' %}">Home <span class="px-1">\</span></a></li>
+                        <li class="small" aria-current="page">schools</li>
+                </ol>
+            </div>
+        </div>
+        <!-- breadcrumb Start -->
+        <div class="text-center ">
+            <h3 class="mb-3 bolder text-light">አብነት</h3>
+            <h3 class="mb-3 text-light ">Sunday School</3>
+        </div>
+        
+    </div>
+        {% comment %} <div class="mx-0 py-2  wow bounceInUp" 
             style="background-image: url('{% static "img/heroAccount-13.png" %}');background-size: cover; background-position: center center; background-repeat: no-repeat; " alt="Church-at" data-wow-delay="0.1s">
             <!-- breadcrumb Start -->
             <div class="container animated bounceInDown py-1 mt-0">
@@ -26,7 +44,7 @@
                 <h3 class="mb-3 text-light ">Sunday School</3>
             </div>
             
-        </div>
+        </div> {% endcomment %}
         <div class="container py-3">
             <div class="text-center py-4">
                 <small class="d-inline-block fw-bold text-dark text-uppercase bg-light border border-primary rounded-pill px-4 py-1 mb-3">Choose your school</small>

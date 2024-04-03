@@ -37,9 +37,77 @@
             <div class="row g-4">
                 <div class="col-lg-12 col-md-12 col-sm-12 wow bounceInUp " data-wow-delay="0.5s">
                     <div class="bg-light rounded service-item">
-                        <div class="service-content p-4">
+                        <div class="service-content-1 p-4">
                             <div class="service-content-icon text-center">
-                         
+                                <nav>
+                                    <div class="nav nav-tabs small" id="nav-tab" role="tablist">
+                                      <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Courses & Quizzes</button>
+                                      <button class="nav-link " id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Reports</button>
+                                      <button class="nav-link " id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false"></button>
+                                    </div>
+                                  </nav>
+                                  <div class="tab-content" id="nav-tabContent">
+                                    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                                        <div class="row row-cols-1 row-cols-md-1 g-5 py-5">
+                                            {% for course in courses %}
+                                            <div class="col">
+                                              <div class="card shadow">
+                                                <div class="card-body">
+                                                    <ul class="nav nav-tabs small" id="myTab" role="tablist">
+                                                        <li class="nav-item" role="presentation">
+                                                          <button class="nav-link active small" id="EOTC-H-tab" data-bs-toggle="tab" data-bs-target="#EOTC-H" type="button" role="tab" aria-controls="EOTC-H" aria-selected="true">{{ course.title }}</button>
+                                                        </li>
+                                                        <li class="nav-item" role="presentation">
+                                                          <button class="nav-link small" id="EOTC-H-quizzes-tab" data-bs-toggle="tab" data-bs-target="#EOTC-H-quizzes" type="button" role="tab" aria-controls="EOTC-H-quizzes" aria-selected="false">QUIZZES</button>
+                                                        </li>
+                                                      </ul>
+                                                      <div class="tab-content" id="myTabContent">
+                                                        <div class="tab-pane fade show active" id="EOTC-H" role="tabpanel" aria-labelledby="EOTC-H-tab">
+                                                            <div class="card-body text-start">
+                                                                <h6 class="card-title py-2">{{ course.title }}</h6>
+                                                                <small class="text-primary">
+                                                                    {{ course.description }}
+                                                                </small>
+                                                            </div>
+                                                            
+                                                            <div class="accordion accordion-flush" id="accordionFlushExample">
+                                                                {% for chapter in chapters %}
+                                                                    {% if chapter.course.title == course.title %}
+                                                                        <div class="accordion-item">
+                                                                            <h2 class="accordion-header" id="flush-heading{{ forloop.counter }}">
+                                                                                <button class="accordion-button collapsed rounded text-primary" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{ forloop.counter }}" aria-expanded="false" aria-controls="flush-collapse{{ forloop.counter }}">
+                                                                                    <i class="fas fa-cross px-2"></i>
+                                                                                    <span>{{ chapter.chapter_title }}</span>                                                                    
+                                                                                </button>
+                                                                            </h2>
+                                                                            <div id="flush-collapse{{ forloop.counter }}" class="accordion-collapse collapse" aria-labelledby="flush-heading{{ forloop.counter }}" data-bs-parent="#accordionFlushExample">
+                                                                                <div class="accordion-body small text-start">
+                                                                                    
+                                                                                    {{ chapter.content }}
+                                                                                </div>
+                                                                                <div class="accordion-body small text-start">
+                                                                                    <audio controls>
+                                                                                        <source src="{% static 'audio/EOTCH_INTRO.mp3' %}" type="audio/mpeg">
+                                                                                        Your browser does not support the audio element.
+                                                                                    </audio>
+                                                                                </div>  
+                                                                            </div>
+                                                                        </div>
+                                                                    {% endif %}
+                                                                {% endfor %}
+                                                            </div>
+                                                        </div> 
+                                                        <div class="tab-pane fade" id="EOTC-H-quizzes" role="tabpanel" aria-labelledby="EOTC-H-quizzes-tab">...</div>
+                                                      </div>
+                                                </div>
+                                              </div>
+                                            </div>
+                                           {% endfor %}
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">...</div>
+                                    <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>
+                                  </div> 
                             </div>
                         </div>
                     </div>
