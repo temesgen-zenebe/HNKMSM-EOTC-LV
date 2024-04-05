@@ -4,7 +4,7 @@ from django.views.generic import TemplateView
 from django.views.generic import ListView, DetailView
 from django.shortcuts import render, redirect
 from django.views import View
-from .models import Course, Chapter, Quiz, Question, Answer, Result, Report
+from .models import Course, Chapter, Quiz, Question, Answer, Resources, Result, Report
 
 # Create your views here.
 class SchoolsView(TemplateView):
@@ -20,11 +20,18 @@ class SchoolsYouthSchool(LoginRequiredMixin,View):
     template_name = 'schools/youthSchool.html'
     
     def get(self, request):
-        courses = Course.objects.all()
-        chapter = Chapter.objects.all()
+        courses = Course.objects.all().order_by('created_at')
+        chapters = Chapter.objects.all().order_by('created_at')
+        chapters_with_resources = []
+                    
+        for chapter in chapters:
+            resources = Resources.objects.filter(chapter=chapter)
+            chapters_with_resources.append({'chapter': chapter, 'resources': resources})
+                       
         context = {
+            'chapters_with_resources': chapters_with_resources, 
             'courses': courses,
-            'chapters': chapter,
+            'chapters': chapters,
             }
         return render(request, self.template_name, context)
     

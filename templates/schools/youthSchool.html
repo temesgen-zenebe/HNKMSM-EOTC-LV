@@ -39,11 +39,11 @@
                     <div class="bg-light rounded service-item">
                         <div class="service-content-1 p-4">
                             <div class="service-content-icon text-center">
-                                <nav>
+                                   <nav>
                                     <div class="nav nav-tabs small" id="nav-tab" role="tablist">
                                       <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Courses & Quizzes</button>
                                       <button class="nav-link " id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Reports</button>
-                                      <button class="nav-link " id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false"></button>
+                                      <button class="nav-link " id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">FAQ</button>
                                     </div>
                                   </nav>
                                   <div class="tab-content" id="nav-tabContent">
@@ -55,14 +55,17 @@
                                                 <div class="card-body">
                                                     <ul class="nav nav-tabs small" id="myTab" role="tablist">
                                                         <li class="nav-item" role="presentation">
-                                                          <button class="nav-link active small" id="EOTC-H-tab" data-bs-toggle="tab" data-bs-target="#EOTC-H" type="button" role="tab" aria-controls="EOTC-H" aria-selected="true">{{ course.title }}</button>
+                                                          <button class="nav-link active small" id="EOTC-H-tab{{forloop.counter}}" data-bs-toggle="tab" data-bs-target="#EOTC-H{{ forloop.counter }}" type="button" role="tab" aria-controls="EOTC-H{{ forloop.counter }}" aria-selected="true">{{ course.title }}</button>
                                                         </li>
                                                         <li class="nav-item" role="presentation">
-                                                          <button class="nav-link small" id="EOTC-H-quizzes-tab" data-bs-toggle="tab" data-bs-target="#EOTC-H-quizzes" type="button" role="tab" aria-controls="EOTC-H-quizzes" aria-selected="false">QUIZZES</button>
+                                                          <button class="nav-link small" id="EOTC-H-quizzes-tab{{forloop.counter}}" data-bs-toggle="tab" data-bs-target="#EOTC-H-quizzes{{ forloop.counter }}" type="button" role="tab" aria-controls="EOTC-H-quizzes{{ forloop.counter }}" aria-selected="false">QUIZZES</button>
+                                                        </li>
+                                                        <li class="nav-item" role="presentation">
+                                                            <button class="nav-link small" id="quations-ansewr-tab{{forloop.counter}}" data-bs-toggle="tab" data-bs-target="#quations-ansewr{{ forloop.counter }}" type="button" role="tab" aria-controls="quations-ansewr{{ forloop.counter }}" aria-selected="false">Quations&Qnsewr</button>
                                                         </li>
                                                       </ul>
                                                       <div class="tab-content" id="myTabContent">
-                                                        <div class="tab-pane fade show active" id="EOTC-H" role="tabpanel" aria-labelledby="EOTC-H-tab">
+                                                        <div class="tab-pane fade show active" id="EOTC-H{{forloop.counter}}" role="tabpanel" aria-labelledby="EOTC-H-tab{{forloop.counter}}">
                                                             <div class="card-body text-start">
                                                                 <h6 class="card-title py-2">{{ course.title }}</h6>
                                                                 <small class="text-primary">
@@ -70,34 +73,68 @@
                                                                 </small>
                                                             </div>
                                                             
-                                                            <div class="accordion accordion-flush" id="accordionFlushExample">
-                                                                {% for chapter in chapters %}
-                                                                    {% if chapter.course.title == course.title %}
+                                                            <div class="chapter_data accordion-flush" id="accordionFlushExample">
+                                                                {% for chapter_data in chapters_with_resources %}
+                                                               
+                                                                    {% if chapter_data.chapter.course.title == course.title %}
                                                                         <div class="accordion-item">
-                                                                            <h2 class="accordion-header" id="flush-heading{{ forloop.counter }}">
-                                                                                <button class="accordion-button collapsed rounded text-primary" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{ forloop.counter }}" aria-expanded="false" aria-controls="flush-collapse{{ forloop.counter }}">
+                                                                            <h4 class="accordion-header" id="flush-heading{{ forloop.counter }}">
+                                                                                <button class="accordion-button collapsed  btn-primary rounded border " type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{ forloop.counter }}" aria-expanded="false" aria-controls="flush-collapse{{ forloop.counter }}">
                                                                                     <i class="fas fa-cross px-2"></i>
-                                                                                    <span>{{ chapter.chapter_title }}</span>                                                                    
+                                                                                    <span class="">{{ chapter_data.chapter.chapter_title }}</span>                                                                    
                                                                                 </button>
-                                                                            </h2>
+                                                                            </h4>
                                                                             <div id="flush-collapse{{ forloop.counter }}" class="accordion-collapse collapse" aria-labelledby="flush-heading{{ forloop.counter }}" data-bs-parent="#accordionFlushExample">
-                                                                                <div class="accordion-body small text-start">
-                                                                                    
-                                                                                    {{ chapter.content }}
+                                                                                <div class="accordion-body small text-start  border rounded my-2">
+                                                                                    {{ chapter_data.chapter.content }}
                                                                                 </div>
-                                                                                <div class="accordion-body small text-start">
+                                                                                {% if chapter_data.chapter.audio_file %}
+                                                                                <div class="accordion-body small text-start border rounded my-2">
+                                                                                    <h6 class="card-title py-2">Lison the audio about the topic</h6>
                                                                                     <audio controls>
-                                                                                        <source src="{% static 'audio/EOTCH_INTRO.mp3' %}" type="audio/mpeg">
+                                                                                        <source src="{{ chapter_data.chapter.audio_file.url }}" type="audio/mpeg">
                                                                                         Your browser does not support the audio element.
                                                                                     </audio>
-                                                                                </div>  
+                                                                                </div>
+                                                                                {% endif %}  
+                                                                                {% if chapter_data.chapter.video_url %}
+                                                                                <div class="accordion-body small text-start border rounded my-2">
+                                                                                    <h6 class="card-title py-2">View the video about the subject matter. | ስለ ርዕሰ ጉዳዩ ቪዲዮውን ይመልከቱ.</h6>
+                                                                                    <iframe width="400"  height="250" class="rounded mx-2"
+                                                                                        src="{{ chapter_data.chapter.video_url }}?rel=0" 
+                                                                                        title="2019 የትንሳኤ ጥዑመ  ዝማሬ" 
+                                                                                        frameborder="0" 
+                                                                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                                                                        allowfullscreen>
+                                                                                    </iframe>
+                                                                                    
+                                                                                </div>
+                                                                                {% endif %} 
+                                                                                
+                                                                                {% if chapter_data.resources %}
+                                                                                <div class="accordion-body small text-start border rounded my-2">
+                                                                                    <h6 class="card-title py-2">
+                                                                                        If you seek further exploration of this topic, the following resources come highly recommended:
+                                                                                    </h6>
+                                                                                    <div class="d-flex flex-column align-items-start px-3">
+                                                                                        
+                                                                                        {% for resource in chapter_data.resources %}
+                                                                                            <a class="text-body mb-3" 
+                                                                                            title="{{resource.Resources_title}}" 
+                                                                                            href="{{ resource.links }}"  target="_blank">
+                                                                                            <span>({{ forloop.counter }})</span> {{resource.Resources_title}} <i class="fas fa-external-link-alt text-primary px-2"></i></a>
+                                                                                        {% endfor %}
+                                                                                    </div>
+                                                                                </div>
+                                                                                {% endif %}
                                                                             </div>
                                                                         </div>
                                                                     {% endif %}
                                                                 {% endfor %}
                                                             </div>
                                                         </div> 
-                                                        <div class="tab-pane fade" id="EOTC-H-quizzes" role="tabpanel" aria-labelledby="EOTC-H-quizzes-tab">...</div>
+                                                        <div class="tab-pane fade" id="EOTC-H-quizzes{{forloop.counter}}" role="tabpanel" aria-labelledby="EOTC-H-quizzes-tab{{forloop.counter}}">quizzes</div>
+                                                        <div class="tab-pane fade" id="quations-ansewr{{forloop.counter}}" role="tabpanel" aria-labelledby="quations-ansewr-tab{{forloop.counter}}">quations ansewr</div>
                                                       </div>
                                                 </div>
                                               </div>
@@ -105,8 +142,8 @@
                                            {% endfor %}
                                         </div>
                                     </div>
-                                    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">...</div>
-                                    <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>
+                                    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">Reports</div>
+                                    <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">FAQ</div>
                                   </div> 
                             </div>
                         </div>

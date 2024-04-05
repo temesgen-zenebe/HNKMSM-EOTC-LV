@@ -9,7 +9,7 @@ class Course(models.Model):
         ('sunday School children ', 'childrenSchool'),  
     )
     title = models.CharField(max_length=100)
-    description = models.TextField(max_length=200, blank=True, null=True)
+    description = models.TextField(max_length=500, blank=True, null=True)
     school_type = models.CharField(max_length=100, choices=SCHOOL_TYPES)
     created_by = models.CharField(max_length=100, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -29,6 +29,8 @@ class Chapter(models.Model):
     chapter_title = models.CharField(max_length=100)
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     content = models.TextField(max_length=2000)
+    audio_file = models.FileField(upload_to='audio', null=True, blank=True)
+    video_url = models.URLField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     slug = models.SlugField(max_length=200, unique=True ,null=True, blank=True)  
@@ -42,6 +44,14 @@ class Chapter(models.Model):
 
     def __str__(self):
         return self.chapter_title
+
+class Resources(models.Model):
+    chapter = models.ForeignKey(Chapter, on_delete=models.CASCADE)
+    Resources_title = models.CharField(max_length=100)
+    links = models.TextField()
+
+    def __str__(self):
+        return f"Resources for {self.chapter.chapter_title}"
 
 class Quiz(models.Model):
     quiz_title = models.CharField(max_length=100)
