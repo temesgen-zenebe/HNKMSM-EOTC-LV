@@ -109,5 +109,21 @@ class Report(models.Model):
     def __str__(self):
         return f"{self.user}'s report for {self.chapter}"
 
+class Progress(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    is_chapter_completed = models.BooleanField(default = False)
+    is_quiz_completed = models.BooleanField(default = False)
+    slug = models.SlugField(unique=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            value = f"{self.user.username}"
+            self.slug = unique_slug(value, type(self))
+        super().save(*args, **kwargs)
 
+    def __str__(self):
+        return f"{self.user} progress of {self.course}"
 

@@ -30,6 +30,7 @@
         <!-- Template Stylesheet -->
         {% comment %} <link href="css/style.css" rel="stylesheet"> {% endcomment %}
         <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        {% block css %}{% endblock %}
         {% block javascript %}{% endblock %}
         <link rel="shortcut icon" type="image/png" href="{% static 'img/favicon3.png' %}">
         <title>{% block title %}{% endblock %} | HNKMSM-EOTC-LV</title>
