@@ -70,6 +70,16 @@ class SchoolsYouthSchool(LoginRequiredMixin,View):
             progress.save()
             return redirect('schools:youthSchool')
         
+        elif 'course_id_retake' in request.POST:
+            user = request.user
+            course_id = request.POST.get('course_id_retake')
+            course = Course.objects.get(id=course_id)
+            progress, created = Progress.objects.get_or_create(user=user, course=course)
+            # progress = Progress.objects.create(user=user, course=course)
+            progress.is_chapter_completed = False
+            progress.save()
+            return redirect('schools:youthSchool')
+        
         elif 'quiz_id' in request.POST:
             user = request.user
             quiz_id = request.POST.get('quiz_id')
@@ -81,11 +91,13 @@ class SchoolsYouthSchool(LoginRequiredMixin,View):
                 result, created = Result.objects.get_or_create(user=user, quiz=quiz, score=score)
             else: 
                 result, created = Result.objects.get_or_create(user=user, quiz=quiz)
-                result.score = score
+                if result.score < score :
+                   result.score = score
             result.save()
             # Update or create progress
             progress, created = Progress.objects.get_or_create(user=user, course=quiz.chapter.course)
             progress.is_quiz_completed = True
+            progress.is_chapter_completed= True
             progress.save()
             
             # Update or create report

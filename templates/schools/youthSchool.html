@@ -87,7 +87,19 @@
                                                           <button class="nav-link active small" id="EOTC-H-tab{{forloop.counter}}" data-bs-toggle="tab" data-bs-target="#EOTC-H{{ forloop.counter }}" type="button" role="tab" aria-controls="EOTC-H{{ forloop.counter }}" aria-selected="true">{{ course.title }}</button>
                                                         </li>
                                                         <li class="nav-item" role="presentation">
-                                                          <button class="nav-link small" id="EOTC-H-quizzes-tab{{forloop.counter}}" data-bs-toggle="tab" data-bs-target="#EOTC-H-quizzes{{ forloop.counter }}" type="button" role="tab" aria-controls="EOTC-H-quizzes{{ forloop.counter }}" aria-selected="false">QUIZZES</button>
+                                                          <button class="nav-link small" id="EOTC-H-quizzes-tab{{forloop.counter}}" data-bs-toggle="tab" data-bs-target="#EOTC-H-quizzes{{ forloop.counter }}" type="button" role="tab" aria-controls="EOTC-H-quizzes{{ forloop.counter }}" aria-selected="false">
+                                                            {% if progress %}
+                                                            {% for progres in progress %}
+                                                            {% if progres.course.title == course.title %}
+                                                            {% if progres.is_chapter_completed %}
+                                                            Result
+                                                            {% else %}
+                                                            Quizzes
+                                                            {% endif %}
+                                                            {% endif %}
+                                                            {% endfor %}
+                                                            {% endif %} 
+                                                         </button>
                                                         </li>
                                                         <li class="nav-item" role="presentation">
                                                             <button class="nav-link small" id="quations-ansewr-tab{{forloop.counter}}" data-bs-toggle="tab" data-bs-target="#quations-ansewr{{ forloop.counter }}" type="button" role="tab" aria-controls="quations-ansewr{{ forloop.counter }}" aria-selected="false">Quations&Qnsewr</button>
@@ -112,7 +124,7 @@
                                                                                     <span class="">{{ chapter_data.chapter.chapter_title }}</span>                                                                    
                                                                                 </button>
                                                                             </h4>
-                                                                            <div id="flush-collapse{{ forloop.counter }}" class="accordion-collapse collapse" aria-labelledby="flush-heading{{ forloop.counter }}" data-bs-parent="#accordionFlushExample">
+                                                                            <div id="flush-collapse{{ forloop.counter }}" class="accordion-collapse collapse" aria-labelledby="flush-heading{{ forloop.counter }}" data-bs-parent="#accordionFlushExample">/
                                                                                 <div class="accordion-body small text-start  border rounded my-2">
                                                                                     {{ chapter_data.chapter.content }}
                                                                                 </div>
@@ -160,43 +172,109 @@
                                                                         </div>
                                                                     {% endif %}
                                                                 {% endfor %}
+                                                                {% if progress %}
+                                                                {% for progres in progress %}
+                                                                {% if progres.course.title == course.title %}
+                                                                {% if progres.is_chapter_completed %}
+                                                                {% comment %} let you re-take {% endcomment %}
                                                                 <form method="post" action="{% url "schools:youthSchool" %}">
                                                                     {% csrf_token %}  
-                                                                    <input type="hidden" name="course_id" value="{{ course.id}}">
+                                                                    <input type="hidden" name="course_id_retake" value="{{course.id}}">
+                                                                    <button class="btn btn-sm btn-outline-primary my-3" type="submit">Are you sure you want retake the Quiz?</button>
+                                                                </form> 
+                                                                {% else %}
+                                                                {% comment %} requist to take for the first time {% endcomment %}
+                                                                <form method="post" action="{% url "schools:youthSchool" %}">
+                                                                    {% csrf_token %}  
+                                                                    <input type="hidden" name="course_id" value="{{course.id}}">
                                                                     <button class="btn btn-sm btn-outline-primary my-3" type="submit">Are you ready to take a Quiz?</button>
-                                                                </form>   
+                                                                </form> 
+                                                                {% endif %}
+                                                                {% endif %}
+                                                                {% endfor %}
+                                                                {% endif %}  
                                                             </div>
                                                         </div> 
                                                         <div class="tab-pane fade text-start px-4 py-3" id="EOTC-H-quizzes{{forloop.counter}}" role="tabpanel" aria-labelledby="EOTC-H-quizzes-tab{{forloop.counter}}">
-                                                            {% for chapter_data in chapters_with_resources %}
-                                                            {% if chapter_data.quizzes %}
-                                                            {% for quiz in chapter_data.quizzes %}
-                                                            {% if quiz.chapter.course.title == course.title %}
-                                                                <h3 class="py-2 text-center">{{ quiz.quiz_title }}</h3>
-                                                                <form method="post" action="{% url "schools:youthSchool" %}">
-                                                                    {% csrf_token %}
-                                                                    <input type="hidden" name="quiz_id" value="{{ quiz.id }}">
-                                                                   
-                                                                        {% for question in chapter_data.questions %}
-                                                                            {% if question.quiz_id == quiz.id %}
-                                                                                <h6 class="py-2"> {{forloop.counter}}) <span class"mx-2">{{ question.text }}</span></h6>
-                                                                              
-                                                                                    {% for answer in question.answer_set.all %}
-                                                                                        <p class="h6 text-dark small py-2 mx-3"><input class="option-input radio" type="radio" name="question{{ question.id }}" value="{{ answer.id }}"><span class"px-2">{{ answer.text }}</span></p>
+                                                            {% if progress %}
+                                                            {% for progres in progress %}
+                                                            {% if progres.course.title == course.title %}
+                                                            {% if progres.is_chapter_completed and progres.is_quiz_completed %}
+                                                            {% comment %} Result View {% endcomment %}
+                                                            <div>
+                                                                <div class="row g-4">
+                                                                    <div class="col-lg-8 " data-wow-delay="0.0s" style="visibility: visible; animation-delay: 0.0s; animation-name: bounceInUp;">
+                                                                        <div class="menu-item d-flex align-items-center">
+                                                                            <img class="flex-shrink-0 img-fluid rounded-circle mx-auto" src="{% static "img/icon/certificationChurch Logo.png" %}" alt="100x100-placeholder">
+                                                                            <div class="w-100 d-flex flex-column text-start ps-4">
+                                                                                <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
+                                                                                    <h6 class="text-primary">Status : <span class="badge rounded-pill text-success">PASSED</span></h6>
+                                                                                    <h6 class="text-primary">Score: 90 %</h6>
+                                                                                </div>
+                                                                                <h6 class="text-primary">Remark</h6>
+                                                                                <div class="d-flex flex-column align-items-start px-3">
+                                                                                    
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-4 border rounded p-3">
+                                                                        <h6 class="text-primary">Resource for more reading:</h6>
+                                                                                <div class="d-flex flex-column align-items-start px-3">
+                                                                                    {% for chapter_data in chapters_with_resources %} 
+                                                                                    {% for resource in chapter_data.resources %}
+                                                                                    {% if resource.chapter.course.title == course.title  %}
+                                                                                    <a class="text-body mb-3 small" 
+                                                                                        title="{{resource.Resources_title}}" 
+                                                                                        href="{{ resource.links }}"  target="_blank">
+                                                                                        <i class="fa fa-check text-primary me-2" style="font-size: 10px; color:#D4A762;"></i> 
+                                                                                        {{resource.Resources_title}} 
+                                                                                        <i class="fas fa-external-link-alt text-primary px-2" style="font-size: 10px; color:#D4A762;"></i>
+                                                                                    </a>
+                                                                                    {% endif %}
                                                                                     {% endfor %}
+                                                                                    {% endfor %}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            {% else %}
+                                                            {% comment %} quiz {% endcomment %}
+                                                            <div>
+                                                                {% for chapter_data in chapters_with_resources %}
+                                                                {% if chapter_data.quizzes %}
+                                                                {% for quiz in chapter_data.quizzes %}
+                                                                {% if quiz.chapter.course.title == course.title %}
+                                                                    <h3 class="py-2 text-center">{{ quiz.quiz_title }}</h3>
+                                                                    <form method="post" action="{% url "schools:youthSchool" %}">
+                                                                        {% csrf_token %}
+                                                                        <input type="hidden" name="quiz_id" value="{{ quiz.id }}">
+                                                                    
+                                                                            {% for question in chapter_data.questions %}
+                                                                                {% if question.quiz_id == quiz.id %}
+                                                                                    <h6 class="py-2"> {{forloop.counter}}) <span class"mx-2">{{ question.text }}</span></h6>
                                                                                 
-                                                                            {% endif %}
-                                                                        {% endfor %}
-                                                                    <button class="btn btn-sm btn-outline-primary" type="submit">Submit Quiz</button>
-                                                                </form>
+                                                                                        {% for answer in question.answer_set.all %}
+                                                                                            <p class="h6 text-dark small py-2 mx-3"><input class="option-input radio" type="radio" name="question{{ question.id }}" value="{{ answer.id }}"><span class"px-2">{{ answer.text }}</span></p>
+                                                                                        {% endfor %}
+                                                                                    
+                                                                                {% endif %}
+                                                                            {% endfor %}
+                                                                        <button class="btn btn-sm btn-outline-primary" type="submit">Submit Quiz</button>
+                                                                    </form>
+                                                                {% endif %}
+                                                                {% endfor %}
+                                                                {% endif %}
+                                                                {% endfor %}
+                                                            <div>
+                                                            {% endif %}
                                                             {% endif %}
                                                             {% endfor %}
-                                                            {% endif %}
-                                                            {% endfor %}
+                                                            {% endif %} 
+                                                            
+                                                            
                                                         </div>
                                                         <div class="tab-pane fade" id="quations-ansewr{{forloop.counter}}" role="tabpanel" aria-labelledby="quations-ansewr-tab{{forloop.counter}}">
-                                                            quations-ansewr 
-                                                            
+                                                            quations-ansewr  
                                                         </div> 
                                                     </div>
                                                 </div>
