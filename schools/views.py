@@ -25,6 +25,7 @@ class SchoolsYouthSchool(LoginRequiredMixin,View):
         chapters = Chapter.objects.all().order_by('created_at')
         reports = Report.objects.filter(user=self.request.user)
         progress = Progress.objects.filter(user=self.request.user)
+        result = Result.objects.filter(user=self.request.user)
         chapters_with_resources = []
                    
         for chapter in chapters:
@@ -51,6 +52,7 @@ class SchoolsYouthSchool(LoginRequiredMixin,View):
             'courses': courses,
             'chapters': chapters,
             'progress' : progress,
+            'results' : result,
         }
         return render(request, self.template_name, context)
     

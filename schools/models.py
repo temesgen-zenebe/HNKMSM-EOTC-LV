@@ -97,7 +97,15 @@ class Result(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
     score = models.FloatField()
-
+    is_pass = models.BooleanField(default=False)
+    
+    def save(self, *args, **kwargs):
+        if self.score >= 4:
+            self.is_pass = True
+        else:
+            self.is_pass = False
+        super().save(*args, **kwargs)
+        
     def __str__(self):
         return f"{self.user}'s result for {self.quiz}"
 

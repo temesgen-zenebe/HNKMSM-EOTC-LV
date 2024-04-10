@@ -201,15 +201,24 @@
                                                             {% if progres.course.title == course.title %}
                                                             {% if progres.is_chapter_completed and progres.is_quiz_completed %}
                                                             {% comment %} Result View {% endcomment %}
+                                                            {% if results %}
+                                                            {% for result in results %}
+                                                            {% if result.quiz.chapter.course.title == course.title %}
                                                             <div>
                                                                 <div class="row g-4">
                                                                     <div class="col-lg-8 " data-wow-delay="0.0s" style="visibility: visible; animation-delay: 0.0s; animation-name: bounceInUp;">
                                                                         <div class="menu-item d-flex align-items-center">
-                                                                            <img class="flex-shrink-0 img-fluid rounded-circle mx-auto" src="{% static "img/icon/certificationChurch Logo.png" %}" alt="100x100-placeholder">
+                                                                            <img class="flex-shrink-0 img-fluid rounded-circle mx-auto" src="{% static "img/icon/achievementQuizChurch Logo.png" %}" alt="100x100-placeholder">
                                                                             <div class="w-100 d-flex flex-column text-start ps-4">
                                                                                 <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
-                                                                                    <h6 class="text-primary">Status : <span class="badge rounded-pill text-success">PASSED</span></h6>
-                                                                                    <h6 class="text-primary">Score: 90 %</h6>
+                                                                                    <h6 class="text-primary">Status : 
+                                                                                        {% if result.is_pass %}
+                                                                                        <span class="badge rounded-pill text-success">YOU PASSED</span>
+                                                                                        {% else %}
+                                                                                        <span class="badge rounded-pill text-success">YOU NOT PASSED</span>
+                                                                                        {% endif %}
+                                                                                    </h6>
+                                                                                    <h6 class="text-primary">Score: {{result.score}}\ 5 Quations</h6>
                                                                                 </div>
                                                                                 <h6 class="text-primary">Remark</h6>
                                                                                 <div class="d-flex flex-column align-items-start px-3">
@@ -237,6 +246,9 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
+                                                            {% endif %}
+                                                            {% endfor %}
+                                                            {% endif %}
                                                             {% else %}
                                                             {% comment %} quiz {% endcomment %}
                                                             <div>
