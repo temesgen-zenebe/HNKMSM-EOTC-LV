@@ -337,8 +337,39 @@
                                                                         {% endfor %}
                                                                     {% endif %} 
                                                                 </div>
-                                                                <div class="tab-pane fade" id="nav-contact-{{ forloop.counter }}" role="tabpanel" aria-labelledby="nav-contact-tab-{{ forloop.counter }}">
-                                                                    Quations & Ansewr
+                                                                <div class="tab-pane fade small" id="nav-contact-{{ forloop.counter }}" role="tabpanel" aria-labelledby="nav-contact-tab-{{ forloop.counter }}">
+                                                                     {% comment %} Quations & Ansewr  {% endcomment %}
+                                                                     <div class="card-body text-start ">
+                                                                        <div class='border rounded p-2 my-2'>
+                                                                            <!-- Comment with nested comments-->
+                                                                            <div class="d-flex mb-4">
+                                                                                <!-- Parent comment-->
+                                                                                <div class="flex-shrink-0"><img class="rounded-circle" src="{% static "img/icon/Quationes.png "%}" alt="50x50 user image"></div>
+                                                                                <div class="ms-3">
+                                                                                    <div class="fw-bold">Commenter Name</div>
+                                                                                    If you're going to lead a space frontier, it has to be government; it'll never be private enterprise. Because the space frontier is dangerous, and it's expensive, and it has unquantified risks.
+
+                                                                                </div>
+                                                                            </div>
+                                                                            <!-- Single comment-->
+                                                                            <div class="d-flex">
+                                                                                <div class="flex-shrink-0"><img class="rounded-circle" src="{% static "img/icon/Ansewr.png "%}" alt="ansewr"></div>
+                                                                                <div class="ms-3">
+                                                                                    <div class="fw-bold">Commenter Name</div>
+                                                                                    When I look at the universe and all the ways the universe wants to kill us, I find it hard to reconcile that with statements of beneficence.
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <!-- Comment form-->
+                                                                        <div class='border rounded p-2 my-2'>
+                                                                            <form class="mb-4">
+                                                                                {% comment %} <textarea class="form-control" rows="3" placeholder="Join the discussion and leave your Quations!"></textarea> {% endcomment %}
+                                                                                <textarea class="w-100 form-control mb-4 p-3 border-primary bg-light" rows="4" cols="10" placeholder="Join the discussion and leave your Quations!"></textarea>
+                                                                                <button class="w-100 btn btn-sm btn-primary form-control  border-primary bg-primary rounded-pill" type="submit">Submit</button>
+                                    
+                                                                            </form>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                               </div>
                                                         </div>

@@ -5,7 +5,7 @@ from django.views.generic import ListView, DetailView
 from django.shortcuts import render, redirect
 from django.views import View
 from django.utils import timezone
-from .models import Course, Chapter, Quiz, Question, Answer, Resources, Result, Report,Progress
+from .models import Course, Chapter, Quiz, Question, Answer, Resources, Result, Report,Progress,QuationsAndAnswer
 
 # Create your views here.
 class SchoolsView(TemplateView):
@@ -26,6 +26,7 @@ class SchoolsYouthSchool(LoginRequiredMixin,View):
         reports = Report.objects.filter(user=self.request.user)
         progress = Progress.objects.filter(user=self.request.user)
         result = Result.objects.filter(user=self.request.user)
+        quationsAndAnswer = QuationsAndAnswer.objects.filter(user=self.request.user)
         chapters_with_resources = []
                    
         for chapter in chapters:
@@ -44,6 +45,7 @@ class SchoolsYouthSchool(LoginRequiredMixin,View):
                  'quizzes': quizzes, 
                  'questions': questions, 
                  'reports': reports,
+                 'quationsAndAnswer': quationsAndAnswer,
                  
                  })
                        
