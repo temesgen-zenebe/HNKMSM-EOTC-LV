@@ -12,6 +12,7 @@ class Course(models.Model):
     description = models.TextField(max_length=500, blank=True, null=True)
     school_type = models.CharField(max_length=100, choices=SCHOOL_TYPES)
     created_by = models.CharField(max_length=100, blank=True, null=True)
+    image = models.ImageField(upload_to="course_image/%Y/%m/%d" ,blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     slug = models.SlugField(max_length=200, unique=True ,null=True, blank=True)  
@@ -98,6 +99,7 @@ class Result(models.Model):
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
     score = models.FloatField()
     is_pass = models.BooleanField(default=False)
+    updated_at = models.DateTimeField(auto_now=True)
     
     def save(self, *args, **kwargs):
         if self.score >= 4:

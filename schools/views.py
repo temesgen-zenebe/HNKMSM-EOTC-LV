@@ -79,6 +79,7 @@ class SchoolsYouthSchool(LoginRequiredMixin,View):
             progress, created = Progress.objects.get_or_create(user=user, course=course)
             # progress = Progress.objects.create(user=user, course=course)
             progress.is_chapter_completed = False
+            progress.is_quiz_completed = False
             progress.save()
             return redirect('schools:youthSchool')
         
