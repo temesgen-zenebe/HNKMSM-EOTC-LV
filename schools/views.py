@@ -6,7 +6,7 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.utils import timezone
 from .models import Course, Chapter, Quiz, Question, Answer, Resources, Result, Report,Progress,QuationsAndAnswer
-
+from .forms import QuationsAndAnswerForm
 # Create your views here.
 class SchoolsView(TemplateView):
     template_name = 'schools/schoolsView.html'
@@ -27,6 +27,8 @@ class SchoolsYouthSchool(LoginRequiredMixin,View):
         progress = Progress.objects.filter(user=self.request.user)
         result = Result.objects.filter(user=self.request.user)
         quationsAndAnswer = QuationsAndAnswer.objects.filter(user=self.request.user)
+        quationsAndAnswerAll = QuationsAndAnswer.objects.all().order_by('updated')
+        quationsAnAnswerForm = QuationsAndAnswerForm()
         chapters_with_resources = []
                    
         for chapter in chapters:
@@ -45,8 +47,6 @@ class SchoolsYouthSchool(LoginRequiredMixin,View):
                  'quizzes': quizzes, 
                  'questions': questions, 
                  'reports': reports,
-                 'quationsAndAnswer': quationsAndAnswer,
-                 
                  })
                        
         context = {
@@ -55,6 +55,9 @@ class SchoolsYouthSchool(LoginRequiredMixin,View):
             'chapters': chapters,
             'progress' : progress,
             'results' : result,
+            'quationsAndAnswer': quationsAndAnswer,
+            'quationsAnAnswerForm':quationsAnAnswerForm,
+            'quationsAndAnswerAll':quationsAndAnswerAll,
         }
         return render(request, self.template_name, context)
     
@@ -109,11 +112,25 @@ class SchoolsYouthSchool(LoginRequiredMixin,View):
             report, created = Report.objects.get_or_create(user=user, chapter=quiz.chapter,defaults={'completion_date': timezone.now()})
             report.save()
             return redirect('schools:youthSchool')
-            
+        
+        elif 'user_questions' in request.POST: 
+            form = QuationsAndAnswerForm(request.POST)
+            if form.is_valid():
+                user = request.user
+                course_id = request.POST.get('course')  # Assuming you have a hidden input with course_id in the form
+                course = Course.objects.get(id=course_id)
+                # Save the question to the database
+                question = form.save(commit=False)
+                question.user = user
+                question.course = course
+                question.save()
+                return redirect('schools:youthSchool')
         
             
         else:
-            context = {}
+            context = {
+                'quationsAnAnswerForm': QuationsAndAnswerForm()
+                }
             return render(request, self.template_name, context)
 
     def calculate_score(self, request):

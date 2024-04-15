@@ -1,5 +1,6 @@
 {% extends "_base.html" %}
 {% load static %}
+{% load crispy_forms_tags %}
 {% block css %}
 <link rel="stylesheet" href="{% static 'css/quizzes.css' %}">
 {% endblock %}
@@ -67,7 +68,7 @@
                                                     <div class="card shadow border-warning-church">
                                                         {% if course.image %}
                                                             <div class="m-1 wow bounceInUp" height="100%"
-                                                                style="padding: 100px 0px; background-image: url('{{course.image.url}} '); background-size: cover; background-position: center top; background-repeat: no-repeat; " alt="Church-at" data-wow-delay="0.1s">
+                                                                style="padding: 100px 0px; background-image: url('{{course.image.url}} '); background-size: cover; background-position: center top; background-repeat: no-repeat; " alt="Church-at" data-wow-delay="0.0s">
                                                                 {% comment %} <img width="600" height="200" src="{{ course.image.url }}" alt="Logo" class="img-fluid" >  {% endcomment %}
                                                                 <div class="text-center ">
                                                                     <h3 class="mb-3 bolder text-light">{{ course.title }}</h3>
@@ -339,15 +340,20 @@
                                                                 </div>
                                                                 <div class="tab-pane fade small" id="nav-contact-{{ forloop.counter }}" role="tabpanel" aria-labelledby="nav-contact-tab-{{ forloop.counter }}">
                                                                      {% comment %} Quations & Ansewr  {% endcomment %}
-                                                                     <div class="card-body text-start ">
+                                                                    <div class="card-body text-start ">
+                                                                        {% comment %} {% if user.is_authenticated %}
+                                                                        {% if quationsAndAnswer %}
+                                                                        {% for quations_Answer in quationsAndAnswer %}
+                                                                        {% if quations_Answer.course.title == course.title %}
                                                                         <div class='border rounded p-2 my-2'>
                                                                             <!-- Comment with nested comments-->
                                                                             <div class="d-flex mb-4">
                                                                                 <!-- Parent comment-->
                                                                                 <div class="flex-shrink-0"><img class="rounded-circle" src="{% static "img/icon/Quationes.png "%}" alt="50x50 user image"></div>
                                                                                 <div class="ms-3">
-                                                                                    <div class="fw-bold">Commenter Name</div>
-                                                                                    If you're going to lead a space frontier, it has to be government; it'll never be private enterprise. Because the space frontier is dangerous, and it's expensive, and it has unquantified risks.
+                                                                                    <div class="fw-bold py-1">{{quations_Answer.user}}</div>
+                                                                                    <hr>
+                                                                                    <span>{{quations_Answer.question}}?</span>
 
                                                                                 </div>
                                                                             </div>
@@ -355,18 +361,105 @@
                                                                             <div class="d-flex">
                                                                                 <div class="flex-shrink-0"><img class="rounded-circle" src="{% static "img/icon/Ansewr.png "%}" alt="ansewr"></div>
                                                                                 <div class="ms-3">
-                                                                                    <div class="fw-bold">Commenter Name</div>
-                                                                                    When I look at the universe and all the ways the universe wants to kill us, I find it hard to reconcile that with statements of beneficence.
+                                                                                    <div class="fw-bold">Youth School</div>
+                                                                                    <hr>
+                                                                                    {% if quations_Answer.answer %}
+                                                                                    <span >{{quations_Answer.answer}}?</span>
+                                                                                    {% else %}
+                                                                                    <span>The answer will be available soon. Thank you for your patience!</span>
+                                                                                    {% endif %}
+                                                                                    
                                                                                 </div>
                                                                             </div>
                                                                         </div>
+                                                                        {% endif %}
+                                                                        {% endfor %}
+                                                                        {% endif %}
+                                                                        {% endif %} {% endcomment %}
+                                                                        {% comment %} <hr> {% endcomment %}
+                                                                        {% if quationsAndAnswerAll %}
+                                                                        {% for quationsAndAnswer in quationsAndAnswerAll %}
+                                                                        {% if quationsAndAnswer.course.title == course.title %}
+                                                                        {% if quationsAndAnswer.viewed_by == 'public' %}
+                                                                            <div class='border rounded p-2 my-2'>
+                                                                                <!-- Comment with nested comments-->
+                                                                                <div class="d-flex mb-4">
+                                                                                    <!-- Parent comment-->
+                                                                                    <div class="flex-shrink-0"><img class="rounded-circle" src="{% static "img/icon/Quationes.png "%}" alt="50x50 user image"></div>
+                                                                                    <div class="ms-3">
+                                                                                        <div class="fw-bold py-1">{{quationsAndAnswer.user}}</div>
+                                                                                        <hr>
+                                                                                        <span>{{quationsAndAnswer.question}}?</span>
+
+                                                                                    </div>
+                                                                                </div>
+                                                                                <!-- Single comment-->
+                                                                                <div class="d-flex">
+                                                                                    <div class="flex-shrink-0"><img class="rounded-circle" src="{% static "img/icon/Ansewr.png "%}" alt="ansewr"></div>
+                                                                                    <div class="ms-3">
+                                                                                        <div class="fw-bold">Youth School</div>
+                                                                                        <hr>
+                                                                                        {% if quationsAndAnswer.answer %}
+                                                                                        <span >{{quationsAndAnswer.answer}}?</span>
+                                                                                        {% else %}
+                                                                                        <span>The answer will be available soon. Thank you for your patience!</span>
+                                                                                        {% endif %}
+                                                                                        
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        {% elif quationsAndAnswer.viewed_by == 'private' and user.username == quationsAndAnswer.user.username  %}
+                                                                            {% if user.is_authenticated %}
+                                                                                <div class='border rounded p-2 my-2'>
+                                                                                    <!-- Comment with nested comments-->
+                                                                                    <div class="d-flex mb-4">
+                                                                                        <!-- Parent comment-->
+                                                                                        <div class="flex-shrink-0"><img class="rounded-circle" src="{% static "img/icon/Quationes.png "%}" alt="50x50 user image"></div>
+                                                                                        <div class="ms-3">
+                                                                                            <div class="fw-bold py-1">{{quationsAndAnswer.user}}</div>
+                                                                                            <hr>
+                                                                                            <span>{{quationsAndAnswer.question}}?</span>
+
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <!-- Single comment-->
+                                                                                    <div class="d-flex">
+                                                                                        <div class="flex-shrink-0"><img class="rounded-circle" src="{% static "img/icon/Ansewr.png "%}" alt="ansewr"></div>
+                                                                                        <div class="ms-3">
+                                                                                            <div class="fw-bold">Youth School</div>
+                                                                                            <hr>
+                                                                                            {% if quationsAndAnswer.answer %}
+                                                                                            <span >{{quationsAndAnswer.answer}}?</span>
+                                                                                            {% else %}
+                                                                                            <span>The answer will be available soon. Thank you for your patience!</span>
+                                                                                            {% endif %}
+                                                                                            
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            {% endif %}
+                                                                        {% endif %}
+                                                                        {% endif %}
+                                                                        {% endfor %}
+                                                                        {% endif %}
                                                                         <!-- Comment form-->
                                                                         <div class='border rounded p-2 my-2'>
-                                                                            <form class="mb-4">
-                                                                                {% comment %} <textarea class="form-control" rows="3" placeholder="Join the discussion and leave your Quations!"></textarea> {% endcomment %}
-                                                                                <textarea class="w-100 form-control mb-4 p-3 border-primary bg-light" rows="4" cols="10" placeholder="Join the discussion and leave your Quations!"></textarea>
-                                                                                <button class="w-100 btn btn-sm btn-primary form-control  border-primary bg-primary rounded-pill" type="submit">Submit</button>
-                                    
+                                                                            
+                                                                            <form class="mb-4" method="POST" action="{% url "schools:youthSchool" %}">
+                                                                                {% csrf_token %}
+                                                                               <input type="hidden" name="course" id="id_course" value="{{course.id}}"> 
+                                                                               <div id="div_id_question" class="mb-3"> 
+                                                                                <label for="id_question" class="form-label requiredField">
+                                                                                Question<span class="asteriskField">*</span> </label> 
+                                                                                <textarea name="question" 
+                                                                                cols="10" rows="4" 
+                                                                                class="w-100 form-control form-control-sm mb-4 p-3 border-primary bg-light textarea" 
+                                                                                placeholder="Leave your short and brief questions here, and we'll respond promptly!" 
+                                                                                required="true" 
+                                                                                maxlength="2000" 
+                                                                                id="id_question" 
+                                                                                spellcheck="true"></textarea> </div>
+                                                                                <button name="user_questions" class="w-100 btn btn-sm btn-primary form-control  border-primary bg-primary rounded-pill" type="submit">Submit</button>
                                                                             </form>
                                                                         </div>
                                                                     </div>
