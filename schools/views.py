@@ -55,6 +55,7 @@ class SchoolsYouthSchool(LoginRequiredMixin,View):
             'chapters': chapters,
             'progress' : progress,
             'results' : result,
+            'reports' : reports,
             'quationsAndAnswer': quationsAndAnswer,
             'quationsAnAnswerForm':quationsAnAnswerForm,
             'quationsAndAnswerAll':quationsAndAnswerAll,

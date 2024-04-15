@@ -472,7 +472,41 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="tab-pane fade" id="Reports" role="tabpanel" aria-labelledby="Reports-tab">Reports</div>
+                                    <div class="tab-pane fade" id="Reports" role="tabpanel" aria-labelledby="Reports-tab">
+                                        <div class="row g-5 my-3">
+                                            
+                                            {% if reports %}
+                                            {% for reportsResources in reports %}
+                                            
+                                            <div class="col-lg-6 my-3 ">
+                                                <div class="menu-item d-flex align-items-center mx-2">
+                                                    
+                                                    <div class="w-100 d-flex flex-column text-start ps-4">
+                                                        <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
+                                                            <h3 class="text-primary">{{reportsResources.chapter.course.title}}</h3>
+                                                            <h4 class="text-primary"><i class="bi bi-stars fs-4"></i></h4>
+                                                        </div>
+                                                        {% for reportsResourceChapter in chapters  %}
+                                                        {% if reportsResources.chapter.course.title == reportsResourceChapter.course.title %}
+                                                        <div class="border border-primary rounded p-2">
+                                                            <h6 class="mb-0 my-2 text-church">{{reportsResources.chapter.course.title}}</h6>
+                                                            {% for result in results %}
+                                                            {% if result.quiz.chapter.chapter_title == reportsResourceChapter.chapter_title%}
+                                                            <div class="progress my-2">
+                                                                <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                                                            </div> 
+                                                            {% endif %}
+                                                            {% endfor %}
+                                                        </div>
+                                                        {% endif %}
+                                                        {% endfor %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {% endfor %}
+                                            {% endif %}
+                                        </div>
+                                    </div>
                                     <div class="tab-pane fade" id="FAQ" role="tabpanel" aria-labelledby="FAQ-tab">FAQ</div>
                                     {% comment %} <div class="tab-pane fade" id="FAQ" role="tabpanel" aria-labelledby="settings-tab">settings</div> {% endcomment %}
                                 </div>
