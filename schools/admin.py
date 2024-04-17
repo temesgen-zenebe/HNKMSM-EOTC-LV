@@ -1,6 +1,6 @@
 # admin.py
 from django.contrib import admin
-from .models import Course, Chapter, Resources,Quiz, Question, Answer, Result, Report,Progress,QuationsAndAnswer
+from .models import  Course, Chapter, FAQReader, Resources,Quiz, Question, Answer, Result, Report,Progress,QuationsAndAnswer,FAQ
 
 admin.site.register(Course)
 admin.site.register(Chapter)
@@ -19,3 +19,13 @@ class QuationsAndAnswerAdmin(admin.ModelAdmin):
     is_answered.boolean = True  # Displays a nice True/False icon instead of "True"/"False"
     is_answered.short_description = 'Answered'  # Custom column header name
 admin.site.register(QuationsAndAnswer, QuationsAndAnswerAdmin)
+class FAQAdmin(admin.ModelAdmin):
+    list_display = ('question', 'answer','satisfaction_rating', 'readers_count')
+   
+    search_fields = ('question', 'answer')
+admin.site.register(FAQ, FAQAdmin)
+
+class FAQReaderAdmin(admin.ModelAdmin):
+    list_display = ('user', 'faq','is_satisfied')
+admin.site.register(FAQReader, FAQReaderAdmin)
+

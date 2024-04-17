@@ -2,6 +2,7 @@
 from django.db import models
 from django.conf import settings
 from common.utils.text import unique_slug
+from django.utils import timezone
 
 class Course(models.Model):
     SCHOOL_TYPES = (
@@ -32,7 +33,7 @@ class Chapter(models.Model):
     content = models.TextField(max_length=2000)
     audio_file = models.FileField(upload_to='audio', null=True, blank=True)
     video_url = models.URLField(null=True, blank=True)
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(default=timezone.now)
     updated = models.DateTimeField(auto_now=True)
     slug = models.SlugField(max_length=200, unique=True ,null=True, blank=True)  
     
@@ -167,3 +168,51 @@ class QuationsAndAnswer(models.Model):
 
     def __str__(self):
         return f"Question by {self.user.username} on {self.course.title}"
+
+
+class FAQ(models.Model):
+    question = models.CharField(max_length=255)
+    answer = models.TextField()
+    satisfaction_rating = models.IntegerField(default=0, help_text="Satisfaction rating from 0 to 5")
+    readers_count = models.PositiveIntegerField(default=0)
+    slug = models.SlugField(unique=True)
+    created = models.DateTimeField(default=timezone.now)
+    updated = models.DateTimeField(default=timezone.now)
+    
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            value = f"frequentlyAskedQuestion"
+            self.slug = unique_slug(value, type(self))
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.question
+
+class FAQReader(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    faq = models.ForeignKey(FAQ, on_delete=models.CASCADE)
+    is_satisfied = models.BooleanField(default=False)
+    slug = models.SlugField(unique=True)
+    created = models.DateTimeField(default=timezone.now)
+    updated = models.DateTimeField(default=timezone.now)
+    
+    class Meta:
+        unique_together = ('user', 'faq')
+
+    def save(self, *args, **kwargs):
+        if self.pk is None:
+            self.faq.readers_count += 1
+            self.faq.save()
+            
+        if not self.slug:
+            value = f"{self.user.username}"
+            self.slug = unique_slug(value, type(self))
+            
+        super().save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        self.faq.readers_count -= 1
+        self.faq.save()
+        super().delete(*args, **kwargs)
+        
+    
