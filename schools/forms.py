@@ -1,5 +1,5 @@
 from django import forms
-from .models import QuationsAndAnswer
+from .models import QuationsAndAnswer, FAQ, FAQReader
 
 class QuationsAndAnswerForm(forms.ModelForm):
     class Meta:
@@ -12,3 +12,20 @@ class QuationsAndAnswerForm(forms.ModelForm):
                                               'placeholder': "Leave your short and brief questions here, and we'll respond promptly!",
                                               'required': True})
         }
+
+class FAQReaderForm(forms.ModelForm):
+    class Meta:
+        model = FAQReader
+        fields = ['is_satisfied']
+        labels = {
+            'is_satisfied': 'Are you satisfied with the answer?'
+        }
+       
+class FAQForm(forms.ModelForm):
+    class Meta:
+        model = FAQ
+        fields = ['satisfaction_rating']
+        labels = {
+            'satisfaction_rating': 'Satisfaction Rating'
+        }
+        

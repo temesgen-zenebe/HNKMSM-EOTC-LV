@@ -5,8 +5,8 @@ from django.views.generic import ListView, DetailView
 from django.shortcuts import render, redirect
 from django.views import View
 from django.utils import timezone
-from .models import Course, Chapter, Quiz, Question, Answer, Resources, Result, Report,Progress,QuationsAndAnswer
-from .forms import QuationsAndAnswerForm
+from .models import FAQ, Course, Chapter, FAQReader, Quiz, Question, Answer, Resources, Result, Report,Progress,QuationsAndAnswer
+from .forms import QuationsAndAnswerForm , FAQReaderForm, FAQForm
 # Create your views here.
 class SchoolsView(TemplateView):
     template_name = 'schools/schoolsView.html'
@@ -29,6 +29,9 @@ class SchoolsYouthSchool(LoginRequiredMixin,View):
         quationsAndAnswer = QuationsAndAnswer.objects.filter(user=self.request.user)
         quationsAndAnswerAll = QuationsAndAnswer.objects.all().order_by('updated')
         quationsAnAnswerForm = QuationsAndAnswerForm()
+        faqs = FAQ.objects.all()
+        faq_reader_form = FAQReaderForm()
+        faqs_form = FAQForm()
         chapters_with_resources = []
                    
         for chapter in chapters:
@@ -59,6 +62,9 @@ class SchoolsYouthSchool(LoginRequiredMixin,View):
             'quationsAndAnswer': quationsAndAnswer,
             'quationsAnAnswerForm':quationsAnAnswerForm,
             'quationsAndAnswerAll':quationsAndAnswerAll,
+            'faqs': faqs,
+            'faq_reader_form': faq_reader_form,
+            'faqs_form' : faqs_form
         }
         return render(request, self.template_name, context)
     
@@ -126,7 +132,17 @@ class SchoolsYouthSchool(LoginRequiredMixin,View):
                 question.course = course
                 question.save()
                 return redirect('schools:youthSchool')
-        
+            
+        elif 'faq_id' in request.POST:
+            form = FAQReaderForm(request.POST)
+            if form.is_valid():
+                user = request.user
+                faq_id = request.POST.get('faq_id') 
+                # Save the question to the database
+                faq_reader, created = FAQReader.objects.get_or_create(user=user, faq_id=faq_id)
+                faq_reader.is_satisfied = form.cleaned_data['is_satisfied']
+                faq_reader.save()
+                return redirect('schools:youthSchool')
             
         else:
             context = {
