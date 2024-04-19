@@ -1,5 +1,5 @@
 from django import forms
-from .models import QuationsAndAnswer, FAQ, FAQReader
+from .models import QuationsAndAnswer, FAQReader
 
 class QuationsAndAnswerForm(forms.ModelForm):
     class Meta:
@@ -16,16 +16,14 @@ class QuationsAndAnswerForm(forms.ModelForm):
 class FAQReaderForm(forms.ModelForm):
     class Meta:
         model = FAQReader
-        fields = ['is_satisfied']
-        labels = {
-            'is_satisfied': 'Are you satisfied with the answer?'
-        }
-       
-class FAQForm(forms.ModelForm):
-    class Meta:
-        model = FAQ
         fields = ['satisfaction_rating']
         labels = {
-            'satisfaction_rating': 'Satisfaction Rating'
+            'satisfaction_rating': 'rat your satisfaction about the answer ?',
+          
         }
+        # widgets = {
+        #     'satisfaction_rating': forms.Select(attrs={'class': 'form-select form-select-sm'}),
+            
+        # }
         
+       

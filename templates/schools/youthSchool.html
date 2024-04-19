@@ -598,28 +598,12 @@
                                                         <div id="flush-collapseOne-{{ forloop.counter }}" class="accordion-collapse collapse" aria-labelledby="flush-headingOne-{{ forloop.counter }}" data-bs-parent="#accordionFlushExample-{{ forloop.counter }}">
                                                             <div class="accordion-body ">
                                                                 <div class="row g-2">
-                                                                    <div class="col-12 p-2 small">
+                                                                    <div class="col-12 p-2 small mb-3 border rounded">
                                                                         <span class="text-start text-primary">{{ faq.answer }}</span>
                                                                     </div> 
                                                                 </div> 
-                                                                <div class="row row-cols-1 row-cols-md-3 g-2">
-                                                                    <div class="col text-center card border-0">
-                                                                        <div class="card-body rounded p-2 mx-1 border">
-                                                                            <form method="post" action="{% url "schools:youthSchool" %}">
-                                                                                {% csrf_token %}
-                                                                                <input type="hidden" name="faq_id" value="{{ faq.id }}">   
-                                                                                <h6 class="text-primary small">
-                                                                                    {{ faq_reader_form.is_satisfied.label_tag }}: 
-                                                                                    {% if frq.is_satisfie %}
-                                                                                    <input type="checkbox" name="is_satisfied" id="id_is_satisfied" checked>
-                                                                                    {% else %}
-                                                                                    <input type="checkbox" name="is_satisfied" id="id_is_satisfied">
-                                                                                    {% endif %} 
-                                                                                </h6>
-                                                                                <button type="submit" class="btn btn-sm btn-outline-primary">Ok</button>
-                                                                            </form>
-                                                                        </div>
-                                                                    </div> 
+                                                                <div class="row row-cols-1 row-cols-md-2 g-3">
+                                                                    
                                                                     <div class="card col border-0 text-center">
                                                                         <div class="card-body p-2 text-primary rounded border">
                                                                             <h6 class="text-primary small">
@@ -641,8 +625,21 @@
                                                                     </div>
                                                                     <div class="col text-center card border-0">
                                                                         <div class="card-body rounded p-2 border">
-                                                                            <h6 class="text-primary "><span class="card-title text-primary small">Readers Number:</span> <span class="badge bg-primary mx-2 small">{{ faq.readers_count }}</span> </h6 >
-                                                                            <h6 class="text-primary "><span class="card-title text-primary small">Satisfaction Rating:</span><span class="badge bg-primary mx-2 ">{{faq.satisfaction_rating}}</span> </h6 >
+                                                                            <h6 class="small"><span class="card-title text-primary small">Readers Number:</span> <span class="badge bg-primary mx-2 small">{{ faq.readers_count }}</span> </h6 >
+                                                                            {% if fqaReader %}
+                                                                            {% for readerReating in fqaReader %}
+                                                                            {% if readerReating.faq.id == faq.id and readerReating.user.username == user.username %}
+                                                                            <h6 class="small">
+                                                                                <span class="card-title text-primary small">Satisfaction Rating:</span>
+                                                                                <span class="badge bg-primary mx-2 ">
+                                                                                    {{readerReating.satisfaction_rating}} 
+                                                                                    <i class="fas fa-star text-success px-2"></i>
+                                                                                </span>
+                                                                            </h6 >
+                                                                            {% endif %}
+                                                                            {% endfor %}
+                                                                            {% endif %}
+                                                                            
                                                                         </div>
                                                                     </div> 
                                                                 </div>

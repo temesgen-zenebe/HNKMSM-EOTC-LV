@@ -6,7 +6,7 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.utils import timezone
 from .models import FAQ, Course, Chapter, FAQReader, Quiz, Question, Answer, Resources, Result, Report,Progress,QuationsAndAnswer
-from .forms import QuationsAndAnswerForm , FAQReaderForm, FAQForm
+from .forms import QuationsAndAnswerForm , FAQReaderForm
 # Create your views here.
 class SchoolsView(TemplateView):
     template_name = 'schools/schoolsView.html'
@@ -31,7 +31,7 @@ class SchoolsYouthSchool(LoginRequiredMixin,View):
         quationsAnAnswerForm = QuationsAndAnswerForm()
         faqs = FAQ.objects.all()
         faq_reader_form = FAQReaderForm()
-        faqs_form = FAQForm()
+        fqaReader= FAQReader.objects.filter(user=self.request.user)
         chapters_with_resources = []
                    
         for chapter in chapters:
@@ -64,7 +64,8 @@ class SchoolsYouthSchool(LoginRequiredMixin,View):
             'quationsAndAnswerAll':quationsAndAnswerAll,
             'faqs': faqs,
             'faq_reader_form': faq_reader_form,
-            'faqs_form' : faqs_form
+            'fqaReader' : fqaReader
+            
         }
         return render(request, self.template_name, context)
     
@@ -140,7 +141,8 @@ class SchoolsYouthSchool(LoginRequiredMixin,View):
                 faq_id = request.POST.get('faq_id') 
                 # Save the question to the database
                 faq_reader, created = FAQReader.objects.get_or_create(user=user, faq_id=faq_id)
-                faq_reader.is_satisfied = form.cleaned_data['is_satisfied']
+                faq_reader.satisfaction_rating = form.cleaned_data['satisfaction_rating']
+                faq_reader.is_satisfied = True
                 faq_reader.save()
                 return redirect('schools:youthSchool')
             

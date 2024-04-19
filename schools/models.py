@@ -172,8 +172,7 @@ class QuationsAndAnswer(models.Model):
 
 class FAQ(models.Model):
     question = models.CharField(max_length=255)
-    answer = models.TextField()
-    satisfaction_rating = models.IntegerField(default=0, help_text="Satisfaction rating from 0 to 5")
+    answer = models.TextField()   
     readers_count = models.PositiveIntegerField(default=0)
     slug = models.SlugField(unique=True)
     created = models.DateTimeField(default=timezone.now)
@@ -192,6 +191,7 @@ class FAQReader(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     faq = models.ForeignKey(FAQ, on_delete=models.CASCADE)
     is_satisfied = models.BooleanField(default=False)
+    satisfaction_rating = models.IntegerField(default=0, help_text="Satisfaction rating from 0 to 5")
     slug = models.SlugField(unique=True)
     created = models.DateTimeField(default=timezone.now)
     updated = models.DateTimeField(default=timezone.now)

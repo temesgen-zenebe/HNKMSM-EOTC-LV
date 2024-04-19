@@ -19,13 +19,13 @@ class QuationsAndAnswerAdmin(admin.ModelAdmin):
     is_answered.boolean = True  # Displays a nice True/False icon instead of "True"/"False"
     is_answered.short_description = 'Answered'  # Custom column header name
 admin.site.register(QuationsAndAnswer, QuationsAndAnswerAdmin)
+
 class FAQAdmin(admin.ModelAdmin):
-    list_display = ('question', 'answer','satisfaction_rating', 'readers_count')
-   
+    list_display = ('question', 'answer', 'readers_count')
     search_fields = ('question', 'answer')
 admin.site.register(FAQ, FAQAdmin)
 
 class FAQReaderAdmin(admin.ModelAdmin):
-    list_display = ('user', 'faq','is_satisfied')
+    list_display = ('user', 'faq', 'is_satisfied', 'satisfaction_rating', 'created', 'updated')  # Add 'satisfaction_rating' here
 admin.site.register(FAQReader, FAQReaderAdmin)
 
