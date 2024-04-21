@@ -15,7 +15,7 @@
         <div class="mx-0 py-2  wow bounceInUp" height="100%"
             style="background-image: url('{% static "img/heroAccount-13.png" %}');background-size: cover; background-position: center center; background-repeat: no-repeat; " alt="Church-at" data-wow-delay="0.1s">
              <!-- breadcrumb Start -->
-             <div class="container animated bounceInDown py-1 mt-0">
+            <div class="container animated bounceInDown py-1 mt-0">
                 <div class=" ">
                     <ol class="breadcrumb justify-content-start mb-0 ">
                         <li class="small"><a href="{% url 'pages:homepage' %}">Home <span class="px-1">\</span></a></li>
@@ -26,15 +26,9 @@
             </div>
             <!-- breadcrumb Start -->
             <div class="text-center ">
-                {% comment %} <div class="text-center py-4">
-                    <small class="d-inline-block fw-bold text-dark text-uppercase bg-light border border-primary rounded-pill px-4 py-1 mb-3">
-                        <i class="fas fa-school fa-3x text-primary mb-4 text-center px-2"></i>
-                        Sunday School for Youth</small>
-                </div> {% endcomment %}
                 <h3 class="mb-3 bolder text-light">ለወጣቶች አብነት ትምህርት</h3>
                 <h3 class="mb-3 text-light ">Sunday Youth School</3>
             </div>
-            
         </div>
         <div class="container py-3">
             <div class="row g-4">
@@ -57,7 +51,6 @@
                                     <button class="nav-link" id="settings-tab" data-bs-toggle="tab" data-bs-target="#settings" type="button" role="tab" aria-controls="settings" aria-selected="false">Settings</button>
                                     </li> {% endcomment %}
                                 </ul>
-                                
                                 <!-- Tab panes -->
                                 <div class="tab-content">
                                     <div class="tab-pane fade show active" id="CoursesQuizzes" role="tabpanel" aria-labelledby="CoursesQuizzes-tab">
@@ -339,44 +332,7 @@
                                                                     {% endif %} 
                                                                 </div>
                                                                 <div class="tab-pane fade small" id="nav-contact-{{ forloop.counter }}" role="tabpanel" aria-labelledby="nav-contact-tab-{{ forloop.counter }}">
-                                                                     {% comment %} Quations & Ansewr  {% endcomment %}
                                                                     <div class="card-body text-start ">
-                                                                        {% comment %} {% if user.is_authenticated %}
-                                                                        {% if quationsAndAnswer %}
-                                                                        {% for quations_Answer in quationsAndAnswer %}
-                                                                        {% if quations_Answer.course.title == course.title %}
-                                                                        <div class='border rounded p-2 my-2'>
-                                                                            <!-- Comment with nested comments-->
-                                                                            <div class="d-flex mb-4">
-                                                                                <!-- Parent comment-->
-                                                                                <div class="flex-shrink-0"><img class="rounded-circle" src="{% static "img/icon/Quationes.png "%}" alt="50x50 user image"></div>
-                                                                                <div class="ms-3">
-                                                                                    <div class="fw-bold py-1">{{quations_Answer.user}}</div>
-                                                                                    <hr>
-                                                                                    <span>{{quations_Answer.question}}?</span>
-
-                                                                                </div>
-                                                                            </div>
-                                                                            <!-- Single comment-->
-                                                                            <div class="d-flex">
-                                                                                <div class="flex-shrink-0"><img class="rounded-circle" src="{% static "img/icon/Ansewr.png "%}" alt="ansewr"></div>
-                                                                                <div class="ms-3">
-                                                                                    <div class="fw-bold">Youth School</div>
-                                                                                    <hr>
-                                                                                    {% if quations_Answer.answer %}
-                                                                                    <span >{{quations_Answer.answer}}?</span>
-                                                                                    {% else %}
-                                                                                    <span>The answer will be available soon. Thank you for your patience!</span>
-                                                                                    {% endif %}
-                                                                                    
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        {% endif %}
-                                                                        {% endfor %}
-                                                                        {% endif %}
-                                                                        {% endif %} {% endcomment %}
-                                                                        {% comment %} <hr> {% endcomment %}
                                                                         {% if quationsAndAnswerAll %}
                                                                         {% for quationsAndAnswer in quationsAndAnswerAll %}
                                                                         {% if quationsAndAnswer.course.title == course.title %}
@@ -473,7 +429,6 @@
                                         </div>
                                     </div>
                                     <div class="tab-pane fade" id="Reports" role="tabpanel" aria-labelledby="Reports-tab">
-                                       
                                         <div class="row my-3 px-3 ">
                                             <div class="col-lg-12 mb-4 ">
                                                 <div class="card card-header-actions h-100 ">
