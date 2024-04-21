@@ -1,6 +1,6 @@
 # admin.py
 from django.contrib import admin
-from .models import  Course, Chapter, FAQReader, Resources,Quiz, Question, Answer, Result, Report,Progress,QuationsAndAnswer,FAQ
+from .models import  Course, Chapter, FAQReader, FaqRelatedResource, Resources,Quiz, Question, Answer, Result, Report,Progress,QuationsAndAnswer,FAQ
 
 admin.site.register(Course)
 admin.site.register(Chapter)
@@ -21,11 +21,11 @@ class QuationsAndAnswerAdmin(admin.ModelAdmin):
 admin.site.register(QuationsAndAnswer, QuationsAndAnswerAdmin)
 
 class FAQAdmin(admin.ModelAdmin):
-    list_display = ('question', 'answer', 'readers_count')
+    list_display = ('question', 'answer', 'is_satisfied', 'readers_count')
     search_fields = ('question', 'answer')
 admin.site.register(FAQ, FAQAdmin)
 
 class FAQReaderAdmin(admin.ModelAdmin):
-    list_display = ('user', 'faq', 'is_satisfied', 'satisfaction_rating', 'created', 'updated')  # Add 'satisfaction_rating' here
+    list_display = ('user', 'faq', 'satisfaction_rating', 'created', 'updated')  # Add 'satisfaction_rating' here
 admin.site.register(FAQReader, FAQReaderAdmin)
-
+admin.site.register(FaqRelatedResource)
