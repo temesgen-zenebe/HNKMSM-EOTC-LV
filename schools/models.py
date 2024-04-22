@@ -6,8 +6,8 @@ from django.utils import timezone
 
 class Course(models.Model):
     SCHOOL_TYPES = (
-        ('sunday School Youth ', 'youthSchool'),
-        ('sunday School children ', 'childrenSchool'),  
+        ('sundaySchoolYouth', 'youthSchool'),
+        ('sundaySchoolChildren', 'childrenSchool'),  
     )
     title = models.CharField(max_length=100)
     description = models.TextField(max_length=500, blank=True, null=True)

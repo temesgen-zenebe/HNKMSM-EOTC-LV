@@ -32,6 +32,7 @@
         </div>
         <div class="container py-3">
             <div class="row g-4">
+                {% if is_youth %}
                 <div class="col-lg-12 col-md-12 col-sm-12 wow bounceInUp " data-wow-delay="0.5s">
                     <div class="bg-light rounded service-item">
                         <div class="service-content-1 p-1">
@@ -57,6 +58,8 @@
                                         <div class="container py-5">
                                             <div class="row row-cols-1 row-cols-md-2 g-4">
                                                 {% for course in courses %}
+
+                                                {% if course.school_type == 'sundaySchoolYouth' %}
                                                 <div class="col">
                                                     <div class="card shadow border-warning-church">
                                                         {% if course.image %}
@@ -211,6 +214,8 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="tab-pane fade" id="nav-profile-{{ forloop.counter }}" role="tabpanel" aria-labelledby="nav-profile-tab-{{ forloop.counter }}">
+                                                                    
+                                                                    {% if  course.school_type == 'sundaySchoolYouth' %}
                                                                     {% comment %} quiz or result {% endcomment %}
                                                                     {% if progress %}
                                                                         {% for progres in progress %}
@@ -330,6 +335,7 @@
                                                                             {% endif %}
                                                                         {% endfor %}
                                                                     {% endif %} 
+                                                                    {% endif %}
                                                                 </div>
                                                                 <div class="tab-pane fade small" id="nav-contact-{{ forloop.counter }}" role="tabpanel" aria-labelledby="nav-contact-tab-{{ forloop.counter }}">
                                                                     <div class="card-body text-start ">
@@ -353,7 +359,7 @@
                                                                                 <div class="d-flex">
                                                                                     <div class="flex-shrink-0"><img class="rounded-circle" src="{% static "img/icon/Ansewr.png "%}" alt="ansewr"></div>
                                                                                     <div class="ms-3">
-                                                                                        <div class="fw-bold">Youth School</div>
+                                                                                        <div class="fw-bold small">Youth Sunday School</div>
                                                                                         <hr>
                                                                                         {% if quationsAndAnswer.answer %}
                                                                                         <span >{{quationsAndAnswer.answer}}?</span>
@@ -424,6 +430,16 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                {% comment %} 
+                                                {% else %}
+                                                {% if forloop.counter == 1 %}
+                                                    <div class="col border rounded p-3 my-3 border-warning mx-auto">
+                                                        No courses found at the moment. We apologize for any inconvenience caused. We are working to bring new courses soon. Please try again later.
+                                                        <br><small class="text-church">sunday School department</small>
+                                                    </div>
+                                                {% endif %} 
+                                                {% endcomment %}
+                                                {% endif %}
                                                 {% endfor %}
                                             </div>
                                         </div>
@@ -457,61 +473,63 @@
                                                     {% for reportsResources in reports %}
                                                     <div class="card-body text-start px-4">
                                                         {% for result in results %}
-                                                        {% if result.quiz.chapter.course.title == reportsResources.chapter.course.title %}
-                                                        <div class="d-flex justify-content-between pb-2">
-                                                            <div>
-                                                                <small class="">{{reportsResources.chapter.course.title}}</small> 
-                                                            </div>
-                                                            <div>
-                                                                <h6 class="small"><span class="float-end fw-bold ">{{ result.score|floatformat:"0" }} / 5</span></h6>
-                                                            </div>
-                                                        </div>
-                                                        {% if result.score == 5.0 %}
-                                                        <div class="progress mb-1" style="height: 25px;">
-                                                            <div class="progress-bar bg-primary" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">100 %</div>
-                                                        </div>
-                                                        <div class="d-flex align-items-center justify-content-between small text-body">
-                                                            <span class="mb-2 small mx-2 text-success">completed successfully with Outsatnding result !</span>
-                                                            <span class="small text-body" >Completed: {{reportsResources.completion_date|date}}</span>
-                                                        </div>
-                                                        
-                                                        {% elif result.score == 4.0 %}
-                                                        <div class="progress mb-1" style="height: 25px;">
-                                                            <div class="progress-bar bg-primary " role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">80 %</div>
-                                                        </div>
-                                                        <div class="d-flex align-items-center justify-content-between small text-body">
-                                                            <span class="mb-2 small mx-2 text-success">successfully completed !</span>
-                                                            <span class="small text-body" >Completed: {{reportsResources.completion_date|date}}</span>
-                                                        </div>
-                                                        
-                                                        {% elif result.score == 3.0 %}
-                                                        <div class="progress mb-1" style="height: 25px;">
-                                                            <div class="progress-bar bg-primary" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">60 %</div>
-                                                        </div>
-                                                        <div class="d-flex align-items-center justify-content-between small text-body">
-                                                            <span class="mb-2 small mx-2 text-warning">completed with avarage Result !</span>
-                                                            <span class="small text-body" >Completed: {{reportsResources.completion_date|date}}</span>
-                                                        </div>
-                                                        
-                                                        {% elif result.score == 2.0 %}
-                                                        <div class="progress mb-1" style="height: 25px;">
-                                                            <div class="progress-bar bg-primary" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">40 %</div>
-                                                        </div>
-                                                        <div class="d-flex align-items-center justify-content-between small text-body">
-                                                            <span class="mb-2 small mx-2 text-danger">completed but need to retake the course and quiz  !</span>
-                                                            <span class="small text-body" >Completed: {{reportsResources.completion_date|date}}</span>
-                                                        </div>
-                                                        
-                                                        {% elif result.score == 1.0 %}
-                                                        <div class="progress mb-1" style="height: 25px;">
-                                                            <div class="progress-bar bg-primary" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">20 %</div>
-                                                        </div>
-                                                        
-                                                        <div class="d-flex align-items-center justify-content-between small text-body">
-                                                            <span class="mb-2 small mx-2 text-danger">completed but must retake the course and quiz !</span>
-                                                            <span class="small text-body" >Completed: {{reportsResources.completion_date|date}}</span>
-                                                        </div>
-                                                        {% endif %}
+                                                        {% if result.quiz.chapter.course.school_type == 'sundaySchoolYouth' %}
+                                                            {% if result.quiz.chapter.course.title == reportsResources.chapter.course.title %}
+                                                                <div class="d-flex justify-content-between pb-2">
+                                                                    <div>
+                                                                        <small class="">{{reportsResources.chapter.course.title}}</small> 
+                                                                    </div>
+                                                                    <div>
+                                                                        <h6 class="small"><span class="float-end fw-bold ">{{ result.score|floatformat:"0" }} / 5</span></h6>
+                                                                    </div>
+                                                                </div>
+                                                                {% if result.score == 5.0 %}
+                                                                <div class="progress mb-1" style="height: 25px;">
+                                                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">100 %</div>
+                                                                </div>
+                                                                <div class="d-flex align-items-center justify-content-between small text-body">
+                                                                    <span class="mb-2 small mx-2 text-success">completed successfully with Outsatnding result !</span>
+                                                                    <span class="small text-body" >Completed: {{reportsResources.completion_date|date}}</span>
+                                                                </div>
+                                                                
+                                                                {% elif result.score == 4.0 %}
+                                                                <div class="progress mb-1" style="height: 25px;">
+                                                                    <div class="progress-bar bg-primary " role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">80 %</div>
+                                                                </div>
+                                                                <div class="d-flex align-items-center justify-content-between small text-body">
+                                                                    <span class="mb-2 small mx-2 text-success">successfully completed !</span>
+                                                                    <span class="small text-body" >Completed: {{reportsResources.completion_date|date}}</span>
+                                                                </div>
+                                                                
+                                                                {% elif result.score == 3.0 %}
+                                                                <div class="progress mb-1" style="height: 25px;">
+                                                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">60 %</div>
+                                                                </div>
+                                                                <div class="d-flex align-items-center justify-content-between small text-body">
+                                                                    <span class="mb-2 small mx-2 text-warning">completed with avarage Result !</span>
+                                                                    <span class="small text-body" >Completed: {{reportsResources.completion_date|date}}</span>
+                                                                </div>
+                                                                
+                                                                {% elif result.score == 2.0 %}
+                                                                <div class="progress mb-1" style="height: 25px;">
+                                                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">40 %</div>
+                                                                </div>
+                                                                <div class="d-flex align-items-center justify-content-between small text-body">
+                                                                    <span class="mb-2 small mx-2 text-danger">completed but need to retake the course and quiz  !</span>
+                                                                    <span class="small text-body" >Completed: {{reportsResources.completion_date|date}}</span>
+                                                                </div>
+                                                                
+                                                                {% elif result.score == 1.0 %}
+                                                                <div class="progress mb-1" style="height: 25px;">
+                                                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">20 %</div>
+                                                                </div>
+                                                                
+                                                                <div class="d-flex align-items-center justify-content-between small text-body">
+                                                                    <span class="mb-2 small mx-2 text-danger">completed but must retake the course and quiz !</span>
+                                                                    <span class="small text-body" >Completed: {{reportsResources.completion_date|date}}</span>
+                                                                </div>
+                                                                {% endif %}
+                                                            {% endif %}
                                                         {% endif %}
                                                         {% endfor %}
                                                     </div>
@@ -561,7 +579,7 @@
                                                                     <div class="col text-center card border-0">
                                                                         <div class="card-body rounded p-2 border">
                                                                             <small class="d-inline-block fw-bold text-primary text-uppercase bg-light border border-primary rounded-pill px-4 py-1 mb-3">
-                                                                                Readers Number: <span class="badge bg-primary mx-2 small">{{ faq.readers_count }}</span> 
+                                                                                Number Of Readers : <span class="badge bg-primary mx-2 small">{{ faq.readers_count }}</span> 
                                                                             </small>
                                                                             {% if fqaReader %}
                                                                                 {% for readerReating in fqaReader %}
@@ -654,6 +672,15 @@
                         </div>
                     </div>
                 </div>
+                {% else %}
+                <div class="col-lg-12 col-md-12 col-sm-12 wow bounceInUp " data-wow-delay="0.5s">
+                    <div class="card border rounded p-3 my-3 border-warning mx-auto shadow">
+                        No courses found at the moment. We apologize for any inconvenience caused. 
+                        We are working to bring new courses soon. Please try again later.
+                        <br><small class="text-church">sunday School department</small>
+                    </div>
+                </div>
+                {% endif %}
             </div>
         </div>
     </div>
