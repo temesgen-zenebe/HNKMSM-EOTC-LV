@@ -10,13 +10,21 @@ class SermonSeries(models.Model):
     
     def __str__(self):
         return self.title
-
+    
+class SermonCategory(models.Model):
+    category = models.CharField(max_length=200)
+    subcategory = models.CharField(max_length=200)
+    # Add any other fields relevant to sermon series
+    
+    def __str__(self):
+        return self.category
 
 class Sermon(models.Model):
     title = models.CharField(max_length=200)
     preacher = models.CharField(max_length=100)
     date_preached = models.DateField()
     series = models.ForeignKey(SermonSeries, on_delete=models.SET_NULL, null=True, blank=True)
+    category = models.ForeignKey(SermonCategory, on_delete=models.SET_NULL, null=True, blank=True)
     description = models.TextField(blank=True)
     image = models.ImageField(upload_to='sermonGallery/%Y/%m/%d', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
