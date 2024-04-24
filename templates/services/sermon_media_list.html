@@ -30,36 +30,40 @@
             </div>
         </div>
         <div class="container py-4">
-            {% comment %} <div class="container mx-auto text-center py-5 rounded-top wow bounceInUp" >
-                <small class="d-inline-block fw-bold text-dark text-uppercase bg-light border border-primary rounded-pill px-4 py-1 mb-3">Our Sermon Lists</small>
-            </div> {% endcomment %}
-         
-            <div class="tab-class text-center">
-
+            <div class="tab-class text-start">
                 <ul class="nav nav-pills d-inline-flex justify-content-start mb-3 wow bounceInUp small" data-wow-delay="0.1s">
-                    
                     <li class="nav-item p-2">
-                        <a class="d-flex mx-2 py-2 border border-primary bg-light rounded-pill active" data-bs-toggle="pill" href="#tab-1">
+                        <a class="d-flex mx-2 py-2 border border-primary bg-light rounded-pill active" 
+                            data-bs-toggle="pill" 
+                            href="#tab-11">
                             <span class="text-dark" style="width: 150px;"><i class="bi bi-grid-3x3-gap-fill fs-6 px-2"></i> All Sermon</span>
                         </a>
                     </li>
-                   
                     <li class="nav-item dropdown p-2">
                         <a class="nav-link dropdown-toggle d-flex py-2 mx-2 border border-primary bg-light rounded-pill"
                          data-bs-toggle="dropdown" href="#" aria-expanded="false" >
-                            <span class="text-dark px-auto" style="width: 180px;"><i class="bi bi-sliders2 fs-6 px-2"></i> Filter Sermons Catagory</span>
+                            <span class="text-dark px-auto" style="width: 200px;">
+                                <i class="bi bi-sliders2 fs-6 px-2"></i> 
+                                  Filter By Catagory
+                                <i class="bi bi-caret-down-fill fs-6 px-2"></i>
+                            </span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#tab-2" data-bs-toggle="pill" ><span class="text-dark" style="width: 150px;">የቅዳሴ ስብከት | Mass sermon</span></a></li>
-                            <li><a class="dropdown-item" href="#tab-3" data-bs-toggle="pill" ><span class="text-dark" style="width: 150px;">ሰርግ ስብከት | Wedding sermon</span></a></li>
-                            <li><a class="dropdown-item" href="#tab-4" data-bs-toggle="pill" ><span class="text-dark" style="width: 150px;">ክብረ በዓላት ስብከት | Sermon on celebrations</span></a></li>
-                          </ul>
+                            {% for category, categories in sermon_categories.items %}
+                                <li>
+                                    <a class="dropdown-item" href="#tab-{{ forloop.counter }}" data-bs-toggle="pill" >
+                                        <span class="text-dark" style="width: 150px;">
+                                        {{ category }} 
+                                        </span>
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
                     </li>
-                    
                 </ul>
-                <hr class="text-primary text-primary py-1 rounded wow bounceInUp">
-                <div class="tab-content py-3">
-                    <div id="tab-1" class="tab-pane fade show p-0 active">
+                <hr class="text-primary text-primary py-1 my-2 rounded wow bounceInUp">
+                <div class="tab-content text-center py-3">
+                    <div id="tab-11" class="tab-pane fade show p-0 active">
                         <div class="row g-4">
                             <div class="col-lg-12">
                                 <div class="row g-4">
@@ -83,11 +87,29 @@
                             </div>
                         </div>
                     </div>
-                    <div id="tab-2" class="tab-pane fade show p-0">
+                    {% for category, categories in sermon_categories.items %}
+                    <div id="tab-{{ forloop.counter }}" class="tab-pane fade show p-0">
                         <div class="row g-4">
                             <div class="col-lg-12">
                                 <div class="row g-4">
-                                    <div class="col-md-6 col-lg-3">
+                                    {% for sermon_media in sermon_media_list %}
+                                    {% if sermon_media.sermon.category.category == category %}
+                                    <div class="col-md-6 col-lg-3 wow bounceInUp rounded" data-wow-delay="0.1s">
+                                        <div class="event-img position-relative shadow rounded">
+                                            <img class="img-fluid rounded w-100" src="{{sermon_media.sermon.image.url }}" 
+                                            alt="{{ sermon_media.sermon.title }}">
+                                            <small class="me-auto text-primary">{{ sermon_media.sermon.title }}</small>
+                                            <div class="event-overlay d-flex flex-column ">
+                                                <h4 class="me-auto px-3">{{ sermon_media.sermon.title }}</h4>
+                                                <h4 class="me-auto px-3">{{ sermon_media.sermon.preacher}}</h4>
+                                                <a class="btn btn-sm btn-primary my-auto mx-3" 
+                                                    href="{% url 'services:sermon_media_detail' sermon_media.pk %}">view</a>
+                                            </div>
+                                        </div> 
+                                    </div>
+                                    {% endif %}
+                                    {% endfor %}
+                                    {% comment %} <div class="col-md-6 col-lg-3">
                                         <div class="event-img position-relative">
                                             <img class="img-fluid rounded w-100" src="{% static "img/aboutUs/leaders-32.png" %}" alt="">
                                             <div class="event-overlay d-flex flex-column p-4">
@@ -113,150 +135,18 @@
                                                 <a href="img/01.html" data-lightbox="event-9" class="my-auto"><i class="fas fa-search-plus text-dark fa-2x"></i></a>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> {% endcomment %}
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div id="tab-3" class="tab-pane fade show p-0">
-                        <div class="row g-4">
-                            <div class="col-lg-12">
-                                <div class="row g-4">
-                                    <div class="col-md-6 col-lg-3">
-                                        <div class="event-img position-relative">
-                                            <img class="img-fluid rounded w-100" src="{% static "img/aboutUs/leaders-42.png" %}" alt="">
-                                            <div class="event-overlay d-flex flex-column p-4">
-                                                <h4 class="me-auto">Corporate</h4>
-                                                <a href="img/01.html" data-lightbox="event-10" class="my-auto"><i class="fas fa-search-plus text-dark fa-2x"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-lg-3">
-                                        <div class="event-img position-relative">
-                                            <img class="img-fluid rounded w-100" src="{% static "img/aboutUs/leaders-52.png" %}" alt="">
-                                            <div class="event-overlay d-flex flex-column p-4">
-                                                <h4 class="me-auto">Corporate</h4>
-                                                <a href="img/01.html" data-lightbox="event-11" class="my-auto"><i class="fas fa-search-plus text-dark fa-2x"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-lg-3">
-                                        <div class="event-img position-relative">
-                                            <img class="img-fluid rounded w-100" src="{% static "img/aboutUs/leaders-32.png" %}" alt="">
-                                            <div class="event-overlay d-flex flex-column p-4">
-                                                <h4 class="me-auto">More..</h4>
-                                                <a href="img/01.html" data-lightbox="event-11" class="my-auto"><i class="fas fa-search-plus text-dark fa-2x"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-lg-3">
-                                        <div class="event-img position-relative">
-                                            <img class="img-fluid rounded w-100" src="{% static "img/aboutUs/leaders-12.png" %}" alt="">
-                                            <div class="event-overlay d-flex flex-column p-4">
-                                                <h4 class="me-auto">More</h4>
-                                                <a href="img/01.html" data-lightbox="event-11" class="my-auto"><i class="fas fa-search-plus text-dark fa-2x"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="tab-4" class="tab-pane fade show p-0">
-                        <div class="row g-4">
-                            <div class="col-lg-12">
-                                <div class="row g-4">
-                                    <div class="col-md-6 col-lg-3">
-                                        <div class="event-img position-relative">
-                                            <img class="img-fluid rounded w-100" src="{% static "img/aboutUs/leaders-19.png" %}" alt="">
-                                            <div class="event-overlay d-flex flex-column p-4">
-                                                <h4 class="me-auto">Click</h4>
-                                                <a href="img/01.html" data-lightbox="event-12" class="my-auto"><i class="fas fa-search-plus text-dark fa-2x"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-lg-3">
-                                        <div class="event-img position-relative">
-                                            <img class="img-fluid rounded w-100" src="{% static "img/aboutUs/leaders-49.png" %}" alt="">
-                                            <div class="event-overlay d-flex flex-column p-4">
-                                                <h4 class="me-auto">Click</h4>
-                                                <a href="static/img/01.html" data-lightbox="event-13" class="my-auto"><i class="fas fa-search-plus text-dark fa-2x"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-lg-3">
-                                        <div class="event-img position-relative">
-                                            <img class="img-fluid rounded w-100" src="{% static "img/aboutUs/leaders-13.png" %}" alt="">
-                                            <div class="event-overlay d-flex flex-column p-4">
-                                                <h4 class="me-auto">Click</h4>
-                                                <a href="static/img/01.html" data-lightbox="event-13" class="my-auto"><i class="fas fa-search-plus text-dark fa-2x"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {% comment %} <div id="tab-5" class="tab-pane fade show p-0">
-                        <div class="row g-4">
-                            <div class="col-lg-12">
-                                <div class="row g-4">
-                                    <div class="col-md-6 col-lg-3">
-                                        <div class="event-img position-relative">
-                                            <img class="img-fluid rounded w-100" src="{% static "img/aboutUs/leaders-11.png" %}" alt="">
-                                            <div class="event-overlay d-flex flex-column p-4">
-                                                <h4 class="me-auto">Click</h4>
-                                                <a href="static\img\01.html" data-lightbox="event-14" class="my-auto"><i class="fas fa-search-plus text-dark fa-2x"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-lg-3">
-                                        <div class="event-img position-relative">
-                                            <img class="img-fluid rounded w-100" src="{% static "img/aboutUs/leaders-33.png" %}" alt="">
-                                            <div class="event-overlay d-flex flex-column p-4">
-                                                <h4 class="me-auto">Click</h4>
-                                                <a href="img/01.html" data-lightbox="event-15" class="my-auto"><i class="fas fa-search-plus text-dark fa-2x"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> {% endcomment %}
-                    <div id="tab-5-6" class="tab-pane fade show p-0">
-                        <div class="row g-4">
-                            <div class="col-lg-12">
-                                <div class="row g-4">
-                                    <div class="col-md-6 col-lg-3">
-                                        <div class="event-img position-relative">
-                                            <img class="img-fluid rounded w-100" src="{% static "img/aboutUs/leaders-15.png" %}" alt="">
-                                            <div class="event-overlay d-flex flex-column p-4">
-                                                <h4 class="me-auto">Click</h4>
-                                                <a href="static\img\01.html" data-lightbox="event-14" class="my-auto"><i class="fas fa-search-plus text-dark fa-2x"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-lg-3">
-                                        <div class="event-img position-relative">
-                                            <img class="img-fluid rounded w-100" src="{% static "img/aboutUs/leaders-22.png" %}" alt="">
-                                            <div class="event-overlay d-flex flex-column p-4">
-                                                <h4 class="me-auto">Click</h4>
-                                                <a href="img/01.html" data-lightbox="event-15" class="my-auto"><i class="fas fa-search-plus text-dark fa-2x"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
-
-            
         </div>
     </div>
     <!-- Events End -->
-    <div class="container-fluid py-6">
+    <div class="container-fluid py-4">
         <div class="container">
             <div class="row g-5 align-items-center">
                 <div class="col-lg-5 wow bounceInUp" data-wow-delay="0.1s" 
