@@ -1,5 +1,6 @@
 {% extends "_base.html" %}
 {% load static %}
+{% load humanize %}
 {% block javascript %}
    {% comment %} <script type="text/javascript" src="{% static '' %}" defer ></script> {% endcomment %}
 {% endblock %}
@@ -12,7 +13,8 @@
             <ol class="breadcrumb justify-content-start mb-0 animated bounceInDown">
                 <li class="small"><a href="{% url 'pages:homepage' %}">Home <span class="px-1">\</span></a></li>
                 <li class="small"><a href="{% url 'services:service' %}">services <span class="px-1">\</span></a></li>
-                <li class="text-dark small" aria-current="page">sermon</li>
+                <li class="small"><a href="{% url "services:sermon_media_list" %}">sermonList<span class="px-1">\</span></a></li>
+                <li class="text-dark small" aria-current="page">sermonDetail</li>
             </ol>
         </div>
     </div>
@@ -44,6 +46,7 @@
         </div>
     </div>
     <!-- Service End -->
+    {% if related_sermons %}
     <div class="album py-5 bg-light">
         <div class="container">
             <div class="row g-4 align-items-center py-5">
@@ -55,68 +58,29 @@
                 </div>
             </div>
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3 wow bounceInUp">
+                
+                {% for related_sermon in related_sermons %}
                 <div class="col">
                     <div class="card shadow">
-                        <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-            
+                        {% comment %} <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg> {% endcomment %}
+                        <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="{{related_sermon.image.url }}" alt="{{ related_sermon.title }}">
                         <div class="card-body">
-                        <p class="card-text small">This is a wider card with supporting text below as a natural lead-in to additional content</p>
+                        <p class="card-text small">{{ related_sermon.title }}</p>
                         <div class="d-flex justify-content-between align-items-center">
-                            <div class="btn-group ">
-                            <button type="button" class="btn btn-sm btn-outline-primary btn-rounded">View</button>
-                            </div>
-                            <small class="text-muted">9 mins</small>
+                        <a class="btn btn-sm btn-primary my-auto p-2" 
+                                href="{% url 'services:sermon_media_detail' related_sermon.pk %}">view</a>
+                            {% comment %} <small class="text-muted">{{ related_sermon.updated| }}</small> {% endcomment %}
+                            
+                            <small class="text-muted">{{ related_sermon.updated | timesince }}</small>
+
                         </div>
                         </div>
                     </div>
                 </div>
-                <div class="col">
-                    <div class="card shadow">
-                    <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-        
-                    <div class="card-body">
-                        <p class="card-text small">This is a wider card with supporting text below as a natural lead-in to additional content</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                        <div class="btn-group ">
-                            <button type="button" class="btn btn-sm btn-outline-primary btn-rounded">View</button>
-                        </div>
-                        <small class="text-muted">9 mins</small>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card shadow">
-                    <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-        
-                    <div class="card-body">
-                        <p class="card-text small">This is a wider card with supporting text below as a natural lead-in to additional content</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                        <div class="btn-group ">
-                            <button type="button" class="btn btn-sm btn-outline-primary btn-rounded">View</button>
-                        </div>
-                        <small class="text-muted">9 mins</small>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card shadow">
-                    <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-        
-                    <div class="card-body">
-                        <p class="card-text small">This is a wider card with supporting text below as a natural lead-in to additional content</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                        <div class="btn-group ">
-                            <button type="button" class="btn btn-sm btn-outline-primary btn-rounded">View</button>
-                        </div>
-                        <small class="text-muted">9 mins</small>
-                        </div>
-                    </div>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
-      </div>
+    </div>
+    {% endif %}
 </div>
 {% endblock %}

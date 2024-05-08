@@ -26,10 +26,16 @@ class SermonMediaListView(ListView):
 
         return context
 
-        
-            
-            
+                
 class SermonMediaDetailView(DetailView):
     model = SermonMedia
     template_name = 'services/sermon_media_detail.html'  # Template name to be created
     context_object_name = 'sermon_media'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        sermon_media = self.get_object()  # Get the current SermonMedia object
+        related_sermons = Sermon.objects.filter(category=sermon_media.sermon.category)  # Filter related sermons by category
+
+        context['related_sermons'] = related_sermons
+        return context
