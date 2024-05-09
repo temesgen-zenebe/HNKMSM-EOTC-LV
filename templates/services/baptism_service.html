@@ -1,0 +1,37 @@
+{% extends "_base.html" %}
+{% load static %}
+{% block javascript %}
+   {% comment %} <script type="text/javascript" src="{% static '' %}" defer ></script> {% endcomment %}
+{% endblock %}
+{% block css %}
+{% comment %} <link rel="stylesheet" href="{% static 'css/offcanvasNavbar.css' %}"> {% endcomment %}
+{% endblock %}
+{% block title %}Baptism Service{% endblock %}
+{% block main %}
+<div class="">
+    <!-- Baptism Service -->
+    <div class="event pb-5">
+        <div class="mx-auto wow bounceInUp" 
+            style="background-image: url('{% static "img/heroAccount-13.png" %}');background-size: cover; background-position: center center; background-repeat: no-repeat; " alt="Church-at" data-wow-delay="0.1s">
+            <div class="container py-1 mt-0">
+                <div class="animated bounceInDown ">
+                    <ol class="breadcrumb justify-content-start mb-0 animated bounceInDown">
+                        <li class="small"><a href="{% url 'pages:homepage' %}">Home <span class="px-1">\</span></a></li>
+                        <li class="small"> <a href="{% url "services:service" %}">services <span class="px-1">\</span></a></li>
+                        <li class="small" aria-current="page">Sermon</li>
+                    </ol>
+                    
+                </div>
+             
+            </div>
+            <div class="text-center py-2">
+                <h3 class="mb-2 bolder text-light ">የጥምቀት(ክርስትና) አገልግሎት</h3>
+                <h3 class="mb-2 text-light ">Baptism Service </h3>
+            </div>
+        </div>
+        <div class="container py-4">
+            
+        </div>
+    </div>
+</div>
+{% endblock %}

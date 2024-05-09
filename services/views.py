@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.views import View
 from django.views.generic import TemplateView
 from django.views.generic import ListView, DetailView
 from .models import Sermon, SermonCategory, SermonMedia
@@ -39,3 +40,15 @@ class SermonMediaDetailView(DetailView):
 
         context['related_sermons'] = related_sermons
         return context
+
+class BaptismServiceView(View):
+    # model = SermonMedia
+    template_name = 'services/baptism_service.html'  # Template name to be created
+    def get(self, request):
+        context={}
+        return render(request, self.template_name, context)
+    
+    def post(self, request):
+        context={}
+        return render(request, self.template_name, context)
+        
