@@ -10,7 +10,7 @@
 {% block main %}
 <div class="">
     <!-- Baptism Service -->
-    <div class="event pb-5">
+    <div class="event pb-3">
         <div class="mx-auto wow bounceInUp" 
             style="background-image: url('{% static "img/heroAccount-13.png" %}');background-size: cover; background-position: center center; background-repeat: no-repeat; " alt="Church-at" data-wow-delay="0.1s">
             <div class="container py-1 mt-0">
@@ -18,7 +18,8 @@
                     <ol class="breadcrumb justify-content-start mb-0 animated bounceInDown">
                         <li class="small"><a href="{% url 'pages:homepage' %}">Home <span class="px-1">\</span></a></li>
                         <li class="small"> <a href="{% url "services:service" %}">services <span class="px-1">\</span></a></li>
-                        <li class="small" aria-current="page">Sermon</li>
+                        {% comment %} <li class="small"> <a href="{% url "services:baptism_service" %}">baptism <span class="px-1">\</span></a></li> {% endcomment %}
+                        <li class="small" aria-current="page">Baptism</li>
                     </ol>
                     
                 </div>
@@ -29,8 +30,127 @@
                 <h3 class="mb-2 text-light ">Baptism Service </h3>
             </div>
         </div>
-        <div class="container py-4">
-            
+        <div class="container py-3">
+            <div class="tab-class text-center">
+                <ul class="nav nav-pills d-inline-flex justify-content-center mb-5 wow bounceInUp" data-wow-delay="0.1s">
+                    <li class="nav-item p-3">
+                        <a class="d-flex mx-2 py-3 px-2 border border-primary bg-light rounded-pill active" data-bs-toggle="pill" href="#tab-1">
+                            <span class="text-dark" style="width: 430px;">ጥምቀት ለምን ያስፈልገናል? / why do we need Baptism?</span>
+                        </a>
+                    </li>
+                    <li class="nav-item p-3">
+                        <a class="d-flex py-3 mx-2 px-2 border border-primary bg-light rounded-pill" data-bs-toggle="pill" href="#tab-2">
+                            <span class="text-dark" style="width: 430px;">ብቁ ለመሆን የሚያስፈልጉ መስፈርቶች / Eligibility requirements</span>
+                        </a>
+                    </li>
+                    {% comment %} <li class="nav-item p-2">
+                        <a class="d-flex mx-2 py-2 border border-primary bg-light rounded-pill" data-bs-toggle="pill" href="#tab-3">
+                            <span class="text-dark" style="width: 150px;">ስብከት|Sermon</span>
+                        </a>
+                    </li>
+                    <li class="nav-item p-2">
+                        <a class="d-flex mx-2 py-2 border border-primary bg-light rounded-pill" data-bs-toggle="pill" href="#tab-4">
+                            <span class="text-dark" style="width: 150px;">ክብረ በዓላት</span>
+                        </a>
+                    </li>
+                    <li class="nav-item p-2">
+                        <a class="d-flex mx-2 py-2 border border-primary bg-light rounded-pill" data-bs-toggle="pill" href="#tab-5">
+                            <span class="text-dark" style="width: 150px;">ምርቃት|Graduation </span>
+                        </a>
+                    </li>
+                    <li class="nav-item p-2">
+                        <a class="d-flex mx-2 py-2 border border-primary bg-light rounded-pill" data-bs-toggle="pill" href="#tab-5-6">
+                            <span class="text-dark" style="width: 150px;">ሰርግ|Wedding</span>
+                        </a>
+                    </li> {% endcomment %}
+                </ul>
+                <div class="tab-content">
+                    <div id="tab-1" class="tab-pane fade show p-0 active">
+                        <div class="row g-4">
+                            <div class="col-lg-12">
+                                <div class="row g-4">
+                                    <div class="col-md-10 col-lg-12 wow bounceInUp" data-wow-delay="0.1s">
+                                        <div class="event-img position-relative">
+                                            <ul class="nav nav-pills mb-4 " id="pills-tab" role="tablist">
+                                                <li class="nav-item" role="presentation">
+                                                  <button class="nav-link active " id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">ጥምቀት የሚያስፈልገን</button>
+                                                </li>
+                                                <li class="nav-item" role="presentation">
+                                                  <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">We need baptism</button>
+                                                </li>
+                                                
+                                              </ul>
+                                              <div class="tab-content" id="pills-tabContent">
+                                                <div class="tab-pane fade show active  border-top py-3 pt-3 text-start" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
+                                                    <p>  <i class="fa fa-check text-primary me-2"></i> <button class="btn btn-sm btn-outline-primary border-0"> መንፈሳዊ ንጽህና</button>: ጥምቀት የኃጢአትና የርኩሰትን መታጠብን ያመለክታል ይህም መንፈሳዊ ዳግም መወለድን ወደ ጽድቅ ሕይወት ያመለክታል።</p>
+
+                                                    <p>  <i class="fa fa-check text-primary me-2"></i> <button class="btn btn-sm btn-outline-primary border-0"> ወደ ቤተክርስትያን መግባት </button>:  በጥምቀት፣ ግለሰቦች በመደበኛነት ወደ አማኞች ማህበረሰብ ይቀበላሉ፣ የቤተክርስቲያኑ አባላት እና የመንፈሳዊ ተስፋዎች ወራሾች ይሆናሉ።</p>
+
+                                                    <p>  <i class="fa fa-check text-primary me-2"></i> <button class="btn btn-sm btn-outline-primary border-0"> መንፈስ ቅዱስን መቀበል</button>:  ጥምቀት ለተጠመቁት መንፈስ ቅዱስ የሚሰጥበት፣ የእምነትና የአገልግሎት ሕይወት እንዲኖራቸው የሚያስችል ቁርባን እንደሆነ ይታመናል።</p>
+
+                                                    <p>  <i class="fa fa-check text-primary me-2"></i> <button class="btn btn-sm btn-outline-primary border-0"> በክርስቶስ ሞት እና ትንሳኤ መሳተፍ </button>: ጥምቀት በኢየሱስ ክርስቶስ ሞት እና ትንሳኤ መሳተፍን ያመለክታል ይህም በእርሱ ውስጥ አዲስ ሕይወትን ያመለክታል።</p>
+
+                                                    <p> <i class="fa fa-check text-primary me-2"></i> <button class="btn btn-sm btn-outline-primary border-0"> በመዳን ምልክት መታተም </button>:  ጥምቀት በድኅነት ምልክት እንደ መታተም ይታያል፣ ይህም የግለሰቡን ቦታ በተዋጁት እና ወደ እግዚአብሔር መንግሥት ለመግባት ዋስትና ይሰጣል።</p>
+                                                    </div>
+                                                <div class="tab-pane fade border-top py-3 text-start pt-3" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">
+                                                    <p> <i class="fa fa-check text-primary me-2"></i> <button class="btn btn-sm btn-outline-primary border-0"> Spiritual Cleansing </button>:  Baptism symbolizes the washing away of sins and impurities, marking a spiritual rebirth into a life of righteousness.</p>
+
+                                                    <p> <i class="fa fa-check text-primary me-2"></i> <button class="btn btn-sm btn-outline-primary border-0"> Initiation into the Church </button>:  Through Baptism, individuals are formally welcomed into the community of believers, becoming members of the Church and heirs to its spiritual promises.</p>
+
+                                                    <p> <i class="fa fa-check text-primary me-2"></i> <button class="btn btn-sm btn-outline-primary border-0"> Receiving the Holy Spirit </button>:  Baptism is believed to be a sacrament through which the Holy Spirit is bestowed upon the baptized, empowering them for a life of faith and service.</p>
+
+                                                    <p> <i class="fa fa-check text-primary me-2"></i> <button class="btn btn-sm btn-outline-primary border-0"> Participation in Christ's Death and Resurrection </button>:  Baptism symbolizes participation in the death and resurrection of Jesus Christ, signifying a new life in Him.</p>
+
+                                                    <p> <i class="fa fa-check text-primary me-2"></i> <button class="btn btn-sm btn-outline-primary border-0"> Sealing with the Sign of Salvation </button>:  Baptism is seen as a sealing with the sign of salvation, ensuring the individual's place among the redeemed and guaranteeing entrance into the Kingdom of God.</p>
+                                                </div>
+                                               
+                                              </div>
+                                            
+                                            </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="tab-2" class="tab-pane fade show p-0">
+                        <div class="row g-4">
+                            <div class="col-lg-12">
+                                <div class="row g-4">
+                                    <div class="col-md-6 col-lg-3">
+                                        <div class="event-img position-relative">
+                                            <img class="img-fluid rounded w-100" src="{% static "img/aboutUs/leaders-32.png" %}" alt="">
+                                            <div class="event-overlay d-flex flex-column p-4">
+                                                <h4 class="me-auto">Click </h4>
+                                                <a href="img/01.html" data-lightbox="event-8" class="my-auto"><i class="fas fa-search-plus text-dark fa-2x"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-3">
+                                        <div class="event-img position-relative">
+                                            <img class="img-fluid rounded w-100" src="{% static "img/aboutUs/leaders-42.png" %}" alt="">
+                                            <div class="event-overlay d-flex flex-column p-4">
+                                                <h4 class="me-auto">Click</h4>
+                                                <a href="img/01.html" data-lightbox="event-9" class="my-auto"><i class="fas fa-search-plus text-dark fa-2x"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-3">
+                                        <div class="event-img position-relative">
+                                            <img class="img-fluid rounded w-100" src="{% static "img/aboutUs/leaders-22.png" %}" alt="">
+                                            <div class="event-overlay d-flex flex-column p-4">
+                                                <h4 class="me-auto">Click</h4>
+                                                <a href="img/01.html" data-lightbox="event-9" class="my-auto"><i class="fas fa-search-plus text-dark fa-2x"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
         </div>
     </div>
 </div>
