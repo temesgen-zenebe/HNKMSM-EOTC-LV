@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import SermonCategory, SermonSeries, Sermon, SermonMedia, Comment
+from .models import SermonCategory, SermonSeries, Sermon, SermonMedia, Comment, BaptizedCertification
 
 @admin.register(SermonSeries)
 class SermonSeriesAdmin(admin.ModelAdmin):
@@ -32,3 +32,11 @@ class CommentAdmin(admin.ModelAdmin):
     search_fields = ('sermon__title', 'user__username')
     readonly_fields = ('created_at', 'respond_at',)
 
+class BaptizedCertificationAdmin(admin.ModelAdmin):
+    list_display = ('user','given_full_name', 'baptism_date', 'qualified', 'applied_data', 'updated')
+    list_filter = ('qualified', 'baptism_date', 'applied_data', 'updated')
+    search_fields = ('given_full_name', 'fathers_full_name', 'mothers_full_name', 'phone_number')
+    prepopulated_fields = {'slug': ('given_full_name',)}
+    readonly_fields = ('service_request_confirmation_number', 'citification_request_confirmation_number')
+
+admin.site.register(BaptizedCertification, BaptizedCertificationAdmin)

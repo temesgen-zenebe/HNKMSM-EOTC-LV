@@ -1,9 +1,12 @@
-from django.shortcuts import render
+from email.mime import application
+from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import redirect, render
 from django.views import View
 from django.views.generic import TemplateView
 from django.views.generic import ListView, DetailView
 from .models import Sermon, SermonCategory, SermonMedia
-
+from .forms import BaptizedApplicationForm
 class ServicesView(TemplateView):
     template_name = 'services/servicesView.html'
 
@@ -41,14 +44,24 @@ class SermonMediaDetailView(DetailView):
         context['related_sermons'] = related_sermons
         return context
 
-class BaptismServiceView(View):
+class BaptismServiceView(LoginRequiredMixin,View):
     # model = SermonMedia
     template_name = 'services/baptism_service.html'  # Template name to be created
     def get(self, request):
-        context={}
+        baptizedForm = BaptizedApplicationForm()
+        context = {'baptizedForm': baptizedForm}
         return render(request, self.template_name, context)
     
     def post(self, request):
-        context={}
-        return render(request, self.template_name, context)
-        
+        form = BaptizedApplicationForm(request.POST)
+        if form.is_valid():
+            user = request.user
+            baptized_application = form.save(commit=False)
+            baptized_application.user = user
+            baptized_application.save()
+            # Add a success message
+            messages.success(request, 'Your baptism application has been successfully submitted!')
+            return redirect('services:baptism_service')
+        else:
+            context = {'baptizedForm': form}
+            return render(request, self.template_name, context)
