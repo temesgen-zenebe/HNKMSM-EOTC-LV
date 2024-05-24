@@ -27,7 +27,7 @@
     <div class="row gap-2">
         <div class="col-md-8 col-lg-8">
             <div class="card shadow rounded  border-primary">
-                <div class="card-header bg-white d-flex justify-content-between shadow">
+                <div class="card-header bg-white d-flex justify-content-between ">
                     <div><h6 class="text-primary">Yours Member Information</h6></div>
                     {% if members %}
                         {% for member in members %}
@@ -125,7 +125,7 @@
                     {% for member in members %}
                         {% if user.is_authenticated and member.user.username == user.username %}
                             
-                        <div class="card-title bg-white border py-2 shadow rounded-top">
+                        <div class="card-title bg-white border py-2 rounded-top">
                             <div class="mx-3"><h6 class="text-primary">Yours Children Information</h6></div>
                         </div>
                         <div class="card-body bd-content">
@@ -150,7 +150,7 @@
                                 </table>
                             </div>
                         </div>             
-                        <div class="card-title bg-white border py-2 shadow rounded-top">
+                        <div class="card-title bg-white border py-2 rounded-top">
                             <div class="mx-3"><h6 class="text-primary">Yours Relative Information</h6></div>
                         </div>
                         <div class="card-body bd-content">
