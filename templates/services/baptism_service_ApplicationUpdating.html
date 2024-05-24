@@ -33,11 +33,12 @@
                         <div class="mb-3">
                             {{ form|crispy }}
                         </div>
-                        <div class="gap-4">
-                        <button type="submit" class="btn btn-sm btn-outline-primary">update</button>
-                        <button type="submit" class="btn btn-sm btn-outline-success" href="{% url "services:baptism_service" %}">cancel</button>
+                        <div class="px-2">
+                         <button type="submit" class="btn btn-sm btn-primary">update</button>
+                         <a class="btn btn-sm btn-success" href="{% url "services:baptism_service" %}">Cancel</a>
                         </div>
                     </form>
+                    
                 </div>
             </div>
         </div>

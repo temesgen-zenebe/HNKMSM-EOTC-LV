@@ -40,3 +40,7 @@ class BaptizedCertificationAdmin(admin.ModelAdmin):
     readonly_fields = ('service_request_confirmation_number', 'citification_request_confirmation_number')
 
 admin.site.register(BaptizedCertification, BaptizedCertificationAdmin)
+
+
+
+

@@ -93,3 +93,4 @@ class BaptizedApplicationUpdatingView(LoginRequiredMixin, UpdateView):
     def form_valid(self, form):
         messages.success(self.request, 'Your baptism application information has been updated successfully!')
         return super().form_valid(form)
+

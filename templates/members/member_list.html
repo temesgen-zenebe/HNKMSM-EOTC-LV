@@ -1,0 +1,186 @@
+{% extends "_base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}{% if form.instance.pk %}Update{% else %}Create{% endif %}Member Information{% endblock %}
+{% block main %}
+
+<div class="container">
+    <div class="mx-auto wow bounceInUp rounded my-3" 
+        style="background-image: url('{% static "img/heroAccount-13.png" %}');background-size: cover; background-position: center center; background-repeat: no-repeat; " alt="Church-at" data-wow-delay="0.1s">
+        <div class="container py-1 mt-0">
+            <div class="animated bounceInDown ">
+                <ol class="breadcrumb justify-content-start mb-0 animated bounceInDown">
+                    <li class="small"><a href="{% url 'pages:homepage' %}">Home <span class="px-1">\</span></a></li>
+                    <li class="small" aria-current="page"> <a href="{% url "members:member_list" %}">memberInformation<span class="px-1">\</span></a></li>
+                </ol>
+            </div>
+        </div>
+        <div class="text-center py-2">
+            <h3 class="mb-2 bolder text-light ">የአባልነት ወቅታዊ የቤተሰብ ሁኔታ መረጃ መጠየቆች</h3>
+            <h3 class="mb-2 text-light ">Members' current family status information requests</h3>
+        </div>
+        <div class="text-center py-2 px-2 ">
+            <p class="small">ከዚህ በታች የተዘረዘሩትን መጠየቆች ለቤተክርስቲያኖች መረጃ የረዳን ዘንድ አሁን ያሉበትን ትክክለኛ አድራሻ ስልክ ቁጥርና የቤተሰብ የተሟላ የቤተሰብ መረጃ ይሞሉልን ዘንድ አንጠይቃለን ።</p>
+            <p class="small">To assist our church, kindly provide your current address, phone number, and family details by completing the attached questionnaire.</p>
+        </div>
+    </div>
+    <div class="row gap-2">
+        <div class="col-md-8 col-lg-8">
+            <div class="card shadow rounded  border-primary">
+                <div class="card-header bg-white d-flex justify-content-between shadow">
+                    <div><h6 class="text-primary">Yours Member Information</h6></div>
+                    {% if members %}
+                        {% for member in members %}
+                            {% if user.is_authenticated and member.user.username == user.username%}
+                            <div class="small"><a href="{% url 'members:member_update' member.id %}" class="text-primary"><i class="bi bi-pencil-square px-2"></i></a></div>     
+                            {% endif %}
+                        {% endfor %}
+                    {% else %}
+                        <div class="small"><a href="{% url 'members:member_create' %}" class="btn btn-primary">Create your member Information</a></div>
+                    {% endif %}
+                    
+                </div>
+                <div class="card-body bd-content">
+                {% if members %}
+                    {% for member in members %}
+                        {% if user.is_authenticated and member.user.username == user.username %}
+                            <div class="table-responsive">
+                                <table class="table text-primary">
+                                <thead>
+                                <tr>
+                                <th>Title</th>
+                                <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td><code>Full Name </code></td>
+                                    <td>{{ member.full_name }}</td>
+                                </tr>
+                                <tr>
+                                    <td><code>Baptismal Name</code></td>
+                                    <td>{{ member.baptismal_name }}</td>
+                                </tr>
+                                <tr>
+                                    <td><code>Godfather </code></td>
+                                    <td>{{ member.godfather }}</td>
+                                </tr>
+                                <tr>
+                                    <td><code>City </code></td>
+                                    <td>{{ member.city }}</td>
+                                </tr>
+                                <tr>
+                                    <td><code>State </code></td>
+                                    <td>{{ member.state }}</td>
+                                </tr>
+                                <tr>
+                                    <td><code>Email </code></td>
+                                    <td>{{ member.email }}</td>
+                                </tr>
+                                <tr>
+                                    <td><code>Zip Code </code></td>
+                                    <td>{{ member.zip_code }}</td>
+                                </tr>
+                                <tr>
+                                    <td><code>Apartment </code></td>
+                                    <td>{{ member.apartment }}</td>
+                                </tr>
+                                <tr>
+                                    <td><code>Telephone </code></td>
+                                    <td>{{ member.telephone_number }}</td>
+                                </tr>
+                                <tr>
+                                    <td><code>Marital Status </code></td>
+                                    <td>{{ member.marital_status }}</td>
+                                </tr>
+                                <tr>
+                                    <td><code>Spouse Name </code></td>
+                                    <td>{{ member.spouse_name }}</td>
+                                </tr>
+                                <tr>
+                                    <td><code>Spouse Baptismal Name </code></td>
+                                    <td>{{ member.spouse_name }}</td>
+                                </tr>
+                                <tr>
+                                    <td><code>Spouse Baptismal Name </code></td>
+                                    <td>{{ member.spouse_name }}</td>
+                                </tr>
+                                
+                                </tbody>
+                                </table>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% else %}
+                    <div class="alert alert-info" role="alert">
+                        To assist our church, kindly provide your current address, phone number, and family details by completing the attached questionnaire."
+                        clicked the Membership Information button and submit your information **ቤተ ክርስቲያናችንን ለመርዳት፣ የተያያዘውን መጠይቅ በመሙላት ወቅታዊ አድራሻችሁን፣ ስልክ ቁጥራችሁን እና የቤተሰብ ዝርዝሮችን በአክብሮት ያቅርቡ።
+                        ስልክ ቁጥራችሁን እና የቤተሰብ ዝርዝሮችን በአክብሮት ያቅርቡ።
+                        ከላይ የአባልነት መረጃ ቁልፍን በመጠቀም መረጃዎን ያስገቡ:: **
+                    </div>
+                {% endif %}
+                    
+                </div>
+                {% if members %}
+                    {% for member in members %}
+                        {% if user.is_authenticated and member.user.username == user.username %}
+                            
+                        <div class="card-title bg-white border py-2 shadow rounded-top">
+                            <div class="mx-3"><h6 class="text-primary">Yours Children Information</h6></div>
+                        </div>
+                        <div class="card-body bd-content">
+                            <div class="table-responsive">
+                                <table class="table text-primary">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Age</th>
+                                            <th>Gender</th>
+                                        </tr>
+                                        </thead>
+                                            <tbody>
+                                                {% for children in member.children.all %}
+                                                <tr>
+                                                    <td>{{children.name}}</td>
+                                                    <td>{{children.age}}</td>
+                                                    <td>{{children.gender}}</td>
+                                                </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                </table>
+                            </div>
+                        </div>             
+                        <div class="card-title bg-white border py-2 shadow rounded-top">
+                            <div class="mx-3"><h6 class="text-primary">Yours Relative Information</h6></div>
+                        </div>
+                        <div class="card-body bd-content">
+                            <div class="table-responsive">
+                                <table class="table text-primary">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Relationship</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for relative in member.relatives.all %}
+                                            <tr>
+                                                <td>{{relative.name}}</td>
+                                                <td>{{relative.relationship}}</td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+        
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-md-4 col-lg-4">
+        </div>
+    </div>
+</div>
+{% endblock %}

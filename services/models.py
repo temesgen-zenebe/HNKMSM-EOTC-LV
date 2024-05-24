@@ -112,3 +112,5 @@ class BaptizedCertification(models.Model):
 
     def __str__(self):
         return self.given_full_name
+
+

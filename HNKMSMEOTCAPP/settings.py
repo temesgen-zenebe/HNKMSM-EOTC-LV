@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'projectVote.apps.ProjectvoteConfig',
     'services.apps.ServicesConfig',
     'schools.apps.SchoolsConfig',
+    'members.apps.MembersConfig',
     
 ]
 SITE_ID = 1

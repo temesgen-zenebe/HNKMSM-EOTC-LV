@@ -775,5 +775,68 @@ banner
         height: 185.68px;
         /* object-fit: cover; This ensures the image retains its aspect ratio while covering the specified dimensions */
 }
+
+
+
+
+.bd-content>.table,.bd-content>.table-responsive .table {
+    --bs-table-border-color: #bcd5ed;
+    max-width: 100%;
+    margin-bottom: 1.5rem;
+    font-size: .875rem;
+    color: chocolate;
+}
+@media (max-width: 991.98px) {
+    .bd-content>.table.table-bordered,.bd-content>.table-responsive .table.table-bordered {
+        border:0
+    }
+}
+.bd-content>.table thead,.bd-content>.table-responsive .table thead {
+    border-bottom: 2px solid currentcolor
+}
+
+.bd-content>.table tbody:not(:first-child),.bd-content>.table-responsive .table tbody:not(:first-child) {
+    border-top: 2px solid currentcolor
+}
+
+.bd-content>.table th:first-child,.bd-content>.table td:first-child,.bd-content>.table-responsive .table th:first-child,.bd-content>.table-responsive .table td:first-child {
+    padding-left: 0
+}
+
+.bd-content>.table th:not(:last-child),.bd-content>.table td:not(:last-child),.bd-content>.table-responsive .table th:not(:last-child),.bd-content>.table-responsive .table td:not(:last-child) {
+    padding-right: 1.5rem
+}
+
+.bd-content>.table th,.bd-content>.table-responsive .table th {
+    color: var(--bs-emphasis-color)
+}
+
+.bd-content>.table strong,.bd-content>.table-responsive .table strong {
+    color: var(--bs-emphasis-color)
+}
+
+.bd-content>.table th,.bd-content>.table td:first-child>code,.bd-content>.table-responsive .table th,.bd-content>.table-responsive .table td:first-child>code {
+    white-space: nowrap
+}
+
+.table-options td:nth-child(2) {
+    min-width: 160px
+}
+
+.table-options td:last-child,.table-utilities td:last-child {
+    min-width: 280px
+}
+
+.table-swatches th {
+    color: chocolate;
+}
+
+.table-swatches td code {
+    white-space: nowrap;
     
-   
+}
+code {
+    font-size: 0.875em;
+    color: chocolate;
+    word-wrap: break-word;
+}

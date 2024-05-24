@@ -12,10 +12,10 @@
 {% endblock %}
 {% block title %}Baptism Service{% endblock %}
 {% block main %}
-<div class="">
+<div class="container my-2">
     <!-- Baptism Service -->
     <div class="event pb-3">
-        <div class="mx-auto wow bounceInUp" 
+        <div class="mx-auto wow bounceInUp rounded" 
             style="background-image: url('{% static "img/heroAccount-13.png" %}');background-size: cover; background-position: center center; background-repeat: no-repeat; " alt="Church-at" data-wow-delay="0.1s">
             <div class="container py-1 mt-0">
                 <div class="animated bounceInDown ">
@@ -246,7 +246,7 @@
                                                                 </div>
                                                                 <div class="d-flex">
                                                                     <a class="badge bg-primary rounded-pill mx-1 p-2" href="{% url "services:baptizedApplicationUpdating"  slug=baptizedApplicationConfirmation.slug %}">Update</a>
-                                                                    <span class="badge bg-success rounded-pill mx-1 p-2" data-bs-toggle="modal" data-src="" data-bs-target="#continueToPay">Continue</span>
+                                                                    <span class="badge bg-success rounded-pill mx-1 p-2 text-center"  data-bs-toggle="modal" data-bs-target="#all-payments" >Continue to payment</span>
                                                                 </div>
                                                             </li>
                                                             {% if baptizedApplicationConfirmation.qualified %}
@@ -255,12 +255,15 @@
                                                               <small class="form-check-label opacity-25 badge bg-success rounded-pill mx-1 p-2"> 
                                                                 Approved!
                                                               </small>
+                                                              
                                                             </li> 
                                                             {% else %}
                                                             <li class="list-group-item">
                                                               <small class="form-check-label">Application Status</small> :
-                                                              <small class="form-check-label opacity-25 badge bg-danger rounded-pill mx-1 p-2"> 
-                                                                Pending
+                                                              <small class="form-check-label opacity-25 badge bg-danger rounded-pill mx-1 p-2" 
+                                                              data-bs-toggle="modal" data-bs-target="#how-to-Approved" 
+                                                               title="you need to complete the next step and states change to Approved"> 
+                                                                  Pending <i class="bi bi-info-circle px-1"></i> 
                                                               </small>
                                                             </li>
                                                             {% endif %}
@@ -502,7 +505,28 @@
             </div>
         </div>
     </div>
-    
+    <!-- Modal how-to-Approved-->
+    <div class="modal fade" id="how-to-Approved" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+          <div class="modal-content rounded-1 shadow alert-warning">
+              <div class="modal-body ">
+                  <div class="card border border-0 alert alert-warning alert-dismissible fade show">
+                    <div class="card-body">
+                      <div class="">
+                        <div class="" role="alert">
+                          <small>Thank you for your recent application. To proceed with the approval process and ensure prompt service, we kindly ask that you complete the necessary step of paying the required service fee.
+                             Upon successful payment, your application will be reviewed and approved instantly. **
+                             ለቅርብ ጊዜ ማመልከቻዎ እናመሰግናለን። የማጽደቁን ሂደት ለመቀጠል እና ፈጣን አገልግሎትን ለማረጋገጥ አስፈላጊውን የአገልግሎት ክፍያ ለመክፈል አስፈላጊውን ደረጃ እንዲያጠናቅቁ በአክብሮት እንጠይቃለን። በተሳካ ሁኔታ ክፍያ ከተፈጸመ በኋላ፣ ማመልከቻዎ ወዲያውኑ ይጸድቃል።
+                             **</small>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
 </div>
 
 {% endblock %}
