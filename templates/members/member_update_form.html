@@ -24,91 +24,158 @@
             <p class="small">To assist our church, kindly provide your current address, phone number, and family details by completing the attached questionnaire.</small>
         </div>
     </div>
-    
-    <div class="row">
-       
-        <div class="col-sm-6 mb-3 mb-sm-0">
-          <div class="card">
-            <div class="card-header bg-white  d-flex justify-content-between"> 
-                <h3 class="text-primary">Update Member Information</h3>
-                <div class="small"><a href="{% url 'members:member_list' %}">Back</a></div>
-            </div>
-            <div class="card-body">
-                <form method="post" class="needs-validation" novalidate>
-                    {% csrf_token %}
-                    {{ form.non_field_errors }}
-                    <div class="mb-3">
-                        {{ form.full_name|as_crispy_field }}
-                    </div>
-                    <div class="mb-3">
-                        {{ form.baptismal_name|as_crispy_field }}
-                    </div>
-                    <div class="mb-3">
-                        {{ form.godfather|as_crispy_field }}
-                    </div>
-                    <div class="mb-3">
-                        {{ form.address|as_crispy_field }}
-                    </div>
-                    <div class="mb-3">
-                        {{ form.city|as_crispy_field }}
-                    </div>
-                    <div class="mb-3">
-                        {{ form.state|as_crispy_field }}
-                    </div>
-                    <div class="mb-3">
-                        {{ form.zip_code|as_crispy_field }}
-                    </div>
-                    <div class="mb-3">
-                        {{ form.apartment|as_crispy_field }}
-                    </div>
-                    <div class="mb-3">
-                        {{ form.telephone_number|as_crispy_field }}
-                    </div>
-                    <div class="mb-3">
-                        {{ form.email|as_crispy_field }}
-                    </div>
-                    <div class="mb-3">
-                        {{ form.marital_status|as_crispy_field }}
-                    </div>
-                    <div class="mb-3 spouse-fields {% if not form.instance.marital_status == 'married' %}d-none{% endif %}">
-                        {{ form.spouse_name|as_crispy_field }}
-                    </div>
-                    <div class="mb-3 spouse-fields {% if not form.instance.marital_status == 'married' %}d-none{% endif %}">
-                        {{ form.spouse_baptismal_name|as_crispy_field }}
-                    </div>
-                    
-            
-                    <h4>Children</h4>
-                    {{ children.management_form }}
-                    {% for child in children %}
-                        <div class="form-row">
-                            {{ child.id }}
-                            {{ child.name|as_crispy_field }}
-                        </div>
-                        <div class="form-row">
-                            {{ child.age|as_crispy_field }}
-                        </div>
-                        <div class="form-row">
-                            {{ child.gender|as_crispy_field }}
-                        </div>
-                    {% endfor %}
-            
-                    <h4>Relatives</h4>
-                    {{ relatives.management_form }}
-                    {% for relative in relatives %}
-                        <div class="form-row">
-                            {{ relative.id }}
-                            {{ relative.name|as_crispy_field }}
-                            {{ relative.relationship|as_crispy_field }}
-                        </div>
-                    {% endfor %}
-            
-                    <button type="submit" class="btn btn-primary mt-3">Save</button>
-                </form>
-            </div>
+    <div class="card my-2">
+        <div class="card-header bg-white  d-flex justify-content-between px-4"> 
+            <h2 class="text-primary fs-5">Update Member Information</h2>
+            <div class="small"><a href="{% url 'members:member_list' %}">Back</a></div>
         </div>
     </div>
+    <div class="card shadow border-primary p-2">
+        <form method="post" class="needs-validation" novalidate>
+            {% csrf_token %}
+            <div class="card-header bg-white p-2">
+                <ul class="nav  nav-pills mb-3 text-primary" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Member</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Children</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Relative</button>
+                    </li>
+                </ul>
+            </div>
+            <div class="card-body">
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+                        <div class="row mb-2">
+                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                <div class="card">
+                                    <div class="card-body p-3">
+                                        {{ form.non_field_errors }}
+                                        <div class="mb-3">
+                                            {{ form.full_name|as_crispy_field }}
+                                        </div>
+                                        <div class="mb-3">
+                                            {{ form.baptismal_name|as_crispy_field }}
+                                        </div>
+                                        <div class="mb-3">
+                                            {{ form.godfather|as_crispy_field }}
+                                        </div>
+                                        <div class="mb-3">
+                                            {{ form.marital_status|as_crispy_field }}
+                                        </div>
+                                        <div class="mb-3 spouse-fields {% if not form.instance.marital_status == 'married' %}d-none{% endif %}">
+                                            {{ form.spouse_name|as_crispy_field }}
+                                        </div>
+                                        <div class="mb-3 spouse-fields {% if not form.instance.marital_status == 'married' %}d-none{% endif %}">
+                                            {{ form.spouse_baptismal_name|as_crispy_field }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                <div class="card">
+                                    <div class="card-body p-3">
+                                        <div class="row">
+                                            <div class="col-sm-8 ">
+                                                <div class="mb-3">
+                                                    {{ form.address|as_crispy_field }}
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4 ">
+                                                <div class="mb-3">
+                                                    {{ form.apartment|as_crispy_field }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-4 ">
+                                                <div class="mb-3">
+                                                    {{ form.city|as_crispy_field }}
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4 ">
+                                                <div class="mb-3">
+                                                    {{ form.state|as_crispy_field }}
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4 ">
+                                                <div class="mb-3">
+                                                    {{ form.zip_code|as_crispy_field }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6 ">
+                                                <div class="mb-3">
+                                                    {{ form.telephone_number|as_crispy_field }}
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 ">
+                                                <div class="mb-3">
+                                                    {{ form.email|as_crispy_field }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
+                    </div>
+                    <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+                        <div class="row ">
+                            <div class="col-sm-6 mb-2 mb-sm-0">
+                                <div class="card p-3">        
+                                        <h2 class="fs-5">Children</h2>
+                                        <hr>
+                                        {{ children.management_form }}
+                                        {% for child in children %}
+                                            <div class="form-row">
+                                                {{ child.id }}
+                                                {{ child.name|as_crispy_field }}
+                                            </div>
+                                            <div class="form-row">
+                                                {{ child.age|as_crispy_field }}
+                                            </div>
+                                            <div class="form-row">
+                                                {{ child.gender|as_crispy_field }}
+                                            </div>
+                                        {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">
+                        <div class="row g-2">
+                            <div class="col-sm-6 mb-2 mb-sm-0">
+                                <div class="card p-3">
+                                    <h2 class="fs-5">Relatives</h2>
+                                    <hr>
+                                    {{ relatives.management_form }}
+                                    {% for relative in relatives %}
+                                        <div class="form-row">
+                                            {{ relative.id }}
+                                            {{ relative.name|as_crispy_field }}
+                                            {{ relative.relationship|as_crispy_field }}
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body text-center text-body-primary border-top border-primary">
+                <div class="btn-group gap-2">
+                  <button type="submit" class="btn btn-sm btn-primary ">Update</button>
+                  <a class="btn btn-sm btn-primary " href="{% url 'members:member_list' %}">cancle</a>
+                </div>
+            </div>
+        </form>
+    </div> 
 </div>
 <script>
     document.addEventListener('DOMContentLoaded', function () {

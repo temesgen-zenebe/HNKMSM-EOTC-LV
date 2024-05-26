@@ -16,7 +16,7 @@ class MembersUpdateInformation(models.Model):
         ('pending', 'pending'),  
     )
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    member_id = models.CharField(max_length=10, unique=True, editable=False, default='m')
+    member_id = models.CharField(max_length=10, unique=True, editable=False)
     full_name = models.CharField(max_length=255)
     baptismal_name = models.CharField(max_length=255,blank=True, null=True)
     godfather = models.CharField(max_length=255, blank=True, null=True)

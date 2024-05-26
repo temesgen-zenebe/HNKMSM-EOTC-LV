@@ -28,9 +28,10 @@
     
     <div class="row">
         <div class="col-sm-6 mb-3 mb-sm-0">
-          <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Create Member Information</h5>
+          <div class="card shadow border-primary px-3">
+            <div class="card-body text-primary ">
+                <h2 class="card-title fs-5">Create Member Information</h2>
+                <hr>
                 <form method="post" class="needs-validation" novalidate>
                   {% csrf_token %}
                   {{ form.non_field_errors }}
@@ -75,8 +76,9 @@
                       {{ form.spouse_baptismal_name|as_crispy_field }}
                   </div>
                   
-                  
-                  <h4>Children</h4>
+                  <hr>
+                  <h2 class="fs-5 mt-2">Children</h2>
+                  <hr>
                   {{ children.management_form }}
                   {% for child in children %}
                     <div class="form-row">
@@ -89,7 +91,9 @@
                      {{ child.gender|as_crispy_field }}
                     </div>
                   {% endfor %}
-                  <h4>Relatives</h4>
+                  <hr>
+                    <h2 class="fs-5 mt-2">Relatives</h2>
+                   <hr>
                   {{ relatives.management_form }}
                   {% for relative in relatives %}
                       <div class="form-row">
