@@ -1,14 +1,20 @@
-from django.views.generic import CreateView, ListView, UpdateView
+from django.views.generic import CreateView, ListView
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from .models import MembersUpdateInformation, Child, Relative
 from .forms import MembersUpdateInformationForm, ChildFormSet, RelativeFormSet
+from .forms import ChildForm, RelativeForm
+from django.views.generic.edit import UpdateView
+from django.urls import reverse_lazy
+from django.shortcuts import render
 
-class MemberCreateView(CreateView):
+
+
+class MemberCreateView(LoginRequiredMixin, CreateView):
     model = MembersUpdateInformation
     form_class = MembersUpdateInformationForm
-    template_name = 'members/member_form.html'
+    template_name = 'members/member_create_form.html'
     success_url = reverse_lazy('members:member_list')
 
     def get_context_data(self, **kwargs):
@@ -22,6 +28,7 @@ class MemberCreateView(CreateView):
         return data
 
     def form_valid(self, form):
+        form.instance.user = self.request.user
         context = self.get_context_data()
         children = context['children']
         relatives = context['relatives']
@@ -34,6 +41,7 @@ class MemberCreateView(CreateView):
         return super().form_valid(form)
 
 
+    
 class MemberListView(LoginRequiredMixin, ListView):
     model = MembersUpdateInformation
     template_name = 'members/member_list.html'
@@ -42,10 +50,35 @@ class MemberListView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         return MembersUpdateInformation.objects.filter(user=self.request.user)
     
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['child_form'] = ChildForm()
+        context['relative_form'] = RelativeForm()
+        return context
+
+class ChildCreateView(LoginRequiredMixin, CreateView):
+    model = Child
+    form_class = ChildForm
+    success_url = reverse_lazy('members:member_list')
+    
+    def form_valid(self, form):
+        form.instance.member = MembersUpdateInformation.objects.get(user=self.request.user)
+        return super().form_valid(form)
+
+class RelativeCreateView(LoginRequiredMixin, CreateView):
+    model = Relative
+    form_class = RelativeForm
+    success_url = reverse_lazy('members:member_list')
+    
+    def form_valid(self, form):
+        form.instance.member = MembersUpdateInformation.objects.get(user=self.request.user)
+        return super().form_valid(form)
+
+
 class MemberUpdateView(LoginRequiredMixin, UpdateView):
     model = MembersUpdateInformation
     form_class = MembersUpdateInformationForm
-    template_name = 'members/member_form.html'
+    template_name = 'members/member_update_form.html'
     success_url = reverse_lazy('members:member_list')
 
     def get_context_data(self, **kwargs):
@@ -65,7 +98,11 @@ class MemberUpdateView(LoginRequiredMixin, UpdateView):
         self.object = form.save()
         if children.is_valid() and relatives.is_valid():
             children.instance = self.object
-            children.save()
             relatives.instance = self.object
+            children.save()
             relatives.save()
-        return super().form_valid(form)
+            return super().form_valid(form)
+        else:
+            print("Children Formset Errors: ", children.errors)
+            print("Relatives Formset Errors: ", relatives.errors)
+            return self.form_invalid(form)

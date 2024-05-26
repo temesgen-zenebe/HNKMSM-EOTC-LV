@@ -28,15 +28,15 @@
         <div class="col-md-8 col-lg-8">
             <div class="card shadow rounded  border-primary">
                 <div class="card-header bg-white d-flex justify-content-between ">
-                    <div><h6 class="text-primary">Yours Member Information</h6></div>
+                    <div><h3 class="text-primary">Yours Member Information</h3></div>
                     {% if members %}
                         {% for member in members %}
-                            {% if user.is_authenticated and member.user.username == user.username%}
+                            {% if user.is_authenticated and member.user.username == user.username %}
                             <div class="small"><a href="{% url 'members:member_update' member.id %}" class="text-primary"><i class="bi bi-pencil-square px-2"></i></a></div>     
                             {% endif %}
                         {% endfor %}
                     {% else %}
-                        <div class="small"><a href="{% url 'members:member_create' %}" class="btn btn-primary">Create your member Information</a></div>
+                        <div class="small"><a href="{% url 'members:member_create' %}" class="btn btn-primary">Create</a></div>
                     {% endif %}
                     
                 </div>
@@ -93,19 +93,16 @@
                                     <td><code>Marital Status </code></td>
                                     <td>{{ member.marital_status }}</td>
                                 </tr>
+                                {% if member.marital_status == 'married' %}
                                 <tr>
-                                    <td><code>Spouse Name </code></td>
+                                    <td><code>Spouse Full Name </code></td>
                                     <td>{{ member.spouse_name }}</td>
                                 </tr>
                                 <tr>
                                     <td><code>Spouse Baptismal Name </code></td>
                                     <td>{{ member.spouse_name }}</td>
                                 </tr>
-                                <tr>
-                                    <td><code>Spouse Baptismal Name </code></td>
-                                    <td>{{ member.spouse_name }}</td>
-                                </tr>
-                                
+                                {% endif %}
                                 </tbody>
                                 </table>
                             </div>
@@ -124,56 +121,90 @@
                 {% if members %}
                     {% for member in members %}
                         {% if user.is_authenticated and member.user.username == user.username %}
-                            
-                        <div class="card-title bg-white border py-2 rounded-top">
-                            <div class="mx-3"><h6 class="text-primary">Yours Children Information</h6></div>
-                        </div>
-                        <div class="card-body bd-content">
-                            <div class="table-responsive">
-                                <table class="table text-primary">
-                                    <thead>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Age</th>
-                                            <th>Gender</th>
-                                        </tr>
-                                        </thead>
-                                            <tbody>
-                                                {% for children in member.children.all %}
-                                                <tr>
-                                                    <td>{{children.name}}</td>
-                                                    <td>{{children.age}}</td>
-                                                    <td>{{children.gender}}</td>
-                                                </tr>
-                                                {% endfor %}
-                                            </tbody>
-                                </table>
+                            {% if member.children.all %}
+                            <div class="card-title bg-white border py-2 px-4 rounded-top d-flex justify-content-between">
+                                <div class=""><h6 class="text-primary">Yours Children Information</h6></div>
+                                <span class="fs-5" data-bs-toggle="modal" data-bs-target="#childModal">
+                                    <i class="bi bi-plus-square fs-5 text-primary"></i>
+                                </span>
                             </div>
-                        </div>             
-                        <div class="card-title bg-white border py-2 rounded-top">
-                            <div class="mx-3"><h6 class="text-primary">Yours Relative Information</h6></div>
-                        </div>
-                        <div class="card-body bd-content">
-                            <div class="table-responsive">
-                                <table class="table text-primary">
-                                    <thead>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Relationship</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {% for relative in member.relatives.all %}
+                        
+                            <div class="card-body bd-content">
+                                <div class="table-responsive">
+                                    <table class="table text-primary">
+                                        <thead>
                                             <tr>
-                                                <td>{{relative.name}}</td>
-                                                <td>{{relative.relationship}}</td>
+                                                <th>Name</th>
+                                                <th>Age</th>
+                                                <th>Gender</th>
                                             </tr>
-                                        {% endfor %}
-                                    </tbody>
-                                </table>
+                                            </thead>
+                                                <tbody>
+                                                    {% for children in member.children.all %}
+                                                    <tr>
+                                                        <td>{{children.name}}</td>
+                                                        <td>{{children.age}}</td>
+                                                        <td>{{children.gender}}</td>
+                                                    </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                    </table>
+                                </div>
+                            </div> 
+                            {% else %}
+                            <div class="card-title bg-white border py-2 px-3 rounded-top d-flex justify-content-between">
+                                <div class=""><h6 class="text-primary">Yours Children Information</h6></div>
+                                <span class="" data-bs-toggle="modal" data-bs-target="#childModal">
+                                    <i class="bi bi-plus-square fs-5 text-primary"></i>
+                                </span>
                             </div>
-                        </div>
-        
+                            <div class="card-body bd-content">
+                               you can add Your Children Information if any.
+                            </div> 
+                            {% endif %} 
+                              
+                            {% if member.relatives.all %}         
+                            <div class="card-title bg-white border py-2 rounded-top px-3 rounded-top d-flex justify-content-between">
+                                <div class=""><h6 class="text-primary">Yours Relative Information</h6></div>
+                                <div class="">
+                                    <span class="" data-bs-toggle="modal" data-bs-target="#relativeModal">
+                                        <i class="bi bi-plus-square fs-5 text-primary"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="card-body bd-content">
+                                <div class="table-responsive">
+                                    <table class="table text-primary">
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Relationship</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for relative in member.relatives.all %}
+                                                <tr>
+                                                    <td>{{relative.name}}</td>
+                                                    <td>{{relative.relationship}}</td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            {% else %}
+                            <div class="card-title bg-white border py-2 px-3 rounded-top d-flex justify-content-between">
+                                <div class=""><h6 class="text-primary">Yours Relative  Information</h6></div>
+                                <div class="">
+                                    <span  class="" data-bs-toggle="modal" data-bs-target="#relativeModal">
+                                        <i class="bi bi-plus-square fs-5 text-primary"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="card-body bd-content">
+                               you can add Your Relative Information if any.
+                            </div> 
+                            {% endif %}
                         {% endif %}
                     {% endfor %}
                 {% endif %}
@@ -182,5 +213,52 @@
         <div class="col-md-4 col-lg-4">
         </div>
     </div>
+
+    {% if user.is_authenticated %}
+    {% comment %} <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#childModal">
+      Add Child
+    </button>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#relativeModal">
+      Add Relative
+    </button> {% endcomment %}
+
+    <!-- Child Modal -->
+    <div class="modal fade" id="childModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="childModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="childModalLabel">Add Child</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form method="post" action="{% url 'members:child_create' %}">
+              {% csrf_token %}
+              {{ child_form|crispy }}
+              <button type="submit" class="btn btn-primary">Save</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Relative Modal -->
+    <div class="modal fade" id="relativeModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="relativeModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="relativeModalLabel">Add Relative</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form method="post" action="{% url 'members:relative_create' %}">
+              {% csrf_token %}
+              {{ relative_form|crispy}}
+              <button type="submit" class="btn btn-primary">Save</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endif %}
 </div>
 {% endblock %}

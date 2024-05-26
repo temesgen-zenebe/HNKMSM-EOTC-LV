@@ -11,8 +11,12 @@ class MembersUpdateInformation(models.Model):
         ('married', 'married'),
         ('single', 'single'),  
     )
+    MEMBER_STATUS = (
+        ('active', 'active'),
+        ('pending', 'pending'),  
+    )
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    member_id = models.CharField(max_length=10, unique=True, editable=False)
+    member_id = models.CharField(max_length=10, unique=True, editable=False, default='m')
     full_name = models.CharField(max_length=255)
     baptismal_name = models.CharField(max_length=255,blank=True, null=True)
     godfather = models.CharField(max_length=255, blank=True, null=True)
@@ -26,8 +30,7 @@ class MembersUpdateInformation(models.Model):
     marital_status =  models.CharField(max_length=100, choices=MARITAL_STATUS)
     spouse_name = models.CharField(max_length=255, blank=True, null=True)
     spouse_baptismal_name = models.CharField(max_length=255, blank=True, null=True)
-    how_mony_children = models.SmallIntegerField(default=0)
-    how_mony_relatives = models.SmallIntegerField(default=0)
+    member_status = models.CharField(max_length=100, choices=MEMBER_STATUS, default='pending')
     slug = models.SlugField(max_length=200, unique=True ,null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -50,7 +53,6 @@ class MembersUpdateInformation(models.Model):
         super().save(*args, **kwargs)
         
     
-
     def __str__(self):
         return self.full_name
 
