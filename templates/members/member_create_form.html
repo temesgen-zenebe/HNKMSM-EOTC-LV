@@ -25,9 +25,8 @@
         </div>
     </div>
     <!-- Example Code -->
-    
-    <div class="row">
-        <div class="col-sm-6 mb-3 mb-sm-0">
+    <div class="row g-4">
+        <div class="col-sm-8 mb-3 mb-sm-0">
           <div class="card shadow border-primary px-3">
             <div class="card-body text-primary ">
                 <h2 class="card-title fs-5">Create Member Information</h2>
@@ -35,81 +34,180 @@
                 <form method="post" class="needs-validation" novalidate>
                   {% csrf_token %}
                   {{ form.non_field_errors }}
-                  <div class="mb-3">
-                      {{ form.full_name|as_crispy_field }}
-                  </div>
-                  <div class="mb-3">
-                      {{ form.baptismal_name|as_crispy_field }}
-                  </div>
-                  <div class="mb-3">
-                      {{ form.godfather|as_crispy_field }}
-                  </div>
-                  <div class="mb-3">
-                      {{ form.address|as_crispy_field }}
-                  </div>
-                  <div class="mb-3">
-                      {{ form.city|as_crispy_field }}
-                  </div>
-                  <div class="mb-3">
-                      {{ form.state|as_crispy_field }}
-                  </div>
-                  <div class="mb-3">
-                      {{ form.zip_code|as_crispy_field }}
-                  </div>
-                  <div class="mb-3">
-                      {{ form.apartment|as_crispy_field }}
-                  </div>
-                  <div class="mb-3">
-                      {{ form.telephone_number|as_crispy_field }}
-                  </div>
-                  <div class="mb-3">
-                      {{ form.email|as_crispy_field }}
-                  </div>
-                  <div class="mb-3">
-                      {{ form.marital_status|as_crispy_field }}
-                  </div>
-                  <div class="mb-3 spouse-fields {% if not form.instance.marital_status == 'married' %}d-none{% endif %}">
-                      {{ form.spouse_name|as_crispy_field }}
-                  </div>
-                  
-                  <div class="mb-3 spouse-fields {% if not form.instance.marital_status == 'married' %}d-none{% endif %}">
-                      {{ form.spouse_baptismal_name|as_crispy_field }}
-                  </div>
-                  
-                  <hr>
-                  <h2 class="fs-5 mt-2">Children</h2>
-                  <hr>
-                  {{ children.management_form }}
-                  {% for child in children %}
-                    <div class="form-row">
-                    {{ child.name|as_crispy_field }}  
+                    <div class="mb-3">
+                        {{ form.full_name|as_crispy_field }}
                     </div>
-                    <div class="form-row">
-                    {{ child.age|as_crispy_field }}
+                    <div class="row g-4">
+                        <div class="col-sm-6 ">
+                            <div class="mb-3">
+                                {{ form.baptismal_name|as_crispy_field }}
+                            </div>
+                        </div>
+                        <div class="col-sm-6 ">
+                            <div class="mb-3">
+                                {{ form.godfather|as_crispy_field }}
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-row">
-                     {{ child.gender|as_crispy_field }}
+                    <div class="row g-4">
+                        <div class="col-sm-6 ">
+                            <div class="mb-3">
+                                {{ form.telephone_number|as_crispy_field }}
+                            </div>
+                        </div>
+                        <div class="col-sm-6 ">
+                            <div class="mb-3">
+                                {{ form.email|as_crispy_field }}
+                            </div>
+                        </div>
                     </div>
-                  {% endfor %}
-                  <hr>
+                    <div class="row g-4">
+                        <div class="col-sm-8 ">
+                            <div class="mb-3">
+                                {{ form.address|as_crispy_field }}
+                            </div>
+                        </div>
+                        <div class="col-sm-4 ">
+                            <div class="mb-3">
+                                {{ form.apartment|as_crispy_field }}
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="row g-4">
+                        
+                        <div class="col-sm-4 ">
+                            <div class="mb-3">
+                                {{ form.city|as_crispy_field }}
+                            </div>
+                        </div>
+                        <div class="col-sm-4 ">
+                            <div class="mb-3">
+                                {{ form.state|as_crispy_field }}
+                            </div>
+                        </div>
+                        <div class="col-sm-4 ">
+                            <div class="mb-3">
+                                {{ form.zip_code|as_crispy_field }}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row g-4">
+                        <div class="col-sm-3 ">
+                            <div class="mb-3">
+                                {{ form.marital_status|as_crispy_field }}
+                            </div>
+                        </div>
+                        <div class="col-sm-5 ">
+                            <div class="mb-3 spouse-fields {% if not form.instance.marital_status == 'married' %}d-none{% endif %}">
+                                {{ form.spouse_name|as_crispy_field }}
+                            </div>
+                        </div>
+                        <div class="col-sm-4 ">
+                            <div class="mb-3 spouse-fields {% if not form.instance.marital_status == 'married' %}d-none{% endif %}">
+                                {{ form.spouse_baptismal_name|as_crispy_field }}
+                            </div>
+                        </div>
+                        
+                    </div>
+                    {% comment %} Children {% endcomment %}
+                    <hr>
+                    <h2 class="fs-5 mt-2">Children</h2>
+                    <hr>
+                    {{ children.management_form }}
+                    {% for child in children %}
+                    <div class="row g-2">
+                        <div class="col-sm-6 ">
+                            <div class="mb-3 mb-sm-0">
+                                <div class="form-row">
+                                {{ child.name|as_crispy_field }}  
+                                </div> 
+                            </div>
+                        </div>
+                        <div class="col-sm-3 ">
+                            <div class="mb-3 mb-sm-0">
+                                <div class="form-row">
+                                {{ child.age|as_crispy_field }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 ">
+                            <div class="mb-3 mb-sm-0">
+                                <div class="form-row">
+                                {{ child.gender|as_crispy_field }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}   
+                    <hr>
                     <h2 class="fs-5 mt-2">Relatives</h2>
-                   <hr>
-                  {{ relatives.management_form }}
-                  {% for relative in relatives %}
-                      <div class="form-row">
-                          {{ relative.name|as_crispy_field }}
-                          {{ relative.relationship|as_crispy_field }}
-                          
-                      </div>
-                  {% endfor %}
-                  
-                  <button type="submit" class="btn btn-primary mt-3">Save</button>
-              </form>
-              
+                    <hr>
+                    {{ relatives.management_form }}
+                    {% for relative in relatives %}
+                    <div class="row g-2">
+                        <div class="col-sm-6 p-2">
+                            <div class="mb-3">
+                                <div class="form-row">
+                                    {{ relative.name|as_crispy_field }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 p-2">
+                            <div class="mb-3">
+                                <div class="form-row">
+                                    {{ relative.relationship|as_crispy_field }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <hr>
+                    <button type="submit" class="btn btn-sm btn-outline-primary mt-3 text-center">Create</button>
+                </form>
             </div>
           </div>
         </div>
-      </div>
+         <!-- Upcoming Events -->
+        <div class="col-sm-4 mb-3 ">
+                <div class="card shadow border-primary px-4">
+                    <div class="bg-white pt-3">
+                        <h2 class="card-title fs-5">Upcoming Events</h2>
+                    </div>
+                    <hr>
+                    <div class="row row-cols-1 row-cols-md-1 g-3 mb-3 small text-primary ">
+                        <div class="col">
+                        <div class="card">
+                            <img class="bd-placeholder-img card-img-top" width="100%" height="140" src="{% static "img/aboutUs/leaders-58.png" %}" alt="">
+                            <div class="card-body">
+                            <h2 class="card-title fs-6">Card title</h2>
+                            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="col">
+                            <div class="card">
+                                <img class="bd-placeholder-img card-img-top" width="100%" height="140" src="{% static "img/aboutUs/leaders-60.png" %}" alt="">
+                                <div class="card-body">
+                                <h2 class="card-title fs-6">Card title</h2>
+                                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card">
+                                <img class="bd-placeholder-img card-img-top" width="100%" height="140" src="{% static "img/aboutUs/leaders-56.png" %}" alt="">
+                                <div class="card-body">
+                                <h2 class="card-title fs-6">Card title</h2>
+                                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
 </div>
 <script>
     document.addEventListener('DOMContentLoaded', function () {

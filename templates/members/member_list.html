@@ -32,7 +32,7 @@
                     {% if members %}
                         {% for member in members %}
                             {% if user.is_authenticated and member.user.username == user.username %}
-                            <div class="text-primary">
+                            <div class="px-2">
                                 <h2 class="text-primary fs-4">Yours Member Information</h2>
                                 <small> Member ID : {{member.member_id}}</small>
                             </div>
