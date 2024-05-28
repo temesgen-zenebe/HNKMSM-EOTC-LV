@@ -2,18 +2,20 @@ from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.contrib import messages 
 from events.models import Event
+from django.utils import timezone
 
 
 class HomePageView(TemplateView):
     template_name = 'pages/home.html'
    
-    
     def get(self, request):
-        event = Event.objects.all().order_by('created')
-        context={'event':event}
+        # Get the current time to filter out past events
+        now = timezone.now()
+        # Query the latest three upcoming events
+        events = Event.objects.filter(start_time__gt=now).order_by('-start_time')[:3]
+        context = {'event': events}
         return render(request, self.template_name, context)
-    
-
+   
 class AboutUsView(TemplateView):
     template_name = 'pages/about.html'
 
