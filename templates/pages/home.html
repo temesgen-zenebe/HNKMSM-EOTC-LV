@@ -145,31 +145,24 @@
                 <div class="row g-4 align-items-center py-5">
                     <div class="col-lg-7">
                         <div class="text-center wow bounceInUp" data-wow-delay="0.1s">
-                            <h5 class="mb-5">በቅርቡ የሚደረጉ የቤተክርስቲያችን ፕርግራሞች </h5>
-                            <h3 class="text-church mb-5">Our upcoming church programs</h3>
+                            <h5 class="mb-3 text-primary">በቅርቡ የሚደረጉ የቤተክርስቲያችን ፕርግራሞች </h5>
+                            <h3 class="fs-4 mb-5 text-primary">Our upcoming church programs</h3>
                         </div>
                     <div class="row g-4">
+                        {% if event %}
+                        {% for event in event %}
                             <div class="col-sm-4 wow bounceInUp" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: bounceInUp;">
-                                <div class="faqt-item bg-primary rounded shadow p-4 text-center">
-                                    <i class="fas fa-calendar-plus fa-4x mb-4 text-white"></i>
-                                    <h4 class="fw-bold" >16/03/2024</h4>
-                                    <p class="text-dark text-uppercase fw-bold mb-0">ኪዳነ ምህረት</p>
+                                <div class="faqt-item bg-primary rounded shadow p-2 text-center">
+                                    <i class="fas fa-calendar  fa-2x mb-4 text-white"></i>
+                                    <h2 class="fw-bold fs-5" >{{event.start_time}}</h2>
+                                    <h4 class="fs-4 text-white fw-bold mb-0">{{event.title}}</h4>
                                 </div>
                             </div>
-                            <div class="col-sm-4 wow bounceInUp" data-wow-delay="0.5s" style="visibility: visible; animation-delay: 0.5s; animation-name: bounceInUp;">
-                                <div class="faqt-item bg-primary shadow rounded p-4 text-center">
-                                    <i class="fas fa-calendar-day fa-4x mb-4 text-white"></i>
-                                    <h5 class="fw-bold">21/03/2024</h5>
-                                    <p class="text-dark text-uppercase fw-bold mb-0">Expert </p>
-                                </div>
-                            </div>
-                            <div class="col-sm-4 wow bounceInUp" data-wow-delay="0.7s" style="visibility: visible; animation-delay: 0.7s; animation-name: bounceInUp;">
-                                <div class="faqt-item bg-primary shadow rounded p-4 text-center">
-                                    <i class="fas fa-calendar-alt fa-4x mb-4 text-white"></i>
-                                    <h5 class="fw-bold">12/04/2024</h5>
-                                    <p class="text-dark text-uppercase fw-bold mb-0">Events </p>
-                                </div>
-                            </div>
+                        {% endfor %}
+                        {% endif %}
+                        <div class="align-items-center col-sm-4 wow text-center bounceInUp">
+                            <a href="{% url "events:event_list" %}" class="btn btn-sm btn-primary border-0 rounded-pill py-2 px-2 px-md-5 me-4 animated bounceInLeft">More events</a>
+                        </div>
                         </div>
                     </div>
                     <div class="col-lg-5 wow bounceInUp" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: bounceInUp;">
