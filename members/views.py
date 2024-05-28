@@ -92,6 +92,7 @@ class MemberUpdateView(LoginRequiredMixin, UpdateView):
         return data
 
     def form_valid(self, form):
+        form.instance.user = self.request.user
         context = self.get_context_data()
         children = context['children']
         relatives = context['relatives']

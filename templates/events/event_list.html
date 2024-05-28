@@ -1,0 +1,74 @@
+{% extends "_base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}Events List{% endblock %}
+{% block main %}
+
+<div class="container">
+    <div class="mx-auto wow bounceInUp rounded my-3" 
+        style="background-image: url('{% static "img/heroAccount-13.png" %}');background-size: cover; background-position: center center; background-repeat: no-repeat; " alt="Church-at" data-wow-delay="0.1s">
+        <div class="container py-1 mt-0">
+            <div class="animated bounceInDown ">
+                <ol class="breadcrumb justify-content-start mb-0 animated bounceInDown">
+                    <li class="small"><a href="{% url 'pages:homepage' %}">Home <span class="px-1">\</span></a></li>
+                    <li class="small" aria-current="page"> <a href="{% url "events:event_list" %}">events List<span class="px-1">\</span></a></li>
+                </ol>
+            </div>
+        </div>
+        <div class="text-center py-2">
+            <h3 class="mb-2 text-light fs-4">መጪ ፕሮግራሞች (ክስተቶች) ዝርዝር</h3>
+            <h3 class="mb-2 text-light fs-4 ">The upcoming  events List </h3>
+        </div>
+        <div class="text-center py-2 px-2 ">
+            <p class="small">ሁላችሁም ኦርቶዶክሳውያን በመጪው በሚከናወኑ ፕሮግራሞች ላይ እንድንሳተፍ  ቤተክርስቲያናችን በእግዚአብሔር ስም ጥሪ ታቀርባለች!!</p>
+            <p class="h2 fs-6 text-primary small">In the name of God, our church is inviting all of you Orthodox people to participate in the upcoming programs!!</p>
+        </div>
+    </div>
+    <div class="container mt-5">
+        <h2 class="mb-4 fs-4">Upcoming  events</h2>
+        <hr>
+        <div class="row">
+            {% for event in events %}
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        {% if event.image %}
+                            <img src="{{ event.image.url }}" class="card-img-top" alt="{{ event.title }}">
+                        {% endif %}
+                        <div class="card-body">
+                            <h2 class="card-title fs-5">{{ event.title }}</h2>
+                            <h2 class="card-title fs-5">{{ event.start_time}}</h2>
+                            <p class="card-text small">{{ event.description|truncatewords:30 }}</p>
+                            <a href="{% url 'events:event_detail' event.slug %}" class="btn btn-sm btn-outline-primary">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="d-flex justify-content-center">
+            {% if is_paginated %}
+                <ul class="pagination">
+                    {% if page_obj.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                    {% endif %}
+                    {% for num in page_obj.paginator.page_range %}
+                        <li class="page-item {% if page_obj.number == num %}active{% endif %}">
+                            <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                        </li>
+                    {% endfor %}
+                    {% if page_obj.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

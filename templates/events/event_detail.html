@@ -1,0 +1,59 @@
+{% extends "_base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}{{ event.title }}{% endblock %}
+{% block main %}
+<div class="container">
+    <div class="mx-auto wow bounceInUp rounded my-3" 
+        style="background-image: url('{% static "img/heroAccount-13.png" %}');background-size: cover; background-position: center center; background-repeat: no-repeat; " alt="Church-at" data-wow-delay="0.1s">
+        <div class="container py-1 mt-0">
+            <div class="animated bounceInDown ">
+                <ol class="breadcrumb justify-content-start mb-0 animated bounceInDown">
+                    <li class="small"><a href="{% url 'pages:homepage' %}">Home <span class="px-1">\</span></a></li>
+                    <li class="small"> <a href="{% url "events:event_list" %}">EventsLists<span class="px-1">\</span></a></li>
+                    <li class="small" aria-current="page">EventsDetails<span class="px-1">\</span></li>
+                </ol>
+            </div>
+        </div>
+        <div class="text-center py-2">
+            <h2 class="mb-2 text-light fs-5">{{ event.title }}</h2>
+            <h2 class="mb-2 text-light fs-5 ">The upcoming  events </h2>
+        </div>
+        <div class="text-center py-2 px-2 ">
+            <p class="small">ሁላችሁም ኦርቶዶክሳውያን በመጪው በሚከናወኑ ፕሮግራሞች ላይ እንድንሳተፍ  ቤተክርስቲያናችን በእግዚአብሔር ስም ጥሪ ታቀርባለች!!</p>
+            <p class="h2 fs-6 text-primary small">In the name of God, our church is inviting all of you Orthodox people to participate in the upcoming programs!!</p>
+        </div>
+    </div> 
+    
+    <div class="container mt-2">
+        <div class="row g-1">
+            <div class="col-sm-6">
+              <div class="card">
+                {% if event.image %}
+                    <img src="{{ event.image.url }}" class="card-img-top" alt="{{ event.title }}">
+                {% endif %}
+                
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="card">
+                <div class="card-body">
+                    <p class="card-title ">Event : <span class="h2 fs-5 px-2 text-primary">{{ event.title }}</span></p>
+                    <p class="card-text">Description :<small class=" px-2 text-primary">{{ event.description }}</small></p>
+                    <p class="card-text">Location: <small class="px-2 text-primary">{{ event.location }}</small></p>
+                    <p class="card-text">Start Time: <small class="px-2 text-primary"> {{ event.start_time }}</small></p>
+                    <p class="card-text">End Time:  <small class="px-2 text-primary">{{ event.end_time }}</small></p>
+                    <p class="card-text">Special Guests:  <small class="px-2 text-primary">{{ event.special_guests }}</small></p>
+                    <p class="card-text">Notices:  <small class="px-2 text-primary">{{ event.notices }}</small></p>
+                </div>
+                <div class="card-body">
+                    <a href="{% url 'events:event_list' %}" class="btn btn-sm btn-outline-primary">Back to Event List</a>
+                    <a href="{% url 'events:event_list' %}" class="btn btn-sm btn-outline-primary">Add to remind me</a> 
+                    <a href="{% url 'events:event_list' %}" class="btn btn-sm btn-outline-primary">share</a>
+                </div>
+              </div>
+            </div>
+          </div>
+    </div>
+</div>
+{% endblock %}

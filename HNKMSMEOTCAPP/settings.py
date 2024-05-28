@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'services.apps.ServicesConfig',
     'schools.apps.SchoolsConfig',
     'members.apps.MembersConfig',
+    'events.apps.EventsConfig',
     
 ]
 SITE_ID = 1

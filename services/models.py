@@ -74,7 +74,6 @@ class Comment(models.Model):
     def __str__(self):
         return self.comment
 
-
 class BaptizedCertification(models.Model):
     BAPTIZED_TYPES = (
         ('youth', 'youth'),
