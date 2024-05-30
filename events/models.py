@@ -48,6 +48,7 @@ class EventGallery(models.Model):
     held_date = models.DateField()
     thumbnail_image = models.ImageField(upload_to='event_gallery/thumbnails/%Y/%m/%d', blank=True, null=True)
     viewers_count = models.PositiveIntegerField(default=0)
+    category = models.ForeignKey('EventsCategory', on_delete=models.SET_NULL, null=True, blank=True)
     slug = models.SlugField(max_length=200, unique=True, null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)

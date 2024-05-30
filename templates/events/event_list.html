@@ -30,14 +30,17 @@
         <div class="row">
             {% for event in events %}
                 <div class="col-md-4 mb-4">
-                    <div class="card">
+                    <div class="card shadow">
                         {% if event.image %}
                             <img src="{{ event.image.url }}" class="card-img-top" alt="{{ event.title }}">
                         {% endif %}
                         <div class="card-body">
                             <h2 class="card-title fs-5">{{ event.title }}</h2>
+                            <hr>
                             <h2 class="card-title fs-5">{{ event.start_time}}</h2>
+                            <hr>
                             <p class="card-text small">{{ event.description|truncatewords:30 }}</p>
+                            <hr>
                             <a href="{% url 'events:event_detail' event.slug %}" class="btn btn-sm btn-outline-primary">View Details</a>
                         </div>
                     </div>

@@ -143,33 +143,34 @@
                     <small class="d-inline-block fw-bold text-dark text-uppercase bg-light border border-primary rounded-pill px-4 py-1 mb-3">Upcoming Events</small>
                 </div>
                 <div class="row g-4 align-items-center py-5">
-                    <div class="col-lg-7">
-                        <div class="text-center wow bounceInUp" data-wow-delay="0.1s">
-                            <h5 class="mb-3 text-primary">በቅርቡ የሚደረጉ የቤተክርስቲያችን ፕርግራሞች </h5>
-                            <h3 class="fs-4 mb-5 text-primary">Our upcoming church programs</h3>
-                        </div>
-                    <div class="row g-4">
-                        {% if event %}
-                        {% for event in event %}
-                            <div class="col-sm-4 wow bounceInUp" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: bounceInUp;">
-                                <div class="faqt-item bg-primary rounded shadow p-2 text-center">
-                                    <i class="fas fa-calendar  fa-2x mb-4 text-white"></i>
-                                    <h2 class="fw-bold fs-5" >{{event.start_time}}</h2>
-                                    <h4 class="fs-4 text-white fw-bold mb-0">{{event.title}}</h4>
-                                </div>
-                            </div>
-                        {% endfor %}
-                        {% endif %}
-                        <div class="align-items-center col-sm-4 wow text-center bounceInUp">
-                            <a href="{% url "events:event_list" %}" class="btn btn-sm btn-primary border-0 rounded-pill py-2 px-2 px-md-5 me-4 animated bounceInLeft">More events</a>
-                        </div>
-                        </div>
-                    </div>
                     <div class="col-lg-5 wow bounceInUp" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: bounceInUp;">
                         <div class="video" style="background: linear-gradient(rgba(254, 218, 154, 0.1), rgba(254, 218, 154, 0.1)), url({% static "img/fact.png" %});">
                             <button type="button" class="btn btn-play" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-bs-target="#videoModal">
                                 <span></span>
                             </button>
+                        </div>
+                    </div>
+                    <div class="col-lg-7">
+                        <div class="text-center wow bounceInUp" data-wow-delay="0.1s">
+                            <h5 class="mb-3 text-primary">በቅርቡ የሚደረጉ የቤተክርስቲያችን ፕርግራሞች </h5>
+                            <h3 class="fs-4 mb-5 text-primary">Our upcoming church programs</h3>
+                        </div>
+                        <div class="row g-4">
+                            {% if event %}
+                            {% for event in event %}
+                                <div class="col-sm-4 wow bounceInUp" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: bounceInUp;">
+                                    <div class="faqt-item bg-primary rounded shadow p-2 text-center">
+                                        <i class="fas fa-calendar  fa-2x mb-4 text-white"></i>
+                                        <h2 class="fw-bold fs-5" >{{event.start_time}}</h2>
+                                        <h4 class="fs-4 text-white fw-bold mb-0">{{event.title}}</h4>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                            {% endif %}
+                            <div class="col-sm-12 wow text-center bounceInUp">
+                                <a href="{% url "events:event_list" %}" class="btn btn-sm btn-primary border-0 rounded-pill py-2 px-2 px-md-2 me-4 animated bounceInLeft">More events</a>
+                            </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -318,326 +319,252 @@
         <div class="container-fluid event py-6">
             <div class="container">
                 <div class="text-center wow bounceInUp" data-wow-delay="0.1s">
-                    <small class="d-inline-block fw-bold text-dark text-uppercase bg-light border border-primary rounded-pill px-4 py-1 mb-3">Latest Events</small>
+                    <small class="d-inline-block fw-bold text-dark text-uppercase bg-light border border-primary rounded-pill px-4 py-1 mb-3">Past Events</small>
                     <h3 class="mb-3 bolder">ከዚህ በፊት የተደረጉ የፕሮግራሞች ጋለሪ</h3>
                     <h4 class="mb-5 text-church">Our Events Gallery</h4>
                 </div>
                 <div class="tab-class text-center">
                     <ul class="nav nav-pills d-inline-flex justify-content-center mb-5 wow bounceInUp" data-wow-delay="0.1s">
                         <li class="nav-item p-2">
-                            <a class="d-flex mx-2 py-2 border border-primary bg-light rounded-pill active" data-bs-toggle="pill" href="#tab-1">
-                                <span class="text-dark" style="width: 150px;">All Events</span>
+                            <a class="d-flex mx-1 py-2 border border-primary bg-light rounded-pill active" data-bs-toggle="pill" href="#tab-all">
+                                <span class="text-dark small" style="width: 100px;">All Events</span>
                             </a>
                         </li>
+                        {% if eventsCategory %}
+                        {% for category in eventsCategory %}
                         <li class="nav-item p-2">
-                            <a class="d-flex py-2 mx-2 border border-primary bg-light rounded-pill" data-bs-toggle="pill" href="#tab-2">
-                                <span class="text-dark" style="width: 150px;">ቅዳሴ|kedasa</span>
+                            <a class="d-flex py-2 mx-1 border border-primary bg-light rounded-pill" data-bs-toggle="pill" href="#tab-Category-{{category.id}}">
+                                <span class="text-dark small" style="width: 100px;">{{category.name}}</span>
                             </a>
                         </li>
-                        <li class="nav-item p-2">
-                            <a class="d-flex mx-2 py-2 border border-primary bg-light rounded-pill" data-bs-toggle="pill" href="#tab-3">
-                                <span class="text-dark" style="width: 150px;">ስብከት|Sermon</span>
-                            </a>
-                        </li>
-                        <li class="nav-item p-2">
-                            <a class="d-flex mx-2 py-2 border border-primary bg-light rounded-pill" data-bs-toggle="pill" href="#tab-4">
-                                <span class="text-dark" style="width: 150px;">ክብረ በዓላት</span>
-                            </a>
-                        </li>
-                        <li class="nav-item p-2">
-                            <a class="d-flex mx-2 py-2 border border-primary bg-light rounded-pill" data-bs-toggle="pill" href="#tab-5">
-                                <span class="text-dark" style="width: 150px;">ምርቃት|Graduation </span>
-                            </a>
-                        </li>
-                        <li class="nav-item p-2">
-                            <a class="d-flex mx-2 py-2 border border-primary bg-light rounded-pill" data-bs-toggle="pill" href="#tab-5-6">
-                                <span class="text-dark" style="width: 150px;">ሰርግ|Wedding</span>
-                            </a>
-                        </li>
+                        {% endfor %}
+                        {% endif %}
+                       
                     </ul>
                     <div class="tab-content">
-                        <div id="tab-1" class="tab-pane fade show p-0 active">
+                        <!--all-->
+                        <div id="tab-all" class="tab-pane fade show p-0 active">
                             <div class="row g-4">
                                 <div class="col-lg-12">
                                     <div class="row g-4">
-                                        <div class="col-md-6 col-lg-3 wow bounceInUp" data-wow-delay="0.1s">
-                                            <div class="event-img position-relative">
-                                                <img class="img-fluid rounded w-100" src="{% static "img/aboutUs/leaders-15.png" %}" alt="">
+                                        {% if eventGallery %}
+                                        {% for events in eventGallery %}
+                                        <div class="col-md-6 col-lg-3 wow bounceInUp " data-wow-delay="0.1s">
+                                            <div class="event-img position-relative shadow">
+                                                {% if events.thumbnail_image %}
+                                                <img class="img-fluid rounded w-100" src="{{ events.thumbnail_image.url }}" alt="">
+                                                {% else %}
+                                                <img class="img-fluid rounded w-100" src="{% static "img/Church-at-night-3.png" %}" alt="">
+                                                {% endif %}
                                                 <div class="event-overlay d-flex flex-column p-4">
-                                                    <h4 class="me-auto">Click</h4>
-                                                    <a href="img/01.html" data-lightbox="event-1" class="my-auto"><i class="fas fa-search-plus text-dark fa-2x"></i></a>
+                                                    <!-- Button trigger modal -->
+                                                    <h1><span class="fs-5 text-white border-bottom">{{events.thumbnail_title}}</span></h1>
+                                                    
+                                                    <button type="button" class="btn btn-sm btn-primary rounded rounded-pill" data-bs-toggle="modal" data-bs-target="#all-{{events.slug}}">
+                                                        View Details
+                                                    </button>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-6 col-lg-3 wow bounceInUp" data-wow-delay="0.3s">
-                                            <div class="event-img position-relative">
-                                                <img class="img-fluid rounded w-100" src="{% static "img/aboutUs/leaders-16.png" %}" alt="">
-                                                <div class="event-overlay d-flex flex-column p-4">
-                                                    <h4 class="me-auto">Click</h4>
-                                                    <a href="img/01.html" data-lightbox="event-2" class="my-auto"><i class="fas fa-search-plus text-dark fa-2x"></i></a>
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="all-{{events.slug}}" tabindex="-1" aria-labelledby="{{events.slug}}Label" aria-hidden="true">
+                                            <div class="modal-dialog modal-xl">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                <h1 class="modal-title fs-5 text-primary" id="exampleModalLabel">
+                                                    <i class="fa fa-cross fs-5 px-3 "></i>
+                                                    <span class="fs-4">{{events.thumbnail_title}}</span></h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div>
+                                                        <div class="container py-2">
+                                                          {% if events.video_url %}
+                                                          <div class="py-2 mb-4 bg-body-tertiary rounded-3">
+                                                            <div class="container-fluid rounded">
+                                                                <div class="ratio ratio-16x9">
+                                                                    {% if events.video_url %}
+                                                                        <div class="ratio ratio-16x9">
+                                                                            <iframe src="{{ events.video_url }}" type="text/html" id="staticPlayer" frameborder="0" allowfullscreen></iframe>
+                                                                        </div>
+                                                                    {% endif %}
+                                                                </div>
+                                                            </div>
+                                                            
+                                                          </div>
+                                                          {% endif %}
+                                                          <div class="row align-items-md-stretch">
+                                                            <div class="col-md-6">
+                                                              <div class="h-100 p-5 text-bg-dark rounded-3">
+                                                                <div class="card-body text-start">
+                                                                    <p class="card-text"><small class="text-muted">participants : {{events.number_of_participants }}</small></p>
+                                                                    {% if events.post_events %}
+                                                                    <p class="card-text"><small class="text-muted">Related Event Location: {{ events.post_events.location }}</small></p>
+                                                                    {% endif %}
+                                                                    <p class="card-text"><small class="text-muted">Held date & Time : {{events.held_date}}</small></p>
+                                                                    <p class="card-text"><small class="text-muted">End Time : {{events.viewers_count}}</small></p>
+                                                                </div>
+                                                              </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                              <div class="h-100 p-3 bg-body-tertiary  border rounded-3">
+                                                                <h2>Short Review</h2>
+                                                                <hr>
+                                                                <p class="small text-start">{{events.short_review}}</p>
+                                                              </div>
+                                                            </div>
+                                                          </div>
+
+                                                          <hr>
+                                                          <h1 class="py-2 fs-4 text-primary">Related Events Images </h1>
+                                                          <footer class="pt-3 my-5 text-body-secondary border-top">
+                                                           
+                                                            <div class="row row-cols-1 row-cols-md-3 g-4">
+                                                                {% if postEventImages %}
+                                                                {% for image in postEventImages %}
+                                                                {% if events.slug == image.event_gallery.slug%}
+                                                                <div class="col">
+                                                                  <div class="card shadow h-100">
+                                                                    <img src="{{ image.image.url }}" class="card-img-top" alt="{{ events.thumbnail_title }}">
+                                                                  </div>
+                                                                </div>
+                                                                {% endif %}
+                                                                {% endfor %}
+                                                                {% endif %}
+                                                              </div>
+                                                          </footer>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer ">
+                                                <button type="button" class="btn btn-outline-primary"><i class="bi bi-hand-thumbs-up"></i></button>
+                                                <button type="button" class="btn btn-outline-primary"><i class="bi bi-share"></i></button>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-6 col-lg-3 wow bounceInUp" data-wow-delay="0.5s">
-                                            <div class="event-img position-relative">
-                                                <img class="img-fluid rounded w-100" src="{% static "img/aboutUs/leaders-17.png" %}" alt="">
-                                                <div class="event-overlay d-flex flex-column p-4">
-                                                    <h4 class="me-auto">Click</h4>
-                                                    <a href="img/01.html" data-lightbox="event-3" class="my-auto"><i class="fas fa-search-plus text-dark fa-2x"></i></a>
-                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-6 col-lg-3 wow bounceInUp" data-wow-delay="0.7s">
-                                            <div class="event-img position-relative">
-                                                <img class="img-fluid rounded w-100" src="{% static "img/aboutUs/leaders-18.png" %}" alt="">
-                                                <div class="event-overlay d-flex flex-column p-4">
-                                                    <h4 class="me-auto">Click</h4>
-                                                    <a href="img/01.html" data-lightbox="event-4" class="my-auto"><i class="fas fa-search-plus text-dark fa-2x"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 col-lg-3 wow bounceInUp" data-wow-delay="0.1s">
-                                            <div class="event-img position-relative">
-                                                <img class="img-fluid rounded w-100" src="{% static "img/aboutUs/leaders-19.png" %}" alt="">
-                                                <div class="event-overlay d-flex flex-column p-4">
-                                                    <h4 class="me-auto">Click</h4>
-                                                    <a href="img/01.html" data-lightbox="event-5" class="my-auto"><i class="fas fa-search-plus text-dark fa-2x"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 col-lg-3 wow bounceInUp" data-wow-delay="0.3s">
-                                            <div class="event-img position-relative">
-                                                <img class="img-fluid rounded w-100" src="{% static "img/aboutUs/leaders-20.png" %}" alt="">
-                                                <div class="event-overlay d-flex flex-column p-4">
-                                                    <h4 class="me-auto">Click</h4>
-                                                    <a href="" data-lightbox="event-6" class="my-auto"><i class="fas fa-search-plus text-dark fa-2x"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 col-lg-3 wow bounceInUp" data-wow-delay="0.5s">
-                                            <div class="event-img position-relative">
-                                                <img class="img-fluid rounded w-100" src="{% static "img/aboutUs/leaders-21.png" %}" alt="">
-                                                <div class="event-overlay d-flex flex-column p-4">
-                                                    <h4 class="me-auto">Click</h4>
-                                                    <a href="img/01.html" data-lightbox="event-7" class="my-auto"><i class="fas fa-search-plus text-dark fa-2x"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 col-lg-3 wow bounceInUp" data-wow-delay="0.7s">
-                                            <div class="event-img position-relative">
-                                                <img class="img-fluid rounded w-100" src="{% static "img/aboutUs/leaders-22.png" %}" alt="">
-                                                <div class="event-overlay d-flex flex-column p-4">
-                                                    <h4 class="me-auto">Click</h4>
-                                                    <a href="img/01.html" data-lightbox="event-17" class="my-auto"><i class="fas fa-search-plus text-dark fa-2x"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 col-lg-3 wow bounceInUp" data-wow-delay="0.1s">
-                                            <div class="event-img position-relative">
-                                                <img class="img-fluid rounded w-100" src="{% static "img/aboutUs/leaders-19.png" %}" alt="">
-                                                <div class="event-overlay d-flex flex-column p-4">
-                                                    <h4 class="me-auto">Click</h4>
-                                                    <a href="img/01.html" data-lightbox="event-5" class="my-auto"><i class="fas fa-search-plus text-dark fa-2x"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 col-lg-3 wow bounceInUp" data-wow-delay="0.3s">
-                                            <div class="event-img position-relative">
-                                                <img class="img-fluid rounded w-100" src="{% static "img/aboutUs/leaders-20.png" %}" alt="">
-                                                <div class="event-overlay d-flex flex-column p-4">
-                                                    <h4 class="me-auto">Click</h4>
-                                                    <a href="img/01.html" data-lightbox="event-6" class="my-auto"><i class="fas fa-search-plus text-dark fa-2x"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 col-lg-3 wow bounceInUp" data-wow-delay="0.5s">
-                                            <div class="event-img position-relative">
-                                                <img class="img-fluid rounded w-100" src="{% static "img/aboutUs/leaders-33.png" %}" alt="">
-                                                <div class="event-overlay d-flex flex-column p-4">
-                                                    <h4 class="me-auto">Click</h4>
-                                                    <a href="img/01.html" data-lightbox="event-7" class="my-auto"><i class="fas fa-search-plus text-dark fa-2x"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 col-lg-3 wow bounceInUp" data-wow-delay="0.7s">
-                                            <div class="event-img position-relative">
-                                                <img class="img-fluid rounded w-100" src="{% static "img/aboutUs/leaders-22.png" %}" alt="">
-                                                <div class="event-overlay d-flex flex-column p-4">
-                                                    <h4 class="me-auto">Click</h4>
-                                                    <a href="img/01.html" data-lightbox="event-17" class="my-auto"><i class="fas fa-search-plus text-dark fa-2x"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        {% endfor %}
+                                        {% endif %}
+                                        
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div id="tab-2" class="tab-pane fade show p-0">
+                        {% if eventsCategory %}
+                        {% for category in eventsCategory %}
+                        <div id="tab-Category-{{category.id}}" class="tab-pane fade show p-0">
                             <div class="row g-4">
                                 <div class="col-lg-12">
                                     <div class="row g-4">
+                                        {% if eventGallery %}
+                                        {% for events in eventGallery %}
+                                        {% if events.category.name == category.name %}
                                         <div class="col-md-6 col-lg-3">
-                                            <div class="event-img position-relative">
-                                                <img class="img-fluid rounded w-100" src="{% static "img/aboutUs/leaders-32.png" %}" alt="">
+                                            <div class="event-img position-relative shadow">
+                                                
+                                                {% if events.thumbnail_image %}
+                                                <img class="img-fluid rounded w-100" src="{{ events.thumbnail_image.url }}" alt="">
+                                                {% else %}
+                                                <img class="img-fluid rounded w-100" src="{% static "img/Church-at-night-3.png" %}" alt="">
+                                                {% endif %}
                                                 <div class="event-overlay d-flex flex-column p-4">
-                                                    <h4 class="me-auto">Click </h4>
-                                                    <a href="img/01.html" data-lightbox="event-8" class="my-auto"><i class="fas fa-search-plus text-dark fa-2x"></i></a>
+                                                    <!-- Button trigger modal -->
+                                                    <h1><span class="fs-5 text-white border-bottom">{{events.thumbnail_title}}</span></h1>
+                                                  
+                                                    <button type="button" class="btn btn-sm btn-primary rounded rounded-pill" data-bs-toggle="modal" data-bs-target="#{{events.slug}}">
+                                                        View Details
+                                                    </button> 
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-6 col-lg-3">
-                                            <div class="event-img position-relative">
-                                                <img class="img-fluid rounded w-100" src="{% static "img/aboutUs/leaders-42.png" %}" alt="">
-                                                <div class="event-overlay d-flex flex-column p-4">
-                                                    <h4 class="me-auto">Click</h4>
-                                                    <a href="img/01.html" data-lightbox="event-9" class="my-auto"><i class="fas fa-search-plus text-dark fa-2x"></i></a>
+                                        
+                                         <!-- Modal -->
+                                         <div class="modal fade" id="{{events.slug}}" tabindex="-1" aria-labelledby="{{events.slug}}Label" aria-hidden="true">
+                                            <div class="modal-dialog modal-xl">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                <h1 class="modal-title fs-5 text-primary" id="exampleModalLabel">
+                                                    <i class="fa fa-cross fs-5 px-3 "></i>
+                                                    <span class="fs-4">{{events.thumbnail_title}}</span></h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div>
+                                                        <div class="container py-2">
+                                                          {% if events.video_url %}
+                                                          <div class="py-2 mb-4 bg-body-tertiary rounded-3">
+                                                            <div class="container-fluid rounded">
+                                                                <div class="ratio ratio-16x9">
+                                                                    {% if events.video_url %}
+                                                                        <div class="ratio ratio-16x9">
+                                                                            <iframe src="{{ events.video_url }}" type="text/html" id="staticPlayer" frameborder="0" allowfullscreen></iframe>
+                                                                        </div>
+                                                                    {% endif %}
+                                                                </div>
+                                                            </div>
+                                                            
+                                                          </div>
+                                                          {% endif %}
+                                                          <div class="row align-items-md-stretch">
+                                                            <div class="col-md-6">
+                                                              <div class="h-100 p-5 text-bg-dark rounded-3">
+                                                                <div class="card-body text-start">
+                                                                    <p class="card-text"><small class="text-muted">participants : {{events.number_of_participants }}</small></p>
+                                                                    {% if events.post_events %}
+                                                                    <p class="card-text"><small class="text-muted">Related Event Location: {{ events.post_events.location }}</small></p>
+                                                                    {% endif %}
+                                                                    <p class="card-text"><small class="text-muted">Held date & Time : {{events.held_date}}</small></p>
+                                                                    <p class="card-text"><small class="text-muted">End Time : {{events.viewers_count}}</small></p>
+                                                                </div>
+                                                              </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                              <div class="h-100 p-3 bg-body-tertiary  border rounded-3">
+                                                                <h2>Short Review</h2>
+                                                                <hr>
+                                                                <p class="small text-start">{{events.short_review}}</p>
+                                                              </div>
+                                                            </div>
+                                                          </div>
+
+                                                          <hr>
+                                                          <h1 class="py-2 fs-4 text-primary">Related Events Images </h1>
+                                                          <footer class="pt-3 my-5 text-body-secondary border-top">
+                                                           
+                                                            <div class="row row-cols-1 row-cols-md-3 g-4">
+                                                                {% if postEventImages %}
+                                                                {% for image in postEventImages %}
+                                                                {% if events.slug == image.event_gallery.slug%}
+                                                                <div class="col">
+                                                                  <div class="card shadow h-100">
+                                                                    <img src="{{ image.image.url }}" class="card-img-top" alt="{{ events.thumbnail_title }}">
+                                                                  </div>
+                                                                </div>
+                                                                {% endif %}
+                                                                {% endfor %}
+                                                                {% endif %}
+                                                              </div>
+                                                          </footer>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer ">
+                                                <button type="button" class="btn btn-outline-primary"><i class="bi bi-hand-thumbs-up"></i></button>
+                                                <button type="button" class="btn btn-outline-primary"><i class="bi bi-share"></i></button>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-6 col-lg-3">
-                                            <div class="event-img position-relative">
-                                                <img class="img-fluid rounded w-100" src="{% static "img/aboutUs/leaders-22.png" %}" alt="">
-                                                <div class="event-overlay d-flex flex-column p-4">
-                                                    <h4 class="me-auto">Click</h4>
-                                                    <a href="img/01.html" data-lightbox="event-9" class="my-auto"><i class="fas fa-search-plus text-dark fa-2x"></i></a>
-                                                </div>
                                             </div>
                                         </div>
+                                        {% endif %}
+                                        {% endfor %}
+                                        {% endif %}
+                                        
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div id="tab-3" class="tab-pane fade show p-0">
-                            <div class="row g-4">
-                                <div class="col-lg-12">
-                                    <div class="row g-4">
-                                        <div class="col-md-6 col-lg-3">
-                                            <div class="event-img position-relative">
-                                                <img class="img-fluid rounded w-100" src="{% static "img/aboutUs/leaders-42.png" %}" alt="">
-                                                <div class="event-overlay d-flex flex-column p-4">
-                                                    <h4 class="me-auto">Corporate</h4>
-                                                    <a href="img/01.html" data-lightbox="event-10" class="my-auto"><i class="fas fa-search-plus text-dark fa-2x"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 col-lg-3">
-                                            <div class="event-img position-relative">
-                                                <img class="img-fluid rounded w-100" src="{% static "img/aboutUs/leaders-52.png" %}" alt="">
-                                                <div class="event-overlay d-flex flex-column p-4">
-                                                    <h4 class="me-auto">Corporate</h4>
-                                                    <a href="img/01.html" data-lightbox="event-11" class="my-auto"><i class="fas fa-search-plus text-dark fa-2x"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 col-lg-3">
-                                            <div class="event-img position-relative">
-                                                <img class="img-fluid rounded w-100" src="{% static "img/aboutUs/leaders-32.png" %}" alt="">
-                                                <div class="event-overlay d-flex flex-column p-4">
-                                                    <h4 class="me-auto">More..</h4>
-                                                    <a href="img/01.html" data-lightbox="event-11" class="my-auto"><i class="fas fa-search-plus text-dark fa-2x"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 col-lg-3">
-                                            <div class="event-img position-relative">
-                                                <img class="img-fluid rounded w-100" src="{% static "img/aboutUs/leaders-12.png" %}" alt="">
-                                                <div class="event-overlay d-flex flex-column p-4">
-                                                    <h4 class="me-auto">More</h4>
-                                                    <a href="img/01.html" data-lightbox="event-11" class="my-auto"><i class="fas fa-search-plus text-dark fa-2x"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="tab-4" class="tab-pane fade show p-0">
-                            <div class="row g-4">
-                                <div class="col-lg-12">
-                                    <div class="row g-4">
-                                        <div class="col-md-6 col-lg-3">
-                                            <div class="event-img position-relative">
-                                                <img class="img-fluid rounded w-100" src="{% static "img/aboutUs/leaders-19.png" %}" alt="">
-                                                <div class="event-overlay d-flex flex-column p-4">
-                                                    <h4 class="me-auto">Click</h4>
-                                                    <a href="img/01.html" data-lightbox="event-12" class="my-auto"><i class="fas fa-search-plus text-dark fa-2x"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 col-lg-3">
-                                            <div class="event-img position-relative">
-                                                <img class="img-fluid rounded w-100" src="{% static "img/aboutUs/leaders-49.png" %}" alt="">
-                                                <div class="event-overlay d-flex flex-column p-4">
-                                                    <h4 class="me-auto">Click</h4>
-                                                    <a href="static/img/01.html" data-lightbox="event-13" class="my-auto"><i class="fas fa-search-plus text-dark fa-2x"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 col-lg-3">
-                                            <div class="event-img position-relative">
-                                                <img class="img-fluid rounded w-100" src="{% static "img/aboutUs/leaders-13.png" %}" alt="">
-                                                <div class="event-overlay d-flex flex-column p-4">
-                                                    <h4 class="me-auto">Click</h4>
-                                                    <a href="static/img/01.html" data-lightbox="event-13" class="my-auto"><i class="fas fa-search-plus text-dark fa-2x"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="tab-5" class="tab-pane fade show p-0">
-                            <div class="row g-4">
-                                <div class="col-lg-12">
-                                    <div class="row g-4">
-                                        <div class="col-md-6 col-lg-3">
-                                            <div class="event-img position-relative">
-                                                <img class="img-fluid rounded w-100" src="{% static "img/aboutUs/leaders-11.png" %}" alt="">
-                                                <div class="event-overlay d-flex flex-column p-4">
-                                                    <h4 class="me-auto">Click</h4>
-                                                    <a href="static\img\01.html" data-lightbox="event-14" class="my-auto"><i class="fas fa-search-plus text-dark fa-2x"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 col-lg-3">
-                                            <div class="event-img position-relative">
-                                                <img class="img-fluid rounded w-100" src="{% static "img/aboutUs/leaders-33.png" %}" alt="">
-                                                <div class="event-overlay d-flex flex-column p-4">
-                                                    <h4 class="me-auto">Click</h4>
-                                                    <a href="img/01.html" data-lightbox="event-15" class="my-auto"><i class="fas fa-search-plus text-dark fa-2x"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="tab-5-6" class="tab-pane fade show p-0">
-                            <div class="row g-4">
-                                <div class="col-lg-12">
-                                    <div class="row g-4">
-                                        <div class="col-md-6 col-lg-3">
-                                            <div class="event-img position-relative">
-                                                <img class="img-fluid rounded w-100" src="{% static "img/aboutUs/leaders-15.png" %}" alt="">
-                                                <div class="event-overlay d-flex flex-column p-4">
-                                                    <h4 class="me-auto">Click</h4>
-                                                    <a href="static\img\01.html" data-lightbox="event-14" class="my-auto"><i class="fas fa-search-plus text-dark fa-2x"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 col-lg-3">
-                                            <div class="event-img position-relative">
-                                                <img class="img-fluid rounded w-100" src="{% static "img/aboutUs/leaders-22.png" %}" alt="">
-                                                <div class="event-overlay d-flex flex-column p-4">
-                                                    <h4 class="me-auto">Click</h4>
-                                                    <a href="img/01.html" data-lightbox="event-15" class="my-auto"><i class="fas fa-search-plus text-dark fa-2x"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        {% endfor %}
+                        {% endif %}
                     </div>
                 </div>
             </div>
