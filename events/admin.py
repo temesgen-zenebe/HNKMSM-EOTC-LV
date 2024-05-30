@@ -36,7 +36,7 @@ class PostEventImagesInline(admin.TabularInline):
 
 @admin.register(EventGallery)
 class EventGalleryAdmin(admin.ModelAdmin):
-    list_display = (
+    list_display = ('post_events',
         'thumbnail_title','short_review', 'held_date', 'number_of_participants', 'thumbnail_image',
         'viewers_count', 'category', 'created', 'updated'
     )
@@ -49,7 +49,7 @@ class EventGalleryAdmin(admin.ModelAdmin):
 
     fieldsets = (
         (None, {
-            'fields': ('thumbnail_title', 'short_review', 'video_url', 'number_of_participants', 'category', 'held_date', 'thumbnail_image', 'slug')
+            'fields': ('post_events','thumbnail_title', 'short_review', 'video_url', 'number_of_participants', 'category', 'held_date', 'thumbnail_image', 'slug')
         }),
         ('Timestamps', {
             'fields': ('created', 'updated'),

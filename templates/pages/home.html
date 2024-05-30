@@ -315,7 +315,7 @@
         </div>
         <!-- Service End -->
 
-        <!-- Events Start -->
+        <!-- Past Events Start -->
         <div class="container-fluid event py-6">
             <div class="container">
                 <div class="text-center wow bounceInUp" data-wow-delay="0.1s">
@@ -342,7 +342,7 @@
                        
                     </ul>
                     <div class="tab-content">
-                        <!--all-->
+                        <!--all events Category-->
                         <div id="tab-all" class="tab-pane fade show p-0 active">
                             <div class="row g-4">
                                 <div class="col-lg-12">
@@ -378,6 +378,75 @@
                                                 </div>
                                                 <div class="modal-body">
                                                     <div>
+                                                        <div class="container py-2">
+                                                          {% if events.video_url %}
+                                                            <div class="row align-items-md-stretch">
+                                                                <div class="col-md-8">
+                                                                    <div class="h-100 p-1 text-bg-dark rounded-3">
+                                                                        <div class="card-body text-start">
+                                                                            <div class="py-2 mb-4 bg-body-tertiary rounded-3">
+                                                                                <div class="container-fluid ">
+                                                                                    <div class="rounded-3">
+                                                                                        {% if events.video_url %}
+                                                                                            <div class="ratio ratio-16x9 ">
+                                                                                                <iframe src="{{ events.video_url }}" type="text/html" id="staticPlayer" frameborder="0" allowfullscreen></iframe>
+                                                                                            </div>
+                                                                                        {% endif %}
+                                                                                    </div>
+                                                                                </div>
+                                                                                
+                                                                              </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <div class="h-100 p-1 text-bg-dark rounded-3">
+                                                                        <div class="card-body text-start ">
+                                                                            <p class="card-text"><small class="text-muted">past events  : {{ events.post_events }}</small></p>
+                                                                            <p class="card-text"><small class="text-muted">participants : {{events.number_of_participants }}</small></p>
+                                                                            {% if events.post_events %}
+                                                                            <p class="card-text"><small class="text-muted">Event Location: {{ events.post_events.location }}</small></p>
+                                                                            {% endif %}
+                                                                            <p class="card-text"><small class="text-muted">Held date & Time : {{events.held_date}}</small></p>
+                                                                            <p class="card-text"><small class="text-muted">End Time : {{events.viewers_count}}</small></p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                          
+                                                          {% endif %}
+                                                          <div class="row align-items-md-stretch">
+                                                            <!--Short Review-->
+                                                            <div class="col-md-12">
+                                                              <div class="h-100 p-3 bg-body-tertiary  border rounded-3">
+                                                                <h2>Short Review</h2>
+                                                                <hr>
+                                                                <p class="small text-start">{{events.short_review}}</p>
+                                                              </div>
+                                                            </div>
+                                                          </div>
+
+                                                          <hr>
+                                                          <h1 class="py-2 fs-4 text-primary">Related Events Images </h1>
+                                                          <footer class="pt-3 my-5 text-body-secondary border-top">
+                                                           
+                                                            <div class="row row-cols-1 row-cols-md-3 g-4">
+                                                                {% if postEventImages %}
+                                                                {% for image in postEventImages %}
+                                                                {% if events.slug == image.event_gallery.slug%}
+                                                                <div class="col">
+                                                                  <div class="card shadow h-100">
+                                                                    <img src="{{ image.image.url }}" class="card-img-top" alt="{{ events.thumbnail_title }}">
+                                                                  </div>
+                                                                </div>
+                                                                {% endif %}
+                                                                {% endfor %}
+                                                                {% endif %}
+                                                              </div>
+                                                          </footer>
+                                                        </div>
+                                                    </div>
+                                                    {% comment %} <div>
                                                         <div class="container py-2">
                                                           {% if events.video_url %}
                                                           <div class="py-2 mb-4 bg-body-tertiary rounded-3">
@@ -434,7 +503,7 @@
                                                               </div>
                                                           </footer>
                                                         </div>
-                                                    </div>
+                                                    </div> {% endcomment %}
                                                 </div>
                                                 <div class="modal-footer ">
                                                 <button type="button" class="btn btn-outline-primary"><i class="bi bi-hand-thumbs-up"></i></button>
@@ -450,6 +519,7 @@
                                 </div>
                             </div>
                         </div>
+                        <!--Filter post events Category-->
                         {% if eventsCategory %}
                         {% for category in eventsCategory %}
                         <div id="tab-Category-{{category.id}}" class="tab-pane fade show p-0">
@@ -479,7 +549,7 @@
                                         </div>
                                         
                                          <!-- Modal -->
-                                         <div class="modal fade" id="{{events.slug}}" tabindex="-1" aria-labelledby="{{events.slug}}Label" aria-hidden="true">
+                                        <div class="modal fade" id="{{events.slug}}" tabindex="-1" aria-labelledby="{{events.slug}}Label" aria-hidden="true">
                                             <div class="modal-dialog modal-xl">
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -492,33 +562,44 @@
                                                     <div>
                                                         <div class="container py-2">
                                                           {% if events.video_url %}
-                                                          <div class="py-2 mb-4 bg-body-tertiary rounded-3">
-                                                            <div class="container-fluid rounded">
-                                                                <div class="ratio ratio-16x9">
-                                                                    {% if events.video_url %}
-                                                                        <div class="ratio ratio-16x9">
-                                                                            <iframe src="{{ events.video_url }}" type="text/html" id="staticPlayer" frameborder="0" allowfullscreen></iframe>
+                                                            <div class="row align-items-md-stretch">
+                                                                <div class="col-md-8">
+                                                                    <div class="h-100 p-1 text-bg-dark rounded-3">
+                                                                        <div class="card-body text-start">
+                                                                            <div class="py-2 mb-4 bg-body-tertiary rounded-3">
+                                                                                <div class="container-fluid rounded">
+                                                                                    <div class="ratio ratio-16x9">
+                                                                                        {% if events.video_url %}
+                                                                                            <div class="ratio ratio-16x9">
+                                                                                                <iframe src="{{ events.video_url }}" type="text/html" id="staticPlayer" frameborder="0" allowfullscreen></iframe>
+                                                                                            </div>
+                                                                                        {% endif %}
+                                                                                    </div>
+                                                                                </div>
+                                                                                
+                                                                              </div>
                                                                         </div>
-                                                                    {% endif %}
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <div class="h-100 p-1 text-bg-dark rounded-3">
+                                                                        <div class="card-body text-start">
+                                                                            <p class="card-text"><small class="text-muted">past events  : {{ events.post_events }}</small></p>
+                                                                            <p class="card-text"><small class="text-muted">participants : {{events.number_of_participants }}</small></p>
+                                                                            {% if events.post_events %}
+                                                                            <p class="card-text"><small class="text-muted">Event Location: {{ events.post_events.location }}</small></p>
+                                                                            {% endif %}
+                                                                            <p class="card-text"><small class="text-muted">Held date & Time : {{events.held_date}}</small></p>
+                                                                            <p class="card-text"><small class="text-muted">End Time : {{events.viewers_count}}</small></p>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                            
-                                                          </div>
+                                                          
                                                           {% endif %}
                                                           <div class="row align-items-md-stretch">
-                                                            <div class="col-md-6">
-                                                              <div class="h-100 p-5 text-bg-dark rounded-3">
-                                                                <div class="card-body text-start">
-                                                                    <p class="card-text"><small class="text-muted">participants : {{events.number_of_participants }}</small></p>
-                                                                    {% if events.post_events %}
-                                                                    <p class="card-text"><small class="text-muted">Related Event Location: {{ events.post_events.location }}</small></p>
-                                                                    {% endif %}
-                                                                    <p class="card-text"><small class="text-muted">Held date & Time : {{events.held_date}}</small></p>
-                                                                    <p class="card-text"><small class="text-muted">End Time : {{events.viewers_count}}</small></p>
-                                                                </div>
-                                                              </div>
-                                                            </div>
-                                                            <div class="col-md-6">
+                                                            <!--Short Review-->
+                                                            <div class="col-md-12">
                                                               <div class="h-100 p-3 bg-body-tertiary  border rounded-3">
                                                                 <h2>Short Review</h2>
                                                                 <hr>
