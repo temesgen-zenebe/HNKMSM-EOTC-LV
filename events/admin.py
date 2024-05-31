@@ -5,7 +5,7 @@ from .models import Event, EventGallery, EventsCategory, PostEventImages
 @admin.register(Event)
 class EventAdmin(admin.ModelAdmin):
     list_display = (
-        'title', 'start_time', 'end_time', 'location', 
+        'title', 'start_time', 'end_time', 'status_tag','location', 
         'category', 'created_by', 'special_guests', 
         'max_number_guests', 'created', 'updated'
     )
@@ -37,7 +37,7 @@ class PostEventImagesInline(admin.TabularInline):
 @admin.register(EventGallery)
 class EventGalleryAdmin(admin.ModelAdmin):
     list_display = ('post_events',
-        'thumbnail_title','short_review', 'held_date', 'number_of_participants', 'thumbnail_image',
+        'thumbnail_title', 'held_date', 'number_of_participants', 'thumbnail_image',
         'viewers_count', 'category', 'created', 'updated'
     )
     list_filter = ('held_date',)

@@ -136,65 +136,6 @@
         </div> 
         <!-- About End -->
 
-        <!-- upcoming church programs -->
-        <div class="container-fluid faqt pb-6">
-            <div class="container">
-                <div class="text-center wow bounceInUp " data-wow-delay="0.1s">
-                    <small class="d-inline-block fw-bold text-dark text-uppercase bg-light border border-primary rounded-pill px-4 py-1 mb-3">Upcoming Events</small>
-                </div>
-                <div class="row g-4 align-items-center py-5">
-                    <div class="col-lg-5 wow bounceInUp" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: bounceInUp;">
-                        <div class="video" style="background: linear-gradient(rgba(254, 218, 154, 0.1), rgba(254, 218, 154, 0.1)), url({% static "img/fact.png" %});">
-                            <button type="button" class="btn btn-play" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-bs-target="#videoModal">
-                                <span></span>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="col-lg-7">
-                        <div class="text-center wow bounceInUp" data-wow-delay="0.1s">
-                            <h5 class="mb-3 text-primary">በቅርቡ የሚደረጉ የቤተክርስቲያችን ፕርግራሞች </h5>
-                            <h3 class="fs-4 mb-5 text-primary">Our upcoming church programs</h3>
-                        </div>
-                        <div class="row g-4">
-                            {% if event %}
-                            {% for event in event %}
-                                <div class="col-sm-4 wow bounceInUp" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: bounceInUp;">
-                                    <div class="faqt-item bg-primary rounded shadow p-2 text-center">
-                                        <i class="fas fa-calendar  fa-2x mb-4 text-white"></i>
-                                        <h2 class="fw-bold fs-5" >{{event.start_time}}</h2>
-                                        <h4 class="fs-4 text-white fw-bold mb-0">{{event.title}}</h4>
-                                    </div>
-                                </div>
-                            {% endfor %}
-                            {% endif %}
-                            <div class="col-sm-12 wow text-center bounceInUp">
-                                <a href="{% url "events:event_list" %}" class="btn btn-sm btn-primary border-0 rounded-pill py-2 px-2 px-md-2 me-4 animated bounceInLeft">More events</a>
-                            </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Modal Video -->
-        <div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content rounded-1">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Youtube Video</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <!-- 16:9 aspect ratio -->
-                        <div class="ratio ratio-16x9">
-
-                        <iframe width="766" height="431" src="https://www.youtube.com/embed/JlhzT6lFz2Q?rel=0" title="2019 የትንሳኤ ጥዑመ  ዝማሬ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         <!-- Service Start -->
         <div class="container-fluid service py-6">
             <div class="container">
@@ -315,6 +256,67 @@
         </div>
         <!-- Service End -->
 
+        <!-- upcoming church programs -->
+        <div class="container-fluid faqt pb-6">
+            <div class="container">
+                <div class="text-center wow bounceInUp " data-wow-delay="0.1s">
+                    <small class="d-inline-block fw-bold text-dark text-uppercase bg-light border border-primary rounded-pill px-4 py-1 mb-3">Upcoming Events</small>
+                </div>
+                <div class="row g-4 align-items-center py-5">
+                    <div class="col-lg-5 wow bounceInUp" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: bounceInUp;">
+                        <div class="video" style="background: linear-gradient(rgba(254, 218, 154, 0.1), rgba(254, 218, 154, 0.1)), url({% static "img/fact.png" %});">
+                            <button type="button" class="btn btn-play" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-bs-target="#videoModal">
+                                <span></span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-lg-7">
+                        <div class="text-center wow bounceInUp" data-wow-delay="0.1s">
+                            <h5 class="mb-3 text-primary">በቅርቡ የሚደረጉ የቤተክርስቲያችን ፕርግራሞች </h5>
+                            <h3 class="fs-4 mb-5 text-primary">Our upcoming church programs</h3>
+                        </div>
+                        <div class="row g-4">
+                            {% if event %}
+                            {% for event in event %}
+                                <div class="col-sm-4 wow bounceInUp" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: bounceInUp;">
+                                    <div class="faqt-item bg-primary rounded shadow p-2 text-center">
+                                        <i class="fas fa-calendar  fa-2x mb-4 text-white"></i>
+                                        <h2 class="fw-bold fs-5" >{{event.start_time}}</h2>
+                                        <h4 class="fs-4 text-white fw-bold mb-0">{{event.title}}</h4>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                            {% endif %}
+                            <div class="col-sm-12 wow text-center bounceInUp">
+                                <a href="{% url "events:event_list" %}" class="btn btn-sm btn-primary border-0 rounded-pill py-2 px-2 px-md-2 me-4 animated bounceInLeft">More events</a>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal Video -->
+        <div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content rounded-1">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Youtube Video</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- 16:9 aspect ratio -->
+                        <div class="ratio ratio-16x9">
+
+                        <iframe width="766" height="431" src="https://www.youtube.com/embed/JlhzT6lFz2Q?rel=0" title="2019 የትንሳኤ ጥዑመ  ዝማሬ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+       <!-- end upcoming church programs -->
+
         <!-- Past Events Start -->
         <div class="container-fluid event py-6">
             <div class="container">
@@ -349,6 +351,7 @@
                                     <div class="row g-4">
                                         {% if eventGallery %}
                                         {% for events in eventGallery %}
+                                        {% if events.short_review  %}
                                         <div class="col-md-6 col-lg-3 wow bounceInUp " data-wow-delay="0.1s">
                                             <div class="event-img position-relative shadow">
                                                 {% if events.thumbnail_image %}
@@ -512,6 +515,7 @@
                                             </div>
                                             </div>
                                         </div>
+                                        {% endif %}
                                         {% endfor %}
                                         {% endif %}
                                         
@@ -528,7 +532,7 @@
                                     <div class="row g-4">
                                         {% if eventGallery %}
                                         {% for events in eventGallery %}
-                                        {% if events.category.name == category.name %}
+                                        {% if events.category.name == category.name and events.short_review %}
                                         <div class="col-md-6 col-lg-3">
                                             <div class="event-img position-relative shadow">
                                                 

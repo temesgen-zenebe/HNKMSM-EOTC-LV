@@ -17,7 +17,10 @@
         </div>
         <div class="text-center py-2">
             <h2 class="mb-2 text-light fs-5">{{ event.title }}</h2>
-            <h2 class="mb-2 text-light fs-5 ">The upcoming  events </h2>
+            <h2 class="mb-2 text-light fs-5 ">
+                {% if event.status_tag == 'active' %}The upcoming events{% else %}Past events list{% endif %}
+                
+            </h2>
         </div>
         <div class="text-center py-2 px-2 ">
             <p class="small">ሁላችሁም ኦርቶዶክሳውያን በመጪው በሚከናወኑ ፕሮግራሞች ላይ እንድንሳተፍ  ቤተክርስቲያናችን በእግዚአብሔር ስም ጥሪ ታቀርባለች!!</p>

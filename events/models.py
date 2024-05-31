@@ -2,12 +2,14 @@
 from django.db import models
 from django.conf import settings
 from common.utils.text import unique_slug
+from django.utils import timezone
 
 class Event(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
+    status_tag = models.CharField(max_length=200, default='active')
     location = models.CharField(max_length=200)
     image = models.ImageField(upload_to='events/%Y/%m/%d', blank=True, null=True)
     media_url = models.URLField(blank=True, null=True)
@@ -22,10 +24,17 @@ class Event(models.Model):
 
     class Meta:
         ordering = ['-start_time', '-created']
-
+    
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = unique_slug(self.title, Event)
+        now = timezone.now()
+        
+        if self.end_time < now:
+            self.status_tag = 'past'
+        else:
+            self.status_tag = 'active'
+       
         super().save(*args, **kwargs)
 
     def __str__(self):
