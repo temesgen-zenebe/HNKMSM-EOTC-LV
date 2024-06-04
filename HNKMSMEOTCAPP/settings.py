@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'schools.apps.SchoolsConfig',
     'members.apps.MembersConfig',
     'events.apps.EventsConfig',
+    'multimedia.apps.MultimediaConfig',
     
 ]
 SITE_ID = 1
