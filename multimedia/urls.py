@@ -1,15 +1,17 @@
 from django.urls import path
 from .views import (
-    BooksLibraryListView, BooksLibraryDetailView,
+    BooksLibraryCreateView, BooksLibraryListView, BooksLibraryDetailView,
     GalleryListView, GalleryDetailView,
     UserManualListView, UserManualDetailView,
     PraiseGloryListView, PraiseGloryDetailView,
     TestimonyOfSalvationListView, TestimonyOfSalvationDetailView,
-    ArchiveLinkListView, ArchiveLinkDetailView
+    ArchiveLinkListView, ArchiveLinkDetailView, MultimediaView,
 )
 app_name = 'multimedia'
 
-urlpatterns = [
+urlpatterns = [ 
+    path('multimediaList/', MultimediaView.as_view(), name='multimedia'), 
+    path('books/new/', BooksLibraryCreateView.as_view(), name='books_library_create'),
     path('books/', BooksLibraryListView.as_view(), name='books_library_list'),
     path('books/<slug:slug>/', BooksLibraryDetailView.as_view(), name='books_library_detail'),
     path('gallery/', GalleryListView.as_view(), name='gallery_list'),

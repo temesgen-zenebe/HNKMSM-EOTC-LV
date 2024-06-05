@@ -70,8 +70,8 @@
                                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Resources</a>
                                 <div class="dropdown-menu bg-light">
                                     <a href="{% url 'events:event_list' %}" class="dropdown-item">Events</a>
-                                    <a href="#" class="dropdown-item">Multimedia</a>
-                                    <a href="#" class="dropdown-item">Articles|blog</a>
+                                    <a href="{% url "multimedia:multimedia" %}" class="dropdown-item">Multimedia</a>
+                                    <a href="" class="dropdown-item">Articles|blog</a>
                                     <a href="#" class="dropdown-item">News & Announcements</a>
                                     <a href="#" class="dropdown-item">Archive Links</a>
                                 </div>
@@ -183,7 +183,7 @@
                                 <a class="text-body mb-3" href="#"><i class="fa fa-check text-primary me-2"></i>Marriage School </a>
                                 <a class="text-body mb-3" href="#"><i class="fa fa-check text-primary me-2"></i>Articles|blog</a>
                                 <a class="text-body mb-3" href="#"><i class="fa fa-check text-primary me-2"></i>News & Announcements</a>
-                                <a class="text-body mb-3" href="#"><i class="fa fa-check text-primary me-2"></i>Multimedia</a>
+                                <a class="text-body mb-3" href="{% url "multimedia:multimedia" %}"><i class="fa fa-check text-primary me-2"></i>Multimedia</a>
                                 <a class="text-body mb-3" href="#"><i class="fa fa-check text-primary me-2"></i>Event</a>
                                 
                             </div>

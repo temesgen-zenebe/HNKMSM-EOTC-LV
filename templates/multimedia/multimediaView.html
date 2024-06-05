@@ -1,0 +1,116 @@
+{% extends "_base.html" %}
+{% load static %}
+{% block javascript %}
+   {% comment %} <script type="text/javascript" src="{% static '' %}" defer ></script> {% endcomment %}
+{% endblock %}
+{% block title %}services list{% endblock %}
+{% block main %}
+<div class="container mt-2">
+    
+     <!-- Service Start -->
+     <div class="service">
+        <div class="mx-0 py-2  wow bounceInUp rounded" height="100%"
+            style="background-image: url('{% static "img/heroAccount-13.png" %}');background-size: cover; background-position: center center; background-repeat: no-repeat; " alt="Church-at" data-wow-delay="0.1s">
+            <!-- breadcrumb Start -->
+            <div class="container animated bounceInDown py-1 mt-0">
+                <div class=" ">
+                    <ol class="breadcrumb justify-content-start mb-0 ">
+                        <li class="small"><a href="{% url 'pages:homepage' %}">Home<span class="px-1">\</span></a></li>
+                        <li class="small" aria-current="page">multimediaList</li>
+                    </ol>
+                </div>
+            </div>
+            <!-- breadcrumb Start -->
+            <div class="text-center py-1">
+                <h1 class="mb-3 bolder text-light fs-3">multimedia List</h1>
+                <h1 class="fs-6 mb-2 text-light">select from the list</1>
+            </div>
+        </div>
+        <div class="container py-4">
+            
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6 col-sm-12 wow bounceInUp " data-wow-delay="0.5s">
+                    <div class="bg-light rounded service-item shadow">
+                        <div class="service-content d-flex align-items-center justify-content-center p-4">
+                            <div class="service-content-icon text-center">
+                                <i class="fas fa-book fa-2x text-primary mb-4"></i>
+                                <h5 class="mb-3">Library Books list</h5>
+                                <p class="mb-4 small">
+                                    "እውነትን ማስተማር፣ ልብን አነሳሽ፣ ነፍሳትን ወደ መለኮታዊ ማስተዋል መምራት።" ማቴዎስ 5:2
+                                </p>
+                                <a href="{% url "multimedia:books_library_list" %}" class="btn btn-sm btn-primary px-4 py-2 rounded-pill">Start</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12 wow bounceInUp" data-wow-delay="0.1s">
+                    <div class="bg-light rounded service-item shadow">
+                        <div class="service-content d-flex align-items-center justify-content-center p-4">
+                            <div class="service-content-icon text-center">
+                                <i class="fas fa-image fa-2x text-primary mb-4"></i>
+                                <h6 class="mb-3 fs-5">Gallery List</h6>
+                                <p class="mb-4 small">የኃጢአት ስርየት እና የመንፈስ ጥምቀት።
+                                    ንስሐ ግቡ እያንዳንዳችሁም ተጠመቁ። የሐዋርያት ሥራ 2:38 </p>
+                                <a href="{% url "multimedia:gallery_list" %}" class="btn btn-primary px-4 py-2 rounded-pill">Start</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12 wow bounceInUp" data-wow-delay="0.3s">
+                    <div class="bg-light rounded service-item shadow">
+                        <div class="service-content d-flex align-items-center justify-content-center p-4">
+                            <div class="service-content-icon text-center">
+                                <i class="fas fa-list fa-2x text-primary mb-4"></i>
+                                <h5 class="mb-3">User Manual</h5>
+                                <p class="mb-4 small">ሥጋዬን የሚበላ ደሜንም የሚጠጣ የዘላለም ሕይወት አለው። ዮሐንስ 6:54</p>
+                                <a href="{% url "multimedia:user_manual_list" %}" class="btn btn-primary px-4 py-2 rounded-pill">Start</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12 wow bounceInUp" data-wow-delay="0.5s">
+                    <div class="bg-light rounded service-item shadow">
+                        <div class="service-content d-flex align-items-center justify-content-center p-4">
+                            <div class="service-content-icon text-center">
+                                <i class="fas fa-chess-king fa-2x text-primary mb-4"></i>
+                                <h5 class="mb-3">praise & glory List</h5>
+                                <p class="mb-2 small">የምስጋና:ክብር:ዝርዝር</p>
+                                <p class="mb-2 small">የቅዱስ ሚካኤል አማላጅነት የቤተክርስቲያን እና የምእመናን ደጋፊ እና ጠባቂ እንደሆነ ስለሚታመን እጅግ በጣም ተፈላጊ ነው።</p>
+                                <a href="{% url "multimedia:praise_glory_list" %}" class="btn btn-primary px-4 py-2 rounded-pill">Start</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12 wow bounceInUp" data-wow-delay="0.7s">
+                    <div class="bg-light rounded service-item shadow">
+                        <div class="service-content d-flex align-items-center justify-content-center p-3">
+                            <div class="service-content-icon text-center">
+                                <i class="fas fa-cross fa-2x text-primary mb-4"></i>
+                                <h5 class="mb-3 fs-6">Testimony of salvation list</h5>
+                                <p class="mb-4 small">የመዳን ምስክርነት፡ የድነት ምስክርነቶችን ይይዛል</p>
+                                <p class="mb-4 small">አባካኙ ልጅ በአባት ፍቅር ታቅፎ፣ ያለ ምንም ቅድመ ሁኔታ ይቅርታ ተደረገለት።" ሉቃስ 15:20</p>
+                                <a href="{% url "multimedia:testimony_of_salvation_list" %}" class="btn btn-primary px-4 py-2 rounded-pill">Start</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12 wow bounceInUp" data-wow-delay="0.1s">
+                    <div class="bg-light rounded service-item shadow">
+                        <div class="service-content d-flex align-items-center justify-content-center p-2">
+                            <div class="service-content-icon text-center">
+                                <i class="fas fa-link fa-2x text-primary mb-4"></i>
+                                {% comment %} <img src="{% static 'img/icon/matting_Church_justice_during_the_funeral.png' %}" class="img-fluid rounded text-primary mb-4" alt="">  {% endcomment %}
+                                <h5 class="mb-3">Archive Resources Link </h5>
+                                <p class="mb-4 small">የማህደር መርጃዎች አገናኝ ዝርዝር</p>
+                                <p class="mb-4 small">በርግጥ ጠቃሚ ሆኖ ከዚ አፕሊኬሽን ውጪ ያሉ ሪሶርስ ሊንኮችን ያገኛሉ</p>
+                                <a href="{% url "multimedia:archive_link_list" %}" class="btn btn-primary px-4 py-2 rounded-pill">Start</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Service End -->
+</div>
+{% endblock %}

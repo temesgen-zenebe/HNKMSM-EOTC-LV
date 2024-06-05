@@ -1,5 +1,16 @@
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView,CreateView
+from django.views.generic import TemplateView
 from .models import BooksLibrary, Gallery, UserManual, PraiseGlory, TestimonyOfSalvation, ArchiveLink
+from .forms import BooksLibraryForm
+from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
+from .models import BooksLibrary
+from django.core.exceptions import ValidationError
+from django.http import HttpResponseRedirect
+
+
+class MultimediaView(TemplateView):
+    template_name = 'multimedia/multimediaView.html'
 
 class BooksLibraryListView(ListView):
     model = BooksLibrary
@@ -68,8 +79,27 @@ class ArchiveLinkDetailView(DetailView):
     context_object_name = 'archive'
 
 
-# multimedia/
 
+class BooksLibraryCreateView(CreateView, LoginRequiredMixin):
+    model = BooksLibrary
+    form_class = BooksLibraryForm
+    template_name = 'multimedia/books_library_form.html'
+    success_url = reverse_lazy('multimedia:books_library_list')
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        title = form.cleaned_data.get('title')
+        author = form.cleaned_data.get('author')
+        published_date = form.cleaned_data.get('published_date')
+        
+        # Check if a book with the same title, author, and published date already exists
+        if BooksLibrary.objects.filter(title=title, author=author, published_date=published_date).exists():
+            form.add_error(None, "A book with the same title, author, and published date already exists.")
+            return self.form_invalid(form)
+        
+        return super().form_valid(form)
+
+# multimedia/
 # books_library_list.html
 # books_library_detail.html
 # gallery_list.html

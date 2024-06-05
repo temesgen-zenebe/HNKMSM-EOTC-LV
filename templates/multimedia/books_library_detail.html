@@ -3,17 +3,43 @@
 {% load crispy_forms_tags %}
 {% block title %}Books Detaile{% endblock %}
 {% block main %}
-<div class="container">
-    <h1>{{ book.title }}</h1>
-    <div class="row">
-        <div class="col-md-8">
+<div class="container mt-3">
+    <!-- breadcrumb -->
+    <div class="event pb-5">
+        <div class="mx-auto wow bounceInUp rounded" 
+            style="background-image: url('{% static "img/heroAccount-13.png" %}');background-size: cover; background-position: center center; background-repeat: no-repeat; " alt="Church-at" data-wow-delay="0.1s">
+            <div class="container py-1 mt-0">
+                <div class="animated bounceInDown ">
+                    <ol class="breadcrumb justify-content-start mb-0 animated bounceInDown">
+                        <li class="small"><a href="{% url 'pages:homepage' %}">Home <span class="px-1">\</span></a></li>
+                        <li class="small"> <a href="{% url "multimedia:multimedia" %}">multimedia<span class="px-1">\</span></a></li>
+                        <li class="small"> <a href="{% url "multimedia:books_library_list" %}">BooksLibraryList<span class="px-1">\</span></a></li>
+                        <li class="small" aria-current="page">BookSDetailes</li>
+                    </ol>  
+                </div>
+            </div>
+        </div>
+    </div>
+    <h1 class="fs-6 text-primary">Title : {{ book.title }}</h1>
+    <hr>
+    <div class="row mt-3">
+        <div class="col-md-8 px-3 small">
             <p><strong>Author:</strong> {{ book.author }}</p>
+            <hr>
             <p><strong>Published Date:</strong> {{ book.published_date }}</p>
+            <hr>
             <p><strong>ISBN:</strong> {{ book.isbn }}</p>
-            <p>{{ book.summary }}</p>
-            {% if book.web_link %}
-            <p><a href="{{ book.web_link }}" target="_blank">More Info</a></p>
-            {% endif %}
+            <hr>
+            <p class="small">{{ book.summary }}</p>
+            <hr>
+            <div class="d-flex gap-2">
+                {% if book.web_link %}
+                <a href="{{ book.web_link }}" class="btn btn-sm btn-outline-primary mt-3" target="_blank">More Info</a>
+                
+                {% endif %}
+                <a href="{% url 'multimedia:books_library_list' %}" class="btn btn-sm btn-outline-primary mt-3">Back to Books Library</a>
+            </div>
+            <hr>
         </div>
         <div class="col-md-4">
             {% if book.cover_image %}
@@ -21,6 +47,6 @@
             {% endif %}
         </div>
     </div>
-    <a href="{% url 'multimedia:books_library_list' %}" class="btn btn-primary mt-3">Back to Books Library</a>
+   
 </div>
 {% endblock %}

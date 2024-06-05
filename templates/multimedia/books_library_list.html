@@ -3,22 +3,47 @@
 {% load crispy_forms_tags %}
 {% block title %}Books Library{% endblock %}
 {% block main %}
-<div class="container">
-    <h1>Books Library</h1>
-    <div class="row">
-        {% for book in books %}
-        <div class="col-md-4">
-            <div class="card mb-4">
-                {% if book.cover_image %}
-                <img src="{{ book.cover_image.url }}" class="card-img-top" alt="{{ book.title }}">
-                {% endif %}
-                <div class="card-body">
-                    <h5 class="card-title">{{ book.title }}</h5>
-                    <p class="card-text">{{ book.summary|truncatewords:30 }}</p>
-                    <a href="{% url 'multimedia:books_library_detail' slug=book.slug %}" class="btn btn-primary">Read More</a>
+<div class="container mt-1">
+     <!-- breadcrumb -->
+     <div class="event pb-4">
+        <div class="mx-auto wow bounceInUp rounded-1" 
+            style="background-image: url('{% static "img/heroAccount-13.png" %}');background-size: cover; background-position: center center; background-repeat: no-repeat; " alt="Church-at" data-wow-delay="0.1s">
+            <div class="container py-1 mt-0">
+                <div class="animated bounceInDown ">
+                    <ol class="breadcrumb justify-content-start mb-0 animated bounceInDown">
+                        <li class="small"><a href="{% url 'pages:homepage' %}">Home <span class="px-1">\</span></a></li>
+                        <li class="small"> <a href="{% url "multimedia:multimedia" %}">multimedia<span class="px-1">\</span></a></li>
+                        <li class="small" aria-current="page">LibraryOfBooks</li>
+                    </ol>
                 </div>
             </div>
         </div>
+    </div>
+    <div class="d-flex justify-content-between ">
+    <h1 class="fs-4 text-primary">Library Books List</h1>
+    {% if user.is_authenticated %}
+    <a class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdropMYbookList">
+        <i class="fas fa-book fa-6 p-1"></i>Add your bast Books</a>
+    {% endif %}
+    </div>
+    <hr>
+    <div class="row">
+        {% for book in books %}
+        {% if book.visibility == 'public' %}
+        <div class="col-md-4">
+            <div class="card mb-4 shadow">
+                {% if book.cover_image %}
+                <img src="{{ book.cover_image.url }}" class="card-img-top" alt="{{ book.title }}">
+                {% endif %}
+                <div class="card-body small">
+                    <h5 class="card-title">{{ book.title }}</h5>
+                    <p class="card-text small">{{ book.summary|truncatewords:30 }}</p>
+                    <a href="{% url 'multimedia:books_library_detail' slug=book.slug %}" class="btn btn-sm btn-outline-primary">Read More</a>
+                    <a href="{% url 'multimedia:books_library_create'  %}" class="btn btn-sm btn-outline-primary">create</a>
+                </div>
+            </div>
+        </div>
+        {% endif %}
         {% endfor %}
     </div>
     {% if is_paginated %}
@@ -56,5 +81,117 @@
         </ul>
     </nav>
     {% endif %}
+    <!--MYbookList Modal -->
+    <div class="modal fade" id="staticBackdropMYbookList" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropMYbookListLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <nav class="modal-title small" id="staticBackdropMYbookListpLabel">
+                    <div class="nav nav-pills rounded gap-2" id="nav-tab" role="tablist">
+                        <button class="nav-link border active " id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Vote the Books</button>
+                        <button class="nav-link border" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Add your bast book</button>
+                    </div>
+                </nav>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="">
+                    <div class="tab-content" id="nav-tabContent">
+                        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
+                            <div class="my-2 p-2 bg-body rounded shadow-sm">
+                                <div class="d-flex justify-content-between py-2 border-bottom">
+                                    <h5 class="pb-2 mb-0 text-primary fs-6">Recommended by others</h5>
+                                    <h6 class="pb-2 mb-0 text-primary ">Vote</h6>
+                                </div>
+                                {% for book in books %}
+                                {% if book.visibility == 'private' %}
+                                {% if book.activeForVote %}
+                                <div class="d-flex text-body-secondary pt-3">
+                                    {% if book.cover_image %} 
+                                        <img src="{{ book.cover_image.url }}" 
+                                            class="bd-placeholder-img flex-shrink-0 me-2 rounded" 
+                                            width="35" height="35" 
+                                            alt="{{ book.title }}"
+                                            role="img" 
+                                            aria-label="Placeholder: 32x32" 
+                                            preserveAspectRatio="xMidYMid slice" 
+                                            focusable="false">
+                                    {% else %}
+                                    <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" 
+                                    width="32" height="32" 
+                                    src="{{book.cover_image.url}}" 
+                                    role="img" 
+                                    aria-label="Placeholder: 32x32" 
+                                    preserveAspectRatio="xMidYMid slice" 
+                                    focusable="false">
+                                    <title>Placeholder</title>
+                                    <rect width="100%" height="100%" fill="#007bff"></rect>
+                                    <text x="50%" y="50%" 
+                                    fill="#007bff" 
+                                    dy=".3em">32x32</text>
+                                    </svg>
+                                    {% endif %}
+                                  <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
+                                    <div class="d-flex justify-content-between">
+                                      <strong class="text-gray-dark">{{book.title}}</strong>
+                                      <div>
+                                        <a href="#" class="btn btn-sm btn-primary d-block" id="voteBook" >Vote</a>
+                                        <a href="#" class="btn btn-sm btn-danger d-none" id="unVoteBook">unVote</a>
+                                      </div>
+                                    </div>
+                                    <span class="d-block small pb-2">By: {{book.user.username}}</span>
+                                    <span class="d-block small">@<a href="{{book.web_link}}" target="_blank">Red More</a></span>
+                                  </div>
+                                
+                                </div>
+                                {% else %}
+                                {% if user.is_authenticated %}
+                                    {% if book.user.username == user.username %}
+                                    <h6 class="pb-2 mt-3">Recommended by you</h6>
+                                    <hr>
+                                    <div class="d-flex text-body-secondary pt-3">
+                                        <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" 
+                                        width="32" height="32" 
+                                        src="{{book.cover_image.url}}" 
+                                        role="img" 
+                                        aria-label="Placeholder: 32x32" 
+                                        preserveAspectRatio="xMidYMid slice" 
+                                        focusable="false">
+                                        <title>Placeholder</title>
+                                        <rect width="100%" height="100%" fill="#007bff"></rect>
+                                        <text x="50%" y="50%" 
+                                        fill="#007bff" 
+                                        dy=".3em">32x32</text></svg>
+                                        <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
+                                          <div class="d-flex justify-content-between">
+                                            <strong class="text-gray-dark">Full Name</strong>
+                                            <a href="#">Follow</a>
+                                          </div>
+                                          <span class="d-block">@username</span>
+                                        </div>
+                                      </div>
+                                    {% endif %}
+                                {% endif %}
+                                {% endif %}
+                                {% endif %}
+                                {% endfor %}
+                                
+                                <small class="d-block text-end mt-3">
+                                  <a href="#">All suggestions</a>
+                                </small>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">----</div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Understood</button>
+            </div>
+        </div>
+        </div>
+    </div>
+    <!-- End Example Code -->
 </div>
 {% endblock %}
