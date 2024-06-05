@@ -1,3 +1,4 @@
+from django.shortcuts import redirect
 from django.views.generic import ListView, DetailView,CreateView
 from django.views.generic import TemplateView
 from .models import BooksLibrary, Gallery, UserManual, PraiseGlory, TestimonyOfSalvation, ArchiveLink
@@ -12,12 +13,64 @@ from django.http import HttpResponseRedirect
 class MultimediaView(TemplateView):
     template_name = 'multimedia/multimediaView.html'
 
+    
 class BooksLibraryListView(ListView):
     model = BooksLibrary
     template_name = 'multimedia/books_library_list.html'
     context_object_name = 'books'
     paginate_by = 10
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = BooksLibraryForm()
+        return context
+    
+    def post(self, request, *args, **kwargs):
+        form = BooksLibraryForm(request.POST, request.FILES)
+        
+        if form.is_valid():
+            form.instance.user = self.request.user
+            title = form.cleaned_data.get('title')
+            author = form.cleaned_data.get('author')
+            published_date = form.cleaned_data.get('published_date')
+            
+            # Check if a book with the same title, author, and published date already exists
+            if BooksLibrary.objects.filter(title=title, author=author, published_date=published_date).exists():
+                form.add_error(None, "A book with the same title, author, and published date already exists.")
+                # Render the same page with the invalid form
+                return self.form_invalid(form)
+            else:
+                form.save()
+                return redirect('multimedia:books_library_list')
+        else:
+            return self.form_invalid(form)
+
+    def form_invalid(self, form):
+        # Ensure the object_list is set for rendering the context
+        self.object_list = self.get_queryset()
+        context = self.get_context_data()
+        context['form'] = form
+        return self.render_to_response(context)
+
+
+    # def post(self, request, *args, **kwargs):
+    #     form = BooksLibraryForm(request.POST, request.FILES)
+        
+    #     if form.is_valid():
+    #         form.instance.user = self.request.user
+    #         title = form.cleaned_data.get('title')
+    #         author = form.cleaned_data.get('author')
+    #         published_date = form.cleaned_data.get('published_date')
+            
+    #         # Check if a book with the same title, author, and published date already exists
+    #         if BooksLibrary.objects.filter(title=title, author=author, published_date=published_date).exists():
+    #             form.add_error(None, "A book with the same title, author, and published date already exists.")
+    #             return self.form_invalid(form)
+    #             form.save()
+    #             return redirect('multimedia:books_library_list')
+    #     else:
+    #         return self.get(request, *args, **kwargs)
+        
 class BooksLibraryDetailView(DetailView):
     model = BooksLibrary
     template_name = 'multimedia/books_library_detail.html'

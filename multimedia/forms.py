@@ -10,5 +10,5 @@ class BooksLibraryForm(forms.ModelForm):
             'author': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
             'published_date': forms.DateInput(attrs={'type': 'date','class': 'form-control form-control-sm'}),
             'format_type': forms.Select(attrs={'class': 'form-control form-control-sm'}),
-            'cover_image': forms.ClearableFileInput(attrs={'class': 'form-control-file'}),
+            'cover_image': forms.ClearableFileInput(attrs={'class': 'form-control-file form-control-sm' ,'type':'file'}),
             }
