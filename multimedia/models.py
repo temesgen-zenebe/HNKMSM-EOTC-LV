@@ -24,6 +24,8 @@ class BooksLibrary(models.Model):
     web_link = models.URLField(blank=True, null=True)
     summary = models.TextField(max_length=300, blank=True, null=True)
     cover_image = models.ImageField(upload_to='multimedia/book_covers/', blank=True, null=True)
+    voteCount = models.PositiveIntegerField(default=0)
+    voters = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='voted_books', blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     slug = models.SlugField(max_length=200, unique=True ,null=True, blank=True)  # Add this line

@@ -8,12 +8,15 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import BooksLibrary
 from django.core.exceptions import ValidationError
 from django.http import HttpResponseRedirect
+from django.http import JsonResponse
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_POST
+
 
 
 class MultimediaView(TemplateView):
     template_name = 'multimedia/multimediaView.html'
 
-    
 class BooksLibraryListView(ListView):
     model = BooksLibrary
     template_name = 'multimedia/books_library_list.html'
@@ -52,24 +55,6 @@ class BooksLibraryListView(ListView):
         context['form'] = form
         return self.render_to_response(context)
 
-
-    # def post(self, request, *args, **kwargs):
-    #     form = BooksLibraryForm(request.POST, request.FILES)
-        
-    #     if form.is_valid():
-    #         form.instance.user = self.request.user
-    #         title = form.cleaned_data.get('title')
-    #         author = form.cleaned_data.get('author')
-    #         published_date = form.cleaned_data.get('published_date')
-            
-    #         # Check if a book with the same title, author, and published date already exists
-    #         if BooksLibrary.objects.filter(title=title, author=author, published_date=published_date).exists():
-    #             form.add_error(None, "A book with the same title, author, and published date already exists.")
-    #             return self.form_invalid(form)
-    #             form.save()
-    #             return redirect('multimedia:books_library_list')
-    #     else:
-    #         return self.get(request, *args, **kwargs)
         
 class BooksLibraryDetailView(DetailView):
     model = BooksLibrary
@@ -131,8 +116,6 @@ class ArchiveLinkDetailView(DetailView):
     template_name = 'multimedia/archive_link_detail.html'
     context_object_name = 'archive'
 
-
-
 class BooksLibraryCreateView(CreateView, LoginRequiredMixin):
     model = BooksLibrary
     form_class = BooksLibraryForm
@@ -152,8 +135,42 @@ class BooksLibraryCreateView(CreateView, LoginRequiredMixin):
         
         return super().form_valid(form)
 
+
+@login_required
+@require_POST
+def vote_book(request):
+    book_id = request.POST.get('book_id')
+    action = request.POST.get('action')
+    user = request.user
+
+    try:
+        book = BooksLibrary.objects.get(id=book_id)
+        
+        if action == 'vote':
+            if not book.voters.filter(id=user.id).exists():
+                book.voters.add(user)
+                book.voteCount += 1
+                book.save()
+                return JsonResponse({'status': 'ok', 'voteCount': book.voteCount})
+            else:
+                return JsonResponse({'status': 'error', 'message': 'You have already voted.'})
+        elif action == 'unvote':
+            if book.voters.filter(id=user.id).exists():
+                book.voters.remove(user)
+                book.voteCount -= 1
+                book.save()
+                return JsonResponse({'status': 'ok', 'voteCount': book.voteCount})
+            else:
+                return JsonResponse({'status': 'error', 'message': 'You have not voted yet.'})
+    except BooksLibrary.DoesNotExist:
+        return JsonResponse({'status': 'error', 'message': 'Book not found.'})
+    
+    return JsonResponse({'status': 'error', 'message': 'Invalid action.'})
+
+
 # multimedia/
 # books_library_list.html
+# books_library_form.html
 # books_library_detail.html
 # gallery_list.html
 # gallery_detail.html

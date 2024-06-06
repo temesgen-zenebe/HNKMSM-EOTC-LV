@@ -107,7 +107,7 @@
                                 {% for book in books %}
                                     {% if book.visibility == 'private' %}
                                         {% if book.activeForVote %}
-                                            <div class="d-flex text-body-secondary pt-3">
+                                            <div id="book-{{ book.id }}" class="book d-flex text-body-secondary pt-3">
                                                 {% if book.cover_image %} 
                                                     <img src="{{ book.cover_image.url }}" 
                                                         class="bd-placeholder-img flex-shrink-0 me-2 rounded" 
@@ -135,15 +135,16 @@
                                                 <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
                                                     <div class="d-flex justify-content-between">
                                                         <strong class="text-gray-dark">{{book.title}}</strong>
-                                                        <strong class="btn btn-sm btn-info d-block">100</strong>
+                                                        <strong class="btn btn-sm btn-outline-info"><span id="voteCount-{{ book.id }}">{{ book.voteCount }}</span></strong>
                                                         <div>
-                                                            <a href="#" class="btn btn-sm btn-primary d-block" id="voteBook" >vote</a>
-                                                            <a href="#" class="btn btn-sm btn-danger d-none" id="unVoteBook">unVote</a>
-                                                        </div>
-                                                       
+                                                            <a class="btn btn-sm btn-primary vote-button small" id="voteBook" data-book-id="{{ book.id }}" data-action="vote" {% if user in book.voters.all %}style="display:none;"{% endif %}>vote</a>
+                                                            <a class="btn btn-sm btn-secondary vote-button small" id="unVoteBook" data-book-id="{{ book.id }}" data-action="unvote" {% if user not in book.voters.all %}style="display:none;"{% endif %}>unvote</a>
+                                                        </div> 
                                                     </div>
                                                     <span class="d-block small pb-2">By: {{book.user.username}}</span>
+                                                    {% if  book.web_link %}
                                                     <span class="d-block small">@<a href="{{book.web_link}}" target="_blank">Red More</a></span>
+                                                    {% endif %}
                                                 </div>
                                             </div>
                                        {% endif %}
@@ -261,5 +262,43 @@
         </div>
     </div>
     <!-- End Example Code -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.vote-button').click(function(e) {
+                e.preventDefault();
+
+                var bookId = $(this).data('book-id');
+                var action = $(this).data('action');
+                var $voteButton = $(this).closest('.book').find('#voteBook');
+                var $unVoteButton = $(this).closest('.book').find('#unVoteBook');
+                var $voteCount = $(this).closest('.book').find('#voteCount-' + bookId);
+
+                $.ajax({
+                    type: 'POST',
+                    url: '{% url "multimedia:vote_book" %}',
+                    data: {
+                        'book_id': bookId,
+                        'action': action,
+                        'csrfmiddlewaretoken': '{{ csrf_token }}'
+                    },
+                    success: function(response) {
+                        if (response.status === 'ok') {
+                            $voteCount.text(response.voteCount);
+                            if (action === 'vote') {
+                                $voteButton.hide();
+                                $unVoteButton.show();
+                            } else if (action === 'unvote') {
+                                $voteButton.show();
+                                $unVoteButton.hide();
+                            }
+                        } else {
+                            alert(response.message);
+                        }
+                    }
+                });
+            });
+        });
+    </script>
 </div>
 {% endblock %}
