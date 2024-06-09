@@ -17,6 +17,7 @@ class BooksLibrary(models.Model):
     title = models.CharField(max_length=200)
     author = models.CharField(max_length=200)
     published_date = models.DateField()
+    published_by = models.CharField(max_length=100, blank=True, null=True)
     format_type = models.CharField(max_length=50, choices=FORMAT_TYPE)
     visibility =models.CharField(max_length=50, default="private", choices=VISIBILITY_STATUES)
     activeForVote =models.BooleanField(default=False)

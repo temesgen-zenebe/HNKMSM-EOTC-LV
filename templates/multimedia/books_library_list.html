@@ -33,13 +33,13 @@
         <div class="col-md-4">
             <div class="card mb-4 shadow">
                 {% if book.cover_image %}
-                <img src="{{ book.cover_image.url }}" class="card-img-top" alt="{{ book.title }}">
+                <img src="{{ book.cover_image.url }}" width="100%" height="160"  class="card-img-top" alt="{{ book.title }}">
                 {% endif %}
                 <div class="card-body small">
                     <h5 class="card-title">{{ book.title }}</h5>
                     <p class="card-text small">{{ book.summary|truncatewords:30 }}</p>
                     <a href="{% url 'multimedia:books_library_detail' slug=book.slug %}" class="btn btn-sm btn-outline-primary">Read More</a>
-                    <a href="{% url 'multimedia:books_library_create'  %}" class="btn btn-sm btn-outline-primary">create</a>
+                    {% comment %} <a href="{% url 'multimedia:books_library_create'  %}" class="btn btn-sm btn-outline-primary">create</a> {% endcomment %}
                 </div>
             </div>
         </div>
@@ -83,184 +83,230 @@
     {% endif %}
     <!--MYbookList Modal -->
     <div class="modal fade" id="staticBackdropMYbookList" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropMYbookListLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-scrollable">
-        <div class="modal-content">
-            <div class="modal-header">
-                <nav class="modal-title small" id="staticBackdropMYbookListpLabel">
-                    <div class="nav nav-pills rounded gap-2" id="nav-tab" role="tablist">
-                        <button class="nav-link border active " id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Vote the Books</button>
-                        <button class="nav-link border" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Add your bast book</button>
+            <div class="modal-dialog modal-xl modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <nav class="modal-title small" id="staticBackdropMYbookListpLabel">
+                            <div class="nav nav-pills rounded gap-2" id="nav-tab" role="tablist">
+                                <button class="nav-link border active " id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Vote the Books</button>
+                                <button class="nav-link border" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Add your bast book</button>
+                            </div>
+                        </nav>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                </nav>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="">
-                    <div class="tab-content" id="nav-tabContent">
-                        <div class="tab-pane fade show active " id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
-                            <div class=" card my-2 p-2 bg-body rounded shadow-sm">
-                                <div class="d-flex justify-content-between py-2 border-bottom">
-                                    <p class="pb-1 mb-0 text-primary small">Recommended by others</p>
-                                    <p class="pb-1 mb-0 text-primary small">voteCount</p>
-                                    <p class="pb-2 mb-0 text-primary small">action</p>
-                                </div>
-                                {% for book in books %}
-                                    {% if book.visibility == 'private' %}
-                                        {% if book.activeForVote %}
-                                            <div id="book-{{ book.id }}" class="book d-flex text-body-secondary pt-3">
-                                                {% if book.cover_image %} 
-                                                    <img src="{{ book.cover_image.url }}" 
-                                                        class="bd-placeholder-img flex-shrink-0 me-2 rounded" 
-                                                        width="35" height="35" 
-                                                        alt="{{ book.title }}"
-                                                        role="img" 
-                                                        aria-label="Placeholder: 32x32" 
+                    <div class="modal-body">
+                        <div class="">
+                            <div class="tab-content" id="nav-tabContent">
+                                <div class="tab-pane fade show active " id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
+                                    <!-- Example Code -->
+                                    <div class="row g-2 align-items-md-stretch">
+                                        <div class="col-md-12 border rounded-3 text-bg-white">
+                                        <div class="mx-3 pt-2">
+                                            <h2 class="fs-6 text-primary">You can vote for recommendations by others</h2>
+                                        </div>
+                                        <hr />
+                                        <div class="p-3">
+                                            {% for book in books %}
+                                            {% if book.visibility == 'private' %}
+                                            {% if book.activeForVote %}
+                                            <!-- Card  -->
+                                            <div id="book-{{ book.id }}"  class="book card mb-3">
+                                            <div class="row g-0">
+                                                <div class="col-md-4">
+                                                    {% if book.cover_image %} 
+                                                    <img 
+                                                        src="{{ book.cover_image.url }}" 
+                                                        class="bd-placeholder-img flex-shrink-0 me-2 rounded-top" 
+                                                        width="100%" height="250" 
+                                                        alt="{{ book.title }}" 
+                                                        role="{{ book.title }}-img" 
+                                                        aria-label="Placeholder: 50x50" 
                                                         preserveAspectRatio="xMidYMid slice" 
                                                         focusable="false">
-                                                {% else %}
-                                                <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" 
-                                                width="32" height="32" 
-                                                src="{{book.cover_image.url}}" 
-                                                role="img" 
-                                                aria-label="Placeholder: 32x32" 
-                                                preserveAspectRatio="xMidYMid slice" 
-                                                focusable="false">
-                                                <title>Placeholder</title>
-                                                <rect width="100%" height="100%" fill="#007bff"></rect>
-                                                <text x="50%" y="50%" 
-                                                fill="#007bff" 
-                                                dy=".3em">32x32</text>
-                                                </svg>
-                                                {% endif %}
-                                                <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
-                                                    <div class="d-flex justify-content-between">
-                                                        <strong class="text-gray-dark">{{book.title}}</strong>
-                                                        <strong class="btn btn-sm btn-outline-info"><span id="voteCount-{{ book.id }}">{{ book.voteCount }}</span></strong>
-                                                        <div>
-                                                            <a class="btn btn-sm btn-primary vote-button small" id="voteBook" data-book-id="{{ book.id }}" data-action="vote" {% if user in book.voters.all %}style="display:none;"{% endif %}>vote</a>
-                                                            <a class="btn btn-sm btn-secondary vote-button small" id="unVoteBook" data-book-id="{{ book.id }}" data-action="unvote" {% if user not in book.voters.all %}style="display:none;"{% endif %}>unvote</a>
-                                                        </div> 
-                                                    </div>
-                                                    <span class="d-block small pb-2">By: {{book.user.username}}</span>
-                                                    {% if  book.web_link %}
-                                                    <span class="d-block small">@<a href="{{book.web_link}}" target="_blank">Red More</a></span>
+
+                                                    {% else %}
+                                                    <img 
+                                                        src="{% static "img/bookPlaceHolder.png" %}" 
+                                                        class="bd-placeholder-img flex-shrink-0 me-2 rounded" 
+                                                        width="100%" height="250" 
+                                                        alt="{{ book.title }}bookPlaceHolder" 
+                                                        role="img" 
+                                                        aria-label="Placeholder: 50x50" 
+                                                        preserveAspectRatio="xMidYMid slice" 
+                                                        focusable="false">
                                                     {% endif %}
+                                                </div>
+                                                <div class="col-md-8">
+                                                <div class="card-body">
+                                                    <div class="card-text small">
+                                                    <p class="mb-0 small lh-sm">
+                                                        <strong class="d-block text-secondary">Title : {{book.title}}</strong>
+                                                        <span class="small text-secondary">Publisher : {{book.published_by}}</span>
+                                                    </p>
+                                                    <hr />
+                                                    <p class="mb-0 small lh-md d-flex justify-content-between">
+                                                        <span class="small text-secondary">Author : {{book.author}}</span>
+                                                        <span class="small text-secondary">Published date: {{book.published_date}}</span>
+                                                    </p>
+                                                    </div>
+                                                    <hr />
+                                                    <p class="d-block small text-secondary ">
+                                                    <strong class="small">Description: </strong>
+                                                    <small>{{ book.summary|truncatewords:20 }}</small>
+                                                    {% if book.web_link %}<small><a href="{{book.web_link}}" target="_blank">more</a></small>{% endif %}
+                                                    </p>
+                                                    <hr />
+                                                    <div class="d-flex justify-content-between">
+                                                    <span class="py-2 px-3">
+                                                        <small class="badge bg-primary p-2">Vote count : <span id="voteCount-{{ book.id }}"> {{book.voteCount}}</span></small>
+                                                    </span>
+                                                    <div class="d-flex gap-2">
+                                                        <span class="p-2">
+                                                        <small><a class="badge bg-primary vote-button p-2" id="voteBook" data-book-id="{{ book.id }}" data-action="vote" {% if user in book.voters.all %}style="display:none;"{% endif %}><i class="bi bi-hand-thumbs-up px-1"></i>vote</a></small>
+                                                        </span>
+                                                        <span class="p-2">
+                                                        <small><a class="badge bg-primary vote-button p-2" id="unVoteBook" data-book-id="{{ book.id }}" data-action="unvote" {% if user not in book.voters.all %}style="display:none;"{% endif %}><i class="bi bi-hand-thumbs-down px-1"></i>unvote</a></small>
+                                                        </span>
+                                                    </div>
+                                                    </div>
+                                                </div>
                                                 </div>
                                             </div>
-                                       {% endif %}
-                                    {% endif %}
-                                {% endfor %}
-                                {% comment %} <small class="d-block text-end mt-3">
-                                  <a href="#">All suggestions</a>
-                                </small> {% endcomment %}
-                            </div>
-                            <!--by you-->
-                            <div class="card my-4 p-2 bg-body rounded shadow-sm">
-                                <div class="d-flex justify-content-between py-2 border-bottom">
-                                    <h5 class="pb-2 mb-0 text-primary fs-6">Recommended by you</h5>
-                                    <h6 class="pb-2 mb-0 text-primary ">approvale status</h6>
-                                </div>
-                                {% for book in books %}
-                                    {% if book.visibility == 'private' %}
-                                        {% comment %} {% if book.activeForVote %} {% endcomment %}
-                                            {% if user.is_authenticated %}
-                                                {% if book.user.username == user.username %}
-                                                <div class="d-flex text-body-secondary pt-3">
-                                                    {% if book.cover_image %} 
-                                                        <img src="{{ book.cover_image.url }}" 
-                                                            class="bd-placeholder-img flex-shrink-0 me-2 rounded" 
-                                                            width="35" height="35" 
-                                                            alt="{{ book.title }}"
-                                                            role="img" 
-                                                            aria-label="Placeholder: 32x32" 
-                                                            preserveAspectRatio="xMidYMid slice" 
-                                                            focusable="false">
-                                                    {% else %}
-                                                    <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" 
-                                                    width="32" height="32" 
-                                                    src="{{book.cover_image.url}}" 
-                                                    role="img" 
-                                                    aria-label="Placeholder: 32x32" 
-                                                    preserveAspectRatio="xMidYMid slice" 
-                                                    focusable="false">
-                                                    <title>Placeholder</title>
-                                                    <rect width="100%" height="100%" fill="#007bff"></rect>
-                                                    <text x="50%" y="50%" 
-                                                    fill="#007bff" 
-                                                    dy=".3em">32x32</text>
-                                                    </svg>
-                                                    {% endif %}
-                                                <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
-                                                    <div class="d-flex justify-content-between">
-                                                    <strong class="text-gray-dark">{{book.title}}</strong>
-                                                    <div>
-                                                        {% if book.activeForVote %}
-                                                        <small class="badge bg-success">Thank you! Your recommendation was accepted and listed on the board. God bless you.</small>
-                                                        {% else %}
-                                                        <span class="badge bg-warning voteBook small">panding</span>
-                                                        {% endif %}
-                                                    </div>
-                                                    </div>
-                                                    <span class="d-block small pb-2">By: {{book.user.username}}</span>
-                                                    <span class="d-block small">@<a href="{{book.web_link}}" target="_blank">Red More</a></span>
-                                                </div>
-                                                
-                                                </div>
-                                                {% endif %}
+                                            </div>
                                             {% endif %}
-                                        {% comment %} {% endif %} {% endcomment %}
-                                    {% endif %}
-                                {% endfor %}
-                                {% comment %}                                 
-                                <small class="d-block text-end mt-3">
-                                  <a href="#">All suggestions</a>
-                                </small> {% endcomment %}
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
-                            <div class="card m-auto" style="max-width:90%;">
-                                <div class="card-header bg-body ">
-                                    <h1 class="fs-5">Add a New Book</h1>
+                                            {% endif %}
+                                            {% endfor %}
+                                            
+                                        </div>
+                                        </div>
+                                    </div>
+                                    <!-- End Example Code -->   
                                 </div>
-                                <div class="card-body p-3 small">
-                                    <form method="post" enctype="multipart/form-data">
-                                        {% csrf_token %}
-                                        {{ form.non_field_errors }}
-                                    
-                                        <div class="mb-3">
-                                            {{ form.title.label_tag }} {{ form.title }}
+                                <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
+                                   
+                                     <!-- Your Recommendation Section -->
+                                     <div class="row g-2 align-items-md-stretch">
+                                        <div class="col-md-4 border rounded-3 text-bg-whit">
+                                          <div class="mx-3 pt-2">
+                                            <h2 class="fs-6 text-primary">Post your recommend book</h2>
+                                          </div>
+                                          <hr />
+                                          <div class="p-1">
+                                            <div class="card p-2 mb-3" style="max-width: 100%">
+                                                <form method="post" class="small" enctype="multipart/form-data">
+                                                    {% csrf_token %}
+                                                    {{ form.non_field_errors }}
+                                                
+                                                    <div class="mb-3">
+                                                        {{ form.title.label_tag }} {{ form.title }}
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        {{ form.author.label_tag }} {{ form.author }}
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        {{ form.published_date.label_tag }} {{ form.published_date }}
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        {{ form.format_type.label_tag }} {{ form.format_type }}
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        {{ form.cover_image.label_tag }} {{ form.cover_image }}
+                                                    </div>
+                                                    <hr>
+                                                    <div class="d-flex justify-content-center gap-2">
+                                                        <button type="submit" class="btn btn-sm  btn-primary">Save</button>
+                                                        <a href="{% url 'multimedia:books_library_list' %}" class="btn btn-sm btn-outline-primary">Back</a>
+                                                    </div>    
+                                                </form> 
+                                            </div>
+                                            
+                                          </div>
                                         </div>
-                                        <div class="mb-3">
-                                            {{ form.author.label_tag }} {{ form.author }}
+                                        <!-- YOUR RECOMENDATION  -->
+                                        <div class="col-md-8">
+                                          <div class="p-1 text-bg-white border rounded-2">
+                                            <div class="mx-3 pt-2">
+                                              <h2 class="fs-6 text-primary">Your Recommendation</h2>
+                                            </div>
+                                            <hr />
+                                            <div class="album py-2 ">
+                                              <div class="container">
+                                                <div class="row row-cols-1 row-cols-md-2 g-4">
+                                                    {% for book in books %}
+                                                    {% if book.visibility == 'private' %}
+                                                    {% if user.is_authenticated %}
+                                                    {% if book.user.username == user.username %}
+                                                    <div class="col">
+                                                        <div class="card shadow">
+                                                        {% if book.cover_image %}
+                                                            <img
+                                                                class="bd-placeholder-img card-img-top"
+                                                                width="100%"
+                                                                height="120"
+                                                                src="{{book.cover_image.url}}"
+                                                                role="{{book.title}}-img"
+                                                                aria-label="Placeholder: Thumbnail"
+                                                                preserveAspectRatio="xMidYMid slice"
+                                                                focusable="false"
+                                                            >
+                                                        {% else %}
+                                                                <img
+                                                                class="bd-placeholder-img card-img-top"
+                                                                width="100%"
+                                                                height="120"
+                                                                src="{% static "img/bookPlaceHolder.png" %}"
+                                                                role="{{book.title}}-img-bookPlac"
+                                                                aria-label="Placeholder: Thumbnail"
+                                                                preserveAspectRatio="xMidYMid slice"
+                                                                focusable="false">
+                                                        {% endif %}
+                                                            
+                                                        <div class="card-body">
+                                                        <p class="mb-0 small lh-sm small">
+                                                            <strong class="d-block text-gray-dark">Title :{{book.title}}</strong>
+                                                            <span class="card-titel small text-body-secondary">Publisher : {{book.published_by}}</span>
+                                                        </p>
+                                                        <hr />  
+                                                        <p class="mb-0 p-0 small lh-md d-flex justify-content-between">
+                                                            <span class="d-block card-titel small text-body-secondary">Auhter: {{book.author}}</span>
+                                                            <span class="d-block card-titel small text-body-secondary">Published date:{{book.published_date}}</span>
+                                                        </p>
+                                                        <hr />
+                                                        {% if book.activeForVote %}
+                                                        <div class="mb-0 small lh-md">
+                                                            <span class="d-block card-titel small text-body-secondary">Status: <span class="text-primary">accepted</span> </span>
+                                                            <hr>
+                                                            <span class="d-block card-titel small text-body-secondary">Massge: <span class="text-primary">Thank you! Your recommendation was accepted and listed on the board. God bless you.</span> </span>
+                                                        </div>
+                                                        {% else %}
+                                                        <div class="mb-0 small lh-md">
+                                                            <span class="d-block card-titel small text-body-secondary">Status: <span class="text-secondary">panding</span></span>
+                                                            <hr>
+                                                            <span class="d-block card-titel small text-body-secondary">Massge: <span class="text-danger">Thanks you for your contiribution, if is good for every one the status will change.</span> </span>
+                                                        </div>
+                                                        {% endif %}
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                                    {% endif %}
+                                                    {% endif %}
+                                                    {% endif %}
+                                                    {% endfor %}
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
                                         </div>
-                                        <div class="mb-3">
-                                            {{ form.published_date.label_tag }} {{ form.published_date }}
-                                        </div>
-                                        <div class="mb-3">
-                                            {{ form.format_type.label_tag }} {{ form.format_type }}
-                                        </div>
-                                        <div class="mb-3">
-
-                                        <div class="mb-3">
-                                            {{ form.cover_image.label_tag }} {{ form.cover_image }}
-                                        </div>
-                                        <hr>
-                                        <div class="d-flex justify-content-center gap-2">
-                                            <button type="submit" class="btn btn-sm  btn-primary">Save</button>
-                                            <a href="{% url 'multimedia:books_library_list' %}" class="btn btn-sm btn-outline-primary">Back</a>
-                                        </div>    
-                                    </form>
-                                    
+                                      </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            
-        </div>
         </div>
     </div>
+    
     <!-- End Example Code -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
