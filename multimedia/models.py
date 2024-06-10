@@ -31,6 +31,9 @@ class BooksLibrary(models.Model):
     updated = models.DateTimeField(auto_now=True)
     slug = models.SlugField(max_length=200, unique=True ,null=True, blank=True)  # Add this line
     
+    class Meta:
+        ordering = ['-published_date', '-created_at']
+    
     def save(self, *args, **kwargs):
         if not self.slug:
             value = str(self.title)
@@ -64,7 +67,6 @@ class Gallery(models.Model):
     
     def __str__(self):
         return self.title
-
 
 class UserManual(models.Model):
     title = models.CharField(max_length=200)
@@ -132,6 +134,45 @@ class ArchiveLink(models.Model):
     updated = models.DateTimeField(auto_now=True)
     slug = models.SlugField(max_length=200, unique=True ,null=True, blank=True)  # Add this line
     
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            value = str(self.title)
+            self.slug = unique_slug(value, type(self))
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.title
+
+class SpiritualPoemSong(models.Model):
+    TYPE_CHOICES = [
+        ('poem', 'Poem'),
+        ('song', 'Song'),
+    ]
+
+    LANGUAGE_CHOICES = [
+        ('English', 'English'),
+        ('Amharic', 'Amharic'),
+        ('Other', 'Other'),
+    ]
+
+    title = models.CharField(max_length=200)
+    author = models.CharField(max_length=200, blank=True, null=True)  # Optional author field
+    type = models.CharField(max_length=4, choices=TYPE_CHOICES)
+    discretion = models.TextField(max_length=200, blank=True, null=True)
+    language = models.CharField(max_length=20, choices=LANGUAGE_CHOICES, default='en')
+    published_date = models.DateField(blank=True, null=True)  # Optional publication date
+    audio_file = models.FileField(upload_to='multimedia/spiritual_poems_songs/audio/', blank=True, null=True)
+    pdf_file = models.FileField(upload_to='multimedia/spiritual_poems_songs/pdf/', blank=True, null=True)
+    cover_image = models.ImageField(upload_to='multimedia/spiritual_poems_songs/covers/', blank=True, null=True)
+    link = models.URLField(blank=True, null=True)  # Link to external resource
+    slug = models.SlugField(max_length=200, unique=True, null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True)
+
+    class Meta:
+        ordering = ['-published_date', '-created_at']
+
     def save(self, *args, **kwargs):
         if not self.slug:
             value = str(self.title)

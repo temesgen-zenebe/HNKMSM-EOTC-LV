@@ -1,7 +1,7 @@
 from django.shortcuts import redirect
 from django.views.generic import ListView, DetailView,CreateView
 from django.views.generic import TemplateView
-from .models import BooksLibrary, Gallery, UserManual, PraiseGlory, TestimonyOfSalvation, ArchiveLink
+from .models import BooksLibrary, Gallery, SpiritualPoemSong, UserManual, PraiseGlory, TestimonyOfSalvation, ArchiveLink
 from .forms import BooksLibraryForm
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -167,7 +167,18 @@ def vote_book(request):
     
     return JsonResponse({'status': 'error', 'message': 'Invalid action.'})
 
+class SpiritualPoemSongListView(ListView):
+    model = SpiritualPoemSong
+    template_name = 'multimedia/spiritual_poem_song_list.html'
+    context_object_name = 'poems_songs'
+    paginate_by = 10
 
+class SpiritualPoemSongDetailView(DetailView):
+    model = SpiritualPoemSong
+    template_name = 'multimedia/spiritual_poem_song_detail.html'
+    context_object_name = 'poem_song'
+    
+    
 # multimedia/
 # books_library_list.html
 # books_library_form.html
@@ -182,3 +193,5 @@ def vote_book(request):
 # testimony_of_salvation_detail.html
 # archive_link_list.html
 # archive_link_detail.html
+# spiritual_poem_song_list.html
+# spiritual_poem_song_detail.html

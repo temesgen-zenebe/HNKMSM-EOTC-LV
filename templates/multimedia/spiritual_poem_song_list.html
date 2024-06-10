@@ -1,0 +1,77 @@
+{% extends "_base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}spiritual poem or song list{% endblock %}
+{% block main %}
+<div class="container mt-1">
+     <!-- breadcrumb -->
+     <div class="event pb-4">
+        <div class="mx-auto wow bounceInUp rounded-1" 
+            style="background-image: url('{% static "img/heroAccount-13.png" %}');background-size: cover; background-position: center center; background-repeat: no-repeat; " alt="Church-at" data-wow-delay="0.1s">
+            <div class="container py-1 mt-0">
+                <div class="animated bounceInDown ">
+                    <ol class="breadcrumb justify-content-start mb-0 animated bounceInDown">
+                        <li class="small"><a href="{% url 'pages:homepage' %}">Home <span class="px-1">\</span></a></li>
+                        <li class="small"> <a href="{% url "multimedia:multimedia" %}">multimedia<span class="px-1">\</span></a></li>
+                        <li class="small" aria-current="page">poems and songs </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-3">
+        <h1 class="mb-4">Spiritual Poems and Songs</h1>
+        <hr/>
+        <div class="row">
+            {% for item in poems_songs %}
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    {% if item.cover_image %}
+                    <img src="{{ item.cover_image.url }}" width="100%" height="200" class="card-img-top" alt="{{ item.title }}">
+                    {% endif %}
+                    <div class="card-body small">
+                        <h2 class="card-title fs-6">{{ item.title }}</h2><hr/>
+                        <p class="mb-0 card-text small">By: {{ item.author }}  language:  {{ item.language }}</p>
+                        <p class="mb-0 card-text small">language:  {{ item.language }}</p>
+                        <p class="mb-0 card-text small">Date : {{item.published_date}}</p>
+                        <hr/>
+                        <p class="mb-0 card-text small">
+                            {{ item.discretion|truncatewords:20 }}  <!-- Display a snippet of the content -->
+                        </p>
+                        <hr/>
+                        <a href="{% url 'multimedia:spiritual_poem_song_detail' item.slug %}" class="btn btn-sm btn-primary">Read More</a>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <p>No spiritual poems or songs available.</p>
+            {% endfor %}
+        </div>
+        {% if is_paginated %}
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                {% endif %}
+                {% for num in page_obj.paginator.page_range %}
+                <li class="page-item {% if page_obj.number == num %}active{% endif %}">
+                    <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                </li>
+                {% endfor %}
+                {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

@@ -6,6 +6,7 @@ from .views import (
     PraiseGloryListView, PraiseGloryDetailView,
     TestimonyOfSalvationListView, TestimonyOfSalvationDetailView,
     ArchiveLinkListView, ArchiveLinkDetailView, MultimediaView, vote_book,
+    SpiritualPoemSongListView,SpiritualPoemSongDetailView,
 )
 app_name = 'multimedia'
 
@@ -25,4 +26,7 @@ urlpatterns = [
     path('archives/', ArchiveLinkListView.as_view(), name='archive_link_list'),
     path('archives/<slug:slug>/', ArchiveLinkDetailView.as_view(), name='archive_link_detail'),
     path('vote-book/', vote_book, name='vote_book'),
+    path('spiritualPoemAndSong/', SpiritualPoemSongListView.as_view(), name='spiritual_poem_song_list'),
+    path('spiritualPoemAndSong/<slug:slug>/', SpiritualPoemSongDetailView.as_view(), name='spiritual_poem_song_detail'),
 ]
+
