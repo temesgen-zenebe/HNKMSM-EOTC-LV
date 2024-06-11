@@ -93,6 +93,7 @@ class PraiseGlory(models.Model):
     content = models.TextField(default=1000, null=True, blank=True)
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True)
     link = models.URLField(blank=True, null=True)
+    image = models.ImageField(upload_to='multimedia/praiseGlory/', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     slug = models.SlugField(max_length=200, unique=True ,null=True, blank=True)  # Add this line

@@ -1,0 +1,76 @@
+{% extends "_base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}Spiritual Poem or Song Detaile{% endblock %}
+{% block main %}
+<div class="container mt-3">
+    <!-- breadcrumb -->
+    <div class="event pb-3">
+        <div class="mx-auto wow bounceInUp rounded" 
+            style="background-image: url('{% static "img/heroAccount-13.png" %}');background-size: cover; background-position: center center; background-repeat: no-repeat; " alt="Church-at" data-wow-delay="0.1s">
+            <div class="container py-1 mt-0 small">
+                <div class="animated bounceInDown ">
+                    <ol class="breadcrumb justify-content-start mb-0 animated bounceInDown">
+                        <li class="small"><a href="{% url 'pages:homepage' %}">Home <span class="px-1">\</span></a></li>
+                        <li class="small"> <a href="{% url "multimedia:multimedia" %}">multimedia<span class="px-1">\</span></a></li>
+                        <li class="small"> <a href="{% url "multimedia:praise_glory_list" %}">PraiseAndGloryList<span class="px-1">\</span></a></li>
+                        <li class="small" aria-current="page">PraiseAndGloryDetailes</li>
+                    </ol>  
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body small">
+                        {% if praise_glory.image %}
+                        <img src="{{ praise_glory.image.url }}" width="100%" height="240"  class="card-img-top" alt="{{ book.title }}">
+                        {% endif %}
+                        <h1 class="fs-4 text-primary my-4">{{ praise_glory.title }}</h1>
+                        <hr/>
+                        <p><strong>Author:</strong> {{ praise_glory.author }}</p>
+                        <p><strong>Date:</strong> {{ praise_glory.created_at|date:"F j, Y" }}</p>
+                        <hr/>
+                        <div class="mb-4 small p-2">
+                            <p>{{ praise_glory.content }}</p>
+                        </div>
+                        <hr/>
+                        {% if praise_glory.link %}
+                        <a href="{{ praise_glory.link }}" class="btn btn-sm btn-primary" target="_blank">Read More from externale Link</a>
+                        <a href="{% url "multimedia:praise_glory_list" %}" class="btn btn-sm btn-primary" target="_blank">Back</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container pt-3 mt-5">
+        <div class="row mt-4">
+            <div class="col-lg-12">
+                <h1 class="fs-4 text-primary mb-4">Other Praises and Glories</h3>
+                <hr />
+                <div class="row">
+                    {% for related in related_praises %}
+                    <div class="col-md-4 mb-4">
+                        <div class="card small">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ related.title }}</h5>
+                                <hr/>
+                                <p class="card-text">{{ related.content|truncatewords:15 }}</p>
+                                <hr/>
+                                <a href="{% url 'multimedia:praise_glory_detail' related.slug %}" class="btn btn-sm btn-primary">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <p>No other praises and glories available.</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

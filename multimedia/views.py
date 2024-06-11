@@ -75,24 +75,44 @@ class GalleryDetailView(DetailView):
 class UserManualListView(ListView):
     model = UserManual
     template_name = 'multimedia/user_manual_list.html'
-    context_object_name = 'manuals'
+    context_object_name = 'user_manuals'
     paginate_by = 10
 
 class UserManualDetailView(DetailView):
     model = UserManual
     template_name = 'multimedia/user_manual_detail.html'
-    context_object_name = 'manual'
+    context_object_name = 'user_manual'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        manual = self.get_object()
+
+        # Example: finding related manuals based on the same category or other criteria
+        related_manuals = UserManual.objects.all().exclude(id=manual.id)[:6]  # Excluding the current manual and limiting to 4
+        
+        context['related_manuals'] = related_manuals
+        return context
 
 class PraiseGloryListView(ListView):
     model = PraiseGlory
     template_name = 'multimedia/praise_glory_list.html'
     context_object_name = 'praises'
     paginate_by = 10
-
 class PraiseGloryDetailView(DetailView):
     model = PraiseGlory
     template_name = 'multimedia/praise_glory_detail.html'
-    context_object_name = 'praise'
+    context_object_name = 'praise_glory'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        praise_glory = self.get_object()
+
+        # Example: finding related praises based on some criteria
+        related_praises = PraiseGlory.objects.exclude(id=praise_glory.id)[:4]  # Excluding the current praise and limiting to 4
+
+        context['related_praises'] = related_praises
+        return context
+
 
 class TestimonyOfSalvationListView(ListView):
     model = TestimonyOfSalvation
