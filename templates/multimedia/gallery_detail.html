@@ -26,7 +26,7 @@
     <div class="row">
         <div class="col-md-8 rounded">
             {% if media_item.media_type == 'Photo' %}
-            <img src="{{ media_item.file.url }}" class="img-fluid" alt="{{ media_item.title }}">
+            <img src="{{ media_item.file.url }}" width="100%" height="250" class="img-fluid" alt="{{ media_item.title }}">
             {% elif media_item.media_type == 'Video' %}
             <video controls class="img-fluid">
                 <source src="{{ media_item.file.url }}" type="video/mp4">
@@ -35,7 +35,7 @@
             {% endif %}
             
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 small">
             <p>{{ media_item.description }}</p>
             <hr/>
             <a href="{% url 'multimedia:gallery_list' %}" class="btn btn-sm btn-primary">Back to Gallery List</a>

@@ -8,7 +8,7 @@
     <div class="event pb-4">
         <div class="mx-auto wow bounceInUp rounded-1" 
             style="background-image: url('{% static "img/heroAccount-13.png" %}');background-size: cover; background-position: center center; background-repeat: no-repeat; " alt="Church-at" data-wow-delay="0.1s">
-            <div class="container py-1 mt-0 small">
+            <div class="container py-3 mt-0 small">
                 <div class="animated bounceInDown ">
                     <ol class="breadcrumb justify-content-start mb-0 animated bounceInDown small">
                         <li class="small"><a href="{% url 'pages:homepage' %}">Home <span class="px-1">\</span></a></li>
@@ -35,7 +35,7 @@
                 </div>
                 <hr/>
                 <a href="{{ user_manual.file.url }}" class="btn btn-sm btn-danger" target="_blank">Download</a>
-                <a href="{% url "multimedia:user_manual_list" %}" class="btn btn-sm btn-primary" target="_blank">Back to Manual</a>
+                <a href="{% url "multimedia:user_manual_list" %}" class="btn btn-sm btn-primary">Back to Manual</a>
             </div>
         </div>
     </div>
@@ -49,7 +49,7 @@
                 <div class="row">
                     {% for manual in related_manuals %}
                     <div class="col-md-4 mb-4">
-                        <div class="card bg-primary text-dark ">
+                        <div class="card bg-primary text-dark shadow">
                             <div class="card-body small">
                                 <h5 class="card-title">{{ manual.title }}</h5>
                                 <hr/>

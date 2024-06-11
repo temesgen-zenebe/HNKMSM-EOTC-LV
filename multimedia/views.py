@@ -98,6 +98,7 @@ class PraiseGloryListView(ListView):
     template_name = 'multimedia/praise_glory_list.html'
     context_object_name = 'praises'
     paginate_by = 10
+    
 class PraiseGloryDetailView(DetailView):
     model = PraiseGlory
     template_name = 'multimedia/praise_glory_detail.html'
@@ -118,12 +119,22 @@ class TestimonyOfSalvationListView(ListView):
     model = TestimonyOfSalvation
     template_name = 'multimedia/testimony_of_salvation_list.html'
     context_object_name = 'testimonies'
-    paginate_by = 10
+    paginate_by = 3
 
 class TestimonyOfSalvationDetailView(DetailView):
     model = TestimonyOfSalvation
     template_name = 'multimedia/testimony_of_salvation_detail.html'
     context_object_name = 'testimony'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        testimony = self.get_object()
+
+        # Example: finding related testimonies based on some criteria
+        related_testimonies = TestimonyOfSalvation.objects.exclude(id=testimony.id)[:4]  # Excluding the current testimony and limiting to 4
+
+        context['related_testimonies'] = related_testimonies
+        return context
 
 class ArchiveLinkListView(ListView):
     model = ArchiveLink

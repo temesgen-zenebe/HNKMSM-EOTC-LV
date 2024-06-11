@@ -8,7 +8,7 @@
      <div class="event pb-4">
         <div class="mx-auto wow bounceInUp rounded-1" 
             style="background-image: url('{% static "img/heroAccount-13.png" %}');background-size: cover; background-position: center center; background-repeat: no-repeat; " alt="Church-at" data-wow-delay="0.1s">
-            <div class="container py-1 mt-0">
+            <div class="container py-3 mt-0 small">
                 <div class="animated bounceInDown ">
                     <ol class="breadcrumb justify-content-start mb-0 animated bounceInDown">
                         <li class="small"><a href="{% url 'pages:homepage' %}">Home <span class="px-1">\</span></a></li>
@@ -31,9 +31,9 @@
         {% for book in books %}
         {% if book.visibility == 'public' %}
         <div class="col-md-4">
-            <div class="card mb-4 shadow">
+            <div class="card mb-4 shadow rounded">
                 {% if book.cover_image %}
-                <img src="{{ book.cover_image.url }}" width="100%" height="160"  class="card-img-top" alt="{{ book.title }}">
+                <img src="{{ book.cover_image.url }}" width="100%" height="160"  class="card-img-top rounded " alt="{{ book.title }}">
                 {% endif %}
                 <div class="card-body small">
                     <h5 class="card-title">{{ book.title }}</h5>
