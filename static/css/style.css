@@ -840,3 +840,10 @@ code {
     color: chocolate;
     word-wrap: break-word;
 }
+
+.card-img-top {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    object-position: center;
+  }

@@ -1,0 +1,91 @@
+{% extends "_base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}Blog List{% endblock %}
+{% block main %}
+<div class="container mt-2">
+    <!-- breadcrumb -->
+    <div class="event pb-2">
+        <div class="mx-auto wow bounceInUp rounded" 
+            style="background-image: url('{% static "img/heroAccount-13.png" %}');background-size: cover; background-position: center center; background-repeat: no-repeat; " alt="Church-at" data-wow-delay="0.1s">
+            <div class="container py-2 mt-0 small">
+                <div class="animated bounceInDown ">
+                    <ol class="breadcrumb justify-content-start mb-0 animated bounceInDown">
+                        <li class="small"><a href="{% url 'pages:homepage' %}">Home <span class="px-1">\</span></a></li>
+                        <li class="small" aria-current="page">blogsList</li>
+                    </ol>
+                    
+                </div>
+             
+            </div>
+            <!-- breadcrumb Start -->
+            <div class="text-center">
+                <h1 class="mb-2 bolder text-light fs-4">Blogs and articles List</h1>
+                <h6 class="mb-2 text-light ">የዚህ ጽሁፍ የመጀመሪያው አንባቢ ይሆኑ</h6>
+                <p class="mb-3 text-church">Be the first reader of this article.</p>
+                <p class="mb-2 small ">እውነትን ማስተማር፣ ልብን አነሳሽ፣ ነፍሳትን ወደ መለኮታዊ ማስተዋል መምራት። ማቴዎስ 5:2</p>
+            </div>
+        </div>
+    </div>
+   <!-- Blog Start -->
+    <div class="container blog py-3">
+        <div class="text-center wow bounceInUp" data-wow-delay="0.1s">
+            <small class="d-inline-block fw-bold text-dark text-uppercase bg-light border border-primary rounded-pill px-4 py-1 mb-3">Our Blog</small>
+        </div>
+        <div class="row g-3 justify-content-center">
+            {% if blogs %}
+            {% for blog in blogs %}
+            <div class="col-md-6 col-lg-4 wow bounceInUp " data-wow-delay="0.5s">
+                <div class="blog-item ">
+                    <div class="overflow-hidden rounded shadow" >
+                        {% if blog.cover_image %}
+                        <img src="{{blog.cover_image.url}}" style="height: 21rem;" width="100%" class="bd-placeholder-img flex-shrink-0 me-2 rounded "  alt="{{blog.title}}">
+                        {% else %}
+                        <img src="{% static 'img/blog/ethiopianOrtodx.png' %}" class="img-fluid " alt="ethiopianOrtodx">
+                        {% endif %}
+                    </div>
+                    <div class="blog-content bg-light shadow">
+                        
+                        <div class="p-2 text-dark align-items-center justify-content-center ">
+                            <h5 class="px-2 fs-6">{{ blog.title }}</h5>
+                            <hr class="mx-3"/>
+                            <p class="px-2 small">{{ blog.content|truncatewords:12 }}</p>
+                            <hr class="mx-3 "/>
+                            <div class="text-center">
+                            <a href="{% url 'blog:blog_detail' blog.slug %}" class="btn btn-sm btn-primary p-2  m-3 rounded-pill">Read More</a>
+                            </div>
+                        </div>
+                        <div class="text-dark bg-primary ">
+                            <div class="h-100  px-3 d-flex justify-content-between">
+                                <small class="mb-0"><i class="fas fa-book-reader fa-3 text-dark px-1"></i>{{blog.viewerCount }}</small>
+                                <small class="mb-0"><i class="fas fa-calendar-day fa-3 text-dark px-1"></i>{{blog.published_at}}</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            <div class="col-md-6 col-lg-4 wow bounceInUp " data-wow-delay="0.5s">
+                <div class="blog-item ">
+                    <div class="overflow-hidden rounded shadow">
+                        <img src="{% static 'img/blog/ethiopianOrtodx.png' %}" class="img-fluid" alt="ethiopianOrtodx">
+                    </div>
+                    <div class="blog-content bg-light shadow">
+                        
+                        <div class="py-3 text-dark align-items-center justify-content-center text-center">
+                            <p class="my-1 px-2 small">ይቅርታ፣ በአሁኑ ጊዜ ምንም ብሎግ ጽሁፍ ማግኘት አልቻልንም። እባክዎ ቆየት ብለው ይሞክሩ!!</p>
+                            <hr class="mx-3 px-2" />
+                            <h1 class="px-2 fs-5"> Apologies, we couldn't find any blog data at the moment. Please try again later. </h1>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+        {% include 'pages/pagination.html' with page_obj=page_obj %}
+    </div>
+  <!-- Blog End -->
+</div>
+{% endblock %}

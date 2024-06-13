@@ -19,7 +19,7 @@
             </div>
         </div>
     </div>
-    <h1 class="fs-4 text-primary">Gallery List</h1>
+    <h1 class="fs-4 fs-4 px-2">Gallery List</h1>
     <hr/>
     <div class="row">
         {% for media in media %}
@@ -31,7 +31,7 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ media.title }}</h5>
                     <hr/>
-                    <a href="{% url 'multimedia:gallery_detail' slug=media.slug %}" class="btn btn-sm btn-primary">View Detail</a>
+                    <a href="{% url 'multimedia:gallery_detail' slug=media.slug %}" class="btn btn-sm btn-outline-primary">view Detail</a>
                 </div>
             </div>
         </div>

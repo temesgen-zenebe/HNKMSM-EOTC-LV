@@ -119,7 +119,7 @@ class TestimonyOfSalvationListView(ListView):
     model = TestimonyOfSalvation
     template_name = 'multimedia/testimony_of_salvation_list.html'
     context_object_name = 'testimonies'
-    paginate_by = 3
+    paginate_by = 10
 
 class TestimonyOfSalvationDetailView(DetailView):
     model = TestimonyOfSalvation

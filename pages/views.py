@@ -3,7 +3,11 @@ from django.views.generic import TemplateView
 from django.contrib import messages 
 from events.models import Event,EventGallery, EventsCategory, PostEventImages
 from django.utils import timezone
-
+from multimedia.models import (
+    BooksLibrary, Gallery, UserManual, 
+    PraiseGlory, TestimonyOfSalvation, 
+    ArchiveLink,SpiritualPoemSong 
+)
 
 class HomePageView(TemplateView):
     template_name = 'pages/home.html'
@@ -16,11 +20,31 @@ class HomePageView(TemplateView):
         eventGallery = EventGallery.objects.all().order_by('-created')
         eventsCategory = EventsCategory.objects.all()
         postEventImages = PostEventImages.objects.all()
+        
+        #Multimedia
+        latest_archives = ArchiveLink.objects.order_by('-created_at')[:3]
+        latest_booksLibraries = BooksLibrary.objects.order_by('-created_at')[:3]
+        latest_gallery = Gallery.objects.order_by('-uploaded_at')[:3]
+        latest_praiseGlory = PraiseGlory.objects.order_by('-created_at')[:3]
+        latest_spiritualPoemSongs = SpiritualPoemSong.objects.order_by('-created_at')[:3]
+        latest_testimonySalvations = TestimonyOfSalvation.objects.order_by('-created')[:3]
+        latest_userManuals = UserManual.objects.order_by('-uploaded_at')[:3]
+     
+
         context = {
              'event': events,
              'eventGallery':eventGallery,
              'eventsCategory':eventsCategory,
-             'postEventImages':postEventImages
+             'postEventImages':postEventImages,
+             
+              #Multimedia
+             'latest_archives' : latest_archives,
+             'latest_booksLibraries' : latest_booksLibraries,
+             'latest_gallery' :  latest_gallery,
+             'latest_praiseGlory' :  latest_praiseGlory,
+             'latest_spiritualPoemSongs' : latest_spiritualPoemSongs,
+             'latest_testimonySalvations' : latest_testimonySalvations,
+             'latest_userManuals' :  latest_userManuals,
           }
         return render(request, self.template_name, context)
    

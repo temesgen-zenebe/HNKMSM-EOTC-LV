@@ -6,13 +6,13 @@
 <div class="container my-2">
      <!-- breadcrumb -->
      <div class="event pb-4">
-        <div class="mx-auto wow bounceInUp rounded-1" 
+        <div class="mx-auto wow bounceInUp rounded" 
             style="background-image: url('{% static "img/heroAccount-13.png" %}');background-size: cover; background-position: center center; background-repeat: no-repeat; " alt="Church-at" data-wow-delay="0.1s">
             <div class="container py-3 mt-0 small">
                 <div class="animated bounceInDown ">
                     <ol class="breadcrumb justify-content-start mb-0 animated bounceInDown small">
                         <li class="small"><a href="{% url 'pages:homepage' %}">Home <span class="px-1">\</span></a></li>
-                        <li class="small"> <a href="{% url "multimedia:multimedia" %}">multimedia<span class="px-1">\</span></a></li>
+                        <li class="small"><a href="{% url "multimedia:multimedia" %}">multimedia<span class="px-1">\</span></a></li>
                         <li class="small" aria-current="page">UserManualsList</li>
                     </ol>
                 </div>
@@ -21,7 +21,7 @@
     </div>
    
     <div class="container mt-3">
-        <h1 class="fs-4 text-primary mb-4">User Manuals List</h1>
+        <h1 class="fs-4 mb-4">User Manuals List</h1>
         <hr/>
         <div class="row">
             {% for manual in user_manuals %}
@@ -30,9 +30,9 @@
                     <div class="card-body small">
                         <h5 class="card-title">{{ manual.title }}</h5>
                         <hr/>
-                        <p class="card-text"><strong>Version:</strong> {{ manual.version }}</p>
-                        <p class="card-text"><strong>published by:</strong> {{ manual.published_by }}</p>
-                        <p class="card-text"><strong>Published Date:</strong> {{ manual.published_date }}</p>
+                        <p class="card-text m-0"><strong>Version:</strong> {{ manual.version }}</p>
+                        <p class="card-text m-0"><strong>Published Date:</strong> {{ manual.published_date }}</p>
+                        <p class="card-text m-0"><strong>published by:</strong> {{ manual.published_by }}</p>
                         <hr/>
                         <p class="card-text"><strong>Usage description:</strong>
                             {{ manual.usage_description|truncatewords:15 }}

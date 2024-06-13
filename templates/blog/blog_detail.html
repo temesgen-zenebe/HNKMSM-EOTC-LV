@@ -1,0 +1,93 @@
+{% extends "_base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}Blog Detail List{% endblock %}
+{% block main %}
+<div class="container mt-2">
+    <!-- breadcrumb -->
+    <div class="event pb-2">
+        <div class="mx-auto wow bounceInUp rounded" 
+            style="background-image: url('{% static "img/heroAccount-13.png" %}');background-size: cover; background-position: center center; background-repeat: no-repeat; " alt="Church-at" data-wow-delay="0.1s">
+            <div class="container py-2 mt-0 small">
+                <div class="animated bounceInDown ">
+                    <ol class="breadcrumb justify-content-start mb-0 animated bounceInDown">
+                        <li class="small"><a href="{% url 'pages:homepage' %}">Home <span class="px-1">\</span></a></li>
+                        <li class="small"><a href="{% url 'blog:blog_list' %}">BlogList <span class="px-1">\</span></a></li>
+                        <li class="small" aria-current="page">BlogsDetail</li>
+                    </ol>
+                    
+                </div>
+             
+            </div>
+            <!-- breadcrumb Start -->
+            <div class="text-center">
+                <p class="pb-2 small text-primary">እውነትን ማስተማር፣ ልብን አነሳሽ፣ ነፍሳትን ወደ መለኮታዊ ማስተዋል መምራት። ማቴዎስ 5:2</p>
+            </div>
+        </div>
+    </div>
+ <!-- Example Code -->
+    
+ <div class="row g-2">
+    <div class="col-sm-8">
+      <div class="card p-2">
+        <div class="card-body">
+          <h5 class="card-title">{{ blog.title }}</h5>
+          <hr/>
+          <div class="small">
+          <p><strong>Author:</strong> {{ blog.author }}</p>
+          <p><strong>Published at:</strong> {{ blog.published_at }}</p>
+          <p><strong>Viewer Count:</strong> {{ blog.viewerCount }}</p>
+          </div>
+          <hr/>
+          <p class="card-text p-2 lh-lg">{{ blog.content }}</p>
+          {% if blog.web_link %}
+          <ul class="small">
+            <li><a href="{{blog.web_link}}" class="small" target="_blank">Related important link</a></li>
+          </ul>
+          {% endif %}
+        </div>
+        {% if blog.cover_image %}
+        <img class="rounded-1" src="{{ blog.cover_image.url }}" alt="{{ blog.title }} cover image" />
+        {% endif %}
+        <hr/>
+        <div class="small text-secondry"><small>&copy; HNKM & STM-ATEOTC LV</small></div>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="card">
+        <div class="card-body">
+            <div class="my-3 p-3 bg-body rounded shadow-sm">
+                <h6 class="border-bottom pb-2 mb-0">Recent updates</h6>
+                {% if related_blogs %}
+                {% for blog in related_blogs %}
+                <div class="d-flex text-muted pt-3 g-2">
+                 {% if blog.cover_image %}
+                 <img class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" src="{{blog.cover_image.url}}" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false">
+                 {% else %}
+                  <img class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" src="{% static 'img/placeholder.png' %}" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false">
+                  {% endif %}
+                  <p class="pb-3 mb-0 small lh-sm border-bottom">
+                    <strong class="d-block text-gray-dark small">{{blog.title}}</strong>
+                    <small>{{ blog.content|truncatewords:12 }}<a href="{% url "blog:blog_detail" slug=blog.slug %}">Read</a></small>
+                  </p>
+                </div>
+                {% endfor %}
+                {% else %}
+                <div class="d-flex text-muted pt-3">
+                  <img class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" src="{% static 'img/placeholder.png' %}" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false">
+                  <p class="pb-3 mb-0 small lh-sm border-bottom">
+                    <strong class="d-block text-gray-dark">Apologies,</strong>
+                     we couldn't find any related listed blog data at the moment. Please try again later.
+                  </p>
+                </div>
+                {% endif %}
+                <small class="d-block text-end mt-3">
+                  <a href="{% url "blog:blog_list" %}">All blogs</a>
+                </small>
+              </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -37,9 +37,10 @@
                 {% endif %}
                 <div class="card-body small">
                     <h5 class="card-title">{{ book.title }}</h5>
+                    <hr/>
                     <p class="card-text small">{{ book.summary|truncatewords:30 }}</p>
+                    <hr/>
                     <a href="{% url 'multimedia:books_library_detail' slug=book.slug %}" class="btn btn-sm btn-outline-primary">Read More</a>
-                    {% comment %} <a href="{% url 'multimedia:books_library_create'  %}" class="btn btn-sm btn-outline-primary">create</a> {% endcomment %}
                 </div>
             </div>
         </div>

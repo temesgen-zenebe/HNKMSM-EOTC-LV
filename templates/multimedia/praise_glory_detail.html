@@ -24,23 +24,25 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="card shadow">
-                    <div class="card-body small">
+                    <div class="card-body small p-2">
                         {% if praise_glory.image %}
                         <img src="{{ praise_glory.image.url }}" width="100%" height="240"  class="card-img-top" alt="{{ book.title }}">
                         {% endif %}
-                        <h1 class="fs-4 text-primary my-4">{{ praise_glory.title }}</h1>
-                        <hr/>
-                        <p><strong>Author:</strong> {{ praise_glory.author }}</p>
-                        <p><strong>Date:</strong> {{ praise_glory.created_at|date:"F j, Y" }}</p>
-                        <hr/>
-                        <div class="mb-4 small p-2">
-                            <p>{{ praise_glory.content }}</p>
+                        <div class="p-3">
+                            <h1 class="fs-4 text-primary my-4">{{ praise_glory.title }}</h1>
+                            <hr/>
+                            <p><strong>Author:</strong> {{ praise_glory.author }}</p>
+                            <p><strong>Date:</strong> {{ praise_glory.created_at|date:"F j, Y" }}</p>
+                            <hr/>
+                            <div class="mb-4 small">
+                                <p>{{ praise_glory.content }}</p>
+                            </div>
+                            <hr/>
+                            {% if praise_glory.link %}
+                            <a href="{{ praise_glory.link }}" class="btn btn-sm btn-primary" target="_blank">Read More from externale Link</a>
+                            <a href="{% url "multimedia:praise_glory_list" %}" class="btn btn-sm btn-primary">Back</a>
+                            {% endif %}
                         </div>
-                        <hr/>
-                        {% if praise_glory.link %}
-                        <a href="{{ praise_glory.link }}" class="btn btn-sm btn-primary" target="_blank">Read More from externale Link</a>
-                        <a href="{% url "multimedia:praise_glory_list" %}" class="btn btn-sm btn-primary">Back</a>
-                        {% endif %}
                     </div>
                 </div>
             </div>

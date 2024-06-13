@@ -22,10 +22,8 @@
         <link href="{% static 'lib/animate/animate.min.css' %}" rel="stylesheet">
         <link href="{% static 'lib/lightbox/css/lightbox.min.css' %}" rel="stylesheet">
         <link href="{% static 'lib/owlcarousel/owl.carousel.min.css' %}" rel="stylesheet">
-        <!-- Add this in your base.html in the <head> section -->            
+        <!-- Add this in your base.html in the <head> section -->  
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.2.0/css/bootstrap.min.css" rel="stylesheet">
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.2.0/js/bootstrap.bundle.min.js"></script>
-
         <!-- Customized Bootstrap Stylesheet -->
         <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
 
@@ -76,7 +74,7 @@
                                     <a href="{% url "multimedia:multimedia" %}" class="dropdown-item">Multimedia</a>
                                     <a href="" class="dropdown-item">Articles|blog</a>
                                     <a href="#" class="dropdown-item">News & Announcements</a>
-                                    <a href="#" class="dropdown-item">Archive Links</a>
+                                    <a href="{% url 'multimedia:archive_link_list' %}" class="dropdown-item">Archive Resources</a>
                                 </div>
                             </div>
                             <a href="{% url 'pages:contact-us' %}" class="nav-item nav-link me-4">Contact</a> 
@@ -149,7 +147,7 @@
         <!-- Footer Start -->
         <div class="container-fluid footer py-6 my-6 mb-0 bg-light wow bounceInUp" data-wow-delay="0.1s">
             <div class="container-fluid mx-4 ">
-                <div class="row g-3">
+                <div class="row g-3 small">
                     <div class="col-lg-3 col-md-6">
                         <div class="footer-item mb-3">
                             <a href="{% url 'pages:homepage' %}" class="navbar-brand">
@@ -187,8 +185,8 @@
                                 <a class="text-body mb-3" href="#"><i class="fa fa-check text-primary me-2"></i>Articles|blog</a>
                                 <a class="text-body mb-3" href="#"><i class="fa fa-check text-primary me-2"></i>News & Announcements</a>
                                 <a class="text-body mb-3" href="{% url "multimedia:multimedia" %}"><i class="fa fa-check text-primary me-2"></i>Multimedia</a>
-                                <a class="text-body mb-3" href="#"><i class="fa fa-check text-primary me-2"></i>Event</a>
-                                
+                                <a class="text-body mb-3" href="{% url "events:event_list" %}"><i class="fa fa-check text-primary me-2"></i>Event</a>
+                                <a class="text-body mb-3" href="{% url 'multimedia:archive_link_list' %}"><i class="fa fa-check text-primary me-2"></i>Archive Resources</a>
                             </div>
                         </div>
                     </div>
@@ -285,7 +283,7 @@
 
         <!-- Back to Top -->
         <a href="#" class="btn btn-md-square btn-primary rounded-circle back-to-top"><i class="fa fa-arrow-up"></i></a>   
-        
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.2.0/js/bootstrap.bundle.min.js"></script>
         <!-- JavaScript Libraries -->
         <script src="{% static 'js/ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js' %}"></script>
         <script src="{% static 'js/cdn.jsdelivr.net/npm/bootstrap%405.0.0/dist/js/bootstrap.bundle.min.js' %}"></script>

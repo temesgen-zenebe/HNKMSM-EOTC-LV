@@ -359,9 +359,9 @@
                                         {% for events in eventGallery %}
                                         {% if events.short_review  %}
                                         <div class="col-md-6 col-lg-3 wow bounceInUp " data-wow-delay="0.1s">
-                                            <div class="event-img position-relative shadow">
+                                            <div class="event-img position-relative shadow rounded" >
                                                 {% if events.thumbnail_image %}
-                                                <img class="img-fluid rounded" width="100%" height="200" src="{{ events.thumbnail_image.url }}" alt="">
+                                                <img class="img-fluid rounded" width="100%" style="height: 15rem;" src="{{ events.thumbnail_image.url }}" alt="">
                                                 {% else %}
                                                 <img class="img-fluid rounded" width="100%" height="200" src="{% static "img/Church-at-night-3.png" %}" alt="">
                                                 {% endif %}
@@ -540,10 +540,10 @@
                                         {% for events in eventGallery %}
                                         {% if events.category.name == category.name and events.short_review %}
                                         <div class="col-md-6 col-lg-3">
-                                            <div class="event-img position-relative shadow">
+                                            <div class="event-img position-relative shadow" >
                                                 
                                                 {% if events.thumbnail_image %}
-                                                <img class="img-fluid rounded " width="100%" height="200" src="{{ events.thumbnail_image.url }}" alt="{{events.category.name}}">
+                                                <img class="img-fluid rounded " width="100%" style="height: 15rem;" src="{{ events.thumbnail_image.url }}" alt="{{events.category.name}}">
                                                 {% else %}
                                                 <img class="img-fluid rounded w-100" src="{% static "img/Church-at-night-3.png" %}" alt="">
                                                 {% endif %}
@@ -669,11 +669,11 @@
                     {% comment %} <small class="d-inline-block fw-bold text-dark text-uppercase bg-light border border-primary rounded-pill px-4 py-1 mb-3">Our Menu</small> {% endcomment %}
                     <h1 class="display-5 mb-5">Multimedia</h1>
                 </div>
-                <div class="tab-class text-center">
-                    <ul class="nav nav-pills d-inline-flex justify-content-center mb-5 wow bounceInUp" data-wow-delay="0.1s">
+                <div class="tab-class ">
+                    <ul class="nav nav-pills d-inline-flex justify-content-center text-center small mb-5 wow bounceInUp" data-wow-delay="0.1s">
                         <li class="nav-item p-2">
                             <a class="d-flex py-2 mx-2 border border-primary bg-white rounded-pill active" data-bs-toggle="pill" href="#tab-6">
-                                <span class="text-dark" style="width: 150px;">የስብከት ቤተመጻሕፍት</span>
+                                <span class="text-dark" style="width: 150px;">(Books) ቤተመጻሕፍት</span>
                             </a>
                         </li>
                         <li class="nav-item p-2">
@@ -704,603 +704,270 @@
                     </ul>
                     <div class="tab-content">
                         <div id="tab-6" class="tab-pane fade show p-0 active">
-                            <div class="row g-4">
-                                <div class="col-lg-6 wow bounceInUp" data-wow-delay="0.1s">
+                            <div class="row g-3 ">
+                                <h1 class="fs-4 text-center">Books In our Library | <span class="fs-6 small">መጽሐፍት በእኛ ቤተ-መጽሐፍት ውስጥ </span></h1>
+                                <hr>
+                                <div class="row row-cols-1 row-cols-md-3 g-3">
+                                {% if latest_booksLibraries %}
+                                {% for booksLibraries in latest_booksLibraries %}
+                                <div class="col wow bounceInUp" data-wow-delay="0.1s">
+                                    <div class="card shadow">
+                                        {% if booksLibraries.cover_image %}
+                                        <img class="bd-placeholder-img card-img-top" width="100%" height="200" src="{{booksLibraries.cover_image.url}}" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false">
+                                        {% else %}
+                                        <svg class="bd-placeholder-img card-img-top" width="100%" height="120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false">
+                                            <title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect><text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text></svg>
+                                        {% endif %}
+                                        <div class="card-body small">
+                                          <p class="fs-6 m-0">{{booksLibraries.title}}</p>
+                                          <p class="text-primary small m-0">Date: {{booksLibraries.published_date}}</p>
+                                          <hr />
+                                          <p class="card-text small">
+                                            {{booksLibraries.summary|truncatewords:10}}
+                                             <a href="{% url 'multimedia:books_library_detail' slug=booksLibraries.slug %}" class="small">Read More</a> </a>
+                                          </p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                   {% endfor %}
+                                   {% else %}
+                                   <div class="col-lg-6 wow bounceInUp" data-wow-delay="0.1s">
                                     <div class="menu-item d-flex align-items-center">
                                         <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static "img/placeholder-2.png" %}" alt="100x100-placeholder">
                                         <div class="w-100 d-flex flex-column text-start ps-4">
                                             <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
-                                                <h4>Title</h4>
-                                                <h6 class="text-primary">90</h6>
+                                                <h4>Sorry </h4>
+                                                <h6 class="text-primary">God is Greet</h6>
                                             </div>
-                                            <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
+                                            <p class="mb-0">we don't have listed book for now , pleace try next time.</p>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-lg-6 wow bounceInUp" data-wow-delay="0.2s">
-                                    <div class="menu-item d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static "img/placeholder-2.png" %}" alt="">
-                                        <div class="w-100 d-flex flex-column text-start ps-4">
-                                            <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
-                                                <h4>Title</h4>
-                                               <h6 class="text-primary">90</h6>
-                                            </div>
-                                            <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 wow bounceInUp" data-wow-delay="0.3s">
-                                    <div class="menu-item d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static "img/placeholder-2.png" %}" alt="">
-                                        <div class="w-100 d-flex flex-column text-start ps-4">
-                                            <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
-                                                <h4>Title</h4>
-                                               <h6 class="text-primary">90</h6>
-                                            </div>
-                                            <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 wow bounceInUp" data-wow-delay="0.4s">
-                                    <div class="menu-item d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static "img/placeholder-2.png" %}" alt="">
-                                        <div class="w-100 d-flex flex-column text-start ps-4">
-                                            <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
-                                                <h4>Title</h4>
-                                               <h6 class="text-primary">90</h6>
-                                            </div>
-                                            <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 wow bounceInUp" data-wow-delay="0.5s">
-                                    <div class="menu-item d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static "img/placeholder-2.png" %}" alt="">
-                                        <div class="w-100 d-flex flex-column text-start ps-4">
-                                            <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
-                                                <h4>Title</h4>
-                                               <h6 class="text-primary">90</h6>
-                                            </div>
-                                            <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 wow bounceInUp" data-wow-delay="0.6s">
-                                    <div class="menu-item d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static "img/placeholder-2.png" %}" alt="">
-                                        <div class="w-100 d-flex flex-column text-start ps-4">
-                                            <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
-                                                <h4>Title</h4>
-                                               <h6 class="text-primary">90</h6>
-                                            </div>
-                                            <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 wow bounceInUp" data-wow-delay="0.7s">
-                                    <div class="menu-item d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static "img/placeholder-2.png" %}" alt="">
-                                        <div class="w-100 d-flex flex-column text-start ps-4">
-                                            <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
-                                                <h4>Title</h4>
-                                               <h6 class="text-primary">90</h6>
-                                            </div>
-                                            <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 wow bounceInUp" data-wow-delay="0.8s">
-                                    <div class="menu-item d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static "img/placeholder-2.png" %}" alt="">
-                                        <div class="w-100 d-flex flex-column text-start ps-4">
-                                            <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
-                                                <h4>Title</h4>
-                                               <h6 class="text-primary">90</h6>
-                                            </div>
-                                            <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
-                                        </div>
-                                    </div>
-                                </div>
+                                   </div>
+                                    {% endif %}
+                                 </div>  
+                            </div>
+                            <div class="text-center py-4 small">
+                              <a href="{% url 'multimedia:books_library_list' %}" class="d-inline-block fw-bold text-dark text-uppercase bg-light border border-primary rounded-pill px-4 py-1 mb-3 small">see more books</a> 
                             </div>
                         </div>
                         <div id="tab-7" class="tab-pane fade show p-0">
-                            <div class="row g-4">
-                                <div class="col-lg-6">
+                            <div class="row g-3 ">
+                                <h1 class="fs-4 text-center">Books In our Library | <span class="fs-6 small">መጽሐፍት በእኛ ቤተ-መጽሐፍት ውስጥ </span></h1>
+                                <hr>
+                                <div class="row row-cols-1 row-cols-md-3 g-3">
+                                {% if latest_gallery %}
+                                {% for gallery in latest_gallery %}
+                                <div class="col">
+                                    <div class="card shadow">
+                                        {% if gallery.media_type == 'Photo' %}
+                                        <img src="{{ gallery.file.url }}" width="100%" height="250" class="img-fluid" alt="{{ media_item.title }}">
+                                        {% elif gallery.media_type == 'Video' %}
+                                        <video controls class="img-fluid">
+                                        <source src="{{ gallery.file.url }}" type="video/mp4">
+                                         Your browser does not support the video tag.
+                                        </video>
+                                        {% endif %}
+                                        <div class="card-body small">
+                                          <p class="fs-6 m-0">{{gallery.title}}</p>
+                                          <p class="text-primary small m-0">Date: {{gallery.uploaded_at}}</p>
+                                          <hr />
+                                          <p class="card-text small">
+                                            {{gallery.description|truncatewords:10}}
+                                             <a href="{% url 'multimedia:gallery_detail' slug=gallery.slug %}" class="small">Read More</a> </a>
+                                          </p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                   {% endfor %}
+                                   {% else %}
+                                   <div class="col-lg-6 wow bounceInUp" data-wow-delay="0.1s">
                                     <div class="menu-item d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static "img/placeholder.png" %}" alt="">
+                                        <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static "img/placeholder-2.png" %}" alt="100x100-placeholder">
                                         <div class="w-100 d-flex flex-column text-start ps-4">
                                             <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
-                                                <h4>Title</h4>
-                                               <h6 class="text-primary">90</h6>
+                                                <h4>Sorry </h4>
+                                                <h6 class="text-primary">God is Greet</h6>
                                             </div>
-                                            <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
+                                            <p class="mb-0">we don't have listed gallery  for now , pleace try next time.</p>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="menu-item d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static "img/placeholder.png" %}" alt="">
-                                        <div class="w-100 d-flex flex-column text-start ps-4">
-                                            <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
-                                                <h4>Title</h4>
-                                               <h6 class="text-primary">90</h6>
-                                            </div>
-                                            <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="menu-item d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static "img/placeholder.png" %}" alt="">
-                                        <div class="w-100 d-flex flex-column text-start ps-4">
-                                            <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
-                                                <h4>Title</h4>
-                                               <h6 class="text-primary">90</h6>
-                                            </div>
-                                            <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="menu-item d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static 'img/placeholder.png' %}" alt="">
-                                        <div class="w-100 d-flex flex-column text-start ps-4">
-                                            <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
-                                                <h4>Title</h4>
-                                               <h6 class="text-primary">90</h6>
-                                            </div>
-                                            <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="menu-item d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded-circle" src = "{% static "img/placeholder.png" %}" alt="">
-                                        <div class="w-100 d-flex flex-column text-start ps-4">
-                                            <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
-                                                <h4>Title</h4>
-                                               <h6 class="text-primary">90</h6>
-                                            </div>
-                                            <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="menu-item d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static "img/placeholder-2.png" %}" alt="">
-                                        <div class="w-100 d-flex flex-column text-start ps-4">
-                                            <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
-                                                <h4>Title</h4>
-                                               <h6 class="text-primary">90</h6>
-                                            </div>
-                                            <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="menu-item d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static "img/placeholder-2.png" %}" alt="">
-                                        <div class="w-100 d-flex flex-column text-start ps-4">
-                                            <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
-                                                <h4>Title</h4>
-                                               <h6 class="text-primary">90</h6>
-                                            </div>
-                                            <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="menu-item d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static "img/placeholder-2.png" %}" alt="">
-                                        <div class="w-100 d-flex flex-column text-start ps-4">
-                                            <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
-                                                <h4>Title</h4>
-                                               <h6 class="text-primary">90</h6>
-                                            </div>
-                                            <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
-                                        </div>
-                                    </div>
-                                </div>
+                                   </div>
+                                    {% endif %}
+                                 </div>  
+                            </div>
+                            <div class="text-center py-4 small">
+                              <a href="{% url 'multimedia:gallery_list' %}" class="d-inline-block fw-bold text-dark text-uppercase bg-light border border-primary rounded-pill px-4 py-1 mb-3 small">see more Gallery List</a> 
                             </div>
                         </div>
                         <div id="tab-8" class="tab-pane fade show p-0">
-                            <div class="row g-4">
-                                <div class="col-lg-6">
+                            <div class="row g-3">
+                                <h1 class="fs-4 text-center">user Manuals | <span class="fs-6 small">ጠቃሚ ማኑዋሎች</span></h1>
+                                <hr>
+                                <div class="row row-cols-1 row-cols-md-3 g-3">
+                                {% if latest_userManuals %}
+                                {% for userManuals in latest_userManuals %}
+                                <div class="col">
+                                    <div class="card shadow ">
+                                        <div class="card-body small">
+                                          <p class="fs-6 m-0">{{userManuals.title}}</p>
+                                          <p class="text-primary small m-0">Date: {{userManuals.published_date}}</p>
+                                          <hr />
+                                          <p class="card-text small">
+                                            {{userManuals.usage_description|truncatewords:10}}
+                                             <a href="{% url 'multimedia:user_manual_detail' slug=userManuals.slug %}" class="small">Read More</a> </a>
+                                          </p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                   {% endfor %}
+                                   {% else %}
+                                   <div class="col-lg-6 wow bounceInUp" data-wow-delay="0.1s">
                                     <div class="menu-item d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static "img/placeholder-2.png" %}" alt="">
+                                        <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static "img/placeholder-2.png" %}" alt="100x100-placeholder">
                                         <div class="w-100 d-flex flex-column text-start ps-4">
                                             <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
-                                                <h4>Title</h4>
-                                               <h6 class="text-primary">90</h6>
+                                                <h4>Sorry </h4>
+                                                <h6 class="text-primary">God is Greet</h6>
                                             </div>
-                                            <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
+                                            <p class="mb-0">we don't have listed user manual for now, pleace try next time.</p>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="menu-item d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static "img/placeholder-2.png" %}" alt="">
-                                        <div class="w-100 d-flex flex-column text-start ps-4">
-                                            <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
-                                                <h4>Title</h4>
-                                               <h6 class="text-primary">90</h6>
-                                            </div>
-                                            <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="menu-item d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static "img/placeholder-2.png" %}" alt="">
-                                        <div class="w-100 d-flex flex-column text-start ps-4">
-                                            <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
-                                                <h4>Title</h4>
-                                               <h6 class="text-primary">90</h6>
-                                            </div>
-                                            <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="menu-item d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static "img/placeholder.png" %}" alt="">
-                                        <div class="w-100 d-flex flex-column text-start ps-4">
-                                            <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
-                                                <h4>Title</h4>
-                                               <h6 class="text-primary">90</h6>
-                                            </div>
-                                            <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="menu-item d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static "img/placeholder-2.png" %}" alt="">
-                                        <div class="w-100 d-flex flex-column text-start ps-4">
-                                            <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
-                                                <h4>Title</h4>
-                                               <h6 class="text-primary">90</h6>
-                                            </div>
-                                            <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="menu-item d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static "img/placeholder.png" %}" alt="">
-                                        <div class="w-100 d-flex flex-column text-start ps-4">
-                                            <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
-                                                <h4>Title</h4>
-                                               <h6 class="text-primary">90</h6>
-                                            </div>
-                                            <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="menu-item d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static "img/placeholder.png" %}" alt="">
-                                        <div class="w-100 d-flex flex-column text-start ps-4">
-                                            <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
-                                                <h4>Title</h4>
-                                               <h6 class="text-primary">90</h6>
-                                            </div>
-                                            <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="menu-item d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static "img/placeholder-2.png" %}" alt="">
-                                        <div class="w-100 d-flex flex-column text-start ps-4">
-                                            <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
-                                                <h4>Title</h4>
-                                               <h6 class="text-primary">90</h6>
-                                            </div>
-                                            <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
-                                        </div>
-                                    </div>
-                                </div>
+                                   </div>
+                                    {% endif %}
+                                 </div>  
+                            </div>
+                            <div class="text-center py-4 small">
+                              <a href="{% url 'multimedia:user_manual_list' %}" class="d-inline-block fw-bold text-dark text-uppercase bg-light border border-primary rounded-pill px-4 py-1 mb-3 small">more user manual list</a> 
                             </div>
                         </div>
                         <div id="tab-9" class="tab-pane fade show p-0">
-                            <div class="row g-4">
-                                <div class="col-lg-6">
+                            <div class="row g-3">
+                                <h1 class="fs-4 text-center">praise and glory list| <span class="fs-6 small">ገድላት</span></h1>
+                                <hr>
+                                <div class="row row-cols-1 row-cols-md-3 g-3">
+                                {% if latest_praiseGlory %}
+                                {% for praiseGlory in latest_praiseGlory %}
+                                <div class="col">
+                                    <div class="card shadow ">
+                                        <div class="card-body small">
+                                          <p class="fs-6 m-0">{{praiseGlory.title}}</p>
+                                          <p class="text-primary small m-0">Date: {{praiseGlory.created_at}}</p>
+                                          <hr />
+                                          <p class="card-text small">
+                                            {{praiseGlory.content|truncatewords:10}}
+                                             <a href="{% url 'multimedia:praise_glory_detail' slug=praiseGlory.slug %}" class="small">Read More</a> </a>
+                                          </p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                   {% endfor %}
+                                   {% else %}
+                                   <div class="col-lg-6 wow bounceInUp" data-wow-delay="0.1s">
                                     <div class="menu-item d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static "img/placeholder-2.png" %} " alt="">
+                                        <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static "img/placeholder-2.png" %}" alt="100x100-placeholder">
                                         <div class="w-100 d-flex flex-column text-start ps-4">
                                             <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
-                                                <h4>Title</h4>
-                                               <h6 class="text-primary">90</h6>
+                                                <h4>Sorry </h4>
+                                                <h6 class="text-primary">God is Greet</h6>
                                             </div>
-                                            <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
+                                            <p class="mb-0">we don't have listed praise and glory detail  now, pleace try next time.</p>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="menu-item d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static "img/placeholder.png" %}" alt="">
-                                        <div class="w-100 d-flex flex-column text-start ps-4">
-                                            <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
-                                                <h4>Title</h4>
-                                               <h6 class="text-primary">90</h6>
-                                            </div>
-                                            <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="menu-item d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static "img/placeholder.png" %}" alt="">
-                                        <div class="w-100 d-flex flex-column text-start ps-4">
-                                            <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
-                                                <h4>Title</h4>
-                                               <h6 class="text-primary">90</h6>
-                                            </div>
-                                            <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="menu-item d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static "img/placeholder-2.png" %}" alt="">
-                                        <div class="w-100 d-flex flex-column text-start ps-4">
-                                            <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
-                                                <h4>Title</h4>
-                                               <h6 class="text-primary">90</h6>
-                                            </div>
-                                            <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="menu-item d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static "img/placeholder.png" %}" alt="">
-                                        <div class="w-100 d-flex flex-column text-start ps-4">
-                                            <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
-                                                <h4>Title</h4>
-                                               <h6 class="text-primary">90</h6>
-                                            </div>
-                                            <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="menu-item d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static 'img/placeholder-2.png' %}" alt="">
-                                        <div class="w-100 d-flex flex-column text-start ps-4">
-                                            <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
-                                                <h4>Title</h4>
-                                               <h6 class="text-primary">90</h6>
-                                            </div>
-                                            <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="menu-item d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static 'img/placeholder.png' %}" alt="">
-                                        <div class="w-100 d-flex flex-column text-start ps-4">
-                                            <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
-                                                <h4>Title</h4>
-                                               <h6 class="text-primary">90</h6>
-                                            </div>
-                                            <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="menu-item d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static 'img/placeholder.png' %}" alt="">
-                                        <div class="w-100 d-flex flex-column text-start ps-4">
-                                            <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
-                                                <h4>Title</h4>
-                                               <h6 class="text-primary">90</h6>
-                                            </div>
-                                            <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
-                                        </div>
-                                    </div>
-                                </div>
+                                   </div>
+                                    {% endif %}
+                                 </div>  
+                            </div>
+                            <div class="text-center py-4 small">
+                              <a href="{% url 'multimedia:praise_glory_list' %}" class="d-inline-block fw-bold text-dark text-uppercase bg-light border border-primary rounded-pill px-4 py-1 mb-3 small">more praise and glory detail</a> 
                             </div>
                         </div>
                         <div id="tab-10" class="tab-pane fade show p-0">
-                            <div class="row g-4">
-                                <div class="col-lg-6">
+                            <div class="row g-3">
+                                <h1 class="fs-4 text-center">testimony of salvation list| <span class="fs-6 small">የመዳን ምስክርነት</span></h1>
+                                <hr>
+                                <div class="row row-cols-1 row-cols-md-3 g-3">
+                                {% if latest_testimonySalvations %}
+                                {% for testimony in latest_testimonySalvations %}
+                                <div class="col">
+                                    <div class="card shadow border-primary">
+                                        <div class="card-body text-center">
+                                            <i class="fas fa-church fa-3x text-primary"></i></div>
+                                        <div class="card-body small ">
+                                          <p class="fs-6 m-0">{{testimony.title}}</p>
+                                          <hr class="m-0" />
+                                          <p class="small m-0">Date: {{testimony.created}}</p>
+                                          <p class="small m-0">By: {{testimony.author}}</p>
+                                          <hr />
+                                          <p class="card-text small">
+                                            {{testimony.testimony|truncatewords:10}}
+                                             <a href="{% url 'multimedia:testimony_of_salvation_detail' slug=testimony.slug %}" class="small">Read More</a> </a>
+                                          </p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                   {% endfor %}
+                                   {% else %}
+                                   <div class="col-lg-6 wow bounceInUp" data-wow-delay="0.1s">
                                     <div class="menu-item d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static 'img/placeholder.png' %}"alt="">
+                                        <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static "img/placeholder-2.png" %}" alt="100x100-placeholder">
                                         <div class="w-100 d-flex flex-column text-start ps-4">
                                             <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
-                                                <h4>Title</h4>
-                                               <h6 class="text-primary">90</h6>
+                                                <h4>Sorry </h4>
+                                                <h6 class="text-primary">God is Greet</h6>
                                             </div>
-                                            <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
+                                            <p class="mb-0">We currently don't have the testimony data available. Please check back later.</p>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="menu-item d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static 'img/placeholder.png' %}" alt="">
-                                        <div class="w-100 d-flex flex-column text-start ps-4">
-                                            <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
-                                                <h4>Title</h4>
-                                               <h6 class="text-primary">90</h6>
-                                            </div>
-                                            <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="menu-item d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static 'img/placeholder.png' %}" alt="">
-                                        <div class="w-100 d-flex flex-column text-start ps-4">
-                                            <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
-                                                <h4>Title</h4>
-                                               <h6 class="text-primary">90</h6>
-                                            </div>
-                                            <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="menu-item d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded-circle"  src="{% static 'img/placeholder-2.png' %}" alt="">
-                                        <div class="w-100 d-flex flex-column text-start ps-4">
-                                            <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
-                                                <h4>Title</h4>
-                                               <h6 class="text-primary">90</h6>
-                                            </div>
-                                            <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="menu-item d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static 'img/placeholder.png' %}" alt="">
-                                        <div class="w-100 d-flex flex-column text-start ps-4">
-                                            <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
-                                                <h4>Title</h4>
-                                               <h6 class="text-primary">90</h6>
-                                            </div>
-                                            <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="menu-item d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static 'img/placeholder-2.png' %}" alt="">
-                                        <div class="w-100 d-flex flex-column text-start ps-4">
-                                            <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
-                                                <h4>Title</h4>
-                                               <h6 class="text-primary">90</h6>
-                                            </div>
-                                            <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="menu-item d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static 'img/placeholder.png' %}" alt="">
-                                        <div class="w-100 d-flex flex-column text-start ps-4">
-                                            <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
-                                                <h4>Title</h4>
-                                               <h6 class="text-primary">90</h6>
-                                            </div>
-                                            <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="menu-item d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static 'img/placeholder.png' %}" alt="">
-                                        <div class="w-100 d-flex flex-column text-start ps-4">
-                                            <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
-                                                <h4>Title</h4>
-                                               <h6 class="text-primary">90</h6>
-                                            </div>
-                                            <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
-                                        </div>
-                                    </div>
-                                </div>
+                                   </div>
+                                    {% endif %}
+                                 </div>  
+                            </div>
+                            <div class="text-center py-4 small">
+                              <a href="{% url 'multimedia:testimony_of_salvation_list' %}" class="btn btn-sm d-inline-block fw-bold text-dark text-uppercase bg-light border border-primary rounded-pill px-4 py-1 mb-3 small">more testimony of salvation list</a> 
                             </div>
                         </div>
                         <div id="tab-11" class="tab-pane fade show p-0">
                             <div class="row g-4">
-                                <div class="col-lg-6">
-                                    <div class="menu-item d-flex align-items-center">
+                                <h1 class="fs-4 text-center">Latest Archives Resources</h1>
+                                <hr>
+                                {% if latest_archives %}
+                                {% for archives in latest_archives %}
+                                <div class="col-lg-6 card border-primary p-3 shadow">
+                                    <div class="menu-item d-flex align-items-center ">
                                         <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static 'img/placeholder-2.png' %}"alt="">
                                         <div class="w-100 d-flex flex-column text-start ps-4">
                                             <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
-                                                <h4>Archive Links</h4>
-                                               <h6 class="text-primary">90</h6>
+                                                <p class="fs-6 small">{{archives.title}}</p>
+                                                {% if archives.external_url %}
+                                                <a href="{{archive.external_url}}" class="btn btn-sm btn-outline-primary pt-2">link</a>
+                                                {% endif %}
+                                                
                                             </div>
-                                            <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
+                                            <p class="card-text small">
+                                                {{archives.description|truncatewords:15}}
+                                                 <a href="{% url 'multimedia:archive_link_detail' slug=archives.slug %}" class="small">Read More</a> </a>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
+                                {% endfor %}
+                                {% else %}
                                 <div class="col-lg-6">
                                     <div class="menu-item d-flex align-items-center">
                                         <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static 'img/placeholder.png' %}" alt="">
                                         <div class="w-100 d-flex flex-column text-start ps-4">
                                             <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
                                                 <h4>Archive Links</h4>
-                                               <h6 class="text-primary">90</h6>
+                                               <h6 class="text-primary small">God is Greet</h6>
                                             </div>
-                                            <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
+                                            <p class="mb-0">We currently don't have the archives data available. Please check back later.</p>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-6">
-                                    <div class="menu-item d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static 'img/placeholder.png' %}" alt="">
-                                        <div class="w-100 d-flex flex-column text-start ps-4">
-                                            <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
-                                                <h4>Archive Links</h4>
-                                               <h6 class="text-primary">90</h6>
-                                            </div>
-                                            <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="menu-item d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded-circle"  src="{% static 'img/placeholder.png' %}" alt="">
-                                        <div class="w-100 d-flex flex-column text-start ps-4">
-                                            <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
-                                                <h4>Archive Links</h4>
-                                               <h6 class="text-primary">90</h6>
-                                            </div>
-                                            <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="menu-item d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static 'img/placeholder.png' %}" alt="">
-                                        <div class="w-100 d-flex flex-column text-start ps-4">
-                                            <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
-                                                <h4>Archive Links</h4>
-                                               <h6 class="text-primary">90</h6>
-                                            </div>
-                                            <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="menu-item d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static 'img/placeholder.png' %}" alt="">
-                                        <div class="w-100 d-flex flex-column text-start ps-4">
-                                            <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
-                                                <h4>Archive Links</h4>
-                                               <h6 class="text-primary">90</h6>
-                                            </div>
-                                            <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="menu-item d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static 'img/placeholder.png' %}" alt="">
-                                        <div class="w-100 d-flex flex-column text-start ps-4">
-                                            <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
-                                                <h4>Archive Links</h4>
-                                               <h6 class="text-primary">90</h6>
-                                            </div>
-                                            <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="menu-item d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded-circle" src="{% static 'img/placeholder.png' %}" alt="">
-                                        <div class="w-100 d-flex flex-column text-start ps-4">
-                                            <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
-                                                <h4>Archive Links</h4>
-                                               <h6 class="text-primary">90</h6>
-                                            </div>
-                                            <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
-                                        </div>
-                                    </div>
-                                </div>
+                                {% endif %}
+                            </div>
+                            <div class="text-center py-4 small">
+                                <a href="{% url 'multimedia:archive_link_list' %}" class="d-inline-block fw-bold text-dark text-uppercase bg-light border border-primary rounded-pill px-4 py-1 mb-3 small">see more archive Resources list</a> 
                             </div>
                         </div>
                     </div>

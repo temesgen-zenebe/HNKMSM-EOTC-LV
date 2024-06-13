@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'members.apps.MembersConfig',
     'events.apps.EventsConfig',
     'multimedia.apps.MultimediaConfig',
+    'blog.apps.BlogConfig',
     
 ]
 SITE_ID = 1
