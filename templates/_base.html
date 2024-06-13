@@ -72,7 +72,7 @@
                                 <div class="dropdown-menu bg-light">
                                     <a href="{% url 'events:event_list' %}" class="dropdown-item">Events</a>
                                     <a href="{% url "multimedia:multimedia" %}" class="dropdown-item">Multimedia</a>
-                                    <a href="" class="dropdown-item">Articles|blog</a>
+                                    <a href="{% url "blog:blog_list" %}" class="dropdown-item">Articles|blog</a>
                                     <a href="#" class="dropdown-item">News & Announcements</a>
                                     <a href="{% url 'multimedia:archive_link_list' %}" class="dropdown-item">Archive Resources</a>
                                 </div>
@@ -182,7 +182,7 @@
                             <div class="d-flex flex-column align-items-start">
                                 <a class="text-body mb-3" href="{% url "schools:school" %}"><i class="fa fa-check text-primary me-2"></i>Sunday School</a>
                                 <a class="text-body mb-3" href="#"><i class="fa fa-check text-primary me-2"></i>Marriage School </a>
-                                <a class="text-body mb-3" href="#"><i class="fa fa-check text-primary me-2"></i>Articles|blog</a>
+                                <a class="text-body mb-3" href="{% url "blog:blog_list" %}"><i class="fa fa-check text-primary me-2"></i>Articles|blog</a>
                                 <a class="text-body mb-3" href="#"><i class="fa fa-check text-primary me-2"></i>News & Announcements</a>
                                 <a class="text-body mb-3" href="{% url "multimedia:multimedia" %}"><i class="fa fa-check text-primary me-2"></i>Multimedia</a>
                                 <a class="text-body mb-3" href="{% url "events:event_list" %}"><i class="fa fa-check text-primary me-2"></i>Event</a>
