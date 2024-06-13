@@ -347,21 +347,27 @@
                         </li>
                         {% endfor %}
                         {% endif %}
-                       
+                        <li class="nav-item p-2">
+                            <a href="{% url "events:event_gallery_list" %}" class="d-flex mx-1 py-2 border border-primary bg-light rounded-pill " >
+                                <span class="text-dark small" style="width: 100px;">More</span>
+                            </a>
+                        </li>
                     </ul>
                     <div class="tab-content">
                         <!--all events Category-->
+                       
                         <div id="tab-all" class="tab-pane fade show p-0 active">
                             <div class="row g-4">
                                 <div class="col-lg-12">
                                     <div class="row g-4">
+
                                         {% if eventGallery %}
                                         {% for events in eventGallery %}
                                         {% if events.short_review  %}
                                         <div class="col-md-6 col-lg-3 wow bounceInUp " data-wow-delay="0.1s">
-                                            <div class="event-img position-relative shadow rounded" >
+                                            <div class="event-img position-relative " >
                                                 {% if events.thumbnail_image %}
-                                                <img class="img-fluid rounded" width="100%" style="height: 15rem;" src="{{ events.thumbnail_image.url }}" alt="">
+                                                <img class="img-fluid rounded img-fixed-size shadow "  src="{{ events.thumbnail_image.url }}" alt="">
                                                 {% else %}
                                                 <img class="img-fluid rounded" width="100%" height="200" src="{% static "img/Church-at-night-3.png" %}" alt="">
                                                 {% endif %}
@@ -540,10 +546,10 @@
                                         {% for events in eventGallery %}
                                         {% if events.category.name == category.name and events.short_review %}
                                         <div class="col-md-6 col-lg-3">
-                                            <div class="event-img position-relative shadow" >
+                                            <div class="event-img position-relative " >
                                                 
                                                 {% if events.thumbnail_image %}
-                                                <img class="img-fluid rounded " width="100%" style="height: 15rem;" src="{{ events.thumbnail_image.url }}" alt="{{events.category.name}}">
+                                                <img class="img-fluid rounded img-fixed-size shadow"   src="{{ events.thumbnail_image.url }}" alt="{{events.category.name}}">
                                                 {% else %}
                                                 <img class="img-fluid rounded w-100" src="{% static "img/Church-at-night-3.png" %}" alt="">
                                                 {% endif %}

@@ -1,6 +1,6 @@
 # events/views.py
 from django.views.generic import ListView, DetailView
-from .models import Event, EventGallery
+from .models import Event, EventGallery, PostEventImages
 from django.utils import timezone
 
 class EventListView(ListView):
@@ -57,3 +57,25 @@ class EventGalleryDetailView(DetailView):
     model = EventGallery
     template_name = 'events/event_gallery_detail.html'
     context_object_name = 'gallery'
+    
+    
+    def get_object(self, queryset=None):
+        obj = super().get_object(queryset)
+        
+        # Increment the viewer count
+        if obj.short_review :
+            obj.viewers_count += 1
+            obj.save(update_fields=['viewers_count'])  # Save only the updated field for efficiency
+            
+        return obj
+    def get_context_data(self, **kwargs):
+        # Fetch the base context from the superclass
+        context = super().get_context_data(**kwargs)
+        
+        # Get the current EventGallery instance
+        event_gallery = self.get_object()
+        
+        # Filter PostEventImages based on the current EventGallery instance
+        context["postEvent_Images"] = PostEventImages.objects.filter(event_gallery=event_gallery)
+        
+        return context
