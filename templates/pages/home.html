@@ -1436,28 +1436,39 @@
                     <p class="mb-5 text-church">Be the first reader of this article.</p>
                 </div>
                 <div class="row gx-4 justify-content-center">
+                    {% if latest_blog %} 
+                    {% for blog in latest_blog %}
                     <div class="col-md-6 col-lg-4 wow bounceInUp " data-wow-delay="0.5s">
                         <div class="blog-item ">
                             <div class="overflow-hidden rounded shadow">
+                                {% if blog.cover_image %}
+                                <img class="bd-placeholder-img rounded shadow" style="height: 21rem;" width="100%" 
+                                 src="{{blog.cover_image.url}}" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                                {% else %}
                                 <img src="{% static 'img/blog/ethiopianOrtodx.png' %}" class="img-fluid " alt="ethiopianOrtodx">
+                                {% endif %}
                             </div>
                             <div class="blog-content bg-light shadow">
                                 
                                 <div class="py-2 text-dark align-items-center justify-content-center text-center">
-                                    <h5 class="px-2">Sermon (ስብከት)</h5>
-                                    <p class="px-2 small">እውነትን ማስተማር፣ ልብን አነሳሽ፣ ነፍሳትን ወደ መለኮታዊ ማስተዋል መምራት። ማቴዎስ 5:2</p>
-                                    <a href="#" class="btn btn-sm btn-primary px-3 py-2 mx-4 my-2 rounded-pill">Read More</a>
+                                    <p class="px-2 h-6">{{blog.title}}</p>
+                                    <p class="px-2 small">{{ blog.content|truncatewords:12 }}</p>
+                                    <a href="{% url 'blog:blog_detail' blog.slug %}" class="btn btn-sm btn-primary px-3 py-2 mx-4 my-2 rounded-pill">Read More</a>
                                 </div>
                                 <div class="text-dark bg-primary rounded-bottom">
-                                    <div class="h-100  px-3 d-flex justify-content-between">
-                                        <small class="mb-0"><i class="fas fa-book-reader fa-3 text-dark px-1"></i> 565</small>
-                                        <small class="mb-0"><i class="fas fa-calendar-day fa-3 text-dark px-1"></i> 1-12-24</small>
+                                    <div class="h-100  px-3 d-flex justify-content-between small">
+                                        <small class="mb-0"><i class="fas fa-book-reader fa-3 text-dark px-1"></i>{{blog.viewerCount}}</small>
+                                        <small class="mb-0"><i class="fas fa-calendar-day fa-3 text-dark px-1"></i>{{blog.published_at}}</small>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 col-lg-4 wow bounceInUp " data-wow-delay="0.5s">
+                    {% endfor %}
+                    {% else %} 
+                    Sorry 
+                    {% endif %}
+                    {% comment %} <div class="col-md-6 col-lg-4 wow bounceInUp " data-wow-delay="0.5s">
                         <div class="blog-item ">
                             <div class="overflow-hidden rounded shadow">
                                 <img src="{% static 'img/blog/ethiopianOrtodx.png' %}" class="img-fluid" alt="ethiopianOrtodx">
@@ -1561,7 +1572,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> {% endcomment %}
                 </div>
                 
             </div>
