@@ -5,29 +5,32 @@
 {% endblock %}
 {% block title %}services list{% endblock %}
 {% block main %}
-<div class=" ">
-    
-     <!-- Service Start -->
-     <div class="service">
-        <div class="mx-0 py-2  wow bounceInUp" height="100%"
+<div class="container mt-2">
+    <!-- breadcrumb -->
+    <div class="event pb-5">
+        <div class="mx-auto wow bounceInUp rounded-1" 
             style="background-image: url('{% static "img/heroAccount-13.png" %}');background-size: cover; background-position: center center; background-repeat: no-repeat; " alt="Church-at" data-wow-delay="0.1s">
-            <!-- breadcrumb Start -->
-            <div class="container animated bounceInDown py-1 mt-0">
-                <div class=" ">
-                    <ol class="breadcrumb justify-content-start mb-0 ">
-                        <li class="small"><a href="{% url 'pages:homepage' %}">Home <span class="px-1">\</span></a></li>
-                        <li class="small" aria-current="page">services</li>
+            <div class="container py-3 mt-0 ">
+                <div class="animated bounceInDown ">
+                    <ol class="breadcrumb justify-content-start mb-0 animated bounceInDown small">
+                        <li class=""><a href="{% url 'pages:homepage' %}">Home <span class="px-1">\</span></a></li>
+                        <li class="" aria-current="page">services</li>
                     </ol>
                 </div>
             </div>
             <!-- breadcrumb Start -->
             <div class="text-center py-1">
-                <h3 class="mb-2 bolder text-light">የምንሰጠው አገልግሎቶች</h3>
-                <h3 class="mb-2 text-light">What We Offer </3>
+                <h4 class="mb-2 bolder text-light">የምንሰጠው አገልግሎቶች</h4>
+                <h1 class="mb-2 text-light fs-4">What We Offer </1>
             </div>
         </div>
+    </div>
+    
+
+     <!-- Service Start list -->
+     <div class="service rounded">
         <div class="container py-1">
-            <div class="text-center py-2">
+            <div class="text-center py-4">
                 <small class="d-inline-block fw-bold text-dark text-uppercase bg-light border border-primary rounded-pill px-4 py-1 mb-2">Our Services</small>
             </div>
             <div class="row g-4">
@@ -63,9 +66,9 @@
                         <div class="service-content d-flex align-items-center justify-content-center p-4">
                             <div class="service-content-icon text-center">
                                 <i class="fas fa-wine-glass-alt fa-3x text-primary mb-4"></i>
-                                <h5 class="mb-3">Korban (ቁርባን)</h5>
+                                <h5 class="mb-3"><h5 class="mb-3">sacrament(ቅዱስ ቁርባን)</h5>
                                 <p class="mb-4 small">ሥጋዬን የሚበላ ደሜንም የሚጠጣ የዘላለም ሕይወት አለው። ዮሐንስ 6:54</p>
-                                <a href="#" class="btn btn-primary px-4 py-2 rounded-pill">Start</a>
+                                <a href="{% url "services:holyCommunion" %}" class="btn btn-primary px-4 py-2 rounded-pill">Start</a>
                             </div>
                         </div>
                     </div>
@@ -139,7 +142,7 @@
              
             </div>
         </div>
-    </div>
+     </div>
     <!-- Service End -->
 </div>
 {% endblock %}

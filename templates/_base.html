@@ -45,12 +45,15 @@
         <!-- Spinner End -->
 
         <!-- Navbar start -->
-        <div class="container-fluid nav-bar">
-            <div class="container">
-                <nav class="navbar navbar-light navbar-expand-lg pb-1  sticky-top">
-                    <a href="{% url 'pages:homepage' %}" class="navbar-brand">
+        <div class="container-fluid nav-bar py-5">
+            <div class="container ">
+                <nav class="container-fluid navbar  navbar-dark fixed-top bg-dark navbar-expand-lg  ">
+                    <a href="{% url 'pages:homepage' %}" class="navbar-brand mx-3">
                         {% comment %} <h1 class="text-primary fw-bold mb-0">Cater<span class="text-dark">Serv</span> </h1> {% endcomment %}
-                        <img src="{% static "img/logoNavMain.png" %}" alt="cherchLogo" width="75" height="75">
+                        <img src="{% static "img/logoNavMain2.png" %}" 
+                        class=" img-fluid d-block shadow rounded-circle mx-auto" 
+                        width="75" height="75" 
+                        alt="cherchLogo" >
                     </a>
                     <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                         <span class="fa fa-bars text-primary"></span>

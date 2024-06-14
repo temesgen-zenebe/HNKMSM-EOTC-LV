@@ -32,8 +32,7 @@ class SermonMediaListView(ListView):
                 context['sermon_categories'][category] = SermonCategory.objects.filter(category=category)
 
         return context
-
-                
+              
 class SermonMediaDetailView(DetailView):
     model = SermonMedia
     template_name = 'services/sermon_media_detail.html'  # Template name to be created
@@ -94,3 +93,6 @@ class BaptizedApplicationUpdatingView(LoginRequiredMixin, UpdateView):
         messages.success(self.request, 'Your baptism application information has been updated successfully!')
         return super().form_valid(form)
 
+# HolyCommunion
+class HolyCommunionServicesView(TemplateView):
+    template_name = 'services/holyCommunion.html'
