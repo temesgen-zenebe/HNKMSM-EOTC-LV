@@ -10,7 +10,7 @@ class Course(models.Model):
         ('sundaySchoolChildren', 'childrenSchool'),  
     )
     title = models.CharField(max_length=100)
-    description = models.TextField(max_length=500, blank=True, null=True)
+    description = models.TextField(max_length=1000, blank=True, null=True)
     school_type = models.CharField(max_length=100, choices=SCHOOL_TYPES)
     created_by = models.CharField(max_length=100, blank=True, null=True)
     image = models.ImageField(upload_to="course_image/%Y/%m/%d" ,blank=True, null=True)
