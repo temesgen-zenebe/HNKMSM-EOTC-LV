@@ -96,3 +96,7 @@ class BaptizedApplicationUpdatingView(LoginRequiredMixin, UpdateView):
 # HolyCommunion
 class HolyCommunionServicesView(TemplateView):
     template_name = 'services/holyCommunion.html'
+    
+#Father of Repentance
+class FatherOfRepentanceServicesView(TemplateView):
+    template_name = 'services/fatherOfRepentance.html'
