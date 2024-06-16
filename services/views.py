@@ -100,3 +100,7 @@ class HolyCommunionServicesView(TemplateView):
 #Father of Repentance
 class FatherOfRepentanceServicesView(TemplateView):
     template_name = 'services/fatherOfRepentance.html'
+
+#Funeral Services 
+class FuneralServicesView(TemplateView):
+    template_name = 'services/funeralServicesView.html'
