@@ -20,6 +20,7 @@ urlpatterns = [
     path('events/', include('events.urls')),
     path('multimedia/', include('multimedia.urls')),
     path('blog/', include('blog.urls')),
+    path('marriage/', include('marriage.urls')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:

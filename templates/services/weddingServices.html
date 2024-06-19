@@ -1,0 +1,216 @@
+{% extends "_base.html" %}
+{% load static %}
+{% block javascript %}
+   {% comment %} <script type="text/javascript" src="{% static '' %}" defer ></script> {% endcomment %}
+{% endblock %}
+{% block title %}wedding Services{% endblock %}
+{% block main %}
+<div class="container mt-2">
+    <!-- breadcrumb -->
+    <div class="event pb-5">
+        <div class="mx-auto wow bounceInUp rounded-1" 
+            style="background-image: url('{% static "img/heroAccount-13.png" %}');background-size: cover; background-position: center center; background-repeat: no-repeat; " alt="Church-at" data-wow-delay="0.1s">
+            <div class="container py-3 mt-0 ">
+                <div class="animated bounceInDown ">
+                    <ol class="breadcrumb justify-content-start mb-0 animated bounceInDown small">
+                        <li class=""><a href="{% url 'pages:homepage' %}">Home <span class="px-1">\</span></a></li>
+                        <li class=""><a href="{% url 'services:service' %}">Services<span class="px-1">\</span></a></li>
+                        <li class="" aria-current="page">weddingServices</li>
+                    </ol>
+                </div>
+            </div>
+            <!-- breadcrumb Start -->
+            <div class="text-center py-1">
+                <h5  class="mb-2 bolder text-light small">ለሠርጉ ፕሮግራም የሚያስፈልጉ ዝርዝሮች ከዚህ በታች ተዘርዝረዋል::</h6>
+                <h1 class="mb-2 text-light fs-5">The details required for the wedding program are listed below.</1>
+            </div>
+        </div>
+    </div>
+    <!-- main details -->
+    <div class="container my-2">
+        <!-- Example Code -->
+        <ul class="nav mb-2 justify-content-center" id="pills-tab" role="tablist">
+            <li class="nav-item dropdown small">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Language</a>
+                <ul class="dropdown-menu ">
+                    <li class="nav-item small" role="presentation">
+                    <button class="dropdown-item " id="pills-Amharic-tab" data-bs-toggle="pill" data-bs-target="#pills-Amharic" type="button" role="tab" aria-controls="pills-Amharic">አማርኛ</button>
+                    </li>
+                    <li class="nav-item small" role="presentation">
+                    <button class="dropdown-item " id="pills-English-tab" data-bs-toggle="pill" data-bs-target="#pills-English" type="button" role="tab" aria-controls="pills-English">English</button>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <hr/>
+        <div class="tab-content" id="pills-tabContent">
+            <!-- Amharic Code -->
+            <div class="tab-pane fade show active" id="pills-Amharic" role="tabpanel" aria-labelledby="pills-Amharic-tab" tabindex="0">
+                <div class="card p-3">
+                    <div class="card-body small">
+                    <h4 class="card-title text-center fs-6 mb-4">የሰርግ ፕሮግራም አገልግሎት - የኢትዮጵያ ኦርቶዶክስ ተዋሕዶ ቤተ ክርስቲያን</h4>
+                    <hr />
+                    <!-- የሰርግ አገልግሎት ለማግኘት ደረጃዎች -->
+                    <p class="card-text text-break lh-base">
+                    <h6>ደረጃ 1፡ ተወካይውን ካህን ያነጋግሩ</h6>
+                    <hr/>
+                    በኢትዮጵያ ኦርቶዶክስ ተዋሕዶ ቤተ ክርስቲያን ሰርግ ለማቀድ የመጀመሪያው እርምጃ የደብሩን ቄስ ማግኘት ነው። ካህኑ የመጀመሪያ መመሪያ ይሰጣል፣ ያሉትን ቀኖች ይወያያል እና ቤተክርስቲያኑ ለሠርጉ የሚያስፈልጉትን ነገሮች ያብራራል። ከብዙ ወራት በፊት ለመድረስ ይመከራል.
+                    <small>
+                        <a href="#" class="btn btn-sm  btn-outline-primary my-2">የቤተክርስቲያን የጋብቻ ትምህርት ቤት ኮርስ ለመውሰድ ሊንኩን እንድትጫኑ አጥብቀን እንመክራለን !!</a>
+                    </small>
+                    </p>
+                   
+                    <p class="card-text text-break lh-base">
+                    <h6>ደረጃ 2፡ አስፈላጊ ሰነዶችን አዘጋጅ</h6>
+                    <hr/>
+                    በተለምዶ የሚከተሉትን ያካትታሉ አስፈላጊ ሰነዶችን ይሰብስቡ እና ያዘጋጁ:
+                    <ul>
+                    <li>ለሙሽሪት እና ለሙሽሪት የጥምቀት የምስክር ወረቀቶች።</li>
+                    <li>የኢትዮጵያ ኦርቶዶክስ ተዋሕዶ ቤተ ክርስቲያን አባልነት ማረጋገጫ</li>
+                    <li>እንደ ፓስፖርት ወይም የልደት የምስክር ወረቀት ያሉ የማንነት ሰነዶች።</li>
+                    </ul>
+                    እነዚህ ሰነዶች ጥንዶቹ በቤተ ክርስቲያን ውስጥ ለመጋባት ብቁ መሆናቸውን ለማረጋገጥ አስፈላጊ ናቸው።
+                    </p>
+                   
+                    <p class="card-text text-break lh-base">
+                    <h6>ደረጃ 3፡ የቅድመ-ጋብቻ ምክርን ተሳተፍ</h6>
+                    <hr/>
+                    የኢትዮጵያ ኦርቶዶክስ ተዋሕዶ ቤተ ክርስቲያን ጥንዶች ከጋብቻ በፊት በሚደረጉ የምክር መድረኮች ላይ እንዲገኙ ትጠይቃለች። እነዚህ ክፍሎች የተነደፉት ጥንዶች መንፈሳዊ፣ ስሜታዊና ትዳርን ተግባራዊ ለማድረግ ነው። እነዚህን ክፍለ ጊዜዎች ከፓሪሽ ቄስ ወይም ከተሾመ አማካሪ ጋር ቀጠሮ ይያዙ።
+                    <small>
+                        <a href="#" class="btn btn-sm btn-outline-primary my-2">የቤተክርስቲያን የጋብቻ ትምህርት ቤት ኮርስ ለመውሰድ ሊንኩን እንድትጫኑ አጥብቀን እንመክራለን !!</a>
+                    </small>
+                    </p>
+                   
+                    <p class="card-text text-break lh-base">
+                    <h6>ደረጃ 4፡ የሰርግ ስፖንሰሮችን ይምረጡ</h6>
+                    <hr/>
+                    ጥንዶቹን በትዳር ሕይወታቸው ውስጥ ለመደገፍ የቤተክርስቲያን አባላት የሆኑትን አማልክት ወይም ስፖንሰሮችን ይምረጡ። እነዚህ ስፖንሰሮች በሠርጉ ሥነ ሥርዓት ወቅት እና በጥንዶች ህይወት ውስጥ ጉልህ ሚና ይጫወታሉ.
+                    </p>
+                   
+                    <p class="card-text text-break lh-base">
+                    <h6>ደረጃ 5፡ የሠርግ ሥነ ሥርዓቱን ያቅዱ</h6>
+                    <hr/>
+                    የሠርግ ሥነ ሥርዓቱን ዝርዝሮች ለማቀድ ከፓሪሽ ቄስ ጋር ይስሩ. ይህም መዝሙሮችን፣ ንባቦችን መምረጥ እና የሚከናወኑትን ሥርዓቶች እና ልማዶች መረዳትን ይጨምራል። በክብረ በዓሉ ወቅት ሚናዎችን እና ኃላፊነቶችን መረዳትዎን ያረጋግጡ።
+                    </p>
+                   
+                    <p class="card-text text-break lh-base">
+                    <h6>ደረጃ 6፡ የሠርግ ልብሶችን እና ዕቃዎችን አዘጋጁ</h6>
+                    <hr/>
+                    ሙሽሮች እና ሙሽሮች የሰርግ አለባበሳቸውን በተለይም የኢትዮጵያን የባህል ልብስ ማዘጋጀት አለባቸው። በተጨማሪም ለሥነ-ሥርዓቱ አስፈላጊ የሆኑትን እንደ ቀለበት, ሻማ እና በዘውድ ሥነ ሥርዓት ወቅት ጥቅም ላይ የሚውሉ ዘውዶችን ያዘጋጁ.
+                    </p>
+                   
+                    <p class="card-text text-break lh-base">
+                    <h6>ደረጃ 7፡ በልምምድ ላይ ተገኝ</h6>
+                    <hr/>
+                    ከተቻለ በክብረ በዓሉ ፍሰት ላይ የተሳተፉትን ሁሉ ለማስተዋወቅ በልምምድ ላይ ይሳተፉ። ይህ የሠርጉ ቀን በተቃና ሁኔታ እንዲካሄድ እና ሁሉም ተሳታፊዎች ሚናቸውን እንዲያውቁ ይረዳል.
+                    </p>
+                   
+                    <p class="card-text text-break lh-base">
+                    <h6>ደረጃ 8፡ ሰርጉን ያክብሩ</h6>
+                    <hr/>
+                    በሠርጉ ቀን ሁሉንም የተዘጋጁ ዕቃዎችን እና ልብሶችን ይዘው ወደ ቤተክርስቲያን ይድረሱ. በሥነ ሥርዓቱ ላይ ጸሎቶች፣ ዝማሬዎች፣ የስእለት እና የቀለበት ልውውጥ እና የዘውድ አክሊል ይካሄዳሉ። ካህኑ ጥንዶቹን በተቀደሰ ሥርዓት ይመራቸዋል, በቅዱስ ጋብቻ አንድ ያደርጋቸዋል.
+                    </p>
+                   
+                    <p class="card-text text-break lh-base">
+                    <h6>ደረጃ 9፡ ከሠርግ በኋላ ምዝገባ</h6>
+                    <hr/>
+                    ከሠርጉ በኋላ, ጋብቻው በቤተክርስቲያኑ እና በሲቪል ባለስልጣናት መመዝገቡን ያረጋግጡ. ይህ ሕጋዊ እውቅና ለማግኘት የጋብቻ የምስክር ወረቀቱን ቅጂ ለሚመለከታቸው መሥሪያ ቤቶች ማቅረብን ሊያካትት ይችላል።
+                    </p>
+                   
+                    <p class="card-text text-break lh-base">
+                    <h6>ደረጃ 10፡ በድህረ-ሰርግ ወጎች ውስጥ ይሳተፉ</h6>
+                    <hr/>
+                    ከሠርግ በኋላ ባሉት ወጎች እና በረከቶች ውስጥ ይሳተፉ፣ ለምሳሌ በልዩ አገልግሎት ላይ መገኘት ወይም እንደ ባልና ሚስት ህብረት መቀበል። እነዚህ ወጎች አዲስ ተጋቢዎች ወደ ማህበረሰቡ እንዲዋሃዱ እና አዲስ ህይወታቸውን አብረው እንዲባርኩ ይረዳሉ።
+                    </p>
+                    </div>
+                </div>
+                    
+            </div>
+            <!-- English Code -->
+            <div class="tab-pane fade " id="pills-English" role="tabpanel" aria-labelledby="pills-English-tab" tabindex="0">
+                <!-- Header -->
+                <div class="card p-3">
+                    <div class="card-body small">
+                        <h3 class="card-title text-center fs-5 mb-4">Wedding Program Services - Ethiopian Orthodox Tewahedo Church</h3>
+                        <hr/>
+                        <!-- Steps to Get Wedding Service -->
+                        <p class="card-text text-break lh-base">
+                            <h6>Step 1: Contact the representative Priest</h6>
+                            <hr />
+                            The first step in planning a wedding in the Ethiopian Orthodox Tewahedo Church is to contact the parish priest. The priest will provide initial guidance, discuss available dates, and explain the church’s requirements for the wedding. 
+                            It is recommended to reach out several months in advance.
+                            <p>
+                                <a href="#" class="btn btn-sm btn-outline-primary my-2">we strictly recommend you click the link to take the Marriage School course.</a>
+                            </p>
+                        </p>
+
+                        <p class="card-text text-break lh-base">
+                            <h6>Step 2: Prepare Required Documentation</h6>
+                            <hr />
+                            Gather and prepare the necessary documents, which typically include:
+                            <ul>
+                                <li>Baptismal certificates for both the bride and groom.</li>
+                                <li>Proof of membership in the Ethiopian Orthodox Tewahedo Church.</li>
+                                <li>Identity documents such as passports or birth certificates.</li>
+                            </ul>
+                            These documents are essential for verifying the couple’s eligibility to marry within the church.
+                        </p>
+
+                        <p class="card-text text-break lh-base ">
+                            <h6>Step 3: Attend Pre-Marital Counseling</h6>
+                            <hr />
+                            The Ethiopian Orthodox Tewahedo Church requires couples to attend pre-marital counseling sessions. These sessions are designed to help the couple understand the spiritual, emotional, and practical aspects of marriage. Schedule these sessions with the parish priest or an appointed counselor.
+                            <p>
+                                <a href="#" class="btn btn-sm  btn-outline-primary my-2">we strictly recommend you click the link to take the Marriage School course! </a>
+                            </p>
+                        </p>
+
+                        <p class="card-text text-break lh-base">
+                            <h6>Step 4: Choose Wedding Sponsors</h6>
+                            <hr />
+                            Select godparents or sponsors, who are respected members of the church, to support the couple in their married life. These sponsors play a significant role during the wedding ceremony and throughout the couple’s life.
+                        </p>
+
+                        <p class="card-text text-break lh-base">
+                            <h6>Step 5: Plan the Wedding Ceremony</h6>
+                            <hr />
+                            Work with the parish priest to plan the details of the wedding ceremony. This includes choosing the hymns, readings, and understanding the rites and customs that will be performed. Ensure you understand the roles and responsibilities during the ceremony.
+                        </p>
+
+                        <p class="card-text text-break lh-base">
+                            <h6>Step 6: Prepare the Wedding Attire and Items</h6>
+                            <hr />
+                            The bride and groom should prepare their wedding attire, typically traditional Ethiopian clothing. Additionally, prepare the necessary items for the ceremony, such as rings, candles, and the crowns used during the crowning ritual.
+                        </p>
+
+                        <p class="card-text text-break lh-base">
+                            <h6>Step 7: Attend the Rehearsal</h6>
+                            <hr />
+                            Attend a rehearsal, if possible, to familiarize everyone involved with the ceremony's flow. This helps ensure that the wedding day runs smoothly and that all participants know their roles.
+                        </p>
+
+                        <p class="card-text text-break lh-base">
+                            <h6>Step 8: Celebrate the Wedding</h6>
+                            <hr />
+                            On the wedding day, arrive at the church with all prepared items and attire. The ceremony will include prayers, hymns, the exchange of vows and rings, and the crowning. The priest will guide the couple through the sacred rituals, uniting them in holy matrimony.
+                        </p>
+
+                        <p class="card-text text-break lh-base">
+                            <h6>Step 9: Post-Wedding Registration</h6>
+                            <hr />
+                            After the wedding, ensure that the marriage is registered with the church and civil authorities. This may involve submitting a copy of the marriage certificate to the relevant offices for legal recognition.
+                        </p>
+
+                        <p class="card-text text-break lh-base">
+                            <h6>Step 10: Participate in Post-Wedding Traditions</h6>
+                            <hr />
+                            Engage in the post-wedding traditions and blessings, such as attending a special service or receiving communion as a couple. These traditions help integrate the newlyweds into the community and bless their new life together.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Example Code -->
+    </div>
+</div>
+{% endblock %}

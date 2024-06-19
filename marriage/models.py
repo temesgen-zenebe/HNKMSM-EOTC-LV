@@ -1,0 +1,383 @@
+from django.db import models
+from django.conf import settings
+from common.utils.text import unique_slug
+from django.utils import timezone
+from django.db import models
+from django.conf import settings
+from django.utils import timezone
+
+
+
+# User Registration for the School
+class SignupForSchool(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    date_of_birth = models.DateField()
+    email = models.EmailField()
+    phone = models.CharField(max_length=15)
+    city = models.CharField(max_length=100)
+    country = models.CharField(max_length=100)
+    confirmation = models.BooleanField(default=False)
+    slug = models.SlugField(max_length=200, unique=True, null=True, blank=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = unique_slug(str(self.user), type(self))
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f'{self.user} - {self.city}'
+
+# Progress Control for Users
+class SchoolProgressController(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    is_signup_user_account = models.BooleanField(default=False)
+    is_membership = models.BooleanField(default=False)
+    is_signup_for_school = models.BooleanField(default=False)
+    is_complete_courses = models.BooleanField(default=False)
+    is_pass_quiz = models.BooleanField(default=False)
+    is_attended_webinar = models.BooleanField(default=False)
+    is_attended_onsite = models.BooleanField(default=False)
+    is_certified = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f'{self.user} - Progress'
+
+# Course and Quiz Models
+class Course(models.Model):
+    CATEGORY=( 
+         ('PreMarital', 'PreMarital'),
+         ('PostMarital', 'PostMarital'),  
+     )
+    title = models.CharField(max_length=200)
+    category =models.CharField(max_length=50, choices=CATEGORY)
+    description = models.TextField()
+    slug = models.SlugField(max_length=200, unique=True, null=True, blank=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = unique_slug(self.title, type(self))
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.title
+
+class Quiz(models.Model):
+    quiz_title = models.CharField(max_length=100)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    slug = models.SlugField(max_length=200, unique=True, null=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = unique_slug(self.quiz_title, type(self))
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.quiz_title
+
+class Question(models.Model):
+    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
+    number = models.PositiveSmallIntegerField()
+    question_text = models.TextField(max_length=3000)
+    slug = models.SlugField(max_length=200, unique=True, null=True, blank=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = unique_slug(f"{self.quiz.quiz_title}-{self.number}", type(self))
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f"{self.quiz} - Question {self.number}"
+
+class Answer(models.Model):
+    answer_text = models.CharField(max_length=255)
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    is_correct = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.answer_text
+
+class Results(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
+    score = models.FloatField()
+    is_pass = models.BooleanField(default=False)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def save(self, *args, **kwargs):
+        self.is_pass = self.score >= 4  # Assuming a pass mark of 4
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f"{self.user}'s result for {self.quiz}"
+
+class Certification(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    results = models.ForeignKey(Results, on_delete=models.CASCADE)
+    is_passed = models.BooleanField(default=False)
+    completion_date = models.DateTimeField(null=True, blank=True)
+    slug = models.SlugField(max_length=200, unique=True, null=True, blank=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    def save(self, *args, **kwargs):
+        if self.results.is_pass:
+            self.is_passed = True
+            self.completion_date = timezone.now()
+        else:
+            self.is_passed = False
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f"{self.user} - {self.course}"
+
+# Event and Registration Models
+class MeetEvents(models.Model):
+    MEET_TYPE_CHOICES = [
+        ('Webinar', 'Webinar'),
+        ('Onsite', 'Onsite'),
+    ]
+    
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    meet_type = models.CharField(max_length=50, choices=MEET_TYPE_CHOICES)
+    date_and_time = models.DateTimeField()
+    end_time = models.DateTimeField(null=True, blank=True)
+    location = models.CharField(max_length=200, null=True, blank=True)
+    webinar_link = models.URLField(null=True, blank=True)
+    webinar_password = models.CharField(max_length=100, null=True, blank=True)
+    held_by = models.CharField(max_length=100)
+    speaker = models.CharField(max_length=100)
+    special_guest = models.CharField(max_length=100, null=True, blank=True)
+    status = models.CharField(max_length=50, default="active")
+    max_participant = models.IntegerField()
+    min_participant = models.IntegerField()
+    slug = models.SlugField(max_length=200, unique=True, null=True, blank=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = unique_slug(f"{self.meet_type}-{self.date_and_time}", type(self))
+   
+        now = timezone.now()
+        
+        if self.end_time < now:
+            self.status = 'past'
+        else:
+            self.status = 'active'
+            
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f"{self.meet_type} - {self.date_and_time}"
+
+class SignupForMeetEvents(models.Model):
+    meet_events = models.ForeignKey(MeetEvents, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    confirmation = models.CharField(max_length=255, unique=True, null=True, blank=True)
+    slug = models.SlugField(max_length=200, unique=True, null=True, blank=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = unique_slug(f"{self.user}-{self.meet_events}", type(self))
+            
+        if not self.confirmation:
+             # Format the date to get the year in 'yy' format.
+            formatted_date = timezone.now().strftime("%d%m%Y%H%M%S")
+            self.confirmation = f'ME{formatted_date}'
+            
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f"{self.user} - {self.meet_events}"
+
+# Resources Model
+class Resources(models.Model):
+    title = models.CharField(max_length=200)
+    description = models.TextField()
+    audio = models.FileField(upload_to='resources/audio/', null=True, blank=True)
+    video = models.FileField(upload_to='resources/video/', null=True, blank=True)
+    pdf = models.FileField(upload_to='resources/pdf/', null=True, blank=True)
+    image = models.ImageField(upload_to='resources/images/', null=True, blank=True)
+    links = models.URLField(null=True, blank=True)
+    posted_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    slug = models.SlugField(max_length=200, unique=True, null=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = unique_slug(self.title, type(self))
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.title
+
+
+# marriageCourse
+# class schoolProgressControler(models.Model):
+#     # user
+#     # is_signup  def= False
+#     # is_membership def= False
+#     # is_signupForSchool def= False
+#     # is_completeCourses def= False
+#     # is_passQuiz def= False
+#     # is_attendedWebinar  def= False
+#     # is_attendedOnSite def= False
+#     # is_certified def= False
+#     pass
+   
+# class SignupForSchool(models.Model):
+#     # user 
+#     # dateOfBirth
+#     # bastEmail
+#     # phone 
+#     # city
+#     # country
+#     # confirmation
+#     # slug
+#     # created
+#     # updated
+#     pass
+
+# class Courses(models.Model):
+#     CATEGORY=( 
+#         ('PreMarital', 'PreMarital'),
+#         ('PostMarital', 'PostMarital'),  
+#     )
+#     title = models.CharField(max_length=100)
+#     category =models.CharField(max_length=50, choices=CATEGORY)
+#     description = models.TextField(max_length=3000, blank=True, null=True)
+#     video_link = models.URLField(blank=True, null=True)
+#     audio = models.URLField(blank=True, null=True)
+#     pdf = models.FileField(blank=True, null=True)
+#     image = models.ImageField(upload_to = "marriage/course")
+#     created_at = models.DateTimeField(auto_now_add=True)
+#     updated = models.DateTimeField(auto_now=True)
+#     slug = models.SlugField(max_length=200, unique=True ,null=True, blank=True)  # Add this line
+    
+# class Quiz(models.Model):
+#     quiz_title = models.CharField(max_length=100)
+#     course = models.ForeignKey(Courses, on_delete=models.CASCADE)
+#     created_at = models.DateTimeField(auto_now_add=True)
+#     updated = models.DateTimeField(auto_now=True)
+#     slug = models.SlugField(max_length=200, unique=True ,null=True, blank=True)  
+    
+#     def save(self, *args, **kwargs):
+#         if not self.slug:
+#             value = str(self.quiz_title)
+#             self.slug = unique_slug(value, type(self))
+#         super().save(*args, **kwargs)
+
+#     def __str__(self):
+#         return self.quiz_title
+ 
+# class Quations(models.Model):
+#     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
+#     number = models.PositiveSmallIntegerField()
+#     quations = models.TextField(max_length=3000)
+#     slug = models.SlugField(max_length=200, unique=True ,null=True, blank=True)  # Add this line
+#     created = models.DateTimeField(auto_now_add=True)
+#     updated = models.DateTimeField(auto_now=True)     
+      
+# class Answer(models.Model):
+#     answer = models.CharField(max_length=255)
+#     question = models.ForeignKey(Quations, on_delete=models.CASCADE)
+#     is_correct = models.BooleanField(default=False)
+
+#     def __str__(self):
+#         return self.text
+
+# class Results(models.Model):
+#     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+#     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
+#     score = models.FloatField()
+#     is_pass = models.BooleanField(default=False)
+#     updated_at = models.DateTimeField(auto_now=True)
+    
+#     def save(self, *args, **kwargs):
+#         if self.score >= 4:
+#             self.is_pass = True
+#         else:
+#             self.is_pass = False
+#         super().save(*args, **kwargs)
+        
+#     def __str__(self):
+#         return f"{self.user}'s result for {self.quiz}"
+
+# class Certification(models.Model):
+#     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+#     course = models.ForeignKey(Courses, on_delete=models.CASCADE)
+#     results = models.ForeignKey(Results, on_delete=models.CASCADE)
+#     is_passed = models.BooleanField(default=False)
+#     completion_date = models.DateTimeField(null=True, blank=True)
+#     slug = models.SlugField(max_length=200, unique=True ,null=True, blank=True)  # Add this line
+#     created = models.DateTimeField(auto_now_add=True)
+#     updated = models.DateTimeField(auto_now=True)
+    
+#     def save(self, *args, **kwargs):
+#         if self.results.is_pass == True:
+#             self.is_passed = True
+#             self.completion_date = timezone.now
+#         else:
+#             self.is_passed = False
+#         super().save(*args, **kwargs)
+
+#     def __str__(self):
+#         return f"{self.user}'s report for {self.course}"
+
+# class MeetEvents(models.Model):
+#     pass
+#     # user
+#     # MeetType (webinar or onsite)
+#     # DateAndTime
+#     # location
+#     # webinarLink
+#     # webinarPassword
+#     # heiled_by
+#     # speaker 
+#     # Special_gust
+#     # status
+#     # max_participant
+#     # min_participant
+#     # slug
+#     # created
+#     # updated,
+                   
+# class SignupForMeetEvents(models.Model):
+#     pass
+#     # meetEvents
+#     # user 
+#     # confirmation
+#     # slug
+#     # created 
+#     # updated
+    
+# class Resources(models.Model):
+#     pass 
+#     # title
+#     # description
+#     # audio
+#     # video
+#     # pdf
+#     # image
+#     # links
+#     # posted_by
+#     # created
+#     # updated
+#     # slug
+#     # created
+#     # updated
+
+
+

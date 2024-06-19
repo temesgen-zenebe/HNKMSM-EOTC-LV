@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'events.apps.EventsConfig',
     'multimedia.apps.MultimediaConfig',
     'blog.apps.BlogConfig',
+    'marriage.apps.MarriageConfig',
     
 ]
 SITE_ID = 1
