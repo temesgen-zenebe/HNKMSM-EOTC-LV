@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'multimedia.apps.MultimediaConfig',
     'blog.apps.BlogConfig',
     'marriage.apps.MarriageConfig',
+    'payments.apps.PaymentsConfig',
     
 ]
 SITE_ID = 1

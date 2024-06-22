@@ -40,8 +40,6 @@ class MemberCreateView(LoginRequiredMixin, CreateView):
             relatives.save()
         return super().form_valid(form)
 
-
-    
 class MemberListView(LoginRequiredMixin, ListView):
     model = MembersUpdateInformation
     template_name = 'members/member_list.html'

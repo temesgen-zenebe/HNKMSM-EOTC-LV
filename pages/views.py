@@ -9,6 +9,8 @@ from multimedia.models import (
     PraiseGlory, TestimonyOfSalvation, 
     ArchiveLink,SpiritualPoemSong 
 )
+from members.models import MembersUpdateInformation
+
 
 class HomePageView(TemplateView):
     template_name = 'pages/home.html'
@@ -30,12 +32,15 @@ class HomePageView(TemplateView):
         latest_spiritualPoemSongs = SpiritualPoemSong.objects.order_by('-created_at')[:3]
         latest_testimonySalvations = TestimonyOfSalvation.objects.order_by('-created')[:3]
         latest_userManuals = UserManual.objects.order_by('-uploaded_at')[:3]
-        
+        #membership
+        membership = MembersUpdateInformation.objects.filter(user=self.request.user)
         #BLOG
         latest_blog = Blog.objects.order_by('-created_at')[:3]
      
 
         context = {
+             #membership
+             'membership' : membership,
              'event': events,
              'eventGallery':eventGallery,
              'eventsCategory':eventsCategory,

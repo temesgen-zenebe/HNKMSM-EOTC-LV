@@ -245,8 +245,35 @@
                                     <h5 class="mb-3">Marriage School</h5>
                                     <p class="mb-4 small"> 
                                         Pre-Marital and Post-Marital Counseling.<small>"Prepare hearts for union, nurture bonds, uphold vows, seek counsel, sustain love. - Ephesians 5:25-33"</small></p>
+                                    {% if user.is_authenticated %}
+                                    {% if membership.member_status == 'active' %}
                                     <a href="#" class="btn btn-primary px-4 py-2 rounded-pill">Start</a>
+                                    {% else %}
+                                    <a href="#" class="btn btn-primary px-4 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#membershipSignupMassage">Start</a>
+                                    {% endif %}
+
+                                    {% else %}
+                                    <a href="{% url 'account_login'%}" class="nav-item nav-link btn btn-primary py-2 px-3 me-3 rounded-pill small">start</a>
+                                    {% endif %}
                                 </div>
+                            </div>
+                        </div>
+                        <!--membershipSignupMassage-->
+                        <div class="modal fade " id="membershipSignupMassage" tabindex="-1" aria-labelledby="membershipSignupMassageModalLabel" aria-hidden="true">
+                            <div class="modal-dialog rounded">
+                              <div class="modal-content ">
+                                <div class="modal-header ">
+                                  <h1 class="modal-title fs-6 " id="membershipSignupMassageModalLabel">Action required massge</h1>
+                                  <button type="button " class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                  <p>wellcome to marriage schools,to start the class you need to create active membership profile.</p>
+                                  <div class="modal-footer">
+                                    <a href="{% url "members:member_list" %}" type="button" class="btn btn-sm btn-primary">Start</a>
+                                  </div>
+                                </div>
+                                
+                              </div>
                             </div>
                         </div>
                     </div>

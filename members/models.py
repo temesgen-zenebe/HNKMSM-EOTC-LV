@@ -30,7 +30,8 @@ class MembersUpdateInformation(models.Model):
     marital_status =  models.CharField(max_length=100, choices=MARITAL_STATUS)
     spouse_name = models.CharField(max_length=255, blank=True, null=True)
     spouse_baptismal_name = models.CharField(max_length=255, blank=True, null=True)
-    member_status = models.CharField(max_length=100, choices=MEMBER_STATUS, default='pending')
+    # is_membership_payed = True than the value of member_status change to active
+    member_status = models.CharField(max_length=100, choices=MEMBER_STATUS, default='pending') 
     slug = models.SlugField(max_length=200, unique=True ,null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)

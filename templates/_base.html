@@ -88,11 +88,15 @@
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle btn btn-sm btn-primary py-2 px-4 me-3 rounded-pill " data-bs-toggle="dropdown">
                                      <i class="fas fa-user px-1"></i><small>welcome {{ user.username|slice:":1"|capfirst }}</small></a> 
-                                <div class="dropdown-menu bg-light">
+                                <div class="dropdown-menu bg-light border border-primary small">
+                                    <a class="dropdown-item"><i class="fas fa-user px-1"></i> {{ user.username|capfirst }}</a>
+                                    <hr class="m-0" />
+                                    <a href="{% url "pages:user-dashboard" %}" class="dropdown-item">Dashboard</a>
                                     <a href="{% url "members:member_list" %}" class="dropdown-item">Membership</a>
                                     <a href="#" class="dropdown-item">Payment</a>
                                     <a href="{% url 'my-account' %}" class="dropdown-item">my account</a>
                                     {% comment %} <a  href="{% url 'pages:user-dashboard' %}" class="dropdown-item">dashboard</a></li> {% endcomment %}
+                                    <hr class="m-0" />
                                     <form action="{% url 'account_logout' %}" method="post">
                                         {% csrf_token %}
                                         <button class="btn btn-primary dropdown-item">Logout</button>
