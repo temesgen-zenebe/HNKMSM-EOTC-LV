@@ -41,12 +41,13 @@
             <hr />
             <p class="card-text">Description : {{ payment_case.description }}</p>
             <hr />
-            <form method="post" action="{% url 'payments:addToPaymentCaseCart_view' payment_case.slug %}">
+            <div class="btn-group gap-3">
+               <form method="post" action="{% url 'payments:addToPaymentCaseCart_view' payment_case.slug %}">
                 {% csrf_token %}
                 <button type="submit" class="btn btn-sm btn-primary">Add To PaymentCase Cart</button>
-            </form>
-            {% comment %} <a href="{% url 'payments:addToPaymentCaseCart_view' payment_case.slug %}" class="btn btn-sm btn-primary">Add to payment list</a> {% endcomment %}
-            <a href="{% url 'payments:payment_case_list' %}" class="btn btn-sm btn-primary">Back to List</a>
+               </form>
+               <a href="{% url 'payments:payment_case_list' %}" class="btn btn-sm rounded btn-primary">Back to List</a>
+             </div>
           </div>
         </div>
       </div>

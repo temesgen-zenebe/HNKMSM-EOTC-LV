@@ -39,12 +39,13 @@
         <hr />
         <p class="card-text text-success"><strong>Amount: ${{ case.amount }}</strong></p>
         <hr />
-        <a href="{% url 'payments:payment_case_detail' case.slug %}" class="btn btn-sm btn-primary">Details</a>
-        <form method="post" action="{% url 'payments:addToPaymentCaseCart_view' case.slug %}">
+        <div class="btn-group gap-3">
+          <a href="{% url 'payments:payment_case_detail' case.slug %}" class="btn btn-sm rounded btn-primary">Details</a>
+          <form method="post" action="{% url 'payments:addToPaymentCaseCart_view' case.slug %}">
             {% csrf_token %}
             <button type="submit" class="btn btn-sm btn-primary">Add To PaymentCase Cart</button>
-        </form>
-        
+          </form>
+         </div>
         {% comment %} <a href="{% url 'payments:addToPaymentCaseCart_view' case.slug %}" class="btn btn-sm btn-primary">Add To PaymentCase Cart</a> {% endcomment %}
       </div>
     </div>
