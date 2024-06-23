@@ -39,10 +39,13 @@
                             <div class="px-2 d-flex justify-content-between">
                                 <div>
                                    <h2 class="text-primary fs-4">Yours Member Information</h2>
-                                   <small> Member ID : {{member.member_id}}</small>
+                                   <div class="pt-2">
+                                    <p class="small"> Member ID : {{member.member_id}}</p>
+                                    <p class="small"> Member status : <span class="text-danger">{{member.member_status }}</span></p>
+                                    </div>
                                 </div>
                                 <div class="d-grid gap-2 col-6 mx-auto">
-                                    {% comment %} payment to active memabership {% endcomment %}
+                                    <!--payment to active memabership --> 
                                     <button href="" class="btn btn-sm btn-danger" type="button">Click to active your memabership to get all services.</button>
                   
                                 </div>
@@ -63,7 +66,10 @@
                             {% if user.is_authenticated and member.user.username == user.username %}
                             <div class="px-2">
                                 <h2 class="text-primary fs-4">Yours Member Information</h2>
-                                <small> Member ID : {{member.member_id}}</small>
+                                <div class="pt-2">
+                                  <p class="small"> Member ID : {{member.member_id}}</p>
+                                  <p class="small"> Member status : <span class="text-success">{{member.member_status }}</span></p>
+                                </div>
                             </div>
                             <div class="small"><a href="{% url 'members:member_update' member.id %}" class="text-primary"><i class="bi bi-pencil-square px-2"></i></a></div>     
                             {% endif %}
