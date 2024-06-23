@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 from django.utils.text import slugify
 from django.utils import timezone
 import uuid
@@ -38,3 +39,38 @@ class PaymentCase(models.Model):
     # String representation
     def __str__(self):
         return self.title
+
+
+
+class BillingInformation(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    address = models.CharField(max_length=255)
+    city = models.CharField(max_length=100)
+    state = models.CharField(max_length=100)
+    postal_code = models.CharField(max_length=20)
+    country = models.CharField(max_length=100)
+    created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user}'s Billing Information"
+
+class PaymentCaseCartList(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    payment_case = models.ForeignKey('PaymentCase', on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
+    created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.quantity} of {self.payment_case.title}"
+
+class Payment(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    billing_info = models.ForeignKey(BillingInformation, on_delete=models.CASCADE)
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    payment_case = models.CharField(blank=True, null=True)
+    payment_id = models.CharField(max_length=100, unique=True)
+    status = models.CharField(max_length=50)
+    created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Payment {self.payment_id} by {self.user}"

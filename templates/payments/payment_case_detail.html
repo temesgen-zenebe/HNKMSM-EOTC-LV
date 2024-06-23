@@ -1,0 +1,64 @@
+{% extends "_base.html" %}
+{% load static %}
+{% block javascript %}
+   {% comment %} <script type="text/javascript" src="{% static '' %}" defer ></script> {% endcomment %}
+{% endblock %}
+{% block title %}payment cases List{% endblock %}
+{% block main %}
+<div class="container my-2">
+<!-- breadcrumb  Start -->
+<div class="event pb-4">
+    <div class="mx-auto wow bounceInUp rounded" 
+        style="background-image: url('{% static "img/heroAccount-13.png" %}');background-size: cover; background-position: center center; background-repeat: no-repeat; " alt="Church-at" data-wow-delay="0.1s">
+        <div class="container py-1 mt-0">
+            <div class="animated bounceInDown ">
+                <ol class="breadcrumb justify-content-start mb-0 animated bounceInDown">
+                    <li class="small"><a href="{% url 'pages:homepage' %}">Home <span class="px-1">\</span></a></li>
+                    <li class="small"><a href="{% url "payments:payment_case_list" %}">paymentCaseList<span class="px-1">\</span></a></li>
+                    <li class="small" aria-current="page">paymentCaseDetail \</li>
+                </ol>   
+            </div>
+        </div>
+        <div class="text-center py-2">
+            <h3 class="mb-2 bolder text-light fs-4">Payment Cases Detail </h3>
+            <h3 class="mb-2 text-primary fs-5">Payment Cases Detail explain the all information about it.</h1>
+        </div>
+    </div>
+</div>
+<!-- paymentCaseList -->
+<div class="my-3">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="card  p-2 border border-primary">
+          <div class="card-body small">
+            <h3 class="card-title fs-4">{{ payment_case.title }}</h3>
+            <hr />
+            <p class="card-text text-success"><strong>Amount: ${{ payment_case.amount }}</strong></p>
+            <p class="card-text"><small class="text-muted">Category: {{ payment_case.category.title }}</small></p>
+            <p class="card-text"><small class="text-muted">Case Code: {{ payment_case.case_code }}</small></p>
+            <p class="card-text"><small class="text-muted">Created: {{ payment_case.created|date:"F d, Y" }}</small></p>
+            <p class="card-text"><small class="text-muted">Updated: {{ payment_case.updated|date:"F d, Y" }}</small></p>
+            <hr />
+            <p class="card-text">Description : {{ payment_case.description }}</p>
+            <hr />
+            <form method="post" action="{% url 'payments:addToPaymentCaseCart_view' payment_case.slug %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-sm btn-primary">Add To PaymentCase Cart</button>
+            </form>
+            {% comment %} <a href="{% url 'payments:addToPaymentCaseCart_view' payment_case.slug %}" class="btn btn-sm btn-primary">Add to payment list</a> {% endcomment %}
+            <a href="{% url 'payments:payment_case_list' %}" class="btn btn-sm btn-primary">Back to List</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card p-1 border border-primary">
+          {% if payment_case.imag %}
+          <img src="{{ payment_case.imag.url }}" class="card-img-top" alt="{{ payment_case.title }}">
+          {% endif %}
+         
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

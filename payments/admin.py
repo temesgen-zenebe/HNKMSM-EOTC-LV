@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Categories, PaymentCase
+from .models import BillingInformation, Categories, Payment, PaymentCase, PaymentCaseCartList
 
 @admin.register(Categories)
 class CategoriesAdmin(admin.ModelAdmin):
@@ -13,3 +13,7 @@ class PaymentCaseAdmin(admin.ModelAdmin):
     list_display = ("title", "category", "amount", "created", "updated")
     search_fields = ("title", "description", "category__title")
     list_filter = ("category", "created", "updated")
+    
+admin.site.register(BillingInformation)
+admin.site.register(PaymentCaseCartList)
+admin.site.register(Payment)

@@ -1,0 +1,61 @@
+{% extends "_base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block javascript %}
+   {% comment %} <script type="text/javascript" src="{% static '' %}" defer ></script> {% endcomment %}
+{% endblock %}
+{% block title %}paymentCases cart List{% endblock %}
+{% block main %}
+<div class="container my-2">
+<!-- Sermon  Start -->
+<div class="event pb-5">
+    <div class="mx-auto wow bounceInUp rounded" 
+        style="background-image: url('{% static "img/heroAccount-13.png" %}');background-size: cover; background-position: center center; background-repeat: no-repeat; " alt="Church-at" data-wow-delay="0.1s">
+        <div class="container py-1 mt-0">
+            <div class="animated bounceInDown ">
+                <ol class="breadcrumb justify-content-start mb-0 animated bounceInDown">
+                    <li class="small"><a href="{% url 'pages:homepage' %}">Home <span class="px-1">\</span></a></li>
+                    <li class="small"><a href="{% url "payments:payment_case_list" %}">paymentCaseList<span class="px-1">\</span></a></li>
+                    <li class="small"><a href="{% url "payments:paymentCaseCart_view" %}">paymentCaseCartview<span class="px-1">\</span></a></li>
+                    <li class="small" aria-current="page">Checkout \</li>
+                </ol>   
+            </div>
+        </div>
+        <div class="text-center py-2">
+            <h3 class="mb-2 bolder text-light fs-4">Checkout</h3>
+            <h3 class="mb-2 text-primary fs-5"></h1>
+        </div>
+    </div>
+</div>
+<div class="container mt-5">
+    <h2>Checkout</h2>
+    <form method="post" novalidate>
+      {% csrf_token %}
+      <div class="row">
+        <div class="col-md-6">
+          <h4>Billing Information</h4>
+          {{ form|crispy }}
+          <input type="hidden" name="{{ form.payment_case.name }}" value="{{ form.payment_case.value }}">
+        </div>
+        <div class="col-md-6">
+          <h4>Card Information</h4>
+          <div class="form-group">
+            <label for="card_number">Card Number</label>
+            <input type="text" id="card_number" class="form-control" placeholder="Card Number">
+          </div>
+          <div class="form-group">
+            <label for="expiry_date">Expiry Date</label>
+            <input type="text" id="expiry_date" class="form-control" placeholder="MM/YY">
+          </div>
+          <div class="form-group">
+            <label for="cvc">CVC</label>
+            <input type="text" id="cvc" class="form-control" placeholder="CVC">
+          </div>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-success mt-3">Submit Payment</button>
+    </form>
+</div>
+
+</div>
+{% endblock %}

@@ -3,23 +3,49 @@
 {% block javascript %}
    {% comment %} <script type="text/javascript" src="{% static '' %}" defer ></script> {% endcomment %}
 {% endblock %}
-{% block title %}Proposal List Project{% endblock %}
+{% block title %}payment cases List{% endblock %}
 {% block main %}
-<div class="mx-2 my-5">
+<div class="container my-2">
+<!-- Sermon  Start -->
+<div class="event pb-5">
+    <div class="mx-auto wow bounceInUp rounded" 
+        style="background-image: url('{% static "img/heroAccount-13.png" %}');background-size: cover; background-position: center center; background-repeat: no-repeat; " alt="Church-at" data-wow-delay="0.1s">
+        <div class="container py-1 mt-0">
+            <div class="animated bounceInDown ">
+                <ol class="breadcrumb justify-content-start mb-0 animated bounceInDown">
+                    <li class="small"><a href="{% url 'pages:homepage' %}">Home <span class="px-1">\</span></a></li>
+                    <li class="small" aria-current="page">paymentCaseList \</li>
+                </ol>   
+            </div>
+        </div>
+        <div class="text-center py-2">
+            <h3 class="mb-2 bolder text-light fs-4">Payment Cases List</h3>
+            <h3 class="mb-2 text-primary fs-5">Payment Cases List select from the list to pay</h1>
+        </div>
+    </div>
+</div>
 
-<div class="row">
+<div class="row row-cols-1 row-cols-md-3 g-4">
   {% for case in payment_cases %}
-  <div class="col-sm-6 mb-4">
-    <div class="card">
-      {% if case.imag %}
-      <img src="{{ case.imag.url }}" class="card-img-top" alt="{{ case.title }}">
-      {% endif %}
-      <div class="card-body">
-        <h5 class="card-title">{{ case.title }}</h5>
-        <p class="card-text">{{ case.description|truncatewords:20 }}</p>
-        <p class="card-text"><strong>Amount: ${{ case.amount }}</strong></p>
-        <a href="{% url 'payments:payment_case_detail' case.slug %}" class="btn btn-primary">View Details</a>
-        <a href="{% url 'payments:add_to_cart' case.slug %}" class="btn btn-secondary">Add to Cart</a>
+  <div class="col">
+    <div class="card shadow border border-primary">
+        {% if case.imag %}
+        <img src="{{ case.imag.url }}"  class="img-fluid rounded-top img-fixed-size p-1" alt="{{ case.title }}">
+        {% endif %}
+      <div class="card-body small">
+        <h3 class="card-title fs-5">{{ case.title }}</h3>
+        <hr />
+        <p class="card-text small">Description : {{ case.description|truncatewords:15 }}</p>
+        <hr />
+        <p class="card-text text-success"><strong>Amount: ${{ case.amount }}</strong></p>
+        <hr />
+        <a href="{% url 'payments:payment_case_detail' case.slug %}" class="btn btn-sm btn-primary">Details</a>
+        <form method="post" action="{% url 'payments:addToPaymentCaseCart_view' case.slug %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-sm btn-primary">Add To PaymentCase Cart</button>
+        </form>
+        
+        {% comment %} <a href="{% url 'payments:addToPaymentCaseCart_view' case.slug %}" class="btn btn-sm btn-primary">Add To PaymentCase Cart</a> {% endcomment %}
       </div>
     </div>
   </div>
