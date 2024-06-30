@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
-from django.utils.text import slugify
+from django.forms import ValidationError
+from common.utils.text import unique_slug
 from django.utils import timezone
 import uuid
 
@@ -13,7 +14,7 @@ class Categories(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(self.title)
+            self.slug = unique_slug(self.title, type(self))
         super(Categories, self).save(*args, **kwargs)
 
     def __str__(self):
@@ -33,7 +34,7 @@ class PaymentCase(models.Model):
     # Save method override to create slug
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(self.title)
+            self.slug = unique_slug(self.title, type(self))
         super(PaymentCase, self).save(*args, **kwargs)
 
     # String representation
@@ -74,3 +75,44 @@ class Payment(models.Model):
 
     def __str__(self):
         return f"Payment {self.payment_id} by {self.user}"
+
+class PaymentHistory(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    payment_email = models.EmailField(blank=True, null=True)
+    paymentConfirmation = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    payment_case = models.ForeignKey('PaymentCaseLists', on_delete=models.CASCADE)
+    payment_date = models.DateTimeField(auto_now_add=True)
+    created = models.DateTimeField(auto_now_add=True)
+    slug = models.SlugField(max_length=255, unique=True, blank=True)
+
+   
+    # Save method override to create slug
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            value = str(self.payment_case)
+            self.slug = unique_slug(value, type(self))
+        super(PaymentHistory, self).save(*args, **kwargs)
+        
+    def __str__(self):
+        return f"Payment of {self.amount} by {self.user.username}"
+
+class PaymentCaseLists(models.Model):
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+    stripsPayment_link = models.URLField()
+    payment_case_link = models.CharField(max_length=255, blank=True, null=True)
+    QRCodeImage = models.ImageField(upload_to='payments/qrcodes/', blank=True, null=True)
+    case_id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+    status = models.CharField(max_length=50, choices=[('active', 'Active'), ('inactive', 'Inactive')])
+    category = models.CharField(max_length=100)
+    type = models.CharField(max_length=50, choices=[('onetime', 'One-Time'), ('recurring', 'Recurring')])
+    image = models.ImageField(upload_to='payments/case_images/', blank=True, null=True)
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL,  on_delete=models.CASCADE)
+    slug = models.SlugField(unique=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.title

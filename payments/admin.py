@@ -1,5 +1,12 @@
 from django.contrib import admin
-from .models import BillingInformation, Categories, Payment, PaymentCase, PaymentCaseCartList
+from .models import (
+    BillingInformation, 
+    Categories, Payment, 
+    PaymentCase, 
+    PaymentCaseCartList,
+    PaymentHistory,
+    PaymentCaseLists,
+    )
 
 @admin.register(Categories)
 class CategoriesAdmin(admin.ModelAdmin):
@@ -17,3 +24,41 @@ class PaymentCaseAdmin(admin.ModelAdmin):
 admin.site.register(BillingInformation)
 admin.site.register(PaymentCaseCartList)
 admin.site.register(Payment)
+admin.site.register(PaymentCaseLists)
+# admin.site.register(PaymentHistory)
+
+# Customizing the admin interface for PaymentHistory
+from django.contrib import admin
+from django.db.models import Sum  # Import Sum from django.db.models
+from .models import PaymentHistory
+
+# Customizing the admin interface for PaymentHistory
+class PaymentHistoryAdmin(admin.ModelAdmin):
+    list_display = ('user', 'payment_email', 'amount', 'payment_case', 'payment_date', 'created', 'slug', 'cumulative_total')
+    list_filter = ('payment_date', 'created', 'payment_case')
+    search_fields = ('user__username', 'payment_email', 'paymentConfirmation', 'slug')
+    readonly_fields = ('paymentConfirmation', 'created', 'slug')
+    ordering = ('-created',)  # Order by creation date descending
+    prepopulated_fields = {'slug': ('payment_case',)}
+
+    # Optionally, you can customize the admin form
+    fieldsets = (
+        (None, {
+            'fields': ('user', 'payment_email', 'amount', 'payment_case', 'slug')
+        }),
+        ('Date Information', {
+            'fields': ('payment_date', 'created'),
+            'classes': ('collapse',),
+        }),
+    )
+
+    def cumulative_total(self, obj):
+        # Calculate the cumulative total of payments for the user
+        total = PaymentHistory.objects.filter(user=obj.user).aggregate(total_amount=Sum('amount'))['total_amount']
+        return f"${total:.2f}" if total is not None else "$0.00"
+
+    cumulative_total.short_description = 'Cumulative Total'  # Customize the column header
+
+# Register the model with the custom admin class
+admin.site.register(PaymentHistory, PaymentHistoryAdmin)
+

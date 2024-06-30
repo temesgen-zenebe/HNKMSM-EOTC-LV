@@ -42,10 +42,11 @@
             <p class="card-text">Description : {{ payment_case.description }}</p>
             <hr />
             <div class="btn-group gap-3">
-               <form method="post" action="{% url 'payments:addToPaymentCaseCart_view' payment_case.slug %}">
+               {% comment %} <form method="post" action="{% url 'payments:addToPaymentCaseCart_view' payment_case.slug %}">
                 {% csrf_token %}
-                <button type="submit" class="btn btn-sm btn-primary">Add To PaymentCase Cart</button>
-               </form>
+                <button  type="submit" class="btn btn-sm btn-primary">Add To PaymentCase Cart</button>
+               </form> {% endcomment %}
+               <a href="{{payment_case.stripsPayment_link}}" class="btn btn-sm rounded btn-primary" target="_blank">Go to Payment </a>
                <a href="{% url 'payments:payment_case_list' %}" class="btn btn-sm rounded btn-primary">Back to List</a>
              </div>
           </div>
@@ -53,8 +54,8 @@
       </div>
       <div class="col-md-4">
         <div class="card p-1 border border-primary">
-          {% if payment_case.imag %}
-          <img src="{{ payment_case.imag.url }}" class="card-img-top" alt="{{ payment_case.title }}">
+          {% if payment_case.image %}
+          <img src="{{ payment_case.image.url }}" class="card-img-top" alt="{{ payment_case.title }}">
           {% endif %}
          
         </div>

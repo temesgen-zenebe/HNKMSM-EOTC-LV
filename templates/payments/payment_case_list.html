@@ -29,8 +29,8 @@
   {% for case in payment_cases %}
   <div class="col">
     <div class="card shadow border border-primary">
-        {% if case.imag %}
-        <img src="{{ case.imag.url }}"  class="img-fluid rounded-top img-fixed-size p-1" alt="{{ case.title }}">
+        {% if case.image %}
+        <img src="{{ case.image.url }}"  class="img-fluid rounded-top img-fixed-size p-1" alt="{{ case.title }}">
         {% endif %}
       <div class="card-body small">
         <h3 class="card-title fs-5">{{ case.title }}</h3>
@@ -41,12 +41,12 @@
         <hr />
         <div class="btn-group gap-3">
           <a href="{% url 'payments:payment_case_detail' case.slug %}" class="btn btn-sm rounded btn-primary">Details</a>
-          <form method="post" action="{% url 'payments:addToPaymentCaseCart_view' case.slug %}">
+          {% comment %} <form method="post" action="{% url 'payments:addToPaymentCaseCart_view' case.slug %}">
             {% csrf_token %}
             <button type="submit" class="btn btn-sm btn-primary">Add To PaymentCase Cart</button>
-          </form>
+          </form> {% endcomment %}
          </div>
-        {% comment %} <a href="{% url 'payments:addToPaymentCaseCart_view' case.slug %}" class="btn btn-sm btn-primary">Add To PaymentCase Cart</a> {% endcomment %}
+        <a href="{{case.stripsPayment_link}}" class="btn btn-sm btn-primary" target="_blank">Add To PaymentCase Cart</a> 
       </div>
     </div>
   </div>
