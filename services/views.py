@@ -8,6 +8,7 @@ from django.views import View
 from django.views.generic import TemplateView
 from django.views.generic import ListView, DetailView,UpdateView
 from .models import BaptizedCertification, Sermon, SermonCategory, SermonMedia
+from members.models import MembersUpdateInformation
 from django.contrib.auth.models import User
 from .forms import BaptizedApplicationForm, BaptizedApplicationUpdatingForm
 class ServicesView(TemplateView):
@@ -63,12 +64,17 @@ class BaptismServiceView(LoginRequiredMixin,View):
     def post(self, request):
         baptizedForm = BaptizedApplicationForm(request.POST)
         user = request.user
+        member = MembersUpdateInformation.objects.filter(user=user).first()
         
         if baptizedForm.is_valid():
             # user = request.user
             baptized_application = baptizedForm.save(commit=False)
             baptized_application.user = user
+            if member:
+                baptized_application.qualified = True
             baptized_application.save()
+            
+                
             # Add a success message
             messages.success(request, 'Your baptism application has been successfully submitted!')
             return redirect('services:baptism_service')

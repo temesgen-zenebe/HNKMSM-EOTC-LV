@@ -113,7 +113,7 @@
                         </div>
                     </div>
                     <div id="tab-2" class="tab-pane fade show p-0 active">
-                        <div class="row g-2                                                                                                                                                        ">
+                        <div class="row g-2 ">
                             <div class="col-lg-12">
                                 <div class="row g-4">
                                     <div class="col-md-8 col-lg-8">
@@ -246,7 +246,8 @@
                                                                 </div>
                                                                 <div class="d-flex">
                                                                     <a class="badge bg-primary rounded-pill mx-1 p-2" href="{% url "services:baptizedApplicationUpdating"  slug=baptizedApplicationConfirmation.slug %}">Update</a>
-                                                                    <span class="badge bg-success rounded-pill mx-1 p-2 text-center"  data-bs-toggle="modal" data-bs-target="#all-payments" >Continue to payment</span>
+                                                                    {% comment %} <span class="badge bg-success rounded-pill mx-1 p-2 text-center"  data-bs-toggle="modal" data-bs-target="#all-payments" >Continue to payment</span> {% endcomment %}
+                                                                    <a class="badge bg-primary rounded-pill mx-1 p-2" href="https://book.stripe.com/test_9AQ9AD0Vw0vubccdQR" target="_blank">Continue to payment</a>
                                                                 </div>
                                                             </li>
                                                             {% if baptizedApplicationConfirmation.qualified %}
@@ -325,7 +326,25 @@
                                                     {% endif %}
                                                 </div>
                                                 <div class="tab-pane fade border-top py-3 text-start pt-3" id="pills-payment" role="tabpanel" aria-labelledby="pills-payment-tab" tabindex="0">
-                                                    Payment
+                                                  {% if baptizedApplicationConfirmation.qualified %}
+                                                  <li class="list-group-item">
+                                                    <small class="form-check-label">membership payment successful payed and also service Application payment successful payed ; GOD Bless YOU !! </small> :
+                                                    <small class="form-check-label">Application Status</small> :
+                                                    <small class="form-check-label opacity-25 badge bg-success rounded-pill mx-1 p-2"> 
+                                                      Approved!
+                                                    </small>
+                                                    
+                                                  </li> 
+                                                  {% else %}
+                                                  <li class="list-group-item">
+                                                    <small class="form-check-label">Application Status</small> :
+                                                    <small class="form-check-label opacity-25 badge bg-danger rounded-pill mx-1 p-2" 
+                                                    data-bs-toggle="modal" data-bs-target="#how-to-Approved" 
+                                                     title="you need to complete the next step and states change to Approved"> 
+                                                        Pending <i class="bi bi-info-circle px-1"></i> 
+                                                    </small>
+                                                  </li>
+                                                  {% endif %}
                                                 </div>
                                               </div>
                                             

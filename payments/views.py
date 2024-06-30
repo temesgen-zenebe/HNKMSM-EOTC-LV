@@ -186,7 +186,10 @@ def handle_checkout_session(session):
                 # Check if a member was found and get the user associated with the member
                 if member:
                    user = member.user
-        
+                   if payment_case == 'membership':
+                      member.member_status = 'active'
+                      member.save()
+                   
                    # Print the user information
                    print(f"user: {user}")
             except Exception as e:
