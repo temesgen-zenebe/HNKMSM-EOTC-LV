@@ -12,12 +12,21 @@ import json
 import stripe
 import logging
 from datetime import datetime
+from django.utils import timezone
 from django.conf import settings
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
 
-
+class PaymentMenuView(ListView):
+    model = PaymentCaseLists
+    template_name = 'payments/paymentMenu.html'
+    context_object_name = 'paymentLink'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['payment_cases'] = PaymentCaseLists.objects.filter(title='membership')
+        return context
 
 class PaymentCaseListView(ListView):
     model = PaymentCaseLists
@@ -40,13 +49,13 @@ class AddToPaymentCaseCartView(View):
             cart_item.save()
         return redirect('payments:paymentCaseCart_view')
     
-class PaymentCaseCartListView(LoginRequiredMixin,ListView):
-    model = PaymentCaseCartList
-    template_name = 'payments/paymentCaseCart_list.html'
-    context_object_name = 'paymentCaseCart_items'
+class PaymentsHistoryListView(LoginRequiredMixin,ListView):
+    model = PaymentHistory
+    template_name = 'payments/paymentHistory_list.html'
+    context_object_name = 'paymentHistoryList'
 
     def get_queryset(self):
-        return PaymentCaseCartList.objects.filter(user=self.request.user)
+        return PaymentHistory.objects.filter(user=self.request.user)
     
 class CheckoutView(FormView):
     template_name = 'payments/checkout.html'
@@ -80,9 +89,7 @@ class CheckoutView(FormView):
         )
         payment.save()
         
-       
         
-
         if payment_case_value == 'membership':
             try:
                 membership = MembersUpdateInformation.objects.get(user=self.request.user)
@@ -116,6 +123,10 @@ def stripe_webhook(request):
 
     # Log the received payload
     logger.info(f"Received payload: {payload}")
+    
+    if sig_header is None:
+        logger.error("Missing Stripe-Signature header")
+        return JsonResponse({'error': 'Missing Stripe-Signature header'}, status=400)
 
     try:
         event = stripe.Webhook.construct_event(
@@ -178,25 +189,31 @@ def handle_checkout_session(session):
         
         # Assuming the use of Django ORM and MembersUpdateInformation model
         user = None
+        print("membershipID : " + membershipID)
         if membershipID:
+            print(f"Searching for member with membershipID: {membershipID}")
             try:
                 #Retrieve the first member that matches the membershipID
                 member = MembersUpdateInformation.objects.filter(member_id=membershipID).first()
         
                 # Check if a member was found and get the user associated with the member
                 if member:
-                   user = member.user
-                   if payment_case == 'membership':
-                      member.member_status = 'active'
-                      member.save()
-                   
+                    print(f"Member found: {member.full_name}")
+                    user = member.user
+                    if payment_case.title == 'membership':
+                        print(f"Updating member status to active for member: {member.full_name}")
+                        member.member_status = 'active'
+                        member.save()
                    # Print the user information
-                   print(f"user: {user}")
+                    print(f"user: {user}")
+                   
+                if member.member_status == 'pending':
+                    print(f"member_status change to: {member.member_status}")
+                    
             except Exception as e:
                 print(f"An error occurred: {e}")
         else:
             print("No membershipID found.")
-        
         
         PaymentHistory.objects.create(
             user = user,
@@ -204,7 +221,7 @@ def handle_checkout_session(session):
             #paymentConfirmation=payment_intent_id,
             amount=amount,
             payment_case=payment_case,
-            payment_date=created_date
+            payment_date=created_date #timezone.now() 
            
         )
         logger.info("PaymentHistory record created successfully.")

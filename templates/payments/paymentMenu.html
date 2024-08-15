@@ -1,0 +1,122 @@
+{% extends "_base.html" %}
+{% load static %}
+{% block javascript %}
+   {% comment %} <script type="text/javascript" src="{% static '' %}" defer ></script> {% endcomment %}
+{% endblock %}
+{% block title %}payment Menu{% endblock %}
+{% block main %}
+<div class="container my-2">
+<!-- Sermon  Start -->
+<div class="event pb-5">
+    <div class="mx-auto wow bounceInUp rounded" 
+        style="background-image: url('{% static "img/heroAccount-13.png" %}');background-size: cover; background-position: center center; background-repeat: no-repeat; " alt="Church-at" data-wow-delay="0.1s">
+        <div class="container py-1 mt-0">
+            <div class="animated bounceInDown ">
+                <ol class="breadcrumb justify-content-start mb-0 animated bounceInDown">
+                    <li class="small"><a href="{% url 'pages:homepage' %}">Home <span class="px-1">\</span></a></li>
+                    <li class="small" aria-current="page">payment Menu \</li>
+                </ol>   
+            </div>
+        </div>
+        <div class="text-center py-2">
+            <h3 class="mb-2 bolder text-light fs-4">Payment menu</h3>
+            <h3 class="mb-2 text-primary fs-5">Payment Menu can be used for access all payments activate</h1>
+        </div>
+    </div>
+</div>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  {% for payment_case in payment_cases %}
+  <div class="col">
+    <div class="card shadow border border-primary">
+      <div class="card-body small">
+        <h3 class="card-title fs-5">Next Membership Payment Due Date</h3>
+        <hr>
+        <div class="d-flex justify-content-between">
+          <p class="card-text" id="payment-due-date">
+              <!-- JavaScript will update this -->
+          </p>
+          <p class="card-text text-primary">Amount: usd $50.00</p>
+        </div>
+        <hr>
+        <p class="card-text small text-primary">May God bless you for your participation and membership. Your support is deeply appreciated and contributes greatly to our EOTC </p>
+        <hr>
+        <div class="btn-group">
+            <a href="{% url 'payments:payment_case_detail' payment_case.slug %}" class="btn btn-sm rounded btn-primary">Start</a>
+        </div>
+        <div class="alert alert-warning d-none small" id="payment-reminder" role="alert">
+            Your next membership payment is due soon!
+        </div> 
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+  <div class="col">
+    <div class="card shadow border border-primary">
+      <div class="card-body small">
+        <h3 class="card-title fs-5">Payments Case List</h3>
+        <hr>
+        <p class="small">
+          Discover payment cases where your financial support is needed for Ethiopian Orthodox churches. Click here to find out more!
+          ***ለኢትዮጵያ ኦርቶዶክስ አብያተ ክርስቲያናት የገንዘብ መዋጮ የሚጠይቁትን ተሳትፎ የሚሹትን ሁሉንም የክፍያ ጉዳዮች ያስሱ።
+        </p>
+        <hr>
+        <div class="btn-group gap-3">
+          <a href="{% url "payments:payment_case_list" %}" class="btn btn-sm rounded btn-primary">Start</a>
+         </div>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card shadow border border-primary">
+      <div class="card-body small">
+        <h3 class="card-title fs-5">Your payments History</h3>
+        <hr>
+        <p class="card-title small">Explore your entire payment history, including financial contributions to Ethiopian Orthodox churches and membership payments since you signed up.***
+          የኢትዮጵያ ኦርቶዶክስ አብያተ ክርስቲያናት የገንዘብ መዋጮ እና ከተመዘገቡበት ጊዜ ጀምሮ የአባልነት ክፍያዎችን ጨምሮ አጠቃላይ የክፍያ ታሪክዎን ያስሱ::
+        </p>
+        <hr>
+        <div class="btn-group gap-3">
+          <a href="{% url "payments:paymentsHistoryList" %}" class="btn btn-sm rounded btn-primary">Start</a>
+         </div>
+      </div>
+    </div>
+  </div>
+  
+</div>
+
+
+</div>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    // Get the current date
+    const currentDate = new Date();
+
+    // Calculate the first day of the next month
+    let nextMonth = currentDate.getMonth() + 1;
+    let year = currentDate.getFullYear();
+    if (nextMonth > 11) {
+        nextMonth = 0;
+        year += 1;
+    }
+    const firstDayNextMonth = new Date(year, nextMonth, 1);
+
+    // Calculate the first week of the next month
+    const firstWeekEndDate = new Date(firstDayNextMonth);
+    firstWeekEndDate.setDate(firstDayNextMonth.getDate() + 6);
+
+    // Check if the current date is within the first week of the next month
+    const paymentDueDate = firstDayNextMonth;
+    const isPaymentDueSoon = (currentDate >= paymentDueDate && currentDate <= firstWeekEndDate);
+
+    // Update the card text
+    document.getElementById("payment-due-date").textContent = paymentDueDate.toDateString();
+
+    // Show the alert if the payment is due soon
+    if (isPaymentDueSoon) {
+        document.getElementById("payment-reminder").classList.remove("d-none");
+    }
+});
+
+</script>
+{% endblock %}

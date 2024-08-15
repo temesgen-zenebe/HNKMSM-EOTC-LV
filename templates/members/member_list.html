@@ -46,8 +46,12 @@
                                 </div>
                                 <div class="d-grid gap-2 col-6 mx-auto">
                                     <!--payment to active memabership --> 
-                                    <button href="" class="btn btn-sm btn-danger" type="button">Click to active your memabership to get all services.</button>
-                  
+                                    <button 
+                                        data-bs-toggle="modal" 
+                                        data-bs-target="#activateMembershipModal" 
+                                        class="btn btn-sm btn-danger" 
+                                        type="button">Click to active your memabership to get all services.
+                                    </button>
                                 </div>
                             </div>
                             {% comment %} <div class="small"><a href="{% url 'members:member_update' member.id %}" class="text-primary"><i class="bi bi-pencil-square px-2"></i></a></div>      {% endcomment %}
@@ -332,6 +336,52 @@
           </div>
         </div>
       </div>
+    </div>
+     <!-- activate Membership Modal -->
+     <div class="modal fade" id="activateMembershipModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="activateMembershipModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm border border-warning rounded">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="activateMembershipModalLabel">Activate your Membership</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body"> 
+                {% if payment_cases_membership.exists %}
+                    <div class="row row-cols-1 row-cols-md-1 g-4">
+                        {% for payment_case in payment_cases_membership %}
+                            {% comment %} <li>{{ payment_case.title }} - {{ payment_case.description }}</li> {% endcomment %}
+                            <div class="col">
+                                <div class="card">
+                                    {% if payment_case.image %}
+                                    <img src="{{ payment_case.image.url }}"  class="img-fluid rounded-top img-fixed-size p-1" alt="{{ payment_case.title }}">
+                                    {% else %}
+                                    <svg class="bd-placeholder-img card-img-top" width="100%" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect><text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text></svg>
+                                    {% endif %}
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ payment_case.title }}</h5>
+                                        <p class="card-text small">Description : {{ payment_case.description|truncatewords:18 }}</p>
+                                        <hr />
+                                        <div class="btn-group gap-3">
+                                        <a href="{% url 'payments:payment_case_detail' payment_case.slug %}" class="btn btn-sm rounded btn-primary">Details</a>
+                                        </div>
+                                        <a href="{{payment_case.stripsPayment_link}}" class="btn btn-sm btn-primary" target="_blank">Go To Payment</a> 
+                                    </div>
+                                    <div class="card-body p-2">
+                                    {% if payment_case.QRCodeImage %}
+                                    <img src="{{ payment_case.QRCodeImage.url }}"  class="img-fluid" alt="{{ payment_case.title }}">
+                                    {% endif %} 
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p>No membership payment cases available.</p>
+                {% endif %} 
+               
+            </div>
+          </div>
+        </div>
     </div>
   {% endif %}
 </div>

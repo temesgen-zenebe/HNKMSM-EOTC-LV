@@ -41,8 +41,6 @@ class PaymentCase(models.Model):
     def __str__(self):
         return self.title
 
-
-
 class BillingInformation(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     address = models.CharField(max_length=255)
@@ -76,15 +74,18 @@ class Payment(models.Model):
     def __str__(self):
         return f"Payment {self.payment_id} by {self.user}"
 
+
+
+
 class PaymentHistory(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     payment_email = models.EmailField(blank=True, null=True)
     paymentConfirmation = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     payment_case = models.ForeignKey('PaymentCaseLists', on_delete=models.CASCADE)
-    payment_date = models.DateTimeField(auto_now_add=True)
+    payment_date = models.DateTimeField(editable=False)
     created = models.DateTimeField(auto_now_add=True)
-    slug = models.SlugField(max_length=255, unique=True, blank=True)
+    slug = models.SlugField(max_length=255, unique=True)
 
    
     # Save method override to create slug

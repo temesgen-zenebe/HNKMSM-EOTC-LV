@@ -21,7 +21,7 @@ DEBUG=(bool, False)
 
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -175,11 +175,11 @@ DEFAULT_FROM_EMAIL = 'temf2006@gmail.com'
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
-
 USE_I18N = True
 
 USE_TZ = True
+
+TIME_ZONE = 'UTC'  # or your desired timezone
 
 
 # Static files (CSS, JavaScript, Images)

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.views.generic import TemplateView
 from django.contrib import messages 
 from blog.models import Blog
@@ -15,7 +15,7 @@ from members.models import MembersUpdateInformation
 class HomePageView(TemplateView):
     template_name = 'pages/home.html'
    
-    def get(self, request):
+    def get(self, request, *args, **kwargs):
         # Get the current time to filter out past events
         now = timezone.now()
         # Query the latest three upcoming events
@@ -32,15 +32,21 @@ class HomePageView(TemplateView):
         latest_spiritualPoemSongs = SpiritualPoemSong.objects.order_by('-created_at')[:3]
         latest_testimonySalvations = TestimonyOfSalvation.objects.order_by('-created')[:3]
         latest_userManuals = UserManual.objects.order_by('-uploaded_at')[:3]
-        #membership
-        membership = MembersUpdateInformation.objects.filter(user=self.request.user)
+        #membership account_login
+        if request.user.is_authenticated:
+          #membership = MembersUpdateInformation.objects.filter(user=self.request.user)
+          membership = MembersUpdateInformation.objects.filter(user=request.user)
+          # Proceed with your logic for authenticated users
+          return render(request, 'pages/home.html', {'membership': membership})
+     
+        
         #BLOG
         latest_blog = Blog.objects.order_by('-created_at')[:3]
      
 
         context = {
              #membership
-             'membership' : membership,
+             #'membership' : membership,
              'event': events,
              'eventGallery':eventGallery,
              'eventsCategory':eventsCategory,

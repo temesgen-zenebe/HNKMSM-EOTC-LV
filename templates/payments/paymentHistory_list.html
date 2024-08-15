@@ -1,0 +1,74 @@
+{% extends "_base.html" %}
+{% load static %}
+{% block javascript %}
+   {% comment %} <script type="text/javascript" src="{% static '' %}" defer ></script> {% endcomment %}
+{% endblock %}
+{% block title %}payment History List{% endblock %}
+{% block main %}
+<div class="container my-2">
+<!-- Sermon  Start -->
+<div class="event pb-5">
+    <div class="mx-auto wow bounceInUp rounded" 
+        style="background-image: url('{% static "img/heroAccount-13.png" %}');background-size: cover; background-position: center center; background-repeat: no-repeat; " alt="Church-at" data-wow-delay="0.1s">
+        <div class="container py-1 mt-0">
+            <div class="animated bounceInDown ">
+                <ol class="breadcrumb justify-content-start mb-0 animated bounceInDown small">
+                    <li class="small"><a href="{% url 'pages:homepage' %}">Home <span class="px-1">\</span></a></li>
+                    <li class="small"><a href="{% url "payments:payment_case_list" %}">paymentCaseList<span class="px-1">\</span></a></li>
+                    <li class="small" aria-current="page">paymentHistorytList \</li>
+                </ol>   
+            </div>
+        </div>
+        <div class="text-center py-2">
+            <h3 class="mb-2 bolder text-light fs-4">Your Payment History List</h3>
+            <h3 class="mb-2 text-primary fs-5">Payment History List to Explore your financial participation.</h1>
+        </div>
+    </div>
+</div>
+<div class="container mt-1">
+  <div class="row row-cols-1 row-cols-md-1 g-4">
+    <div class="col">
+      <div class="card shadow border border-primary">
+        <div class="card-header bg-primary small">
+          <h3 class="card-title fs-5">All Payment History</h3>
+        </div>
+        {% if paymentHistoryList %}
+        <div class="card-body small">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">Email</th>
+                <th scope="col">Case</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for history in paymentHistoryList %}
+              <tr>
+                <td>{{ history.payment_email }}</td>
+                <td>{{ history.payment_case }}</td>
+                <td>{{ history.quantity }}</td>
+                <td>${{ history.amount }}</td>
+                <td>${{ history.payment_date }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        {% else %}
+        <div class="card-body small">
+          <h3 class="card-title fs-6">oops! Sorry can't get any history for now.</h3>
+        </div>
+        {% endif %}
+      </div>
+      
+      {% comment %} <a href="{% url 'payments:checkout_view' %}" class="btn btn-primary">Proceed to Checkout</a>  {% endcomment %}
+    </div>
+  </div>
+</div>
+
+
+</div>
+{% endblock %}

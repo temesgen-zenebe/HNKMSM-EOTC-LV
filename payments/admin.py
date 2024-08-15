@@ -34,20 +34,21 @@ from .models import PaymentHistory
 
 # Customizing the admin interface for PaymentHistory
 class PaymentHistoryAdmin(admin.ModelAdmin):
-    list_display = ('user', 'payment_email', 'amount', 'payment_case', 'payment_date', 'created', 'slug', 'cumulative_total')
+    list_display = ('user', 'payment_email', 'amount', 'payment_case', 
+                    'payment_date', 'created', 'slug', 'cumulative_total')
     list_filter = ('payment_date', 'created', 'payment_case')
-    search_fields = ('user__username', 'payment_email', 'paymentConfirmation', 'slug')
-    readonly_fields = ('paymentConfirmation', 'created', 'slug')
+    search_fields = ('user__username', 'payment_email', 'paymentConfirmation')
+    readonly_fields = ('paymentConfirmation', 'created', 'payment_date')  # Add 'payment_date' here
     ordering = ('-created',)  # Order by creation date descending
-    prepopulated_fields = {'slug': ('payment_case',)}
+    #prepopulated_fields = {'slug': ('payment_case',)}
 
     # Optionally, you can customize the admin form
     fieldsets = (
         (None, {
-            'fields': ('user', 'payment_email', 'amount', 'payment_case', 'slug')
+            'fields': ('user', 'payment_email', 'amount', 'payment_case')
         }),
         ('Date Information', {
-            'fields': ('payment_date', 'created'),
+            'fields': ('created',),
             'classes': ('collapse',),
         }),
     )
