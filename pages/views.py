@@ -32,21 +32,15 @@ class HomePageView(TemplateView):
         latest_spiritualPoemSongs = SpiritualPoemSong.objects.order_by('-created_at')[:3]
         latest_testimonySalvations = TestimonyOfSalvation.objects.order_by('-created')[:3]
         latest_userManuals = UserManual.objects.order_by('-uploaded_at')[:3]
-        #membership account_login
-        if request.user.is_authenticated:
-          #membership = MembersUpdateInformation.objects.filter(user=self.request.user)
-          membership = MembersUpdateInformation.objects.filter(user=request.user)
-          # Proceed with your logic for authenticated users
-          return render(request, 'pages/home.html', {'membership': membership})
-     
-        
-        #BLOG
+        #membership = MembersUpdateInformation.objects.filter(user=self.request.user)
+        membership = MembersUpdateInformation.objects.get(user=request.user)
+        print(membership.member_status)
         latest_blog = Blog.objects.order_by('-created_at')[:3]
      
 
         context = {
              #membership
-             #'membership' : membership,
+             'membership' : membership,
              'event': events,
              'eventGallery':eventGallery,
              'eventsCategory':eventsCategory,

@@ -1,0 +1,59 @@
+<div class="container my-4">
+    <div class="row">
+        <div class="col-lg-8">
+            <h2 class="mb-4">Courses</h2>
+            <div class="row">
+                {% for course in courses %}
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ course.name }}</h5>
+                            <p class="card-text">{{ course.description|truncatewords:20 }}</p>
+                            <a href="{% url 'marriage:course_detail' course.slug %}" class="btn btn-primary">View Details</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- Pagination Section -->
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                    {% if page_obj.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    {% endif %}
+
+                    {% for num in page_obj.paginator.page_range %}
+                    <li class="page-item {% if page_obj.number == num %}active{% endif %}">
+                        <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                    </li>
+                    {% endfor %}
+
+                    {% if page_obj.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Resources Section -->
+        <div class="col-lg-4">
+            <h2 class="mb-4">Resources</h2>
+            <ul class="list-group">
+                {% for resource in resources %}
+                <li class="list-group-item">
+                    {{ resource.name }} - <a href="{{ resource.link }}">View</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,274 @@
+{% extends "_base.html" %}
+{% load static %}
+{% block javascript %}
+   {% comment %} <script type="text/javascript" src="{% static '' %}" defer ></script> {% endcomment %}
+{% endblock %}
+{% load crispy_forms_tags %}
+{% block title %}marriage School Welcome{% endblock %}
+{% block main %}
+<div class="container mt-2">
+    <!-- breadcrumb -->
+    <div class="event pb-5">
+        <div class="mx-auto wow bounceInUp rounded-1" 
+            style="background-image: url('{% static "img/heroAccount-13.png" %}');background-size: cover; background-position: center center; background-repeat: no-repeat; " alt="Church-at" data-wow-delay="0.1s">
+            <div class="container py-3 mt-0 ">
+                <div class="animated bounceInDown ">
+                    <ol class="breadcrumb justify-content-start mb-0 animated bounceInDown small">
+                        <li class=""><a href="{% url 'pages:homepage' %}">Home <span class="px-1">\</span></a></li>
+                        <li class=""><a href="{% url 'services:service' %}">services<span class="px-1">\</span></a></li>
+                        <li class="" aria-current="page">marriageSchool</li>
+                    </ol>
+                </div>
+            </div>
+            <!-- breadcrumb Start -->
+            <div class="text-center py-1">
+                <h4 class="mb-2 bolder text-light fs-4">ወደ ጋብቻ ትምህርት ቤት እንኳን ደህና መጡ</h4>
+                <h1 class="mb-2 text-light fs-4">welcome to  marriage School</h1>
+                <p class="mx-1 small">Premarital and Potmarital counseling can matter significantly for couples as it helps build a strong foundation for marriage.</p>
+                <p class="mx-1 small">ከጋብቻ በፊት እና ከጋብቻ በኋላ የሚደረግ ምክር ለትዳር ጠንካራ መሰረትን ለመገንባት ስለሚረዳ ጥንዶች ጠቃሚ ሊሆኑ ይችላሉ።</p>
+            </div>
+        </div>
+    </div>
+
+    <!--type schools-->
+    
+    <div class="service rounded">
+        <div class="container py-1">
+            <div class="text-center py-4">
+                <small class="d-inline-block fw-bold text-dark text-uppercase bg-light border border-primary rounded-pill px-4 py-1 mb-2">The Marriage Education *** የጋብቻ ትምህርት!</small>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-12 col-md-12 col-sm-12 wow  " data-wow-delay="0.5s">
+                    <div class="rounded shadow">
+                        <div class="service-content d-flex align-items-center justify-content-center p-4">
+                           
+                            <div class="service-content-icon text-center">
+                                <i class="fas fa-church fa-3x text-primary mb-4"></i>
+                                <i class="fas fa-circle-notch  fa-2x text-primary mb-4"></i>
+                                <i class="fas fa-circle-notch  fa-2x text-primary mb-4"></i>
+                                <h3 class="mb-3">The Goal of Marriage School </h3>
+                                <p> የጋብቻ ትምህርት ዓላማ</p> 
+                                <p class="small text-center">በኢትዮጵያ ኦርቶዶክስ ተዋሕዶ ቤተ ክርስቲያን ቀኖና መሠረት በቤተክርስቲያን ሥር የቅድመ ጋብቻ እና ከጋብቻ በኋላ ትምህርትን ማግኘት ወደሚከተለው አምስት የብስለት መርሆች ይመራል፡-</p>
+                                <span> ***** </span>
+                                <p class="small text-center">According to the Ethiopian Orthodox Tewahedo Church's Canon,  Attaining Pre-Marital and Post-Marital Education in Marriage School under the church leads to the Following Five Principles of Maturity Upon Completion:</p>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                      <div class="card">
+                                        <div class="card-body"> 
+                                            <ul class="list-unstyled small ">
+                                                <li class="d-flex align-items-start gap-1">
+                                                    <i class="bi bi-check2-circle fs-5 text-primary"></i>                                                    
+                                                    <span>ጥልቅ እምነት እና የቤተክርስቲያን ትምህርቶችን መከተል:: </span>
+                                                </li>
+                                                <li class="d-flex align-items-start gap-1">
+                                                    <i class="bi bi-check2-circle fs-5 text-primary"></i> 
+                                                    <span>ጋብቻን እንደ ቅዱስ ቃል ኪዳን የበለጠ መረዳት::</span>
+                                                </li>
+                                                <li class="d-flex align-items-start gap-1">
+                                                    <i class="bi bi-check2-circle fs-5 text-primary"></i>
+                                                    <span>ለፍቅር፣ ለትዕግስት እና ለትህትና ቁርጠኝነት የተጠናከረ::</span>
+                                                </li>
+                                                <li class="d-flex align-items-start gap-1">
+                                                    <i class="bi bi-check2-circle fs-5 text-primary"></i>
+                                                    <span>በቤተክርስቲያን ትውፊት ላይ ለተመሰረተ ለቤተሰብ ህይወት መሰጠት የላቀ ነው።::</span>
+                                                </li>
+                                                <li class="d-flex align-items-start gap-1">
+                                                    <i class="bi bi-check2-circle fs-5 text-primary"></i>
+                                                    <span>በትዳር ትስስር ውስጥ ቀጣይ መንፈሳዊ እድገት እና ኃላፊነት::</span> 
+                                                </li>
+                                            </ul>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                      <div class="card">
+                                        <div class="card-body">            
+                                            <ul class="list-unstyled small">
+                                                <li class="d-flex align-items-start gap-1">
+                                                    <i class="bi bi-check2-circle fs-5 text-primary"></i>
+                                                    {% comment %} <input class="form-check-input me-2" type="checkbox" value="" checked> {% endcomment %}
+                                                    <span>Deepened faith and adherence to Church teachings</span>
+                                                </li>
+                                                <li class="d-flex align-items-start gap-1">
+                                                    <i class="bi bi-check2-circle fs-5 text-primary"></i>
+                                                    {% comment %} <input class="form-check-input me-2" type="checkbox" value="" checked> {% endcomment %}
+                                                    <span>Greater understanding of marriage as a holy covenant</span>
+                                                </li>
+                                                <li class="d-flex align-items-start gap-1">
+                                                    <i class="bi bi-check2-circle fs-5 text-primary"></i>
+                                                    {% comment %} <input class="form-check-input me-2" type="checkbox" value="" checked> {% endcomment %}
+                                                    <span>Strengthened commitment to love, patience,& humility</span>
+                                                </li>
+                                                <li class="d-flex align-items-start gap-1">
+                                                    <i class="bi bi-check2-circle fs-5 text-primary"></i>
+                                                    {% comment %} <input class="form-check-input me-2" type="checkbox" value="" checked> {% endcomment %}
+                                                    <span>Enhanced dedication to family life rooted in Church tradition</span>
+                                                </li>
+                                                <li class="d-flex align-items-start gap-1">
+                                                    <i class="bi bi-check2-circle fs-5 text-primary"></i>
+                                                    {% comment %} <input class="form-check-input me-2" type="checkbox" value="" checked> {% endcomment %}
+                                                    <span>Ongoing spiritual growth and responsibility within the marital bond</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                              
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 col-sm-12 wow bounceInUp" data-wow-delay="0.1s">
+                    <div class="bg-light rounded service-item shadow">
+                        <div class="service-content d-flex align-items-center justify-content-center p-4">
+                            <div class="service-content-icon text-center">
+                                <i class="fas fa-cross fa-3x text-primary mb-4"></i>
+                                <h6 class="mb-3">Courses</h6>
+                                <p class="mb-4 small">sinup and start</p>
+                                {% if  schoolProgressController.is_signup_for_school %}
+                                <a href="{% url 'marriage:course_list'%}" class="btn btn-primary px-4 py-2 rounded-pill">Start</a>
+                                {% else %}
+                                <a href="" data-bs-toggle="modal" data-bs-target="#signup_for_school" class="btn btn-primary px-4 py-2 rounded-pill">signup For School</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-12 wow bounceInUp" data-wow-delay="0.3s">
+                    <div class="bg-light rounded service-item shadow">
+                        <div class="service-content d-flex align-items-center justify-content-center p-4">
+                            <div class="service-content-icon text-center">
+                                <i class="fas fa-wine-glass-alt fa-3x text-primary mb-4"></i>
+                                <h5 class="mb-3"><h5 class="mb-3">Results Reporte</h5>
+                                <p class="mb-4 small">see you Results and progress</p>
+                                <a href="{% url "services:holyCommunion" %}" class="btn btn-primary px-4 py-2 rounded-pill">view</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-12 wow bounceInUp" data-wow-delay="0.5s">
+                    <div class="bg-light rounded service-item shadow">
+                        <div class="service-content d-flex align-items-center justify-content-center p-4">
+                            <div class="service-content-icon text-center">
+                                <i class="fas fa-chess-king fa-3x text-primary mb-4"></i>
+                                <h5 class="mb-3">MeetEvents</h5>
+                                <p class="mb-4 small">Signup For MeetEvents</p>
+                                <a href="{% url "services:weddingServices" %}" class="btn btn-primary px-4 py-2 rounded-pill">Start</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-12 wow bounceInUp" data-wow-delay="0.7s">
+                    <div class="bg-light rounded service-item shadow">
+                        <div class="service-content d-flex align-items-center justify-content-center p-4">
+                            <div class="service-content-icon text-center">
+                                <i class="fas fa-plus-circle fa-3x text-primary mb-4"></i>
+                                <h5 class="mb-3">የንስሐ አባት</h5>
+                                <h5 class="mb-3">Father of repentance</h5>
+                                <p class="mb-4 small">አባካኙ ልጅ በአባት ፍቅር ታቅፎ፣ ያለ ምንም ቅድመ ሁኔታ ይቅርታ ተደረገለት።" ሉቃስ 15:20</p>
+                                <a href="{% url "services:fatherOfRepentance" %}" class="btn btn-primary px-4 py-2 rounded-pill">Start</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-12 col-md-12 col-sm-12 wow bounceInUp mt-4" data-wow-delay="0.1s">
+                    <div class="bg-light rounded service-item shadow">
+                        <div class="service-content d-flex align-items-center justify-content-center px-4 py-5">
+                            <div class="service-content-icon text-center">
+                                <i class="fas fa-circle-notch  fa-2x text-primary mb-4"></i>
+                                <i class="fas fa-circle-notch  fa-2x text-primary mb-4"></i>
+                                {% comment %} <img src="{% static 'img/icon/matting_Church_justice_during_the_funeral.png' %}" class="img-fluid rounded text-primary mb-4" alt="">  {% endcomment %}
+                                <h5 class="mb-3">Marriage School</h5>
+                                <p class="mb-4 text-start"> 
+                                    Pre-Marital and Post-Marital Counseling.
+                                    <small>
+                                        can play a crucial role in building and maintaining a healthy marriage. 
+                                        Pre-marital counseling helps couples prepare for marriage by addressing important topics such as communication, 
+                                        finances, expectations, and potential areas of conflict. It equips partners with tools to navigate challenges and 
+                                        strengthens their bond before making a lifelong commitment. Post-marital counseling, on the other hand, focuses on 
+                                        helping couples work through issues that arise after marriage, ensuring continued growth and harmony. 
+                                        Together, these forms of counseling promote understanding, prevent conflicts, and foster long-term satisfaction, 
+                                        making them essential for a successful and fulfilling marital journey.
+                                    </small></p>
+                                <hr>
+                                <p class="mb-4 text-start"> 
+                                    ከጋብቻ በፊት እና ከጋብቻ በኋላ የሚሰጠው ምክር
+                                    <small>
+                                        ጤናማ ትዳርን ለመገንባት እና ለመጠበቅ ወሳኝ ሚና ይጫወታል። 
+                                        ከጋብቻ በፊት ምክር መስጠት ባለትዳሮች እንደ ግንኙነት፣ ፋይናንስ፣ የሚጠበቁ ነገሮች እና የግጭት ቦታዎች ያሉ ጠቃሚ ርዕሰ ጉዳዮችን በማንሳት ለጋብቻ እንዲዘጋጁ ይረዳቸዋል። 
+                                        የዕድሜ ልክ ቁርጠኝነት ከማድረጋቸው በፊት አጋሮችን ፈተናዎችን ለመፈተሽ መሳሪያዎችን ያስታጥቃል እና ግንኙነታቸውን ያጠናክራል። 
+                                        ከጋብቻ በኋላ የሚሰጠው ምክር ጥንዶች ከጋብቻ በኋላ በሚነሱ ጉዳዮች ላይ እንዲሰሩ በመርዳት ላይ ያተኮረ ሲሆን ይህም ቀጣይ እድገትና ስምምነትን ያረጋግጣል። 
+                                        እነዚህ የምክር ዓይነቶች አንድ ላይ ሆነው መግባባትን ያበረታታሉ፣ ግጭቶችን ይከላከላሉ እና የረዥም ጊዜ እርካታን ያጎለብታሉ፣ ይህም ለተሳካ እና አርኪ ለትዳር ጉዞ አስፈላጊ ያደርጋቸዋል።
+                                    </small></p>
+                                <a href="#" class="btn btn-primary px-4 py-2 rounded-pill">Start</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+     </div>
+ <!-- Child Modal -->
+ <div class="modal fade" id="signup_for_school" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="signup_for_schoolModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="signup_for_schoolModalLabel">Add Child</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-2 ">
+          <form method="post" class="small" novalidate>
+            {% csrf_token %}
+            {{ signupForSchoolForm|crispy }}
+            <button type="submit" class="btn btn-primary">Save</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+    <!-- Service End -->
+       <div class="row">
+        <!-- School Progress Section -->
+        <div class="col-md-6 mb-4">
+            <h4>School Progress</h4>
+            <p>Status: {{ schoolProgressController.is_signup_for_school }}</p>
+        </div>
+        
+        <!-- Results Section -->
+        <div class="col-md-6 mb-4">
+            <h4>Your Results</h4>
+            <p>Score: {{ results.score }}</p>
+        </div>
+        
+        <!-- Meet Events Section -->
+        <div class="col-md-12 mb-4">
+            <h4>Upcoming Events</h4>
+            {% for event in meetEvents %}
+            <div class="event-item">
+                <p>Event: {{ event.event_name }}</p>
+                <p>Date: {{ event.date }}</p>
+            </div>
+            {% empty %}
+            <p>No events available at the moment.</p>
+            {% endfor %}
+        </div>
+        
+        <!-- Certification Section -->
+        <div class="col-md-6 mb-4">
+            <h4>Certification</h4>
+            <p> Certificate: {{ certification.certificate_name }}</p>
+        </div>
+        
+       
+    </div>
+</div>
+</div>
+{% endblock %}

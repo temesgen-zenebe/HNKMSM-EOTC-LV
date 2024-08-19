@@ -46,11 +46,9 @@ class MembersUpdateInformation(models.Model):
     def save(self, *args, **kwargs):
         if not self.slug:
             value = str(self.full_name)
-            self.slug = unique_slug(value, type(self))
-            
+            self.slug = unique_slug(value, type(self))   
         if not self.member_id:
             self.member_id = self.generate_unique_member_id()
-        
         super().save(*args, **kwargs)
         
     

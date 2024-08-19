@@ -32,7 +32,6 @@
             {% if user.is_authenticated and member.user.username == user.username %}
                 {% if member.member_status == 'pending' %}
                 <div class="card-header bg-white d-flex justify-content-between ">
-                    {% comment %} <div><h3 class="text-primary">Yours Member Information</h3></div> {% endcomment %}
                     {% if members %}
                         {% for member in members %}
                             {% if user.is_authenticated and member.user.username == user.username %}
@@ -44,6 +43,7 @@
                                     <p class="small"> Member status : <span class="text-danger">{{member.member_status }}</span></p>
                                     </div>
                                 </div>
+                              
                                 <div class="d-grid gap-2 col-6 mx-auto">
                                     <!--payment to active memabership --> 
                                     <button 
@@ -364,7 +364,7 @@
                                         <div class="btn-group gap-3">
                                         <a href="{% url 'payments:payment_case_detail' payment_case.slug %}" class="btn btn-sm rounded btn-primary">Details</a>
                                         </div>
-                                        <a href="{{payment_case.stripsPayment_link}}" class="btn btn-sm btn-primary" target="_blank">Go To Payment</a> 
+                                        {% comment %} <a href="{{payment_case.stripsPayment_link}}" class="btn btn-sm btn-primary" target="_blank">Go To Payment</a>  {% endcomment %}
                                     </div>
                                     <div class="card-body p-2">
                                     {% if payment_case.QRCodeImage %}

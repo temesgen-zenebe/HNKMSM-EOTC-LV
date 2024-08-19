@@ -67,7 +67,7 @@
                                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Schools</a>
                                 <div class="dropdown-menu bg-light">
                                     <a href="{% url "schools:school" %}" class="dropdown-item">Sunday School</a>
-                                    <a href="#" class="dropdown-item">Marriage School</a>
+                                    <a href="{% url "marriage:marriageSchool_welcome" %}" class="dropdown-item">Marriage School</a>
                                 </div>
                             </div> 
                             <div class="nav-item dropdown">
@@ -188,7 +188,7 @@
                             <h4 class="mb-4">Resources</h4>
                             <div class="d-flex flex-column align-items-start">
                                 <a class="text-body mb-3" href="{% url "schools:school" %}"><i class="fa fa-check text-primary me-2"></i>Sunday School</a>
-                                <a class="text-body mb-3" href="#"><i class="fa fa-check text-primary me-2"></i>Marriage School </a>
+                                <a class="text-body mb-3" href="{% url "marriage:marriageSchool_welcome" %}"><i class="fa fa-check text-primary me-2"></i>Marriage School</a>
                                 <a class="text-body mb-3" href="{% url "blog:blog_list" %}"><i class="fa fa-check text-primary me-2"></i>Articles|blog</a>
                                 <a class="text-body mb-3" href="#"><i class="fa fa-check text-primary me-2"></i>News & Announcements</a>
                                 <a class="text-body mb-3" href="{% url "multimedia:multimedia" %}"><i class="fa fa-check text-primary me-2"></i>Multimedia</a>

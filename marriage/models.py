@@ -32,8 +32,8 @@ class SignupForSchool(models.Model):
 # Progress Control for Users
 class SchoolProgressController(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    is_signup_user_account = models.BooleanField(default=False)
-    is_membership = models.BooleanField(default=False)
+    is_signup_user_account = models.BooleanField(default=True)
+    is_membership = models.BooleanField(default=True)
     is_signup_for_school = models.BooleanField(default=False)
     is_complete_courses = models.BooleanField(default=False)
     is_pass_quiz = models.BooleanField(default=False)
@@ -53,6 +53,7 @@ class Course(models.Model):
     title = models.CharField(max_length=200)
     category =models.CharField(max_length=50, choices=CATEGORY)
     description = models.TextField()
+    is_completed = models.BooleanField(default=False)
     slug = models.SlugField(max_length=200, unique=True, null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -82,6 +83,7 @@ class Quiz(models.Model):
 
 class Question(models.Model):
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
     number = models.PositiveSmallIntegerField()
     question_text = models.TextField(max_length=3000)
     slug = models.SlugField(max_length=200, unique=True, null=True, blank=True)
@@ -97,6 +99,7 @@ class Question(models.Model):
         return f"{self.quiz} - Question {self.number}"
 
 class Answer(models.Model):
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
     answer_text = models.CharField(max_length=255)
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     is_correct = models.BooleanField(default=False)
@@ -106,6 +109,7 @@ class Answer(models.Model):
 
 class Results(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE,blank=True, null=True)
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
     score = models.FloatField()
     is_pass = models.BooleanField(default=False)
@@ -145,7 +149,6 @@ class MeetEvents(models.Model):
         ('Webinar', 'Webinar'),
         ('Onsite', 'Onsite'),
     ]
-    
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     meet_type = models.CharField(max_length=50, choices=MEET_TYPE_CHOICES)
     date_and_time = models.DateTimeField()
@@ -203,8 +206,13 @@ class SignupForMeetEvents(models.Model):
 
 # Resources Model
 class Resources(models.Model):
+    CATEGORY=( 
+         ('PreMarital', 'PreMarital'),
+         ('PostMarital', 'PostMarital'),  
+     )
     title = models.CharField(max_length=200)
     description = models.TextField()
+    category =models.CharField(max_length=50, choices=CATEGORY, default='PreMarital')
     audio = models.FileField(upload_to='resources/audio/', null=True, blank=True)
     video = models.FileField(upload_to='resources/video/', null=True, blank=True)
     pdf = models.FileField(upload_to='resources/pdf/', null=True, blank=True)

@@ -53,6 +53,7 @@ class PaymentsHistoryListView(LoginRequiredMixin,ListView):
     model = PaymentHistory
     template_name = 'payments/paymentHistory_list.html'
     context_object_name = 'paymentHistoryList'
+    #success_url = reverse_lazy('payments:payment_confirmation')
 
     def get_queryset(self):
         return PaymentHistory.objects.filter(user=self.request.user)
@@ -187,21 +188,31 @@ def handle_checkout_session(session):
         payment_case = PaymentCaseLists.objects.get(payment_case_link=payment_case_link)
         print(payment_case)
         
+        # # Create a Stripe Checkout session
+        # checkout_session = stripe.checkout.Session.create(
+        #     mode="payment",
+        #     invoice_creation={"enabled": True},
+        #     line_items=[{"price": "price_1PXL9PP9YIWmSYJtvyb5XX4k", "quantity": 1}],  # Replace with your actual price ID
+        #     success_url="http://127.0.0.1:8000/payments/confirmation/",
+        #     #cancel_url="https://yourwebsite.com/cancel",
+        #     customer_email=customer_email  # Automatically fill the email in the Stripe checkout
+        # )
+        
+        
         # Assuming the use of Django ORM and MembersUpdateInformation model
         user = None
-        print("membershipID : " + membershipID)
         if membershipID:
-            print(f"Searching for member with membershipID: {membershipID}")
+            #print(f"Searching for member with membershipID: {membershipID}")
             try:
                 #Retrieve the first member that matches the membershipID
                 member = MembersUpdateInformation.objects.filter(member_id=membershipID).first()
         
                 # Check if a member was found and get the user associated with the member
                 if member:
-                    print(f"Member found: {member.full_name}")
+                    #print(f"Member found: {member.full_name}")
                     user = member.user
                     if payment_case.title == 'membership':
-                        print(f"Updating member status to active for member: {member.full_name}")
+                        #print(f"Updating member status to active for member: {member.full_name}")
                         member.member_status = 'active'
                         member.save()
                    # Print the user information
@@ -221,10 +232,15 @@ def handle_checkout_session(session):
             #paymentConfirmation=payment_intent_id,
             amount=amount,
             payment_case=payment_case,
-            payment_date=created_date #timezone.now() 
+            payment_date=timezone.now() #created_date 
            
         )
+        
         logger.info("PaymentHistory record created successfully.")
+        
+        # Redirect the user to the Stripe-hosted payment_confirmation page
+        return redirect('http://127.0.0.1:8000/payments/confirmation/')
+
     except PaymentCaseLists.DoesNotExist:
         logger.error(f"No PaymentCaseLists found with stripsPayment_link: {payment_case_link}")
     except Exception as e:

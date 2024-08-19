@@ -9,7 +9,6 @@ from .views import (
     PaymentCaseDetailView, 
     PaymentConfirmationView, 
     PaymentMenuView,
-    #stripe_webhook 
 )
 
 app_name = 'payments' 
@@ -22,7 +21,6 @@ urlpatterns = [
     path('paymentsHistoryList/', PaymentsHistoryListView.as_view(), name='paymentsHistoryList'),
     path('checkout/', CheckoutView.as_view(), name='checkout_view'),
     path('confirmation/', PaymentConfirmationView.as_view(), name='payment_confirmation'),
-    #path('webhook/', stripe_webhook, name='stripe-webhook'),
     path('stripe_webhook/', views.stripe_webhook, name='stripe_webhook'),
 
     # Add other URL patterns as needed
