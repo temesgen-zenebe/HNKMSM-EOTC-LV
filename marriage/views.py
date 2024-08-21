@@ -73,3 +73,8 @@ class CourseDetailView(LoginRequiredMixin, DetailView):
         context['question'] = Question.objects.filter(course=course)
         context['answer'] = Answer.objects.filter(question__course=course)
         return context
+    
+class ResourceDetailView(LoginRequiredMixin, DetailView):
+    model = Resources
+    template_name = 'marriage/resources_detail.html'  # Specify your detail view template
+    context_object_name = 'resources_detail'

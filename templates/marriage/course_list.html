@@ -16,13 +16,13 @@
                     <ol class="breadcrumb justify-content-start mb-0 animated bounceInDown small">
                         <li class=""><a href="{% url 'pages:homepage' %}">Home<span class="px-1">\</span></a></li>
                         <li class=""><a href="{% url 'marriage:marriageSchool_welcome' %}">marriageSchool<span class="px-1">\</span></a></li>
-                        <li class="" aria-current="page">Courses</li>
+                        <li class="" aria-current="page">coursesList</li>
                     </ol>
                 </div>
             </div>
             <!-- breadcrumb Start -->
             <div class="text-center py-1">
-                <h4 class="mb-2 bolder text-light fs-4">ወደ ጋብቻ ትምህርት ቤት እንኳን ደህና መጡ</h4>
+                <h6 class="mb-2 bolder text-light fs-6">ወደ ጋብቻ ትምህርት ቤት እንኳን ደህና መጡ</h6>
                 <h1 class="mb-2 text-light fs-4">welcome to  marriage School</h1>
                 <p class="mx-1 small">Premarital and Potmarital counseling can matter significantly for couples as it helps build a strong foundation for marriage.</p>
                 <p class="mx-1 small">ከጋብቻ በፊት እና ከጋብቻ በኋላ የሚደረግ ምክር ለትዳር ጠንካራ መሰረትን ለመገንባት ስለሚረዳ ጥንዶች ጠቃሚ ሊሆኑ ይችላሉ።</p>
@@ -30,7 +30,7 @@
         </div>
     </div>
     <nav>
-        <div class="nav nav-tabs mb-3 border-primary" id="nav-tab" role="tablist">
+        <div class="nav nav-pills mb-3 justify-content-center" id="nav-tab" role="tablist">
           <button
             class="nav-link active small btn btn-sm"
             id="nav-home-tab"
@@ -41,7 +41,8 @@
             aria-controls="nav-home"
             aria-selected="true"
           >
-            PreMarital | የቅድመ ጋብቻ ትምህርት
+          <i class="fas fa-book-reader  fa-1x px-2"></i>
+           PreMarital | የቅድመ ጋብቻ ትምህርት
           </button>
           <button
             class="nav-link small btn btn-sm"
@@ -53,7 +54,8 @@
             aria-controls="nav-profile"
             aria-selected="false"
           >
-            PostMarital | የድህረ-ጋብቻ ትምህርት
+          <i class="fas fa-book  fa-1x px-2"></i>
+          PostMarital | የድህረ-ጋብቻ ትምህርት
           </button>
           <button
             class="nav-link small btn btn-sm"
@@ -65,104 +67,209 @@
             aria-controls="nav-contact"
             aria-selected="false"
           >
-            AllResources | ሁሉም መርጃዎች
+          <i class="bi bi-collection-fill fa-1x px-2"></i> AllResources | ሁሉም መርጃዎች
           </button>
         </div>
     </nav>
-    <div class="tab-content p-3 " id="nav-tabContent">
+    <div class="tab-content" id="nav-tabContent">
+        <!-- Pre-Marital Course -->
         <div
-          class="tab-pane fade show active"
+          class="tab-pane fade show active py-4"
           id="nav-home"
           role="tabpanel"
           aria-labelledby="nav-home-tab"
           tabindex="0"
         >
-          <h3 class="m-2 fs-5">Pre-Marital Course| የቅድመ ጋብቻ ኮርሶች </h3>
-          <small><strong>Instructions:</strong> Review the course content and supporting resources, then complete the quiz for the courses listed below.Good luck! </small>
-          <hr>
-            <div class="row row-cols-1 row-cols-md-3 my-2 g-4">
-                {% for course in courses %}
-                    {% if course.category == 'PreMarital' %}
-                        <div class="col">
-                        <div class="card">
-                            <img src="{% static 'img/Courses-palceHlder.png' %}" class="card-img-top" alt="{{ course.title }}">
-                            <div class="card-body">
-                            <h3 class="card-title fs-4">{{ course.title }}</h3>
-                            <small> Status: {% if course.is_completed %}
-                                <span class="text-success">successfuly Completion</span>
-                                {% else %}
-                                <span class="text-danger">Incomplete</span>
+        <!-- Pre-Marital Course Section -->
+        
+            <div class="card border-primary"> 
+                <div class="card-body">
+                    <h3 class="mx-3 fs-5 pt-2">Pre-Marital courses | የቅድመ ጋብቻ ኮርሶች </h3>
+                    <p class="mx-3 small">Pre-Marital Courses from an Ethiopian Orthodox Tewahedo Perspective*ከጋብቻ በፊት የሚሰጠው ትምህርቶች ከኢትዮጵያ ኦርቶዶክስ ተዋሕዶ አንጻር</p>
+                    <small class="mx-3 pb-2"><strong>Instructions:</strong> Review the course content and supporting resources, then complete the quiz for the courses listed below.Good luck! </small>
+                    <hr>
+                    <div class="row row-cols-1 row-cols-md-3 my-2 pb-3 g-4">
+                            {% for course in courses %}
+                                {% if course.category == 'PreMarital' %}
+                                    <div class="col">
+                                    <div class="card shadow">
+                                        <img src="{% static 'img/Courses-palceHlder.png' %}" class="card-img-top" alt="{{ course.title }}">
+                                        <div class="card-body">
+                                        <h3 class="card-title fs-6">{{ course.title|truncatewords:5 }}</h3>
+                                        <small> Status: {% if course.is_completed %}
+                                            <span class="text-success">successfuly Completion</span>
+                                            {% else %}
+                                            <span class="text-danger">Incomplete</span>
+                                            {% endif %}
+                                        </small>
+                                        <hr>
+                                        <p class="card-text small">{{ course.description|truncatewords:10 }}</p>
+                                        <a href="{% url 'marriage:course_detail' course.slug %}" class="btn btn-sm btn-primary">Start</a>
+                                        </div>
+                                    </div>
+                                    </div>
                                 {% endif %}
-                            </small>
-                            <hr>
-                            <p class="card-text">{{ course.description|truncatewords:10 }}</p>
-                            <a href="{% url 'marriage:course_detail' course.slug %}" class="btn btn-sm btn-primary">Start</a>
-                            </div>
-                        </div>
-                        </div>
-                    {% endif %}
-                {% endfor %}
-            </div>
-             <!-- Pagination Section -->
-            <div class="row my-3 py-4">
-                <div class="col-lg-8 small">
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination justify-content-center">
-                            {% if page_obj.has_previous %}
-                            <li class="page-item">
-                                <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                </a>
-                            </li>
-                            {% endif %}
-
-                            {% for num in page_obj.paginator.page_range %}
-                            <li class="page-item {% if page_obj.number == num %}active{% endif %}">
-                                <a class="page-link" href="?page={{ num }}">{{ num }}</a>
-                            </li>
                             {% endfor %}
+                    </div>
+                    <hr>
+                    <!-- Pagination Section -->
+                    <div class="row my-2 ">
+                        <div class="col-lg-8 small">
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination justify-content-center">
+                                    {% if page_obj.has_previous %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                        </a>
+                                    </li>
+                                    {% endif %}
 
-                            {% if page_obj.has_next %}
-                            <li class="page-item">
-                                <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                </a>
-                            </li>
-                            {% endif %}
-                        </ul>
-                    </nav>
+                                    {% for num in page_obj.paginator.page_range %}
+                                    <li class="page-item {% if page_obj.number == num %}active{% endif %}">
+                                        <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                                    </li>
+                                    {% endfor %}
+
+                                    {% if page_obj.has_next %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                    </li>
+                                    {% endif %}
+                                </ul>
+                            </nav>     
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
-          
-             <!-- Resources Section -->
-             <h2 class="mx-4">Related Resources</h2>     
-             <hr>                          
-            <div class="row row-cols-1 row-cols-md-3 my-2 g-4">
-                {% for resource in resources %}
-                    {% if resource.category == 'PreMarital' %}
-                        <div class="col">
-                        <div class="card">
-                            <img src="{% static 'img/Courses-palceHlder.png' %}" class="card-img-top" alt="{{ course.title }}">
-                            <div class="card-body">
-                            <h3 class="card-title fs-4">{{ resource.title }}</h3>
-                            <p class="card-text">{{ resource.description|truncatewords:10 }}</p>
-                            {% comment %} <a href="{% url 'marriage:resource_detail' resource.slug %}" class="btn btn-sm btn-primary">Start</a> {% endcomment %}
-                            </div>
-                        </div>
-                        </div>
-                    {% endif %}
-                {% endfor %}
+            <!-- Resources Section -->
+            <div class="card my-4"> 
+                <div class="card-body">
+                
+                    <h3 class="mx-3 fs-5">Related Resources</h3>     
+                    <hr>                          
+                    <div class="row row-cols-1 row-cols-md-3 my-2 g-4">
+                        {% for resource in resources %}
+                            {% if resource.category == 'PreMarital' %}
+                                <div class="col">
+                                <div class="card shadow">
+                                    <img src="{% static 'img/Courses-palceHlder.png' %}" class="card-img-top" alt="{{ course.title }}">
+                                    <div class="card-body">
+                                    <h3 class="card-title fs-4">{{ resource.title }}</h3>
+                                    <hr>
+                                    <p class="card-text small">{{ resource.description|truncatewords:10 }}</p>
+                                    <a href="{% url 'marriage:resource_detail' resource.slug %}" class="btn btn-sm btn-primary">Start</a>
+                                    </div>
+                                </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
             </div>
-
         </div>
+        
+        <!--  Post-Marital Course Section -->
         <div
-          class="tab-pane fade"
+          class="tab-pane fade py-4"
           id="nav-profile"
           role="tabpanel"
           aria-labelledby="nav-profile-tab"
           tabindex="0"
         >
-          Post-Marital | የድህረ-ጋብቻ ትምህርት
+          
+            <!-- Post-Marital Course Section -->
+            <div class="card border-primary"> 
+                <div class="card-body">
+                    <h3 class="mx-3 fs-5 py-2">Post-Marital Course | የድህረ-ጋብቻ ትምህርት </h3>
+                    <small class="mx-3 pb-2"><strong>Instructions:</strong> Review the course content and supporting resources, then complete the quiz for the courses listed below.Good luck! </small>
+                    <hr>
+                    <div class="row row-cols-1 row-cols-md-3 my-3 pb-3 g-4">
+                            {% for course in courses %}
+                                {% if course.category == 'PostMarital' %}
+                                    <div class="col">
+                                    <div class="card shadow">
+                                        <img src="{% static 'img/Courses-palceHlder.png' %}" class="card-img-top" alt="{{ course.title }}">
+                                        <div class="card-body">
+                                        <h3 class="card-title fs-4">{{ course.title }}</h3>
+                                        <small> Status: {% if course.is_completed %}
+                                            <span class="text-success">successfuly Completion</span>
+                                            {% else %}
+                                            <span class="text-danger small">Incomplete</span>
+                                            {% endif %}
+                                        </small>
+                                        <hr>
+                                        <p class="card-text small">{{ course.description|truncatewords:10 }}</p>
+                                        <a href="{% url 'marriage:course_detail' course.slug %}" class="btn btn-sm btn-primary">Start</a>
+                                        </div>
+                                    </div>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                    </div>
+                    <hr>
+                    <!-- Pagination Section -->
+                    <div class="row my-2 ">
+                        <div class="col-lg-8 small">
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination justify-content-center">
+                                    {% if page_obj.has_previous %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                        </a>
+                                    </li>
+                                    {% endif %}
+
+                                    {% for num in page_obj.paginator.page_range %}
+                                    <li class="page-item {% if page_obj.number == num %}active{% endif %}">
+                                        <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                                    </li>
+                                    {% endfor %}
+
+                                    {% if page_obj.has_next %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                    </li>
+                                    {% endif %}
+                                </ul>
+                            </nav>     
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            <!-- Resources Section -->
+            <div class="card my-4"> 
+                <div class="card-body">
+                
+                    <h3 class="mx-3">Related Resources</h3>     
+                    <hr>                          
+                    <div class="row row-cols-1 row-cols-md-3 my-2 g-4">
+                        {% for resource in resources %}
+                            {% if resource.category == 'PostMarital' %}
+                                <div class="col">
+                                <div class="card shadow">
+                                    <img src="{% static 'img/Courses-palceHlder.png' %}" class="card-img-top" alt="{{ course.title }}">
+                                    <div class="card-body">
+                                    <h3 class="card-title fs-4">{{ resource.title }}</h3>
+                                    <hr>
+                                    <p class="card-text small">{{ resource.description|truncatewords:10 }}</p>
+                                    <a href="{% url 'marriage:resource_detail' resource.slug %}" class="btn btn-sm btn-primary">Start</a>
+                                    </div>
+                                </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
         </div>
         <div
           class="tab-pane fade"
@@ -171,70 +278,59 @@
           aria-labelledby="nav-contact-tab"
           tabindex="0"
         >
-        AllResources | ሁሉም መርጃዎች
+           <div class="card-header bg-white">All Resources | ሁሉም መርጃዎች </div>
+            <!-- Resources Section -->
+            <div class="card my-4"> 
+                <div class="card-body">
+                
+                    <h3 class="mx-3 fs-5">PreMarital Related Resources</h3>     
+                    <hr>                          
+                    <div class="row row-cols-1 row-cols-md-3 my-2 g-4">
+                        {% for resource in resources %}
+                            {% if resource.category == 'PreMarital' %}
+                                <div class="col">
+                                <div class="card shadow">
+                                    <img src="{% static 'img/Courses-palceHlder.png' %}" class="card-img-top" alt="{{ course.title }}">
+                                    <div class="card-body">
+                                    <h3 class="card-title fs-4">{{ resource.title }}</h3>
+                                    <hr>
+                                    <p class="card-text small">{{ resource.description|truncatewords:10 }}</p>
+                                    <a href="{% url 'marriage:resource_detail' resource.slug %}" class="btn btn-sm btn-primary">Start</a>
+                                    </div>
+                                </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <!-- Resources Section -->
+            <div class="card my-4"> 
+                <div class="card-body">
+                    <h3 class="mx-3 fs-5">PostMarital Related Resources</h3>     
+                    <hr>                          
+                    <div class="row row-cols-1 row-cols-md-3 my-2 g-4">
+                        {% for resource in resources %}
+                            {% if resource.category == 'PostMarital' %}
+                                <div class="col">
+                                <div class="card shadow">
+                                    <img src="{% static 'img/Courses-palceHlder.png' %}" class="card-img-top" alt="{{ course.title }}">
+                                    <div class="card-body">
+                                    <h3 class="card-title fs-4">{{ resource.title }}</h3>
+                                    <hr>
+                                    <p class="card-text small">{{ resource.description|truncatewords:10 }}</p>
+                                    <a href="{% url 'marriage:resource_detail' resource.slug %}" class="btn btn-sm btn-primary">Start</a>
+                                    </div>
+                                </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
         </div>
        
     </div>
 
-
-
-    <div class="row">
-        <div class="col-lg-8">
-            <h2 class="mb-4">Courses</h2>
-            <div class="row">
-                {% for course in courses %}
-                <div class="col-md-4 mb-4">
-                    <div class="card">
-                        <img src="{% static 'img/Courses-palceHlder.png' %}" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ course.title }}</h5>
-                            <p class="card-text">{{ course.description|truncatewords:20 }}</p>
-                            <a href="{% url 'marriage:course_detail' course.slug %}" class="btn btn-primary">View Details</a>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-
-            <!-- Pagination Section -->
-            <nav aria-label="Page navigation example">
-                <ul class="pagination justify-content-center">
-                    {% if page_obj.has_previous %}
-                    <li class="page-item">
-                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                    {% endif %}
-
-                    {% for num in page_obj.paginator.page_range %}
-                    <li class="page-item {% if page_obj.number == num %}active{% endif %}">
-                        <a class="page-link" href="?page={{ num }}">{{ num }}</a>
-                    </li>
-                    {% endfor %}
-
-                    {% if page_obj.has_next %}
-                    <li class="page-item">
-                        <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
-                    {% endif %}
-                </ul>
-            </nav>
-        </div>
-
-        <!-- Resources Section -->
-        <div class="col-lg-4">
-            <h2 class="mb-4">Resources</h2>
-            <ul class="list-group">
-                {% for resource in resources %}
-                <li class="list-group-item">
-                    {{ resource.title }} - <a href="{{ resource.link }}">View</a>
-                </li>
-                {% endfor %}
-            </ul>
-        </div>
-    </div>
 </div>
 {% endblock %}

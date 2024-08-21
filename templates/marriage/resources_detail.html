@@ -4,11 +4,11 @@
    {% comment %} <script type="text/javascript" src="{% static '' %}" defer ></script> {% endcomment %}
 {% endblock %}
 {% load crispy_forms_tags %}
-{% block title %}marriage School Premarital and Postmarital corsers detail{% endblock %}
+{% block title %}marriage School resources detail{% endblock %}
 {% block main %}
 <div class="container mt-2">
-     <!-- breadcrumb -->
-     <div class="event pb-3">
+    <!-- breadcrumb -->
+    <div class="event pb-3">
         <div class="mx-auto wow bounceInUp rounded-1" 
             style="background-image: url('{% static "img/heroAccount-13.png" %}');background-size: cover; background-position: center center; background-repeat: no-repeat; " alt="Church-at" data-wow-delay="0.1s">
             <div class="container py-3 mt-0 ">
@@ -16,14 +16,14 @@
                     <ol class="breadcrumb justify-content-start mb-0 animated bounceInDown small">
                         <li class=""><a href="{% url 'pages:homepage' %}">Home<span class="px-1">\</span></a></li>
                         <li class=""><a href="{% url 'marriage:marriageSchool_welcome' %}">marriageSchool<span class="px-1">\</span></a></li>
-                        <li class=""><a href="{% url 'marriage:course_list' %}">coursesList<span class="px-1">\</span></a></li>
-                        <li class="" aria-current="page">courseDetail</li>
+                        <li class=""><a href="{% url 'marriage:course_list' %}">CoursesList<span class="px-1">\</span></a></li>
+                        <li class="" aria-current="page">resourceDetail</li>
                     </ol>
                 </div>
             </div>
             <!-- breadcrumb Start -->
             <div class="text-center py-1">
-                <h1 class="mb-2 text-light fs-4">Course Detail</h1>
+                <h1 class="mb-2 text-light fs-4">Resource Detail</h1>
             </div>
         </div>
     </div>
