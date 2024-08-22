@@ -27,5 +27,73 @@
             </div>
         </div>
     </div>
+    {{course_detail.titel}}
+    {{course_detail.description}}
+    {{quizzes}}
+    {% for quiz  in quizzes %}
+    {{quiz.quiz_title}}
+    {{quiz.course}}
+    {% endfor %}
+   
+    {% if answers %}
+    {% for answer in answers %}
+        {% if questions %}
+        {% for question in questions %}
+            {% if answer.question == question.question_text%}
+                {% for quiz in quizzes %}
+                    {% if question.quiz == quiz.quiz_title %}
+                        {{question_text}}
+                        {{answer.answer_text}}
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        {% endfor %}
+        {% endif %}
+    {% endfor %}
+    {% endif %}
+
+
+    <hr>
+    <div class="container mt-4">
+        {% comment %} <h1>{{ course_detail.name }}</h1>
+        <p>{{ course_detail.description }}</p>
+     {% endcomment %}
+        <!-- Quizzes Section -->
+        <h2 class="mt-5">Quizzes</h2>
+        {% if quizzes %}
+            {% for quiz in quizzes %}
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h5>{{ quiz.quiz_title }}</h5>
+                </div>
+                <div class="card-body">
+                    <form method="post" action="{% url 'marriage:submit_quiz' quiz.id %}">
+                        {% csrf_token %}
+                        {% for question in questions %}
+                            {% if question.quiz == quiz %}
+                            <div class="mb-3">
+                                <label>{{ question.number }}. {{ question.question_text }}</label>
+                                {% for answer in answers %}
+                                    {% if answer.question == question %}
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="question_{{ question.id }}" id="answer_{{ answer.id }}" value="{{ answer.id }}">
+                                        <label class="form-check-label" for="answer_{{ answer.id }}">
+                                            {{ answer.answer_text }}
+                                        </label>
+                                    </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+                        {% endfor %}
+                        <button type="submit" class="btn btn-primary">Submit Quiz</button>
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <p>No quizzes available for this course.</p>
+        {% endif %}
+    </div>
 </div>
 {% endblock %}

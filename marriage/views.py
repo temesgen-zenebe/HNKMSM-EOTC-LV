@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, redirect, render
-from django.views.generic import TemplateView
-from django.views.generic import CreateView, ListView, DetailView
+from django.contrib.auth.decorators import login_required
+from django.views.generic import CreateView, ListView, DetailView,TemplateView
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import (Course, Quiz, Question, 
@@ -57,6 +57,11 @@ class CourseListView(LoginRequiredMixin, ListView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        user = self.request.user
+        
+        # Create a dictionary of course: result pairs
+        context['results'] = {course: Results.objects.filter(user=user, course=course).first() for course in context['courses']}
+        
         context['resources'] = Resources.objects.all()
         return context
     
@@ -69,12 +74,38 @@ class CourseDetailView(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         course = self.get_object()  # Get the current course object
-        context['quiz'] = Quiz.objects.filter(course=course)
-        context['question'] = Question.objects.filter(course=course)
-        context['answer'] = Answer.objects.filter(question__course=course)
+        context['quizzes'] = Quiz.objects.filter(course=course)
+        context['questions'] = Question.objects.filter(course=course)
+        context['answers'] = Answer.objects.filter(question__course=course)
         return context
     
 class ResourceDetailView(LoginRequiredMixin, DetailView):
     model = Resources
     template_name = 'marriage/resources_detail.html'  # Specify your detail view template
     context_object_name = 'resources_detail'
+    
+
+
+@login_required
+def submit_quiz(request, quiz_id):
+    quiz = get_object_or_404(Quiz, id=quiz_id)
+    course = quiz.course
+    total_questions = Question.objects.filter(quiz=quiz).count()
+    correct_answers = 0
+
+    if request.method == 'POST':
+        for question in quiz.question_set.all():
+            selected_answer_id = request.POST.get(f'question_{question.id}')
+            if selected_answer_id:
+                selected_answer = get_object_or_404(Answer, id=selected_answer_id)
+                if selected_answer.is_correct:
+                    correct_answers += 1
+
+        score = (correct_answers / total_questions) * 5  # Scale to a score out of 5
+        result, created = Results.objects.get_or_create(user=request.user, quiz=quiz, course=course)
+        result.score = score
+        result.save()
+
+        return redirect('marriage:course_detail', slug=course.slug)
+
+    return render(request, 'marriage/course_detail.html', {'course_detail': course})

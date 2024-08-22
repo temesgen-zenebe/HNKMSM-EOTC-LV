@@ -1,9 +1,11 @@
 {% extends "_base.html" %}
 {% load static %}
+
 {% block javascript %}
    {% comment %} <script type="text/javascript" src="{% static '' %}" defer ></script> {% endcomment %}
 {% endblock %}
 {% load crispy_forms_tags %}
+{% load custom_filters %}
 {% block title %}marriage School Premarital and Potmarital corsers list{% endblock %}
 {% block main %}
 <div class="container mt-2">
@@ -96,12 +98,23 @@
                                         <img src="{% static 'img/Courses-palceHlder.png' %}" class="card-img-top" alt="{{ course.title }}">
                                         <div class="card-body">
                                         <h3 class="card-title fs-6">{{ course.title|truncatewords:5 }}</h3>
-                                        <small> Status: {% if course.is_completed %}
-                                            <span class="text-success">successfuly Completion</span>
+                                        <!--Completion Status-->
+                                        {% with result=results|get_item:course %}
+                                            {% if result %}
+                                            <small>Status: 
+                                                <span class="text-success">successfuly Completion</span>
+                                                <p><strong>Your Result:</strong> {{ result.score }}</p>
+                                            </small>
                                             {% else %}
-                                            <span class="text-danger">Incomplete</span>
+                                            <small>Status:
+                                                <span class="text-danger">Incomplete</span>
+                                                <p><strong>Your Result:</strong> Not available</p>
+                                            </small>
                                             {% endif %}
-                                        </small>
+                                        {% endwith %}
+
+                            
+                            
                                         <hr>
                                         <p class="card-text small">{{ course.description|truncatewords:10 }}</p>
                                         <a href="{% url 'marriage:course_detail' course.slug %}" class="btn btn-sm btn-primary">Start</a>

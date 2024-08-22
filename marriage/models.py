@@ -111,16 +111,17 @@ class Results(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     course = models.ForeignKey(Course, on_delete=models.CASCADE,blank=True, null=True)
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
-    score = models.FloatField()
+    score = models.FloatField(default=0.0)
     is_pass = models.BooleanField(default=False)
     updated_at = models.DateTimeField(auto_now=True)
 
     def save(self, *args, **kwargs):
-        self.is_pass = self.score >= 4  # Assuming a pass mark of 4
+        self.is_pass = self.score >= 4   # Assuming a pass mark of 4
         super().save(*args, **kwargs)
 
     def __str__(self):
         return f"{self.user}'s result for {self.quiz}"
+
 
 class Certification(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
