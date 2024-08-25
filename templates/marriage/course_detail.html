@@ -27,32 +27,9 @@
             </div>
         </div>
     </div>
-    {{course_detail.titel}}
+    {{course_detail.title}}
+    <hr>
     {{course_detail.description}}
-    {{quizzes}}
-    {% for quiz  in quizzes %}
-    {{quiz.quiz_title}}
-    {{quiz.course}}
-    {% endfor %}
-   
-    {% if answers %}
-    {% for answer in answers %}
-        {% if questions %}
-        {% for question in questions %}
-            {% if answer.question == question.question_text%}
-                {% for quiz in quizzes %}
-                    {% if question.quiz == quiz.quiz_title %}
-                        {{question_text}}
-                        {{answer.answer_text}}
-                    {% endif %}
-                {% endfor %}
-            {% endif %}
-        {% endfor %}
-        {% endif %}
-    {% endfor %}
-    {% endif %}
-
-
     <hr>
     <div class="container mt-4">
         {% comment %} <h1>{{ course_detail.name }}</h1>

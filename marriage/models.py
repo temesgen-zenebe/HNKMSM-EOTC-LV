@@ -116,7 +116,7 @@ class Results(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def save(self, *args, **kwargs):
-        self.is_pass = self.score >= 4   # Assuming a pass mark of 4
+        self.is_pass = self.score >= 80   # Assuming a pass mark of 4
         super().save(*args, **kwargs)
 
     def __str__(self):

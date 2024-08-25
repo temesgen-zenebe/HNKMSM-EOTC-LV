@@ -31,16 +31,18 @@
             </div>
         </div>
     </div>
+    <!-- pre list Section -->
+    <div>
     <nav>
         <div class="nav nav-pills mb-3 justify-content-center" id="nav-tab" role="tablist">
           <button
             class="nav-link active small btn btn-sm"
-            id="nav-home-tab"
+            id="nav-PreMarital-tab"
             data-bs-toggle="tab"
-            data-bs-target="#nav-home"
+            data-bs-target="#nav-PreMarital"
             type="button"
             role="tab"
-            aria-controls="nav-home"
+            aria-controls="nav-PreMarital"
             aria-selected="true"
           >
           <i class="fas fa-book-reader  fa-1x px-2"></i>
@@ -48,12 +50,12 @@
           </button>
           <button
             class="nav-link small btn btn-sm"
-            id="nav-profile-tab"
+            id="nav-PostMarital-tab"
             data-bs-toggle="tab"
-            data-bs-target="#nav-profile"
+            data-bs-target="#nav-PostMarital"
             type="button"
             role="tab"
-            aria-controls="nav-profile"
+            aria-controls="nav-PostMarital"
             aria-selected="false"
           >
           <i class="fas fa-book  fa-1x px-2"></i>
@@ -61,15 +63,16 @@
           </button>
           <button
             class="nav-link small btn btn-sm"
-            id="nav-contact-tab"
+            id="nav-preAllResources-tab"
             data-bs-toggle="tab"
-            data-bs-target="#nav-contact"
+            data-bs-target="#nav-preAllResources"
             type="button"
             role="tab"
-            aria-controls="nav-contact"
+            aria-controls="nav-preAllResources"
             aria-selected="false"
           >
-          <i class="bi bi-collection-fill fa-1x px-2"></i> AllResources | ሁሉም መርጃዎች
+          <i class="bi bi-collection-fill fa-1x px-2"></i> 
+          AllResources | ሁሉም መርጃዎች
           </button>
         </div>
     </nav>
@@ -77,25 +80,25 @@
         <!-- Pre-Marital Course -->
         <div
           class="tab-pane fade show active py-4"
-          id="nav-home"
+          id="nav-PreMarital"
           role="tabpanel"
-          aria-labelledby="nav-home-tab"
+          aria-labelledby="nav-PreMarital-tab"
           tabindex="0"
         >
         <!-- Pre-Marital Course Section -->
         
-            <div class="card border-primary"> 
+            <div class="card"> 
                 <div class="card-body">
                     <h3 class="mx-3 fs-5 pt-2">Pre-Marital courses | የቅድመ ጋብቻ ኮርሶች </h3>
                     <p class="mx-3 small">Pre-Marital Courses from an Ethiopian Orthodox Tewahedo Perspective*ከጋብቻ በፊት የሚሰጠው ትምህርቶች ከኢትዮጵያ ኦርቶዶክስ ተዋሕዶ አንጻር</p>
-                    <small class="mx-3 pb-2"><strong>Instructions:</strong> Review the course content and supporting resources, then complete the quiz for the courses listed below.Good luck! </small>
-                    <hr>
+                    <p class="mx-3 pb-2 small"><strong>Instructions:</strong> Review the course content and supporting resources, then complete the quiz for the courses listed below.Good luck! </p>
+                    <hr class="text-primary">
                     <div class="row row-cols-1 row-cols-md-3 my-2 pb-3 g-4">
                             {% for course in courses %}
                                 {% if course.category == 'PreMarital' %}
                                     <div class="col">
                                     <div class="card shadow">
-                                        <img src="{% static 'img/Courses-palceHlder.png' %}" class="card-img-top" alt="{{ course.title }}">
+                                        <img src="{% static 'img/Courses-palceHlder.png' %}" class="card-img-top rounded-4" alt="{{ course.title }}">
                                         <div class="card-body">
                                         <h3 class="card-title fs-6">{{ course.title|truncatewords:5 }}</h3>
                                         <!--Completion Status-->
@@ -103,7 +106,7 @@
                                             {% if result %}
                                             <small>Status: 
                                                 <span class="text-success">successfuly Completion</span>
-                                                <p><strong>Your Result:</strong> {{ result.score }}</p>
+                                                <p  class="text-primary"><strong>Your Result:</strong> {{ result.score|floatformat:0  }} %</p>
                                             </small>
                                             {% else %}
                                             <small>Status:
@@ -124,45 +127,14 @@
                                 {% endif %}
                             {% endfor %}
                     </div>
-                    <hr>
-                    <!-- Pagination Section -->
-                    <div class="row my-2 ">
-                        <div class="col-lg-8 small">
-                            <nav aria-label="Page navigation example">
-                                <ul class="pagination justify-content-center">
-                                    {% if page_obj.has_previous %}
-                                    <li class="page-item">
-                                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
-                                            <span aria-hidden="true">&laquo;</span>
-                                        </a>
-                                    </li>
-                                    {% endif %}
 
-                                    {% for num in page_obj.paginator.page_range %}
-                                    <li class="page-item {% if page_obj.number == num %}active{% endif %}">
-                                        <a class="page-link" href="?page={{ num }}">{{ num }}</a>
-                                    </li>
-                                    {% endfor %}
-
-                                    {% if page_obj.has_next %}
-                                    <li class="page-item">
-                                        <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
-                                            <span aria-hidden="true">&raquo;</span>
-                                        </a>
-                                    </li>
-                                    {% endif %}
-                                </ul>
-                            </nav>     
-                        </div>
-                    </div>
-                    
                 </div>
             </div>
             <!-- Resources Section -->
             <div class="card my-4"> 
                 <div class="card-body">
                 
-                    <h3 class="mx-3 fs-5">Related Resources</h3>     
+                    <h3 class="mx-3 fs-6">PreMarital Related Resources(ተዛማጅ መረጃዎች)</h3>     
                     <hr>                          
                     <div class="row row-cols-1 row-cols-md-3 my-2 g-4">
                         {% for resource in resources %}
@@ -188,9 +160,9 @@
         <!--  Post-Marital Course Section -->
         <div
           class="tab-pane fade py-4"
-          id="nav-profile"
+          id="nav-PostMarital"
           role="tabpanel"
-          aria-labelledby="nav-profile-tab"
+          aria-labelledby="nav-PostMarital-tab"
           tabindex="0"
         >
           
@@ -198,8 +170,8 @@
             <div class="card border-primary"> 
                 <div class="card-body">
                     <h3 class="mx-3 fs-5 py-2">Post-Marital Course | የድህረ-ጋብቻ ትምህርት </h3>
-                    <small class="mx-3 pb-2"><strong>Instructions:</strong> Review the course content and supporting resources, then complete the quiz for the courses listed below.Good luck! </small>
-                    <hr>
+                    <p class="mx-3 pb-2 small"><strong>Instructions:</strong> Review the course content and supporting resources, then complete the quiz for the courses listed below.Good luck! </p>
+                    <hr class="text-primary"> 
                     <div class="row row-cols-1 row-cols-md-3 my-3 pb-3 g-4">
                             {% for course in courses %}
                                 {% if course.category == 'PostMarital' %}
@@ -223,37 +195,7 @@
                                 {% endif %}
                             {% endfor %}
                     </div>
-                    <hr>
-                    <!-- Pagination Section -->
-                    <div class="row my-2 ">
-                        <div class="col-lg-8 small">
-                            <nav aria-label="Page navigation example">
-                                <ul class="pagination justify-content-center">
-                                    {% if page_obj.has_previous %}
-                                    <li class="page-item">
-                                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
-                                            <span aria-hidden="true">&laquo;</span>
-                                        </a>
-                                    </li>
-                                    {% endif %}
-
-                                    {% for num in page_obj.paginator.page_range %}
-                                    <li class="page-item {% if page_obj.number == num %}active{% endif %}">
-                                        <a class="page-link" href="?page={{ num }}">{{ num }}</a>
-                                    </li>
-                                    {% endfor %}
-
-                                    {% if page_obj.has_next %}
-                                    <li class="page-item">
-                                        <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
-                                            <span aria-hidden="true">&raquo;</span>
-                                        </a>
-                                    </li>
-                                    {% endif %}
-                                </ul>
-                            </nav>     
-                        </div>
-                    </div>
+                   
                     
                 </div>
             </div>
@@ -261,7 +203,7 @@
             <div class="card my-4"> 
                 <div class="card-body">
                 
-                    <h3 class="mx-3">Related Resources</h3>     
+                    <h3 class="mx-3 fs-6">PostMarital Related Resources(ተዛማጅ መረጃዎች)</h3>     
                     <hr>                          
                     <div class="row row-cols-1 row-cols-md-3 my-2 g-4">
                         {% for resource in resources %}
@@ -286,9 +228,9 @@
         </div>
         <div
           class="tab-pane fade"
-          id="nav-contact"
+          id="nav-preAllResources"
           role="tabpanel"
-          aria-labelledby="nav-contact-tab"
+          aria-labelledby="nav-preAllResources-tab"
           tabindex="0"
         >
            <div class="card-header bg-white">All Resources | ሁሉም መርጃዎች </div>
@@ -344,6 +286,7 @@
         </div>
        
     </div>
-
+    </div>
+    
 </div>
 {% endblock %}

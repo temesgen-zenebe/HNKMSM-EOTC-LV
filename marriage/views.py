@@ -11,8 +11,27 @@ from .models import (Course, Quiz, Question,
                 )
 from .forms import SignupForSchoolForm
 
-
 # marriage School Welcome
+# class marriageSchoolWelcome1(TemplateView):
+#     template_name = 'marriage/marriageView.html'
+
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         user = self.request.user
+
+#         context['schoolProgressController'] = get_object_or_404(SchoolProgressController, user=user)
+#         context['results'] = get_object_or_404(Results, user=user)
+#         context['certification'] = get_object_or_404(Certification, user=user)
+#         context['meetEvents'] = MeetEvents.objects.filter(user=user) 
+        
+#         # Instantiate the signup form
+#         context['signupForSchoolForm'] = SignupForSchoolForm()
+
+#         return context
+
+    
+
+
 class marriageSchoolWelcome(TemplateView):
     template_name = 'marriage/marriageView.html'
 
@@ -20,16 +39,30 @@ class marriageSchoolWelcome(TemplateView):
         context = super().get_context_data(**kwargs)
         user = self.request.user
 
-        context['schoolProgressController'] = get_object_or_404(SchoolProgressController, user=user)
-        context['results'] = get_object_or_404(Results, user=user)
-        context['certification'] = get_object_or_404(Certification, user=user)
-        context['meetEvents'] = MeetEvents.objects.filter(user=user) 
-        
+        # Handle objects that may not exist for the user
+        try:
+            context['schoolProgressController'] = SchoolProgressController.objects.get(user=user)
+        except SchoolProgressController.DoesNotExist:
+            context['schoolProgressController'] = None  # or some default value
+
+        try:
+            context['results'] = Results.objects.get(user=user)
+        except Results.DoesNotExist:
+            context['results'] = None  # or some default value
+
+        try:
+            context['certification'] = Certification.objects.get(user=user)
+        except Certification.DoesNotExist:
+            context['certification'] = None  # or some default value
+
+        # MeetEvents is a queryset, so no need for get_object_or_404
+        context['meetEvents'] = MeetEvents.objects.filter(user=user)
+
         # Instantiate the signup form
         context['signupForSchoolForm'] = SignupForSchoolForm()
 
         return context
-
+    
     def post(self, request, *args, **kwargs):
         form = SignupForSchoolForm(request.POST)
         SchoolProgress, created = SchoolProgressController.objects.get_or_create(user=self.request.user)
@@ -49,11 +82,13 @@ class marriageSchoolWelcome(TemplateView):
         return self.render_to_response(context)
     
 
+
+
 class CourseListView(LoginRequiredMixin, ListView):
     model = Course
     template_name = 'marriage/course_list.html'
     context_object_name = 'courses'
-    paginate_by = 6  # Number of courses per page
+    # paginate_by = 6  # Number of courses per page
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -101,7 +136,7 @@ def submit_quiz(request, quiz_id):
                 if selected_answer.is_correct:
                     correct_answers += 1
 
-        score = (correct_answers / total_questions) * 5  # Scale to a score out of 5
+        score = (correct_answers * 100 ) / total_questions   # Scale to a score out of 5
         result, created = Results.objects.get_or_create(user=request.user, quiz=quiz, course=course)
         result.score = score
         result.save()
