@@ -27,5 +27,60 @@
             </div>
         </div>
     </div>
+    <!-- resources_detail -->
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-md-8 mx-auto">
+                <h1 class="text-center">{{ resources_detail.title }}</h1>
+                <p class="text-muted text-center">{{ resources_detail.category }}</p>
+    
+                <div class="card mb-4">
+                    {% if resources_detail.image %}
+                    <img src="{{ resources_detail.image.url }}" class="card-img-top img-fluid" alt="{{ resources_detail.title }}">
+                    {% endif %}
+                    <div class="card-body">
+                        <p class="card-text py-2 lh-lg small">{{ resources_detail.description }}</p>
+                        <hr>
+                        {% if resources_detail.audio %}
+                        <div class="mb-3">
+                            <h5>Audio Resource:</h5>
+                            <audio controls>
+                                <source src="{{ resources_detail.audio.url }}" type="audio/mpeg">
+                                Your browser does not support the audio element.
+                            </audio>
+                        </div>
+                        {% endif %}
+    
+                        {% if resources_detail.video %}
+                        <div class="mb-3">
+                            <h5>Video Resource:</h5>
+                            <video controls class="w-100">
+                                <source src="{{ resources_detail.video.url }}" type="video/mp4">
+                                Your browser does not support the video element.
+                            </video>
+                        </div>
+                        {% endif %}
+    
+                        {% if resources_detail.pdf %}
+                        <div class="mb-3">
+                            <h5>PDF Resource:</h5>
+                            <a href="{{ resources_detail.pdf.url }}" class="btn btn-primary" target="_blank">Download PDF</a>
+                        </div>
+                        {% endif %}
+    
+                        {% if resources_detail.links %}
+                        <div class="mb-3">
+                            <h5>Related Links:</h5>
+                            <a href="{{ resources_detail.links }}" class="btn btn-sm btn-primary" target="_blank">{{ resources_detail.links }}</a>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+    
+                <p class="text-end text-muted small">Posted by: {{ resources_detail.posted_by.username }} on {{ resources_detail.created }}</p>
+                <p class="text-end text-muted small">Last updated: {{ resources_detail.updated }}</p>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}

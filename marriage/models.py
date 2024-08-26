@@ -66,6 +66,24 @@ class Course(models.Model):
     def __str__(self):
         return self.title
 
+# Subtitle Model
+class Subtitle(models.Model):
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='subtitles')
+    subtitle = models.CharField(max_length=200)
+    description = models.TextField()
+    slug = models.SlugField(max_length=200, unique=True, null=True, blank=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = unique_slug(self.subtitle, type(self))
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.subtitle
+    
+
 class Quiz(models.Model):
     quiz_title = models.CharField(max_length=100)
     course = models.ForeignKey(Course, on_delete=models.CASCADE)

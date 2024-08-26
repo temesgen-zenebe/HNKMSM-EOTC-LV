@@ -38,14 +38,15 @@
                 <small class="d-inline-block fw-bold text-dark text-uppercase bg-light border border-primary rounded-pill px-4 py-1 mb-2">The Marriage Education *** የጋብቻ ትምህርት!</small>
             </div>
             <div class="row g-4">
+                <!--schools wellcom-->
                 <div class="col-lg-12 col-md-12 col-sm-12 wow  " data-wow-delay="0.5s">
                     <div class="rounded shadow">
                         <div class="service-content d-flex align-items-center justify-content-center p-4">
                            
                             <div class="service-content-icon text-center">
                                 <i class="fas fa-church fa-3x text-primary mb-4"></i>
-                                <i class="fas fa-circle-notch  fa-2x text-primary mb-4"></i>
-                                <i class="fas fa-circle-notch  fa-2x text-primary mb-4"></i>
+                                {% comment %} <i class="fas fa-circle-notch  fa-2x text-primary mb-4"></i>
+                                <i class="fas fa-circle-notch  fa-2x text-primary mb-4"></i> {% endcomment %}
                                 <h3 class="mb-3">The Goal of Marriage School </h3>
                                 <p> የጋብቻ ትምህርት ዓላማ</p> 
                                 <span class="text-primary"> ***** </span>
@@ -120,14 +121,67 @@
                         </div>
                     </div>
                 </div>
-
+                <!--schools defination of marriageSchool-->
+                <div class="col-lg-12 col-md-12 col-sm-12 wow bounceInUp mt-4" data-wow-delay="0.1s">
+                    <div class="bg-light rounded service-item shadow">
+                        <div class="service-content d-flex align-items-center justify-content-center px-4 py-5">
+                            <div class="service-content-icon text-center">
+                                <i class="fas fa-circle-notch  fa-2x text-primary mb-4"></i>
+                                <i class="fas fa-circle-notch  fa-2x text-primary mb-4"></i>
+                                {% comment %} <img src="{% static 'img/icon/matting_Church_justice_during_the_funeral.png' %}" class="img-fluid rounded text-primary mb-4" alt="">  {% endcomment %}
+                                <h5 class="mb-3">Marriage School</h5>
+                                <p class="mb-4 text-start lh-lg"> 
+                                    Pre-Marital and Post-Marital Counseling.
+                                    <small>
+                                        can play a crucial role in building and maintaining a healthy marriage. 
+                                        Pre-marital counseling helps couples prepare for marriage by addressing important topics such as communication, 
+                                        finances, expectations, and potential areas of conflict. It equips partners with tools to navigate challenges and 
+                                        strengthens their bond before making a lifelong commitment. Post-marital counseling, on the other hand, focuses on 
+                                        helping couples work through issues that arise after marriage, ensuring continued growth and harmony. 
+                                        Together, these forms of counseling promote understanding, prevent conflicts, and foster long-term satisfaction, 
+                                        making them essential for a successful and fulfilling marital journey.
+                                    </small></p>
+                                <hr>
+                                <p class="mb-4 text-start lh-lg"> 
+                                    ከጋብቻ በፊት እና ከጋብቻ በኋላ የሚሰጠው ምክር
+                                    <small>
+                                        ጤናማ ትዳርን ለመገንባት እና ለመጠበቅ ወሳኝ ሚና ይጫወታል። 
+                                        ከጋብቻ በፊት ምክር መስጠት ባለትዳሮች እንደ ግንኙነት፣ ፋይናንስ፣ የሚጠበቁ ነገሮች እና የግጭት ቦታዎች ያሉ ጠቃሚ ርዕሰ ጉዳዮችን በማንሳት ለጋብቻ እንዲዘጋጁ ይረዳቸዋል። 
+                                        የዕድሜ ልክ ቁርጠኝነት ከማድረጋቸው በፊት አጋሮችን ፈተናዎችን ለመፈተሽ መሳሪያዎችን ያስታጥቃል እና ግንኙነታቸውን ያጠናክራል። 
+                                        ከጋብቻ በኋላ የሚሰጠው ምክር ጥንዶች ከጋብቻ በኋላ በሚነሱ ጉዳዮች ላይ እንዲሰሩ በመርዳት ላይ ያተኮረ ሲሆን ይህም ቀጣይ እድገትና ስምምነትን ያረጋግጣል። 
+                                        እነዚህ የምክር ዓይነቶች አንድ ላይ ሆነው መግባባትን ያበረታታሉ፣ ግጭቶችን ይከላከላሉ እና የረዥም ጊዜ እርካታን ያጎለብታሉ፣ ይህም ለተሳካ እና አርኪ ለትዳር ጉዞ አስፈላጊ ያደርጋቸዋል።
+                                    </small></p>
+                                {% comment %} <a href="#" class="btn btn-primary px-4 py-2 rounded-pill">Start</a> {% endcomment %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 wow bounceInUp mt-4" data-wow-delay="0.1s">
+                    <div class="bg-light rounded service-item shadow p-2">
+                        <div class="container mt-2">
+                            <h2 class="fs-5 text-center">marriage School class Progress Overview</h2>
+                            {% if schoolProgressController %}
+                                <div class="progress" role="progressbar" aria-label="User Progress" aria-valuenow="{{ progress_percentage }}" aria-valuemin="0" aria-valuemax="100">
+                                    <div class="progress-bar text-bg-warning" style="width: {{ progress_percentage }}%">
+                                        {{ progress_percentage|floatformat:0 }}%
+                                    </div>
+                                </div>
+                            {% else %}
+                                <p>No progress data available.</p>
+                            {% endif %}
+                            
+                            <!-- Other content goes here -->
+                        </div>
+                    </div>
+                </div>
                 <div class="col-lg-3 col-md-6 col-sm-12 wow bounceInUp" data-wow-delay="0.1s">
                     <div class="bg-light rounded service-item shadow">
                         <div class="service-content d-flex align-items-center justify-content-center p-4">
                             <div class="service-content-icon text-center">
                                 <i class="fas fa-book-reader fa-2x text-primary mb-4"></i>
                                 <h5 class="mb-3">Courses</h5>
-                                <p class="mb-4 small">sinup and start</p>
+                                <p class="small">signup and start</p>
+                                <p class="mb-4 small">Good Luck!</p>
                                 {% if  schoolProgressController.is_signup_for_school %}
                                 <a href="{% url 'marriage:course_list'%}" class="btn btn-primary px-4 py-2 rounded-pill">Start</a>
                                 {% else %}
@@ -144,7 +198,7 @@
                                 <i class="fas fa-digital-tachograph fa-3x text-primary mb-4"></i>
                                 <h5 class="mb-3">Results Reporte</h5>
                                 <p class="mb-4 small">see you Results and progress</p>
-                                <a href="{% url "services:holyCommunion" %}" class="btn btn-primary px-4 py-2 rounded-pill">view</a>
+                                <a href="{% url "marriage:results_list" %}" class="btn btn-primary px-4 py-2 rounded-pill">view</a>
                             </div>
                         </div>
                     </div>
@@ -166,53 +220,20 @@
                         <div class="service-content d-flex align-items-center justify-content-center p-4">
                             <div class="service-content-icon text-center">
                                 <i class="fas fa-plus-circle fa-3x text-primary mb-4"></i>
-                                <h5 class="mb-3">የንስሐ አባት</h5>
-                                <h5 class="mb-3">Father of repentance</h5>
-                                <p class="mb-4 small">አባካኙ ልጅ በአባት ፍቅር ታቅፎ፣ ያለ ምንም ቅድመ ሁኔታ ይቅርታ ተደረገለት።" ሉቃስ 15:20</p>
+                                <h5 class="mb-3">Get your Certification</h5>
+                                <p class="mb-4 small">congrat! start to get you cerification.</p>
                                 <a href="{% url "services:fatherOfRepentance" %}" class="btn btn-primary px-4 py-2 rounded-pill">Start</a>
                             </div>
                         </div>
                     </div>
                 </div>
                 
-                <div class="col-lg-12 col-md-12 col-sm-12 wow bounceInUp mt-4" data-wow-delay="0.1s">
-                    <div class="bg-light rounded service-item shadow">
-                        <div class="service-content d-flex align-items-center justify-content-center px-4 py-5">
-                            <div class="service-content-icon text-center">
-                                <i class="fas fa-circle-notch  fa-2x text-primary mb-4"></i>
-                                <i class="fas fa-circle-notch  fa-2x text-primary mb-4"></i>
-                                {% comment %} <img src="{% static 'img/icon/matting_Church_justice_during_the_funeral.png' %}" class="img-fluid rounded text-primary mb-4" alt="">  {% endcomment %}
-                                <h5 class="mb-3">Marriage School</h5>
-                                <p class="mb-4 text-start"> 
-                                    Pre-Marital and Post-Marital Counseling.
-                                    <small>
-                                        can play a crucial role in building and maintaining a healthy marriage. 
-                                        Pre-marital counseling helps couples prepare for marriage by addressing important topics such as communication, 
-                                        finances, expectations, and potential areas of conflict. It equips partners with tools to navigate challenges and 
-                                        strengthens their bond before making a lifelong commitment. Post-marital counseling, on the other hand, focuses on 
-                                        helping couples work through issues that arise after marriage, ensuring continued growth and harmony. 
-                                        Together, these forms of counseling promote understanding, prevent conflicts, and foster long-term satisfaction, 
-                                        making them essential for a successful and fulfilling marital journey.
-                                    </small></p>
-                                <hr>
-                                <p class="mb-4 text-start"> 
-                                    ከጋብቻ በፊት እና ከጋብቻ በኋላ የሚሰጠው ምክር
-                                    <small>
-                                        ጤናማ ትዳርን ለመገንባት እና ለመጠበቅ ወሳኝ ሚና ይጫወታል። 
-                                        ከጋብቻ በፊት ምክር መስጠት ባለትዳሮች እንደ ግንኙነት፣ ፋይናንስ፣ የሚጠበቁ ነገሮች እና የግጭት ቦታዎች ያሉ ጠቃሚ ርዕሰ ጉዳዮችን በማንሳት ለጋብቻ እንዲዘጋጁ ይረዳቸዋል። 
-                                        የዕድሜ ልክ ቁርጠኝነት ከማድረጋቸው በፊት አጋሮችን ፈተናዎችን ለመፈተሽ መሳሪያዎችን ያስታጥቃል እና ግንኙነታቸውን ያጠናክራል። 
-                                        ከጋብቻ በኋላ የሚሰጠው ምክር ጥንዶች ከጋብቻ በኋላ በሚነሱ ጉዳዮች ላይ እንዲሰሩ በመርዳት ላይ ያተኮረ ሲሆን ይህም ቀጣይ እድገትና ስምምነትን ያረጋግጣል። 
-                                        እነዚህ የምክር ዓይነቶች አንድ ላይ ሆነው መግባባትን ያበረታታሉ፣ ግጭቶችን ይከላከላሉ እና የረዥም ጊዜ እርካታን ያጎለብታሉ፣ ይህም ለተሳካ እና አርኪ ለትዳር ጉዞ አስፈላጊ ያደርጋቸዋል።
-                                    </small></p>
-                                <a href="#" class="btn btn-primary px-4 py-2 rounded-pill">Start</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                
             </div>
         </div>
      </div>
- <!-- Child Modal -->
+
+ <!-- signupForSchoolForm Modal -->
  <div class="modal fade" id="signup_for_school" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="signup_for_schoolModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -229,7 +250,7 @@
         </div>
       </div>
     </div>
-  </div>
+</div>
 
 
 

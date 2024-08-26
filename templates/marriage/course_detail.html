@@ -8,7 +8,7 @@
 {% block main %}
 <div class="container mt-2">
      <!-- breadcrumb -->
-     <div class="event pb-3">
+     <div class="event pb-2">
         <div class="mx-auto wow bounceInUp rounded-1" 
             style="background-image: url('{% static "img/heroAccount-13.png" %}');background-size: cover; background-position: center center; background-repeat: no-repeat; " alt="Church-at" data-wow-delay="0.1s">
             <div class="container py-3 mt-0 ">
@@ -27,32 +27,84 @@
             </div>
         </div>
     </div>
-    {{course_detail.title}}
-    <hr>
-    {{course_detail.description}}
-    <hr>
-    <div class="container mt-4">
-        {% comment %} <h1>{{ course_detail.name }}</h1>
-        <p>{{ course_detail.description }}</p>
-     {% endcomment %}
+    <!-- Rendering detail title -->
+    <div class="container mt-1 p-3">
+        <h3 class="text-primary fs-4">{{course_detail.title}}</h3>
+        <hr>
+        <p class="small lh-lg">{{course_detail.description}}</p>
+        <hr>
+    </div>
+   
+    <!-- Rendering Subtitles -->
+    <div class="container mt-1 p-3">
+        <ul>
+            {% for subtitle in course_detail.subtitles.all %}
+                <li>
+                    <h3 class="text-primary fs-5">{{ subtitle.subtitle }}</h3>
+                    <p class="small lh-lg">{{ subtitle.description }}</p>
+                </li>
+                <hr>
+            {% endfor %}
+        </ul>
+    </div>
+    <!-- Rendering resource -->
+    <div class="container mt-1 ">
+        <!-- resource Section -->
+        {% comment %} <h3 class="mt-3 fs-4 text-primary px-2">Resource list Related with the Course</h3> {% endcomment %}
+        {% if resources %}
+
+            <div class="card mt-2 ">
+                <div class="card-header bg-white">
+                    <h6>Resource list Related with the Course</h6>
+                </div>
+                <div class="card-body small mx-2">
+                    <div class="row row-cols-1 row-cols-md-3 my-2 pb-3 g-4">
+                    {% for resource in resources %}
+                    {% if resource.category == course_detail.category %}
+                        <div class="col">
+                        <div class="card shadow">
+                            <img src="{% static 'img/Courses-palceHlder.png' %}" class="card-img-top" alt="{{ course.title }}">
+                            <div class="card-body">
+                            <h3 class="card-title fs-5">{{ resource.title }}</h3>
+                            <small>{{resource.category }}</small>
+                            <hr>
+                            <p class="card-text small lh-lg">{{ resource.description|truncatewords:10 }}</p>
+                            <a href="{% url 'marriage:resource_detail' resource.slug %}" class="btn btn-sm btn-primary">Start</a>
+                            </div>
+                        </div>
+                        </div>
+                    {% endif %}
+                    {% endfor %}
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <p>No resource available for this course.</p>
+        {% endif %}
+    </div>
+    <!-- Rendering Quiz -->
+    <div class="container my-3 py-3">
         <!-- Quizzes Section -->
-        <h2 class="mt-5">Quizzes</h2>
+       
         {% if quizzes %}
             {% for quiz in quizzes %}
-            <div class="card mt-3">
-                <div class="card-header">
-                    <h5>{{ quiz.quiz_title }}</h5>
+            <div class="card">
+                <div class="card-header bg-white">
+                    <strong class=""> <h3 class="fs-5 text-primary text-center">Take the Quizzes and complete the course</h3>
                 </div>
-                <div class="card-body">
+                <div class="card-header bg-white">
+                    <strong class="">{{ quiz.quiz_title }}</strong>
+                </div>
+                <div class="card-body small my-3 mx-2">
                     <form method="post" action="{% url 'marriage:submit_quiz' quiz.id %}">
                         {% csrf_token %}
                         {% for question in questions %}
                             {% if question.quiz == quiz %}
                             <div class="mb-3">
-                                <label>{{ question.number }}. {{ question.question_text }}</label>
+                                <label><strong>{{ question.number }}. {{ question.question_text }}</strong></label>
                                 {% for answer in answers %}
                                     {% if answer.question == question %}
-                                    <div class="form-check">
+                                    <div class="form-check mx-3 p-2">
                                         <input class="form-check-input" type="radio" name="question_{{ question.id }}" id="answer_{{ answer.id }}" value="{{ answer.id }}">
                                         <label class="form-check-label" for="answer_{{ answer.id }}">
                                             {{ answer.answer_text }}

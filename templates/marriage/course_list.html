@@ -115,9 +115,6 @@
                                             </small>
                                             {% endif %}
                                         {% endwith %}
-
-                            
-                            
                                         <hr>
                                         <p class="card-text small">{{ course.description|truncatewords:10 }}</p>
                                         <a href="{% url 'marriage:course_detail' course.slug %}" class="btn btn-sm btn-primary">Start</a>
@@ -137,13 +134,14 @@
                     <h3 class="mx-3 fs-6">PreMarital Related Resources(ተዛማጅ መረጃዎች)</h3>     
                     <hr>                          
                     <div class="row row-cols-1 row-cols-md-3 my-2 g-4">
-                        {% for resource in resources %}
+                        {% for resource in resources_pre %}
                             {% if resource.category == 'PreMarital' %}
                                 <div class="col">
                                 <div class="card shadow">
                                     <img src="{% static 'img/Courses-palceHlder.png' %}" class="card-img-top" alt="{{ course.title }}">
                                     <div class="card-body">
-                                    <h3 class="card-title fs-4">{{ resource.title }}</h3>
+                                    <h3 class="card-title fs-5">{{ resource.title }}</h3>
+                                    <small>{{resource.category}}</small>
                                     <hr>
                                     <p class="card-text small">{{ resource.description|truncatewords:10 }}</p>
                                     <a href="{% url 'marriage:resource_detail' resource.slug %}" class="btn btn-sm btn-primary">Start</a>
@@ -179,13 +177,22 @@
                                     <div class="card shadow">
                                         <img src="{% static 'img/Courses-palceHlder.png' %}" class="card-img-top" alt="{{ course.title }}">
                                         <div class="card-body">
-                                        <h3 class="card-title fs-4">{{ course.title }}</h3>
-                                        <small> Status: {% if course.is_completed %}
-                                            <span class="text-success">successfuly Completion</span>
+                                        <h3 class="card-title fs-6">{{ course.title|truncatewords:6  }}</h3>
+                                        
+                                        <!--Completion Status-->
+                                        {% with result=results|get_item:course %}
+                                            {% if result %}
+                                            <small>Status: 
+                                                <span class="text-success">successfuly Completion</span>
+                                                <p  class="text-primary small"><strong>Your Result:</strong> {{ result.score|floatformat:0  }} %</p>
+                                            </small>
                                             {% else %}
-                                            <span class="text-danger small">Incomplete</span>
+                                            <small>Status:
+                                                <span class="text-danger">Incomplete</span>
+                                                <p><strong>Your Result:</strong> Not available</p>
+                                            </small>
                                             {% endif %}
-                                        </small>
+                                        {% endwith %}
                                         <hr>
                                         <p class="card-text small">{{ course.description|truncatewords:10 }}</p>
                                         <a href="{% url 'marriage:course_detail' course.slug %}" class="btn btn-sm btn-primary">Start</a>
@@ -206,13 +213,14 @@
                     <h3 class="mx-3 fs-6">PostMarital Related Resources(ተዛማጅ መረጃዎች)</h3>     
                     <hr>                          
                     <div class="row row-cols-1 row-cols-md-3 my-2 g-4">
-                        {% for resource in resources %}
+                        {% for resource in resources_post %}
                             {% if resource.category == 'PostMarital' %}
                                 <div class="col">
                                 <div class="card shadow">
                                     <img src="{% static 'img/Courses-palceHlder.png' %}" class="card-img-top" alt="{{ course.title }}">
                                     <div class="card-body">
-                                    <h3 class="card-title fs-4">{{ resource.title }}</h3>
+                                    <h3 class="card-title fs-5">{{ resource.title }}</h3>
+                                    <small>{{resource.category}}</small>
                                     <hr>
                                     <p class="card-text small">{{ resource.description|truncatewords:10 }}</p>
                                     <a href="{% url 'marriage:resource_detail' resource.slug %}" class="btn btn-sm btn-primary">Start</a>
@@ -235,43 +243,48 @@
         >
            <div class="card-header bg-white">All Resources | ሁሉም መርጃዎች </div>
             <!-- Resources Section -->
+            {% if resources_pre %}
             <div class="card my-4"> 
                 <div class="card-body">
                 
                     <h3 class="mx-3 fs-5">PreMarital Related Resources</h3>     
                     <hr>                          
                     <div class="row row-cols-1 row-cols-md-3 my-2 g-4">
-                        {% for resource in resources %}
-                            {% if resource.category == 'PreMarital' %}
+                        {% for resource in resources_pre %}
+                        {% if resource.category == 'PreMarital' %}
                                 <div class="col">
                                 <div class="card shadow">
                                     <img src="{% static 'img/Courses-palceHlder.png' %}" class="card-img-top" alt="{{ course.title }}">
                                     <div class="card-body">
-                                    <h3 class="card-title fs-4">{{ resource.title }}</h3>
+                                    <h3 class="card-title fs-5">{{ resource.title }}</h3>
+                                    <small>{{resource.category}}</small>
                                     <hr>
                                     <p class="card-text small">{{ resource.description|truncatewords:10 }}</p>
                                     <a href="{% url 'marriage:resource_detail' resource.slug %}" class="btn btn-sm btn-primary">Start</a>
                                     </div>
                                 </div>
                                 </div>
-                            {% endif %}
+                          {% endif %}  
                         {% endfor %}
                     </div>
                 </div>
             </div>
+            {% endif %} 
             <!-- Resources Section -->
+            {% if resources_post %}
             <div class="card my-4"> 
                 <div class="card-body">
                     <h3 class="mx-3 fs-5">PostMarital Related Resources</h3>     
                     <hr>                          
                     <div class="row row-cols-1 row-cols-md-3 my-2 g-4">
-                        {% for resource in resources %}
+                        {% for resource in resources_post %}
                             {% if resource.category == 'PostMarital' %}
                                 <div class="col">
                                 <div class="card shadow">
                                     <img src="{% static 'img/Courses-palceHlder.png' %}" class="card-img-top" alt="{{ course.title }}">
                                     <div class="card-body">
-                                    <h3 class="card-title fs-4">{{ resource.title }}</h3>
+                                    <h3 class="card-title fs-5">{{ resource.title }}</h3>
+                                    <small>{{resource.category}}</small>
                                     <hr>
                                     <p class="card-text small">{{ resource.description|truncatewords:10 }}</p>
                                     <a href="{% url 'marriage:resource_detail' resource.slug %}" class="btn btn-sm btn-primary">Start</a>
@@ -282,7 +295,8 @@
                         {% endfor %}
                     </div>
                 </div>
-            </div>
+            </div> 
+            {% endif %}
         </div>
        
     </div>

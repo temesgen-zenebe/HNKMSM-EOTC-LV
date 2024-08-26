@@ -29,8 +29,6 @@ from .forms import SignupForSchoolForm
 
 #         return context
 
-    
-
 
 class marriageSchoolWelcome(TemplateView):
     template_name = 'marriage/marriageView.html'
@@ -40,13 +38,34 @@ class marriageSchoolWelcome(TemplateView):
         user = self.request.user
 
         # Handle objects that may not exist for the user
+        # try:
+        #     context['schoolProgressController'] = SchoolProgressController.objects.get(user=user)
+        # except SchoolProgressController.DoesNotExist:
+        #     context['schoolProgressController'] = None  # or some default value
         try:
-            context['schoolProgressController'] = SchoolProgressController.objects.get(user=user)
+            school_progress = SchoolProgressController.objects.get(user=user)
         except SchoolProgressController.DoesNotExist:
-            context['schoolProgressController'] = None  # or some default value
+            school_progress = None
+
+        if school_progress:
+            total_steps = 6  # Total number of steps represented by the boolean fields
+            completed_steps = sum([
+                school_progress.is_signup_for_school,
+                school_progress.is_complete_courses,
+                school_progress.is_pass_quiz,
+                school_progress.is_attended_webinar,
+                school_progress.is_attended_onsite,
+                school_progress.is_certified,
+            ])
+            progress_percentage = (completed_steps / total_steps) * 100
+        else:
+            progress_percentage = 0
+
+        context['progress_percentage'] = progress_percentage
+        context['schoolProgressController'] = school_progress
 
         try:
-            context['results'] = Results.objects.get(user=user)
+            context['results'] = Results.objects.filter(user=user).first()
         except Results.DoesNotExist:
             context['results'] = None  # or some default value
 
@@ -81,9 +100,6 @@ class marriageSchoolWelcome(TemplateView):
         context['signupForSchoolForm'] = form
         return self.render_to_response(context)
     
-
-
-
 class CourseListView(LoginRequiredMixin, ListView):
     model = Course
     template_name = 'marriage/course_list.html'
@@ -93,11 +109,12 @@ class CourseListView(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         user = self.request.user
-        
+       
         # Create a dictionary of course: result pairs
         context['results'] = {course: Results.objects.filter(user=user, course=course).first() for course in context['courses']}
         
-        context['resources'] = Resources.objects.all()
+        context['resources_pre'] = Resources.objects.filter(category = 'PreMarital')
+        context['resources_post'] = Resources.objects.filter(category = 'PostMarital')
         return context
     
 class CourseDetailView(LoginRequiredMixin, DetailView): 
@@ -112,6 +129,7 @@ class CourseDetailView(LoginRequiredMixin, DetailView):
         context['quizzes'] = Quiz.objects.filter(course=course)
         context['questions'] = Question.objects.filter(course=course)
         context['answers'] = Answer.objects.filter(question__course=course)
+        context['resources'] = Resources.objects.all()
         return context
     
 class ResourceDetailView(LoginRequiredMixin, DetailView):
@@ -119,7 +137,13 @@ class ResourceDetailView(LoginRequiredMixin, DetailView):
     template_name = 'marriage/resources_detail.html'  # Specify your detail view template
     context_object_name = 'resources_detail'
     
-
+class ResultsListView(LoginRequiredMixin, ListView):
+    model = Results
+    template_name = 'marriage/results_list.html'
+    context_object_name = 'results_list'
+     
+    def get_queryset(self):
+        return Results.objects.filter(user=self.request.user)
 
 @login_required
 def submit_quiz(request, quiz_id):
