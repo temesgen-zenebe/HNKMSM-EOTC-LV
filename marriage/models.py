@@ -83,7 +83,6 @@ class Subtitle(models.Model):
     def __str__(self):
         return self.subtitle
     
-
 class Quiz(models.Model):
     quiz_title = models.CharField(max_length=100)
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
@@ -139,7 +138,6 @@ class Results(models.Model):
 
     def __str__(self):
         return f"{self.user}'s result for {self.quiz}"
-
 
 class Certification(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -206,6 +204,8 @@ class SignupForMeetEvents(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     confirmation = models.CharField(max_length=255, unique=True, null=True, blank=True)
     slug = models.SlugField(max_length=200, unique=True, null=True, blank=True)
+    is_attended = models.BooleanField(default=False)
+    attended_confirmation_code=models.CharField(max_length=255, null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 

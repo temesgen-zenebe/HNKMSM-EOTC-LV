@@ -22,7 +22,7 @@
             </div>
             <!-- breadcrumb Start -->
             <div class="text-center py-1">
-                <h4 class="mb-2 bolder text-light fs-4">ወደ ጋብቻ ትምህርት ቤት እንኳን ደህና መጡ</h4>
+                {% comment %} <h4 class="mb-2 bolder text-light fs-4">ወደ ትዳር ትምህርት ቤት እንኳን ደህና መጡ</h4> {% endcomment %}
                 <h1 class="mb-2 text-light fs-4">welcome to  marriage School</h1>
                 <p class="mx-1 small">Premarital and Potmarital counseling can matter significantly for couples as it helps build a strong foundation for marriage.</p>
                 <p class="mx-1 small">ከጋብቻ በፊት እና ከጋብቻ በኋላ የሚደረግ ምክር ለትዳር ጠንካራ መሰረትን ለመገንባት ስለሚረዳ ጥንዶች ጠቃሚ ሊሆኑ ይችላሉ።</p>
@@ -231,30 +231,30 @@
                 
             </div>
         </div>
-     </div>
-
- <!-- signupForSchoolForm Modal -->
- <div class="modal fade" id="signup_for_school" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="signup_for_schoolModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="signup_for_schoolModalLabel">Add Child</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body p-2 ">
-          <form method="post" class="small" novalidate>
-            {% csrf_token %}
-            {{ signupForSchoolForm|crispy }}
-            <button type="submit" class="btn btn-primary">Save</button>
-          </form>
-        </div>
-      </div>
     </div>
-</div>
+
+    <!-- signupForSchoolForm Modal -->
+    <div class="modal fade" id="signup_for_school" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="signup_for_schoolModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h1 class="modal-title fs-5" id="signup_for_schoolModalLabel">Add Child</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-2 ">
+                <form method="post" class="small" novalidate>
+                    {% csrf_token %}
+                    {{ signupForSchoolForm|crispy }}
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 
-
+{% comment %} 
     <!-- Service End -->
        <div class="row">
         <!-- School Progress Section -->
@@ -289,7 +289,7 @@
         </div>
         
        
-    </div>
+    </div> {% endcomment %}
 </div>
 </div>
 {% endblock %}

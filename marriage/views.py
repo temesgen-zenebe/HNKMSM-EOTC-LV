@@ -38,10 +38,19 @@ class marriageSchoolWelcome(TemplateView):
         user = self.request.user
 
         # Handle objects that may not exist for the user
-        # try:
-        #     context['schoolProgressController'] = SchoolProgressController.objects.get(user=user)
-        # except SchoolProgressController.DoesNotExist:
-        #     context['schoolProgressController'] = None  # or some default value
+        try:
+            schoolProgressController = SchoolProgressController.objects.get(user=user)
+            course = Course.objects.all().count()
+            results = Results.objects.filter(user=user).count()
+            #update the schoolProgressController
+            if course == results:
+               schoolProgressController.is_complete_courses = True
+               schoolProgressController.is_pass_quiz = True
+               schoolProgressController.save()
+               
+        except SchoolProgressController.DoesNotExist:
+           context['schoolProgressController'] = None  # or some default value
+        
         try:
             school_progress = SchoolProgressController.objects.get(user=user)
         except SchoolProgressController.DoesNotExist:
@@ -85,6 +94,7 @@ class marriageSchoolWelcome(TemplateView):
     def post(self, request, *args, **kwargs):
         form = SignupForSchoolForm(request.POST)
         SchoolProgress, created = SchoolProgressController.objects.get_or_create(user=self.request.user)
+        
         if form.is_valid():
             signup = form.save(commit=False)
             signup.user = request.user
