@@ -186,19 +186,38 @@ class MeetEventDetailView(DetailView):
     template_name = 'marriage/meet_event_detail.html'  # Specify the template to use
     context_object_name = 'meet_event'
 
+# @login_required
+# def signup_for_event(request, event_slug):
+#     meet_event = get_object_or_404(MeetEvents, slug=event_slug)
+    
+#     # Check if the user has already signed up for the event
+#     if SignupForMeetEvents.objects.filter(meet_events=meet_event, user=request.user).exists():
+#         messages.warning(request, "You have already signed up for this event.")
+#     else:
+#         signup = SignupForMeetEvents(meet_events=meet_event, user=request.user)
+#         signup.save()
+#         messages.success(request, "You have successfully signed up for the event.")
+    
+#     return redirect('marriage:meet_event_detail', event_slug=event_slug)
+
 @login_required
-def signup_for_event(request, event_slug):
-    meet_event = get_object_or_404(MeetEvents, slug=event_slug)
-    
-    # Check if the user has already signed up for the event
-    if SignupForMeetEvents.objects.filter(meet_events=meet_event, user=request.user).exists():
-        messages.warning(request, "You have already signed up for this event.")
-    else:
-        signup = SignupForMeetEvents(meet_events=meet_event, user=request.user)
-        signup.save()
-        messages.success(request, "You have successfully signed up for the event.")
-    
-    return redirect('marriage:meet_event_detail', event_slug=event_slug)
+def signup_for_event(request, slug):
+    # Fetch the event using the slug
+    event = get_object_or_404(MeetEvents, slug=slug)
+
+    # Check if the user has already signed up
+    if SignupForMeetEvents.objects.filter(user=request.user, meet_events=event).exists():
+        
+        messages.info(request, "You have already signed up for this event.")
+        # Optionally, handle the case where the user is already signed up
+        return redirect('marriage:meet_event_detail', slug=slug)
+
+    # Create a new signup instance
+    signup = SignupForMeetEvents(user=request.user, meet_events=event)
+    signup.save()
+    messages.success(request, "You have successfully signed up for the event.")
+    # Redirect to a confirmation page or the event detail page
+    return redirect('marriage:meet_event_detail', slug=slug)
 
 
 @login_required

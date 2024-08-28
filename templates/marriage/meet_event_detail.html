@@ -1,0 +1,45 @@
+{% extends "_base.html" %}
+{% load static %}
+{% block javascript %}
+   {% comment %} <script type="text/javascript" src="{% static '' %}" defer ></script> {% endcomment %}
+{% endblock %}
+{% load crispy_forms_tags %}
+{% load custom_filters %}
+{% block title %}marriage School meet_events details{% endblock %}
+{% block main %}
+<div class="container mt-5">
+    {% if meet_event %}
+    <h1 class="mb-4">{{ meet_event.meet_type }}</h1>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">{{ meet_event.held_by }}</h5>
+            <p class="card-text"><strong>Speaker:</strong> {{ meet_event.speaker }}</p>
+            {% if meet_event.special_guest %}
+            <p class="card-text"><strong>Special Guest:</strong> {{ meet_event.special_guest }}</p>
+            {% endif %}
+            <p class="card-text"><strong>Date and Time:</strong> {{ meet_event.date_and_time|date:"M d, Y H:i" }}</p>
+            {% if meet_event.location %}
+            <p class="card-text"><strong>Location:</strong> {{ meet_event.location }}</p>
+            {% endif %}
+            {% if meet_event.webinar_link %}
+            <p class="card-text"><strong>Webinar Link:</strong> <a href="{{ meet_event.webinar_link }}">{{ meet_event.webinar_link }}</a></p>
+            {% endif %}
+            {% if meet_event.webinar_password %}
+            <p class="card-text"><strong>Webinar Password:</strong> {{ meet_event.webinar_password }}</p>
+            {% endif %}
+            <a href="{% url 'marriage:signup_for_event' meet_event.slug %}" class="btn btn-success">Sign Up for Event</a>
+        </div>
+    </div>
+    <div class="card">
+        {% if messages %}
+        <div class="alert alert-dismissible fade show" role="alert">
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endif %}
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
