@@ -250,3 +250,33 @@ class Resources(models.Model):
     def __str__(self):
         return self.title
 
+class marriageQuationsAndAnswer(models.Model):
+    VIEWED_TYPES =(
+        ('public', 'public'),
+        ('private', 'private'),  
+    )
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)  # Replace 'YourCourseModel' with your actual course model
+    question = models.TextField(max_length=2000)
+    answer = models.TextField(blank=True, null=True)
+    is_answered= models.BooleanField(default=False)
+    viewed_by = models.CharField(max_length=100, default='private', choices=VIEWED_TYPES)
+    slug = models.SlugField(unique=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    
+      
+    def save(self, *args, **kwargs):    
+        if self.answer:
+            self.is_answered = True
+        if not self.answer:
+            self.is_answered = False
+            
+        if not self.slug:
+            value = f"{self.user.username}-QA"
+            self.slug = unique_slug(value, type(self))
+       
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f"Question by {self.user.username} on {self.course.title}"

@@ -1,0 +1,34 @@
+{% extends "_base.html" %}
+{% load static %}
+{% block javascript %}
+   {% comment %} <script type="text/javascript" src="{% static '' %}" defer ></script> {% endcomment %}
+{% endblock %}
+{% load crispy_forms_tags %}
+{% block title %}marriage School Premarital and Postmarital quations_answers{% endblock %}
+{% block main %}
+<div class="container mt-2">
+    <!-- breadcrumb -->
+    <div class="event pb-2">
+        <div class="mx-auto wow bounceInUp rounded-1" 
+            style="background-image: url('{% static "img/heroAccount-13.png" %}');background-size: cover; background-position: center center; background-repeat: no-repeat; " alt="Church-at" data-wow-delay="0.1s">
+            <div class="container py-3 mt-0 ">
+                <div class="animated bounceInDown ">
+                    <ol class="breadcrumb justify-content-start mb-0 animated bounceInDown small">
+                        <li class=""><a href="{% url 'pages:homepage' %}">Home<span class="px-1">\</span></a></li>
+                        <li class=""><a href="{% url 'marriage:marriageSchool_welcome' %}">marriageSchool<span class="px-1">\</span></a></li>
+                        <li class=""><a href="{% url 'marriage:course_list' %}">courseList<span class="px-1">\</span></a></li> 
+                        <li class="" aria-current="page">quationsAndanswers</li>
+                    </ol>
+                </div>
+            </div>
+            <!-- breadcrumb Start -->
+            <div class="text-center py-1">
+                <h1 class="mb-2 text-light fs-4">you can ask question Related with the corsers</h1>
+            </div>
+        </div>
+    </div>
+
+   
+
+</div>
+{% endblock %}

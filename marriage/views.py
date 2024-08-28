@@ -1,33 +1,19 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
 from django.views.generic import CreateView, ListView, DetailView,TemplateView
+from django.views import View
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib import messages
 from .models import (Course, Quiz, Question, 
                      Answer, Results, Resources, 
                      SchoolProgressController,
                      Certification,MeetEvents,
-                     SignupForSchool,SignupForMeetEvents
+                     marriageQuationsAndAnswer,
+                     SignupForSchool,
+                     SignupForMeetEvents
                 )
-from .forms import SignupForSchoolForm
-
-# marriage School Welcome
-# class marriageSchoolWelcome1(TemplateView):
-#     template_name = 'marriage/marriageView.html'
-
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         user = self.request.user
-
-#         context['schoolProgressController'] = get_object_or_404(SchoolProgressController, user=user)
-#         context['results'] = get_object_or_404(Results, user=user)
-#         context['certification'] = get_object_or_404(Certification, user=user)
-#         context['meetEvents'] = MeetEvents.objects.filter(user=user) 
-        
-#         # Instantiate the signup form
-#         context['signupForSchoolForm'] = SignupForSchoolForm()
-
-#         return context
+from .forms import SignupForSchoolForm,marriageSchoolQuationsAndAnswerForm
 
 
 class marriageSchoolWelcome(TemplateView):
@@ -140,13 +126,16 @@ class CourseDetailView(LoginRequiredMixin, DetailView):
         context['questions'] = Question.objects.filter(course=course)
         context['answers'] = Answer.objects.filter(question__course=course)
         context['resources'] = Resources.objects.all()
+        # Filter quationsAndAnswer by the current course
+        context['quationsAnswerData'] = marriageQuationsAndAnswer.objects.filter(course=course).order_by('created')
         return context
+    
     
 class ResourceDetailView(LoginRequiredMixin, DetailView):
     model = Resources
     template_name = 'marriage/resources_detail.html'  # Specify your detail view template
     context_object_name = 'resources_detail'
-    
+     
 class ResultsListView(LoginRequiredMixin, ListView):
     model = Results
     template_name = 'marriage/results_list.html'
@@ -154,6 +143,63 @@ class ResultsListView(LoginRequiredMixin, ListView):
      
     def get_queryset(self):
         return Results.objects.filter(user=self.request.user)
+
+class marriageSchoolQA(LoginRequiredMixin, View):
+    
+    def post(self, request):
+        
+        if 'questions_and_answers' in request.POST: 
+            form = marriageSchoolQuationsAndAnswerForm(request.POST)
+            if form.is_valid():
+                user = request.user
+                course_id = request.POST.get('course')  # Assuming you have a hidden input with course_id in the form
+                course = Course.objects.get(id=course_id)
+                # Save the question to the database
+                question = form.save(commit=False)
+                question.user = user
+                question.course = course
+                question.save()
+                return redirect('marriage:quationsAndAnswer_confirmation')
+        else:
+            context = {
+                'quationsAnAnswerForm': marriageSchoolQuationsAndAnswerForm()
+                }
+            return render(request, self.template_name, context)
+        
+    
+class QuationsAndAnswer_confirmation(TemplateView, LoginRequiredMixin):
+    template_name = 'marriage/quationsAndAnswer_confirmation.html'
+    
+class MeetEventListView(ListView):
+    model = MeetEvents
+    template_name = 'marriage/meet_event_list.html'  # Specify the template to use
+    context_object_name = 'meet_events'
+    paginate_by = 10  # Add pagination if you have many events
+
+    def get_queryset(self):
+        # Filter to show only active events
+        return MeetEvents.objects.filter(status='active').order_by('-date_and_time')
+
+
+class MeetEventDetailView(DetailView):
+    model = MeetEvents
+    template_name = 'marriage/meet_event_detail.html'  # Specify the template to use
+    context_object_name = 'meet_event'
+
+@login_required
+def signup_for_event(request, event_slug):
+    meet_event = get_object_or_404(MeetEvents, slug=event_slug)
+    
+    # Check if the user has already signed up for the event
+    if SignupForMeetEvents.objects.filter(meet_events=meet_event, user=request.user).exists():
+        messages.warning(request, "You have already signed up for this event.")
+    else:
+        signup = SignupForMeetEvents(meet_events=meet_event, user=request.user)
+        signup.save()
+        messages.success(request, "You have successfully signed up for the event.")
+    
+    return redirect('marriage:meet_event_detail', event_slug=event_slug)
+
 
 @login_required
 def submit_quiz(request, quiz_id):

@@ -124,5 +124,107 @@
             <p>No quizzes available for this course.</p>
         {% endif %}
     </div>
+    <!--quations_answers_create-->
+    <div class="container my-3 py-3">
+        <div class="card">
+            <div class="card-header bg-white">
+                <h3 class="fs-5 text-primary text-center">We welcome your questions or comments about the course and will get back to you as soon as possible.</h3>
+                <p class="text-primary  small text-center">ስለ ኮርሱ ርዕስ የእርስዎን ጥያቄዎች ወይም አስተያየቶች በደስታ እንቀበላለን እና በተቻለ ፍጥነት ወደ እርስዎ እንመለሳለን።</p>
+            </div>
+            <div class="card-body ">
+                <!-- quations_answers -->
+                <div class="container mt-2">
+                    <form class="mb-4 small" method="POST" action="{% url "marriage:quations_answers_create" %}" >
+                        <input type="hidden" name="csrfmiddlewaretoken" value="k4v0FWDC7GKGRVJbRQm3pec2YIymxbLMnJDjPo5JU127iPiCrTjts6EJoommdcSF">
+                        <input type="hidden" name="course" id="id_course"  value="{{course_detail.id}}"> 
+                        <div id="div_id_question" class="mb-3"> 
+                            <label for="id_question" class="form-label requiredField">
+                            Question<span class="asteriskField">*</span> </label> 
+                            <textarea name="question" cols="10" rows="4" 
+                            class="w-100 form-control form-control-sm mb-4 p-3 border-primary bg-light textarea" 
+                            placeholder="Leave your short and brief questions here, and we'll respond promptly!" 
+                            required="" 
+                            maxlength="2000" id="id_question" 
+                            spellcheck="false" required></textarea> 
+                        </div>
+                        
+                        <button name="questions_and_answers" type="submit" class="btn btn-sm  btn-primary">submit</button>                           
+                    </form>
+                </div>
+            </div>
+           
+            <div class="card-body">
+                <hr>
+                {% if quationsAnswerData %}
+                    {% for quationsAndAnswer in quationsAnswerData %}
+                        {% if quationsAndAnswer.viewed_by == 'public' %}
+                            <div class='border rounded p-2 my-2 small'>
+                                <!-- Comment with nested comments-->
+                                <div class="d-flex mb-3 small">
+                                    <!-- Parent comment-->
+                                    <div class="flex-shrink-0">
+                                        <img class="rounded-circle" src="{% static 'img/icon/Quationes.png' %}" alt="50x50 user image">
+                                    </div>
+                                    <div class="ms-3">
+                                        <div class="fw-bold py-1 fs-6">{{ quationsAndAnswer.user }}(you)</div>
+                                        <hr>
+                                        <span>{{ quationsAndAnswer.question }}?</span>
+                                    </div>
+                                </div>
+                                <!-- Respond comment-->
+                                <div class="d-flex small">
+                                    <div class="flex-shrink-0">
+                                        <img class="rounded-circle" src="{% static 'img/icon/Ansewr.png' %}" alt="answer">
+                                    </div>
+                                    <div class="ms-3">
+                                        <div class="fw-bold">marriage School.....</div>
+                                        <hr>
+                                        {% if quationsAndAnswer.answer %}
+                                            <span>{{ quationsAndAnswer.answer }}</span>
+                                        {% else %}
+                                            <span>The answer will be available soon. Thank you for your patience!</span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        {% elif quationsAndAnswer.viewed_by == 'private' and user.is_authenticated and user.username == quationsAndAnswer.user.username %}
+                            <div class='border rounded p-2 my-2'>
+                                <!-- Comment with nested comments-->
+                                <div class="d-flex mb-3 small">
+                                    <!-- Parent comment-->
+                                    <div class="flex-shrink-0">
+                                        <img class="rounded-circle" src="{% static 'img/icon/Quationes.png' %}" alt="50x50 user image">
+                                    </div>
+                                    <div class="ms-3 small">
+                                        <div class="fw-bold py-1 ">{{ quationsAndAnswer.user }}</div>
+                                        <hr>
+                                        <span>{{ quationsAndAnswer.question }}?</span>
+                                    </div>
+                                </div>
+                                <!-- ansewr comment-->
+                                <div class="d-flex small">
+                                    <div class="flex-shrink-0">
+                                        <img class="rounded-circle" src="{% static 'img/icon/Ansewr.png' %}" alt="answer">
+                                    </div>
+                                    <div class="ms-3 small">
+                                        <div class="fw-bold">marriage School</div>
+                                        <hr>
+                                        {% if quationsAndAnswer.answer %}
+                                            <span>{{ quationsAndAnswer.answer }}</span>
+                                        {% else %}
+                                            <span>The answer will be available soon. Thank you for your patience!</span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            </div>
+            
+            
+        </div>
+    </div>
+    
 </div>
 {% endblock %}
