@@ -36,7 +36,7 @@
     <nav>
         <div class="nav nav-pills mb-3 justify-content-center" id="nav-tab" role="tablist">
           <button
-            class="nav-link active small btn btn-sm"
+            class="nav-link active small btn btn-sm px-4 py-2 rounded-pill"
             id="nav-PreMarital-tab"
             data-bs-toggle="tab"
             data-bs-target="#nav-PreMarital"
@@ -49,7 +49,7 @@
            PreMarital | የቅድመ ጋብቻ ትምህርት
           </button>
           <button
-            class="nav-link small btn btn-sm"
+            class="nav-link small btn btn-sm px-4 py-2 rounded-pill"
             id="nav-PostMarital-tab"
             data-bs-toggle="tab"
             data-bs-target="#nav-PostMarital"
@@ -62,7 +62,7 @@
           PostMarital | የድህረ-ጋብቻ ትምህርት
           </button>
           <button
-            class="nav-link small btn btn-sm"
+            class="nav-link small btn btn-sm px-4 py-2 rounded-pill"
             id="nav-preAllResources-tab"
             data-bs-toggle="tab"
             data-bs-target="#nav-preAllResources"
@@ -117,7 +117,7 @@
                                         {% endwith %}
                                         <hr>
                                         <p class="card-text small">{{ course.description|truncatewords:10 }}</p>
-                                        <a href="{% url 'marriage:course_detail' course.slug %}" class="btn btn-sm btn-primary">Start</a>
+                                        <a href="{% url 'marriage:course_detail' course.slug %}" class="btn btn-sm btn-primary px-4 py-2 rounded-pill">Start</a>
                                         </div>
                                     </div>
                                     </div>
@@ -144,7 +144,7 @@
                                     <small>{{resource.category}}</small>
                                     <hr>
                                     <p class="card-text small">{{ resource.description|truncatewords:10 }}</p>
-                                    <a href="{% url 'marriage:resource_detail' resource.slug %}" class="btn btn-sm btn-primary">Start</a>
+                                    <a href="{% url 'marriage:resource_detail' resource.slug %}" class="btn btn-sm btn-primary px-4 py-2 rounded-pill">Start</a>
                                     </div>
                                 </div>
                                 </div>
@@ -195,7 +195,7 @@
                                         {% endwith %}
                                         <hr>
                                         <p class="card-text small">{{ course.description|truncatewords:10 }}</p>
-                                        <a href="{% url 'marriage:course_detail' course.slug %}" class="btn btn-sm btn-primary">Start</a>
+                                        <a href="{% url 'marriage:course_detail' course.slug %}" class="btn btn-sm btn-primary px-4 py-2 rounded-pill">Start</a>
                                         </div>
                                     </div>
                                     </div>
@@ -223,7 +223,7 @@
                                     <small>{{resource.category}}</small>
                                     <hr>
                                     <p class="card-text small">{{ resource.description|truncatewords:10 }}</p>
-                                    <a href="{% url 'marriage:resource_detail' resource.slug %}" class="btn btn-sm btn-primary">Start</a>
+                                    <a href="{% url 'marriage:resource_detail' resource.slug %}" class="btn btn-sm btn-primary px-4 py-2 rounded-pill">Start</a>
                                     </div>
                                 </div>
                                 </div>
@@ -260,7 +260,7 @@
                                     <small>{{resource.category}}</small>
                                     <hr>
                                     <p class="card-text small">{{ resource.description|truncatewords:10 }}</p>
-                                    <a href="{% url 'marriage:resource_detail' resource.slug %}" class="btn btn-sm btn-primary">Start</a>
+                                    <a href="{% url 'marriage:resource_detail' resource.slug %}" class="btn btn-sm btn-primary px-4 py-2 rounded-pill">Start</a>
                                     </div>
                                 </div>
                                 </div>
@@ -287,7 +287,7 @@
                                     <small>{{resource.category}}</small>
                                     <hr>
                                     <p class="card-text small">{{ resource.description|truncatewords:10 }}</p>
-                                    <a href="{% url 'marriage:resource_detail' resource.slug %}" class="btn btn-sm btn-primary">Start</a>
+                                    <a href="{% url 'marriage:resource_detail' resource.slug %}" class="btn btn-sm btn-primary px-4 py-2 rounded-pill">Start</a>
                                     </div>
                                 </div>
                                 </div>

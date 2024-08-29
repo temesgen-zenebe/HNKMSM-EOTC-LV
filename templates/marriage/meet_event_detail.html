@@ -34,11 +34,23 @@
     <!-- Upcoming Meet Events -->
     <div class="container mt-5">
     {% if meet_event %}
-        <h1 class="mb-4 fs-5">{{ meet_event.meet_type }} Details</h1>
+         <!-- messages Meet Events -->
+        {% if messages %}
+        <div class="border-primary p-2">
+            <div class="alert alert-dismissible fade show" role="alert">
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                {% endfor %}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+        {% endif %}
+        
+        <h1 class="mb-4 fs-3">{{ meet_event.meet_type }} Details</h1>
         <hr>
         <div class="card border-primary shadow">
-            <div class="card-body">
-                <div class="d-flex justify-content-between gap-2 px-2">
+            <div class="card-body mx-2">
+                <div class="d-flex justify-content-between px-2">
                     <h6 class="card-title fs-6">Held by: {{ meet_event.held_by }}</h6>
                     <i class="fas fa-chess-king fa-2x text-primary"></i>
                 </div>
@@ -57,19 +69,14 @@
                 {% if meet_event.webinar_password %}
                 <p class="card-text"><strong>Webinar Password:</strong> {{ meet_event.webinar_password }}</p>
                 {% endif %}
-                <a href="{% url 'marriage:signup_for_event' meet_event.slug %}" class="btn btn-sm btn-primary">sign up for meetEvent</a>
+                <hr>
+                <div class="d-grid gap-2 col-4 mx-auto">
+                    <a href="{% url 'marriage:signup_for_event' meet_event.slug %}" class="btn btn-sm btn-primary px-4 py-2 rounded-pill">sign up for meetEvent</a>
+                </div>
+                
             </div>
         </div>
-        <div class="card">
-            {% if messages %}
-            <div class="alert alert-dismissible fade show" role="alert">
-                {% for message in messages %}
-                <div class="alert alert-{{ message.tags }}">{{ message }}</div>
-                {% endfor %}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            {% endif %}
-        </div>
+       
         {% endif %}
     </div>
 </div>

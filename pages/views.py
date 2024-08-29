@@ -3,6 +3,7 @@ from django.views.generic import TemplateView
 from django.contrib import messages 
 from blog.models import Blog
 from events.models import Event,EventGallery, EventsCategory, PostEventImages
+from payments.models import PaymentCaseLists
 from django.utils import timezone
 from multimedia.models import (
     BooksLibrary, Gallery, UserManual, 
@@ -32,7 +33,7 @@ class HomePageView(TemplateView):
         latest_spiritualPoemSongs = SpiritualPoemSong.objects.order_by('-created_at')[:3]
         latest_testimonySalvations = TestimonyOfSalvation.objects.order_by('-created')[:3]
         latest_userManuals = UserManual.objects.order_by('-uploaded_at')[:3]
-        #membership = MembersUpdateInformation.objects.filter(user=self.request.user)
+        payment_donation = PaymentCaseLists.objects.filter(category = 'donation')
         membership = MembersUpdateInformation.objects.get(user=request.user)
         print(membership.member_status)
         latest_blog = Blog.objects.order_by('-created_at')[:3]
@@ -55,6 +56,8 @@ class HomePageView(TemplateView):
              'latest_testimonySalvations' : latest_testimonySalvations,
              'latest_userManuals' :  latest_userManuals,
              'latest_blog' : latest_blog,
+             #payment_donation
+             'payment_donation':payment_donation,
           }
         return render(request, self.template_name, context)
    

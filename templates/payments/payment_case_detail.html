@@ -47,8 +47,8 @@
                 {% csrf_token %}
                 <button  type="submit" class="btn btn-sm btn-primary">Add To PaymentCase Cart</button>
                </form> {% endcomment %}
-               <a href="{{payment_case.stripsPayment_link}}" class="btn btn-sm rounded btn-primary" target="_blank">Go to Payment </a>
-               <a href="{% url 'payments:payment_case_list' %}" class="btn btn-sm rounded btn-primary">Back to List</a>
+               <a href="{{payment_case.stripsPayment_link}}" class="btn btn-sm px-4 py-2 rounded-pill btn-primary" target="_blank">Go to Payment </a>
+               <a href="{% url 'payments:payment_case_list' %}" class="btn btn-sm px-4 py-2 rounded-pill btn-primary">Back to List</a>
              </div>
           </div>
         </div>

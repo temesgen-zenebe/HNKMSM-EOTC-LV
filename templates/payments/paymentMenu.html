@@ -42,7 +42,7 @@
         <p class="card-text small text-primary">May God bless you for your participation and membership. Your support is deeply appreciated and contributes greatly to our EOTC </p>
         <hr>
         <div class="btn-group">
-            <a href="{% url 'payments:payment_case_detail' payment_case.slug %}" class="btn btn-sm rounded btn-primary">Start</a>
+            <a href="{% url 'payments:payment_case_detail' payment_case.slug %}" class="btn btn-sm btn-primary px-4 py-2 rounded-pill">Start</a>
         </div>
         <div class="alert alert-warning d-none small" id="payment-reminder" role="alert">
             Your next membership payment is due soon!
@@ -62,7 +62,7 @@
         </p>
         <hr>
         <div class="btn-group gap-3">
-          <a href="{% url "payments:payment_case_list" %}" class="btn btn-sm rounded btn-primary">Start</a>
+          <a href="{% url "payments:payment_case_list" %}" class="btn btn-sm px-4 py-2 rounded-pill btn-primary">Start</a>
          </div>
       </div>
     </div>
@@ -77,7 +77,7 @@
         </p>
         <hr>
         <div class="btn-group gap-3">
-          <a href="{% url "payments:paymentsHistoryList" %}" class="btn btn-sm rounded btn-primary">Start</a>
+          <a href="{% url "payments:paymentsHistoryList" %}" class="btn btn-sm px-4 py-2 rounded-pill btn-primary">Start</a>
          </div>
       </div>
     </div>
