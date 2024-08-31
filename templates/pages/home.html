@@ -28,25 +28,29 @@
                 </div>
             </div>
         </div>
-            <!-- Modal all payments-->
+            <!-- Modal all payments popup by time counter using javascript-->
         <div class="modal fade" id="all-payments" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-xl modal-dialog-scrollable">
                 <div class="modal-content rounded-1 shadow ">
                     <div class="modal-body ">
                         <div class="card border">
-                            <div class="card-header bg-white text-primary">
-                                <p>This list are the case needs your help; pleace see the details and contributes as much as you can.</p>
+                            <div class="card-header bg-white text-primary px-4 py-2">
+                                <span class="small h5 p-1">This is a case that needs your help; please see the details and contribute as much as you can.<span>
+                                <p class="small p-1 text-primary"> "Give, and it will be given to you. A good measure, pressed down, shaken together and running over, will be poured into your lap." — Luke 6:38.</p>
+                                <span class="small h6">የእርስዎን እርዳታ የሚፈልግ ጉዳይ ነው። እባክዎን ዝርዝሮቹን ይመልከቱ እና በሚችሉት መጠን ያዋጡ።<span>
+                                <p class="small p-1 text-primary">"ስጡ ይሰጣችሁማል፤ የተጨቈነም የተነቀነቀና የተረፈ መልካም መስፈሪያ በእቅፋችሁ ይፈስሳል።" —ሉቃስ 6:38 </p>
+                                 
                             </div>  
                         <div class="card-body">
                             <div class="">
                                 
                                {% if payment_donation %} 
-                               <div class="row row-cols-1 row-cols-md-4 g-4">
+                               <div class="row row-cols-1 row-cols-md-3 g-4">
                                 {% for case in payment_donation %}
                                 <div class="col">
                                   <div class="card shadow border border-primary">
                                       {% if case.image %}
-                                      <img src="{{ case.image.url }}"  class="img-fluid rounded-top img-fixed-size p-1" alt="{{ case.title }}">
+                                      <img src="{{ case.image.url }}"  class="img-fluid rounded-top img-fixed-size" alt="{{ case.title }}">
                                       {% endif %}
                                     <div class="card-body small">
                                       <h3 class="card-title fs-5">{{ case.title }}</h3>

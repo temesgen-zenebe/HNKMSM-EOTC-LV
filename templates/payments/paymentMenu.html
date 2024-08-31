@@ -51,10 +51,13 @@
     </div>
   </div>
   {% endfor %}
+  <!--service_case link-->
   <div class="col">
     <div class="card shadow border border-primary">
       <div class="card-body small">
         <h3 class="card-title fs-5">Payments Case List</h3>
+        <hr>
+        <p class="small">Payment:  Membership, Baptism,..</p>
         <hr>
         <p class="small">
           Discover payment cases where your financial support is needed for Ethiopian Orthodox churches. Click here to find out more!
@@ -67,6 +70,24 @@
       </div>
     </div>
   </div>
+  <!--donation_case link-->
+  <div class="col">
+    <div class="card shadow border border-primary">
+      <div class="card-body small">
+        <h3 class="card-title fs-5">Donation Case List</h3>
+        <hr>
+        <span class="small h5 p-1">This is a case that needs your help; please see the details and contribute as much as you can.<span>
+          <p class="small p-1 text-primary"> "Give, and it will be given to you. A good measure, pressed down, shaken together and running over, will be poured into your lap." — Luke 6:38.</p>
+          <span class="small h6">የእርስዎን እርዳታ የሚፈልግ ጉዳይ ነው። እባክዎን ዝርዝሮቹን ይመልከቱ እና በሚችሉት መጠን ያዋጡ።<span>
+          <p class="small p-1 text-primary">"ስጡ ይሰጣችሁማል፤ የተጨቈነም የተነቀነቀና የተረፈ መልካም መስፈሪያ በእቅፋችሁ ይፈስሳል።" —ሉቃስ 6:38 </p>
+        <hr>
+        <div class="btn-group gap-3">
+          <a href="{% url "pages:donation-caseList" %}" class="btn btn-sm px-4 py-2 rounded-pill btn-primary">Start</a>
+         </div>
+      </div>
+    </div>
+  </div>
+  <!--payment history-->
   <div class="col">
     <div class="card shadow border border-primary">
       <div class="card-body small">

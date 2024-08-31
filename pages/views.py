@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView,ListView,DetailView
 from django.contrib import messages 
 from blog.models import Blog
 from events.models import Event,EventGallery, EventsCategory, PostEventImages
@@ -83,5 +83,19 @@ class UserDashboard(TemplateView):
      
 class ChildCare(TemplateView):
      template_name = 'pages/childCare.html'
-    
-    
+     
+class DonationListView(ListView):
+     model= PaymentCaseLists
+     template_name = 'pages/donationList.html'
+     context_object_name = 'payment_cases_donation_list'
+     paginate_by = 3
+     
+     def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['payment_donation'] = PaymentCaseLists.objects.filter(category='donation')
+        return context  
+   
+class DonationCaseDetailView(DetailView): 
+    model = PaymentCaseLists
+    template_name = 'pages/donation_case_detail.html'  # Specify your detail view template
+    context_object_name = 'donation_case'

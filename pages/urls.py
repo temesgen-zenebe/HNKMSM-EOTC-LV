@@ -1,6 +1,10 @@
 from django.urls import path
 
-from .views import AboutUsView, HomePageView, Contact, TermAndCondition,UserDashboard,ChildCare
+from .views import (AboutUsView, HomePageView, 
+                    Contact, TermAndCondition,
+                    UserDashboard,ChildCare, 
+                    DonationListView,DonationCaseDetailView
+                    )
 
 app_name = 'pages'
 
@@ -11,4 +15,6 @@ urlpatterns = [
     path('terms-polices/', TermAndCondition.as_view(), name='terms-polices'),
     path('user-dashboard/', UserDashboard.as_view(), name='user-dashboard'),
     path('childcare/', ChildCare.as_view(), name='childcare'),
+    path('donationCaseList/', DonationListView.as_view(), name='donation-caseList'),
+    path('donationCaseDetail/<slug:slug>/', DonationCaseDetailView.as_view(), name='donation-detail'),
 ]

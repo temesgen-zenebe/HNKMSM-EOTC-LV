@@ -104,7 +104,8 @@
                                 </div>
                             </div>
                             {% endif %}
-                            <span class="nav-item nav-link btn btn-primary py-2 px-3 d-none d-xl-inline-block rounded-pill small" data-bs-toggle="modal" data-bs-target="#all-payments">Donation</span>
+                            <a href="{% url "pages:donation-caseList" %}" class="nav-item nav-link btn btn-primary py-2 px-3 d-none d-xl-inline-block rounded-pill small">Donation</a>
+                            {% comment %} <span class="nav-item nav-link btn btn-primary py-2 px-3 d-none d-xl-inline-block rounded-pill small" data-bs-toggle="modal" data-bs-target="#all-payments">Donation</span> {% endcomment %}
                         </div>
                        
                     </div>
@@ -185,10 +186,10 @@
                         <div class="footer-item">
                             <h4 class="mb-4">Payment</h4>
                             <div class="d-flex flex-column align-items-start">
-                                <a class="text-body mb-3" href="#"><i class="fa fa-check text-primary me-2"></i>Donations</a>
-                                <a class="text-body mb-3" href="#"><i class="fa fa-check text-primary me-2"></i>መስጠት</a>
-                                <a class="text-body mb-3" href="#"><i class="fa fa-check text-primary me-2"></i>ስህለት</a>
-                                <a class="text-body mb-3" href="#"><i class="fa fa-check text-primary me-2"></i>አስራት በኩራት<small>( Tithe with pride )</small></a>
+                                <a class="text-body mb-3" href="{% url 'pages:donation-caseList' %}"><i class="fa fa-check text-primary me-2"></i>Donations</a>
+                                <a class="text-body mb-3" href="{% url 'payments:payment_case_list' %}"><i class="fa fa-check text-primary me-2"></i>መስጠት</a>
+                                <a class="text-body mb-3" href="{% url 'payments:payment_case_list' %}"><i class="fa fa-check text-primary me-2"></i>ስህለት</a>
+                                <a class="text-body mb-3" href="{% url 'payments:payment_case_list' %}"><i class="fa fa-check text-primary me-2"></i>አስራት በኩራት<small>( Tithe with pride )</small></a>
                             </div>
                         </div>
                     </div>
