@@ -4,6 +4,7 @@ from django.contrib import messages
 from blog.models import Blog
 from events.models import Event,EventGallery, EventsCategory, PostEventImages
 from payments.models import PaymentCaseLists
+
 from django.utils import timezone
 from multimedia.models import (
     BooksLibrary, Gallery, UserManual, 
@@ -11,6 +12,7 @@ from multimedia.models import (
     ArchiveLink,SpiritualPoemSong 
 )
 from members.models import MembersUpdateInformation
+from shopProducts.models import ShopProduct
 
 
 class HomePageView(TemplateView):
@@ -37,7 +39,7 @@ class HomePageView(TemplateView):
         membership = MembersUpdateInformation.objects.get(user=request.user)
         print(membership.member_status)
         latest_blog = Blog.objects.order_by('-created_at')[:3]
-     
+        products = ShopProduct.objects.all().order_by('-created')
 
         context = {
              #membership
@@ -58,6 +60,7 @@ class HomePageView(TemplateView):
              'latest_blog' : latest_blog,
              #payment_donation
              'payment_donation':payment_donation,
+             'products':products,
           }
         return render(request, self.template_name, context)
    
@@ -85,15 +88,16 @@ class ChildCare(TemplateView):
      template_name = 'pages/childCare.html'
      
 class DonationListView(ListView):
-     model= PaymentCaseLists
-     template_name = 'pages/donationList.html'
-     context_object_name = 'payment_cases_donation_list'
-     paginate_by = 3
-     
-     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['payment_donation'] = PaymentCaseLists.objects.filter(category='donation')
-        return context  
+    model = PaymentCaseLists
+    template_name = 'pages/donationList.html'
+    context_object_name = 'payment_cases_donation_list'
+    paginate_by = 6
+
+    def get_queryset(self):
+        queryset = PaymentCaseLists.objects.filter(category='donation').order_by('created')
+        return queryset
+
+  
    
 class DonationCaseDetailView(DetailView): 
     model = PaymentCaseLists

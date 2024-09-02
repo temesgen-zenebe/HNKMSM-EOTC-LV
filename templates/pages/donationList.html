@@ -21,95 +21,40 @@
             </div>
             <div class="text-center py-2">
                 <h3 class="mb-2 bolder text-light fs-4">Donation Cases List</h3>
-                <h3 class="mb-2 text-primary fs-5">DonationList Payment Cases List select from the list to donation</h3>
+                <h3 class="mb-2 text-primary fs-5">DonationList: Select a Payment Case from the list to donate.</h3>
             </div>
         </div>
     </div>
 
-    <div class="row row-cols-1 row-cols-md-3 g-4 my-4">
-        {% for case in payment_donation %}
+    <div class="row row-cols-1 row-cols-md-3 g-4 my-2">
+        {% for case in payment_cases_donation_list %}
         <div class="col">
             <div class="card shadow border border-primary">
                 {% if case.image %}
-                <img src="{{ case.image.url }}"  class="img-fluid rounded-top img-fixed-size p-1" alt="{{ case.title }}">
+                <img src="{{ case.image.url }}" class="img-fluid rounded-top img-fixed-size " alt="{{ case.title }}">
                 {% endif %}
-            <div class="card-body small">
-                <h3 class="card-title fs-5">{{ case.title }}</h3>
-                <hr />
-                <p class="card-text small">Description : {{ case.description|truncatewords:15 }}</p>
-                <hr />
-                <p class="card-text text-success"><strong>Amount: ${{ case.amount }}</strong></p>
-                <hr />
-                <div class="btn-group gap-3">
-                <a href="{% url 'pages:donation-detail' case.slug %}" class="btn btn-sm px-4 py-2 rounded-pill btn-primary">Details</a>
+                <div class="card-body small">
+                    <h3 class="card-title fs-5">{{ case.title }}</h3>
+                    <hr />
+                    <p class="card-text small">Description: {{ case.description|truncatewords:15 }}</p>
+                    <hr />
+                    <p class="card-text text-success"><strong>Amount: ${{ case.amount }}</strong></p>
+                    <hr />
+                    <div class="btn-group gap-3">
+                        <a href="{% url 'pages:donation-detail' case.slug %}" class="btn btn-sm px-4 py-2 rounded-pill btn-primary">Details</a>
+                    </div>
+                    <a href="{{ case.stripsPayment_link }}" class="btn btn-sm btn-primary px-4 py-2 rounded-pill" target="_blank">Add To PaymentCase Cart</a> 
                 </div>
-                <a href="{{case.stripsPayment_link}}" class="btn btn-sm btn-primary px-4 py-2 rounded-pill" target="_blank">Add To PaymentCase Cart</a> 
-            </div>
             </div>
         </div>
+        {% empty %}
+            <div class="col">
+                <div class="card shadow border border-primary p-3">
+                    <h3 class="fs-5 small">Sorry! No donation cases list found, try other time.Thanks</h3>
+                </div>
+            </div>
         {% endfor %}
     </div>
-
-    <!-- Pagination Section -->
-    <nav aria-label="Page navigation example mt-4">
-        <ul class="pagination justify-content-center">
-        {% if payment_donation.has_previous %}
-            <li class="page-item">
-            <a class="page-link" href="?page=1" aria-label="First">
-                <span aria-hidden="true">&laquo;&laquo;</span>
-            </a>
-            </li>
-            <li class="page-item">
-            <a class="page-link" href="?page={{ payment_donation.previous_page_number }}" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-            </a>
-            </li>
-        {% else %}
-            <li class="page-item disabled">
-            <a class="page-link" href="#" aria-label="First">
-                <span aria-hidden="true">&laquo;&laquo;</span>
-            </a>
-            </li>
-            <li class="page-item disabled">
-            <a class="page-link" href="#" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-            </a>
-            </li>
-        {% endif %}
     
-        {% for i in payment_donation.paginator.page_range %}
-            {% if payment_donation.number == i %}
-            <li class="page-item active"><a class="page-link" href="#">{{ i }}</a></li>
-            {% else %}
-            <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
-            {% endif %}
-        {% endfor %}
-    
-        {% if payment_donation.has_next %}
-            <li class="page-item">
-            <a class="page-link" href="?page={{ payment_donation.next_page_number }}" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-            </a>
-            </li>
-            <li class="page-item">
-            <a class="page-link" href="?page={{ payment_cases_donation_list.paginator.num_pages }}" aria-label="Last">
-                <span aria-hidden="true">&raquo;&raquo;</span>
-            </a>
-            </li>
-        {% else %}
-            <li class="page-item disabled">
-            <a class="page-link" href="#" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-            </a>
-            </li>
-            <li class="page-item disabled">
-            <a class="page-link" href="#" aria-label="Last">
-                <span aria-hidden="true">&raquo;&raquo;</span>
-            </a>
-            </li>
-        {% endif %}
-        </ul>
-    </nav>
-
 </div>
 {% endblock %}
