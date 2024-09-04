@@ -1,0 +1,72 @@
+{% extends "_base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}shop products Details{% endblock %}
+{% block main %}
+<div class="container my-2">
+    <div class="event pb-2">
+        <div class="mx-auto wow bounceInUp rounded " 
+            style="background-image: url('{% static "img/heroAccount-13.png" %}');background-size: cover; background-position: center center; background-repeat: no-repeat; " alt="Church-at" data-wow-delay="0.1s">
+            <div class="container py-1 mt-0">
+                <div class="animated bounceInDown small">
+                    <ol class="breadcrumb justify-content-start mb-0 animated bounceInDown">
+                        <li class="small"><a href="{% url 'pages:homepage' %}">Home<span class="px-1">\</span></a></li>
+                        <li class="small"><a href="{% url 'shopProducts:shop_product_list' %}">shopProductsList<span class="px-1">\</span></a></li>
+                        <li class="small" aria-current="page">shopProductsDetail<span class="px-1"></span></li>
+                    </ol>
+                </div>
+
+                <!-- breadcrumb Start -->
+                <div class="text-center pt-3">
+                <h1 class="mb-2 bolder text-light fs-4">Shop Products Details</h1>
+                </div>
+            </div>  
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            {% if product.image %}
+                <img src="{{ product.image.url }}" class="img-fluid" alt="{{ product.name }}">
+            {% else %}
+                <img src="{% static 'images/placeholder.png' %}" class="img-fluid" alt="Placeholder">
+            {% endif %}
+        </div>
+        <div class="col-md-6 small">
+            <h1 class="text-primary fs-4">{{ product.name }}</h1>
+            <hr>
+            <p>{{ product.description }}</p>
+            <hr>
+            <h4 class="text-success">${{ product.price }}</h4>
+            <p>Rating: {{ product.rating_number }}/5</p>
+            <p>Seller: {{ product.seller.username }}</p>
+            <p>Last Updated: {{ product.updated|date:"F j, Y, g:i a" }}</p>
+            <div class='btn-group gap-2'>  
+                <p><a href="{{ product.affiliate_link }}" class="btn btn-sm btn-primary rounded-pill px-2" target="_blank">Buy Now</a></p>
+                <p><a href="{% url 'shopProducts:shop_product_list' %}" class="btn btn-sm btn-outline-pri rounded-pill px-2">Back to list</a></p>
+            </div>
+            <hr>
+            <p>Specification: {{ product.specification }}</p>
+        </div>
+    </div>
+    
+    <h3 class="text-primary fs-5 mt-4">Related Products</h3>
+<div class="row pt-2">
+    {% for related_product in related_products %}
+    <div class="col-md-3 mb-4">
+        <div class="card shadow-sm">
+            {% if related_product.image %}
+                <img src="{{ related_product.image.url }}" class="card-img-top" alt="{{ related_product.name }}">
+            {% else %}
+                <img src="{% static 'images/placeholder.png' %}" class="card-img-top" alt="Placeholder">
+            {% endif %}
+            <div class="card-body">
+                <h5 class="card-title">{{ related_product.name }}</h5>
+                <p class="card-text">{{ related_product.description|truncatewords:10 }}</p>
+                <a href="{% url 'shopProducts:shop_product_detail' related_product.slug %}" class="btn btn-sm btn-primary rounded-pill">View Details</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+</div>
+{% endblock %}

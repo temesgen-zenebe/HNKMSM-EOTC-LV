@@ -1916,7 +1916,9 @@
                                     {% endif %}
                                     
                                 </div>
-                                <div><a href="{{product.affiliate_link}}" class="btn btn-md-square btn-primary rounded-circle" target="_blank"><i class="fas fa-cart-plus fa-1x"></i></a></div>
+                                <div class="d-flex justify-content-between gap-3"><a href="{{product.affiliate_link}}" class="btn btn-md-square btn-primary rounded-circle" target="_blank"><i class="fas fa-cart-plus fa-1x"></i></a>
+                                <a href="{% url 'shopProducts:shop_product_detail' product.slug %}" class="btn btn-md-square btn-primary rounded-pill p-2" target="_blank"><i class="fas fa-arrow-alt-circle-up fa-1x"></i></a> 
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -2006,7 +2008,10 @@
                         
                     </div>
                 </div>
-                <div class="owl-carousel testimonial-carousel testimonial-carousel-2 wow bounceInUp" data-wow-delay="0.3s">
+
+                <a href="{% url 'shopProducts:shop_product_list' %}" class="d-inline-block fw-bold text-dark text-uppercase bg-light border border-primary rounded-pill px-4 py-1 mb-3">Explore More products</a>
+
+                {% comment %} <div class="owl-carousel testimonial-carousel testimonial-carousel-2 wow bounceInUp" data-wow-delay="0.3s">
                     <div class="testimonial-item rounded bg-light">
                         
                         <div class="d-flex mb-3">
@@ -2115,7 +2120,7 @@
                         </div>
                         
                     </div>
-                </div>
+                </div> {% endcomment %}
             </div>
         </div>
         <!-- product-list End -->

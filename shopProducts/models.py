@@ -3,13 +3,16 @@ from common.utils.text import unique_slug
 from django.conf import settings
 
 class ShopProduct(models.Model):
+    CATEGORY=( ('photoFrames', 'photoFrames'),('outSourcesProducts ', 'outSourcesProducts'),('inOurStore', 'inOurStore'))
     # Product fields
     name = models.CharField(max_length=255)
     description = models.TextField(max_length=1000,blank=True, null=True)
+    specification = models.TextField(max_length=1000,blank=True, null=True)
     affiliate_link = models.URLField(max_length=200, blank=True, null=True)
     image = models.ImageField(upload_to='shop_products/', blank=True, null=True)
     rating_number = models.PositiveIntegerField(default=1)
     price = models.DecimalField(max_digits=10, decimal_places=2)
+    category =models.CharField(max_length=50, choices=CATEGORY, default='inOurStore')
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     seller = models.CharField(max_length=200, blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True)
