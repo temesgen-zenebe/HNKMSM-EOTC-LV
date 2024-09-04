@@ -23,6 +23,7 @@ urlpatterns = [
     path('marriage/', include('marriage.urls')),
     path('payments/', include('payments.urls')),
     path('shopProducts/', include('shopProducts.urls')),
+    path('massaging/', include('massaging.urls')),
     
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
