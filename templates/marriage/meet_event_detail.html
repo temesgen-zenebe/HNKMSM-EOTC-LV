@@ -9,7 +9,7 @@
 {% block main %}
 <div class="container mt-2">
     <!-- breadcrumb -->
-    <div class="event pb-3">
+    <div class="event">
         <div class="mx-auto wow bounceInUp rounded-1" 
             style="background-image: url('{% static "img/heroAccount-13.png" %}');background-size: cover; background-position: center center; background-repeat: no-repeat; " alt="Church-at" data-wow-delay="0.1s">
             <div class="container py-3 mt-0 ">
@@ -25,8 +25,8 @@
             <!-- breadcrumb Start -->
             <div class="text-center text-primary py-1">
                 <h1 class="mb-2 text-light fs-4">Meet Events Details</h1>
-                <p>congrate! Completion of the Courses is the big success.</p>
-                <p>Now select the meetEvenet to signup from the given list and attaining the event to be cirtified for your marriage courses</p>
+                <p class="small">congrate! Completion of the Courses is the big success.</p>
+                <p class="small">Now select the meetEvenet to signup from the given list and attaining the event to be cirtified for your marriage courses</p>
             </div>
         </div>
     </div>
@@ -46,7 +46,7 @@
         </div>
         {% endif %}
         
-        <h1 class="mb-4 fs-3">{{ meet_event.meet_type }} Details</h1>
+        <h1 class="mb-2 fs-3">{{ meet_event.meet_type }} Details</h1>
         <hr>
         <div class="card border-primary shadow">
             <div class="card-body mx-2">
