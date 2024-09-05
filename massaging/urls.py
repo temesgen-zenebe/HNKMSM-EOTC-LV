@@ -1,9 +1,9 @@
 from django.urls import path
-from .views import *
+from .views import MassageListView,MassageDetailView
 
 app_name = 'massaging' 
 
 urlpatterns = [
-    # path('members', MemberListView.as_view(), name='member_list'),
-   
+    path('massageList/', MassageListView.as_view(), name='massage_list'),
+    path('massageDetail/<slug:slug>/', MassageDetailView.as_view(), name='massage_detail'),  
 ]

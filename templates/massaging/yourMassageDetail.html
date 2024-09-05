@@ -1,0 +1,69 @@
+{% extends "_base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}your massages Details{% endblock %}
+{% block main %}
+<div class="container mt-2">
+     <!-- breadcrumb -->
+     <div class="event pb-2">
+        <div class="mx-auto wow bounceInUp rounded" 
+            style="background-image: url('{% static "img/heroAccount-13.png" %}');background-size: cover; background-position: center center; background-repeat: no-repeat; " alt="Church-at" data-wow-delay="0.1s">
+            <div class="container py-2 mt-0 small">
+                <div class="animated bounceInDown ">
+                    <ol class="breadcrumb justify-content-start mb-0 animated bounceInDown">
+                        <li class="small"><a href="{% url 'pages:homepage' %}">Home <span class="px-1">\</span></a></li>
+                        <li class="small"><a href="{% url 'pages:user-dashboard' %}">userDashboard<span class="px-1">\</span></a></li>
+                        <li class="small"><a href="{% url 'massaging:massage_list' %}">yourMassageList<span class="px-1">\</span></a></li>
+                        <li class="small" aria-current="page">massageDetail</li>
+                    </ol>
+                </div>
+            </div>
+            <h2 class="text-primary mx-2 fs-4 text-center pb-2">massages and attachments</h2>
+            
+        </div>
+    </div>
+    <!-- Page Header -->
+    <div class="row mt-3 g-2">
+        <div class="col-md-8">
+             <!-- Massage Details Card -->
+            <div class="card white">
+                <div class="card-header bg-white"> <h5 class="">Subject: {{ massage.subject }}</h5></div>
+                <div class="card-body small">
+                    <h6 class="card-title small ">From: {{ massage.sender.get_full_name }} ({{ massage.sender.email }})</h6>
+                    <h6 class="card-subtitle mb-2 text-muted small">To: {{ massage.recipient.get_full_name }} ({{ massage.recipient.email }})</h6>
+                    <span class="card-text small"><strong>Sent on:</strong> {{ massage.created|date:"F j, Y, g:i a" }}</span>
+                    <span class="card-text small"><strong>Last updated:</strong> {{ massage.updated|date:"F j, Y, g:i a" }}</span>
+                    <hr>
+                    <p class="card-text">{{ massage.description }}</p>
+
+                </div>
+                <div class="card-footer bg-white"> 
+                    <!-- Back Button -->
+                    <div class="text-center">
+                        <a href="{% url 'massaging:massage_list' %}" class="btn btn-sm btn-outline-primary px-2 py-2 rounded-pill">Back</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow">
+                {% if massage.attachment %}
+                <div class="card-header bg-white"><h5 class="">Attachment:</h5></div>
+                <div class="card-body small">
+                    <!-- Attachment (if any) -->
+                    <div class="">
+                        
+                        {% if is_pdf %}
+                            <a href="{{ massage.attachment.url }}" target="_blank" class="btn btn-sm btn-primary">View PDF</a>
+                        {% else %}
+                            <img src="{{ massage.attachment.url }}" alt="Attachment" class="img-fluid mt-2">
+                        {% endif %}
+                    </div>
+                    
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
