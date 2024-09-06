@@ -99,6 +99,14 @@ class PaymentHistory(models.Model):
         return f"Payment of {self.amount} by {self.user.username}"
 
 class PaymentCaseLists(models.Model):
+    Category = (
+        ('service', 'service'),
+        ('donation', 'donation'),  
+        ('marriageSchoolRegFee' ,'marriageSchoolRegFee'), 
+        ('abentChildrenRegFee' ,'abentChildrenRegFee'), 
+        ('abentYouthRegFee' ,'abentYouthRegFee'), 
+        ('churchProjectSupportFree' ,'churchProjectSupportFree'), 
+    )
     title = models.CharField(max_length=255)
     description = models.TextField()
     stripsPayment_link = models.URLField()
@@ -106,7 +114,8 @@ class PaymentCaseLists(models.Model):
     QRCodeImage = models.ImageField(upload_to='payments/qrcodes/', blank=True, null=True)
     case_id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     status = models.CharField(max_length=50, choices=[('active', 'Active'), ('inactive', 'Inactive')])
-    category = models.CharField(max_length=100)
+    category = models.CharField(max_length=100, choices=Category, default='service')
+    Instraction = models.TextField(default="If you need guidance on how to make a payment, please contact the office for assistance.") 
     type = models.CharField(max_length=50, choices=[('onetime', 'One-Time'), ('recurring', 'Recurring')])
     image = models.ImageField(upload_to='payments/case_images/', blank=True, null=True)
     amount = models.DecimalField(max_digits=10, decimal_places=2)

@@ -7,7 +7,7 @@
 {% block main %}
 <div class="container my-2">
 <!-- Sermon  Start -->
-<div class="event pb-5">
+<div class="event pb-4">
     <div class="mx-auto wow bounceInUp rounded" 
         style="background-image: url('{% static "img/heroAccount-13.png" %}');background-size: cover; background-position: center center; background-repeat: no-repeat; " alt="Church-at" data-wow-delay="0.1s">
         <div class="container py-1 mt-0">
@@ -25,73 +25,77 @@
         </div>
     </div>
 </div>
-
-<div class="row row-cols-1 row-cols-md-3 g-4">
-  {% for case in payment_service_cases %}
-  <div class="col">
-    <div class="card shadow border border-primary">
-        {% if case.image %}
-        <img src="{{ case.image.url }}"  class="img-fluid rounded-top img-fixed-size p-1" alt="{{ case.title }}">
-        {% endif %}
-      <div class="card-body small">
-        <h3 class="card-title fs-5">{{ case.title }}</h3>
-        <hr />
-        <p class="card-text small">Description : {{ case.description|truncatewords:15 }}</p>
-        <hr />
-        <p class="card-text text-success"><strong>Amount: ${{ case.amount }}</strong></p>
-        <hr />
-        <div class="btn-group gap-3">
-          <a href="{% url 'payments:payment_case_detail' case.slug %}" class="btn btn-sm px-4 py-2 rounded-pill btn-primary">Details</a>
-         </div>
-        <a href="{{case.stripsPayment_link}}" class="btn btn-sm btn-primary px-3 py-2 rounded-pill" target="_blank">Go pay</a> 
+{% if payment_cases %}
+  {% if payment_service_cases %}
+  <div class="p-2 my-4 border-primary border-bottom ">
+    <h3 class="text-primary fs-4">Church services related Fees</h3>
+    <small class="text-primary small">ከቤተክርስቲያን አገልግሎቶች ጋር የተያያዙ ክፍያዎች</small>
+  </div>
+  <div class="row row-cols-1 row-cols-md-3 mb-5 g-4">
+        {% for case in payment_service_cases %}
+          <div class="col">
+            <div class="card shadow border border-primary">
+                {% if case.image %}
+                <img src="{{ case.image.url }}"  class="img-fluid rounded-top img-fixed-size" alt="{{ case.title }}">
+                {% endif %}
+              <div class="card-body small">
+                <h3 class="card-title fs-5">{{ case.title }}</h3>
+                <hr />
+                <p class="card-text small">Description : {{ case.description|truncatewords:15 }}</p>
+                <hr />
+                <p class="card-text text-success"><strong>Amount: ${{ case.amount }}</strong></p>
+                <hr />
+                <div class="btn-group gap-3">
+                  <a href="{% url 'payments:payment_case_detail' case.slug %}" class="btn btn-sm px-4 py-2 rounded-pill btn-primary">Details</a>
+                </div>
+                <a href="{{case.stripsPayment_link}}" class="btn btn-sm btn-primary px-3 py-2 rounded-pill" target="_blank">Go pay</a> 
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+  </div>  
+  {% endif %}
+  
+  {% if payment_Other_cases %} 
+    <div class="px-3 mt-4 border-primary  border-bottom text-primary">
+      <h3 class="text-primary fs-5">payment Other Cases related Fees </h3>
+        <span class="small px-6">ከሌሎች ጉዳዮች ጋር የተያያዙ ክፍያዎች</span>
+    </div>
+  
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+          {% for case in payment_Other_cases %}
+            {% if not case.category == 'donation' %}
+            <div class="col">
+              <div class="card shadow border border-primary">
+                  {% if case.image %}
+                  <img src="{{ case.image.url }}"  class="img-fluid rounded-top img-fixed-size p-1" alt="{{ case.title }}">
+                  {% endif %}
+                <div class="card-body small">
+                  <h3 class="card-title fs-5">{{ case.title }}</h3>
+                  <hr />
+                  <p class="card-text small">Description : {{ case.description|truncatewords:15 }}</p>
+                  <hr />
+                  <p class="card-text text-success"><strong>Amount: ${{ case.amount }}</strong></p>
+                  <hr />
+                  <div class="btn-group gap-3">
+                    <a href="{% url 'payments:payment_case_detail' case.slug %}" class="btn btn-sm px-4 py-2 rounded-pill btn-primary">Details</a>
+                  </div>
+                  <a href="{{case.stripsPayment_link}}" class="btn btn-sm btn-primary px-3 py-2 rounded-pill" target="_blank">Go pay</a> 
+                </div>
+              </div>
+            </div>
+            {% endif %}
+          {% endfor %}
+    </div>
+    {% endif %}
+  {% else %}
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="col">
+      <div class="card shadow border border-primary p-3">
+          <h4>Sorry! No payment cases list found</h6>
       </div>
     </div>
   </div>
-  {% empty %}
-  <div class="col">
-    <div class="card shadow border border-primary p-3">
-        <h4>Sorry! No payment cases list found</h6>
-    </div>
-  </div>
-  {% endfor %}
-</div>
-
-<!-- Pagination Controls -->
-{% if is_paginated %}
-<nav aria-label="Page navigation">
-  <ul class="pagination justify-content-center">
-    {% if page_obj.has_previous %}
-    <li class="page-item">
-      <a class="page-link" href="?page=1">First</a>
-    </li>
-    <li class="page-item">
-      <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>
-    </li>
-    {% endif %}
-
-    {% for num in page_obj.paginator.page_range %}
-    {% if page_obj.number == num %}
-    <li class="page-item active">
-      <a class="page-link">{{ num }}</a>
-    </li>
-    {% elif num > page_obj.number|add:-3 and num < page_obj.number|add:3 %}
-    <li class="page-item">
-      <a class="page-link" href="?page={{ num }}">{{ num }}</a>
-    </li>
-    {% endif %}
-    {% endfor %}
-
-    {% if page_obj.has_next %}
-    <li class="page-item">
-      <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
-    </li>
-    <li class="page-item">
-      <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
-    </li>
-    {% endif %}
-  </ul>
-</nav>
-{% endif %}
-
+  {% endif %}
 </div>
 {% endblock %}
