@@ -112,4 +112,57 @@ class BaptizedCertification(models.Model):
     def __str__(self):
         return self.given_full_name
 
+class FatherOfRepentanceLists(models.Model):
+    COMMUNICATION_PREFERENCE_CHOICES = [
+        ('email', 'Email'),
+        ('phone', 'Phone'),
+        ('other', 'Other'),
+    ]
+    AVAILABILITY_STATUS = (
+        ('active', 'active'),
+        ('deactivated', 'deactivated'),  
+    )
+    full_name = models.CharField(max_length=255)
+    image = models.ImageField(upload_to='fathers_of_repentance/', help_text="Recommended size: 800px (width) by 450px (height).")
+    location = models.CharField(max_length=255)
+    availability_days = models.CharField(max_length=255, help_text="e.g. Monday to Friday")
+    availability_hours = models.CharField(max_length=255, help_text="e.g. 9:00 AM to 5:00 PM")
+    church_serving = models.CharField(max_length=255, help_text="Full-time serving church")
+    title_serving = models.CharField(max_length=255, help_text="title position of serving in church", null=True, blank=True)
+    experience_summary = models.TextField()
+    communication_preference = models.CharField(max_length=10, choices=COMMUNICATION_PREFERENCE_CHOICES, default='phone')
+    communication_information = models.CharField(max_length=255, help_text="Might be active phone, email, whatsappNumber, telegramNumber")
+    availability_states = models.CharField(max_length=20, choices=AVAILABILITY_STATUS, default='active')
+    slug = models.SlugField(max_length=200, unique=True ,null=True, blank=True)  
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    
+    
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            value = str(self.full_name)
+            self.slug = unique_slug(value, type(self))
+        super().save(*args, **kwargs)
+        
+    def __str__(self):
+        return self.full_name
 
+class GroupMassageToSonOfRepentance(models.Model):
+    father_of_repentance = models.ForeignKey(FatherOfRepentanceLists, on_delete=models.CASCADE)
+    message = models.TextField(help_text="Message to Sons of Repentance")
+    sent_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    slug = models.SlugField(max_length=200, unique=True ,null=True, blank=True) 
+    
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            value = str(self.father_of_repentance.full_name)
+            self.slug = unique_slug(value, type(self))
+        super().save(*args, **kwargs)
+        
+    def __str__(self):
+        return f"Message from {self.father_of_repentance.full_name} at {self.sent_at}"
+
+
+#Memorial Service

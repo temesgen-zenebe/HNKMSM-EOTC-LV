@@ -1,14 +1,15 @@
 from django.urls import path
 from .views import (
     BaptizedApplicationUpdatingView, 
-    ServicesView,HolyCommunionServicesView,
-    FatherOfRepentanceServicesView, 
+    ServicesView,HolyCommunionServicesView, 
     SermonServicesView,
     SermonMediaListView, 
     SermonMediaDetailView,
     BaptismServiceView,
     FuneralServicesView,
-    WeddingServicesView
+    WeddingServicesView,
+    FatherOfRepentanceListView, 
+    FatherOfRepentanceDetailView
     )
 
 app_name = 'services' 
@@ -16,7 +17,8 @@ app_name = 'services'
 urlpatterns = [
     path('service/', ServicesView.as_view(), name='service'), 
     path('holyCommunion/', HolyCommunionServicesView.as_view(), name='holyCommunion'),
-    path('fatherOfRepentance/', FatherOfRepentanceServicesView.as_view(), name='fatherOfRepentance'),
+    path('fatherOfRepentance/', FatherOfRepentanceListView.as_view(), name='fatherOfRepentance'),
+    path('fathers/<slug:slug>/', FatherOfRepentanceDetailView.as_view(), name='father_of_repentance_detail'),
     path('funeralServices/', FuneralServicesView.as_view(), name='funeralServices'),
     path('weddingServices/', WeddingServicesView.as_view(), name='weddingServices'),
     path('sermon/', SermonServicesView.as_view(), name='sermon'),

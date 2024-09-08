@@ -7,7 +7,9 @@ from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import TemplateView
 from django.views.generic import ListView, DetailView,UpdateView
-from .models import BaptizedCertification, Sermon, SermonCategory, SermonMedia
+from .models import (
+    BaptizedCertification, Sermon, SermonCategory, SermonMedia,
+    FatherOfRepentanceLists, GroupMassageToSonOfRepentance,)
 from members.models import MembersUpdateInformation
 from django.contrib.auth.models import User
 from .forms import BaptizedApplicationForm, BaptizedApplicationUpdatingForm
@@ -103,9 +105,6 @@ class BaptizedApplicationUpdatingView(LoginRequiredMixin, UpdateView):
 class HolyCommunionServicesView(TemplateView):
     template_name = 'services/holyCommunion.html'
     
-#Father of Repentance
-class FatherOfRepentanceServicesView(TemplateView):
-    template_name = 'services/fatherOfRepentance.html'
 
 #Funeral Services 
 class FuneralServicesView(TemplateView):
@@ -113,3 +112,22 @@ class FuneralServicesView(TemplateView):
 #WeddingServicesView
 class WeddingServicesView(TemplateView):
     template_name ='services/weddingServices.html'
+ 
+ 
+# ListView for displaying all Fathers of Repentance
+class FatherOfRepentanceListView(ListView):
+    model = FatherOfRepentanceLists
+    template_name = 'services/fatherOfRepentance.html'
+    context_object_name = 'fathers'
+    paginate_by = 9  # Paginate after every 9 item
+    
+class FatherOfRepentanceDetailView(DetailView):
+    model = FatherOfRepentanceLists
+    template_name = 'services/fatherOfRepentanceDetail.html'
+    context_object_name = 'father'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Fetch related messages for the specific Father of Repentance
+        context['messages'] = GroupMassageToSonOfRepentance.objects.filter(father_of_repentance=self.object)
+        return context

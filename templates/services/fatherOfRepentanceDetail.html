@@ -1,0 +1,71 @@
+{% extends "_base.html" %}
+{% load static %}
+{% block javascript %}
+   {% comment %} <script type="text/javascript" src="{% static '' %}" defer ></script> {% endcomment %}
+{% endblock %}
+{% block title %}Father Of Repentance Details{% endblock %}
+{% block main %}
+<div class="container mt-2">
+    <!-- breadcrumb -->
+    <div class="event pb-3">
+        <div class="mx-auto wow bounceInUp rounded-1" 
+            style="background-image: url('{% static "img/heroAccount-13.png" %}');background-size: cover; background-position: center center; background-repeat: no-repeat; " alt="Church-at" data-wow-delay="0.1s">
+            <div class="container py-3 mt-0 ">
+                <div class="animated bounceInDown ">
+                    <ol class="breadcrumb justify-content-start mb-0 animated bounceInDown small">
+                        <li class=""><a href="{% url 'pages:homepage' %}">Home <span class="px-1">\</span></a></li>
+                        <li class=""><a href="{% url 'services:service' %}">Services <span class="px-1">\</span></a></li>
+                        <li class=""><a href="{% url 'services:fatherOfRepentance' %}">FatherOfRepentance<span class="px-1">\</span></a></li>
+                        <li class="" aria-current="page">FatherOfRepentanceDetail</li>
+                    </ol>
+                </div>
+            </div>
+            <!-- breadcrumb Start -->
+            <div class="text-center py-2 px-3 ">
+                <h3 class="mb-1 text-light fs-5 small">{{father.full_name}}</h3> 
+                <small  class="mb-2 bolder text-primary small">1ኛ ዮሐንስ 1፡9 “በኃጢአታችን ብንናዘዝ ኃጢአታችንን ይቅር ሊለን ከዓመፃም ሁሉ ሊያነጻን የታመነና ጻድቅ ነው”::</small>
+            </div>
+        </div>
+    </div>
+
+    <div class="container py-5">
+    <div class="row g-3">
+        <div class="col-md-6">
+            <img src="{{ father.image.url }}" class="img-fluid rounded-3" alt="{{ father.full_name }}">
+        </div>
+        <div class="col-md-6 small px-2">
+            {% comment %} <h2>{{ father.full_name }}</h2> {% endcomment %}
+            <p><strong>Location:</strong> {{ father.location }}</p>
+            <p><strong>Church Serving:</strong> {{ father.church_serving }}</p>
+            <p><strong>Availability:</strong> {{ father.availability_days }} from {{ father.availability_hours }}</p>
+            <p><strong>Communication Preference:</strong> {{ father.communication_preference }}</p>
+            <p><strong>Contact Information:</strong> {{ father.communication_information }}</p>
+            <p class="lh-lg"><strong>Experience Summary:</strong> {{ father.experience_summary }}</p>
+        </div>
+    </div>
+    <hr>
+    <!-- Section for Messages to Sons of Repentance -->
+    <div class="row my-3">
+        
+            {% if messages %}
+            <div class="col-12">
+                <h3 class="m-2 p-2 fs-4 text-primary">Messages to Sons of Repentance</h3>
+               
+                <ul class="list-group">
+                    {% for message in messages %}
+                        <li class="list-group-item">
+                            <small>Sent on: {{ message.sent_at|date:"F j, Y, g:i a" }}</small>
+                            <p class="py-4 px-3 text-break lh-lg small">{{ message.message }}</p>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% else %}
+            <div class="col-12">  <p>No messages have been sent yet.</p></div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+</div>
+{% endblock %}

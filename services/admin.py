@@ -1,5 +1,10 @@
 from django.contrib import admin
-from .models import SermonCategory, SermonSeries, Sermon, SermonMedia, Comment, BaptizedCertification
+from .models import (SermonCategory, SermonSeries, 
+Sermon, SermonMedia, 
+Comment, BaptizedCertification,
+FatherOfRepentanceLists,
+GroupMassageToSonOfRepentance
+)
 
 @admin.register(SermonSeries)
 class SermonSeriesAdmin(admin.ModelAdmin):
@@ -42,5 +47,22 @@ class BaptizedCertificationAdmin(admin.ModelAdmin):
 admin.site.register(BaptizedCertification, BaptizedCertificationAdmin)
 
 
+@admin.register(FatherOfRepentanceLists)
+class FatherOfRepentanceListsAdmin(admin.ModelAdmin):
+    list_display = (
+    'full_name',
+    'image',
+    'location',
+    'availability_days',
+    'availability_hours',
+    'church_serving',
+    'title_serving',
+    'experience_summary',
+    'communication_preference',
+    'communication_information', 
+    'availability_states' , )
 
-
+@admin.register(GroupMassageToSonOfRepentance)
+class GroupMassageToSonOfRepentanceAdmin(admin.ModelAdmin):
+    list_display = ('father_of_repentance', 'message', 'sent_at')
+  

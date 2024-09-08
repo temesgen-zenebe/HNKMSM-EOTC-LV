@@ -7,60 +7,49 @@
 {% block main %}
 <div class="container mt-2">
     <!-- breadcrumb -->
-    <div class="event pb-5">
+    <div class="event pb-3">
         <div class="mx-auto wow bounceInUp rounded-1" 
             style="background-image: url('{% static "img/heroAccount-13.png" %}');background-size: cover; background-position: center center; background-repeat: no-repeat; " alt="Church-at" data-wow-delay="0.1s">
             <div class="container py-3 mt-0 ">
                 <div class="animated bounceInDown ">
                     <ol class="breadcrumb justify-content-start mb-0 animated bounceInDown small">
-                        <li class=""><a href="{% url 'pages:homepage' %}">Home <span class="px-1">\</span></a></li>
-                        <li class=""><a href="{% url 'services:service' %}">Services <span class="px-1">\</span></a></li>
-                        <li class="" aria-current="page">FatherOfRepentance</li>
+                        <li class="small"><a href="{% url 'pages:homepage' %}">Home <span class="px-1">\</span></a></li>
+                        <li class="small"><a href="{% url 'services:service' %}">Services <span class="px-1">\</span></a></li>
+                        <li class="small" aria-current="page"><a href="{% url 'services:fatherOfRepentance' %}">FatherOfRepentance<span class="px-1">\</span></a></li>
+
                     </ol>
                 </div>
             </div>
             <!-- breadcrumb Start -->
-            <div class="text-center py-2 px-3 ">
-                <h1 class="mb-2 text-light fs-4 small">Father of repentance | የንስሐ አባት</1>
-                <h6  class="mb-2 bolder text-light small">
-                        የእግዚአብሔር ምሕረት ከማንኛውም ኃጢአት እንደሚበልጥ እመኑ። </h6>
-                <h6  class="mb-2 bolder text-light small">1ኛ ዮሐንስ 1፡9 “በኃጢአታችን ብንናዘዝ ኃጢአታችንን ይቅር ሊለን ከዓመፃም ሁሉ ሊያነጻን የታመነና ጻድቅ ነው”::</h6>
+           
+            <div class="text-center py-2 px-3 small">
+              <h3 class="mb-2 bolder text-primary text-italic small fs-5">የንስሐ አባት</h3>
+              <small  class="h3 bolder text-primary small fs-5">In Our Church</small>
             </div>
         </div>
     </div>
 
     <main>
-
-        <section class="py-2 text-center container">
+        <section class="text-center container">
           <div class="row py-lg-3">
             <div class="col-lg-10 col-md-10 mx-auto text-center">
-              <h1 class="fw-light fs-4">Father of Repentance</h1>
-              <h3 class="fw-light fs-4 ">In the Ethiopian Orthodox Tewahedo Church</h3>
-              <p class=" text-primary small">
-                The "Father of Repentance" plays a crucial role in the Ethiopian Orthodox Tewahedo Church, 
-                guiding the faithful through repentance and helping them to grow spiritually. 
-                By understanding and embracing this role, we can better appreciate the depth of God's love and 
-                the path to true reconciliation and peace.***
-
-                በኢትዮጵያ ኦርቶዶክስ ተዋሕዶ ቤተ ክርስቲያን ምእመናንን በንስሐ በመምራት በመንፈሳዊ እንዲያድጉ በመርዳት 
-                "የንስሐ አባት" ወሳኝ ሚና ይጫወታል። ይህንን ሚና በመረዳት እና በመቀበል፣ የእግዚአብሔርን ፍቅር ጥልቀት 
-                እና ወደ እውነተኛ እርቅ እና ሰላም የሚወስደውን መንገድ በተሻለ ሁኔታ እናደንቃለን።</p>
-                <p class="">
+              
+                  <p class="">
                     <ul class="nav justify-content-center gap-2" id="pills-tab-church" role="tablist">
                       <li class="nav-item" role="presentation">
-                        <a class="btn btn-sm btn-outline-primary my-2  active" id="pills-church-tab" data-bs-toggle="pill" data-bs-target="#pills-church" type="button" role="tab" aria-controls="pills-church" aria-selected="true">
-                            <p class="m-0 small"> Meaning of Father of Repentance ?</p>
+                        <a class="btn btn-sm btn-outline-primary rounded-pill active" id="pills-church-tab" data-bs-toggle="pill" data-bs-target="#pills-church" type="button" role="tab" aria-controls="pills-church" aria-selected="true">
+                            <p class="m-0 small px-4"> Meaning of Father of Repentance ?</p>
                             <p class="m-0 small"> የንስሐ አባት ማለት ?</p>
                         </a>
                       </li>
                       <li class="nav-item" role="presentation">
-                        <a class="btn btn-sm btn-outline-primary my-2" id="pills-Father-tab" data-bs-toggle="pill" data-bs-target="#pills-Father" type="button" role="tab" aria-controls="pills-Father" aria-selected="false">
-                            <p class="m-0 small">List of Our Church's Fathers of Repentance</p>
-                            <p class="m-0 small">የቤተክርስቲያናችን የንስሐ አባቶች ስም ዝርዝር</p>
+                        <a class="btn btn-sm btn-outline-primary rounded-pill " id="pills-Father-tab" data-bs-toggle="pill" data-bs-target="#pills-Father" type="button" role="tab" aria-controls="pills-Father" aria-selected="false">
+                            <p class="m-0 small px-4">List of Our Church's Fathers of Repentance</p>
+                            <p class="m-0 small">የቤተክርስቲያናችን የንስሐ አባቶች ዝርዝር</p>
                         </a>
                       </li>
                      </ul>
-                </p>
+                  </p>
               
             </div>
           </div>
@@ -68,6 +57,21 @@
         <div class="tab-content" id="pills-tabContent-church">
             <div class="tab-pane fade show active" id="pills-church" role="tabpanel" aria-labelledby="pills-church-tab" tabindex="0">
                 <!--why Father of Repentance ?-->
+              <div class="card shadow-sm border-primary border-0 album py-3 px-4 bg-light ">
+              <h1 class="fw-light text-center fs-4">Father of Repentance</h1>
+              <h3 class="mb-1 fw-light text-center fs-6">In the Ethiopian Orthodox Tewahedo Church</h3>
+              <hr>
+              <p class="px-3 mx-auto text-start small">
+                The "Father of Repentance" plays a crucial role in the Ethiopian Orthodox Tewahedo Church, 
+                guiding the faithful through repentance and helping them to grow spiritually. 
+                By understanding and embracing this role, we can better appreciate the depth of God's love and 
+                the path to true reconciliation and peace. </p> 
+                <p class="px-3 mx-auto text-start small">
+                      በኢትዮጵያ ኦርቶዶክስ ተዋሕዶ ቤተ ክርስቲያን ምእመናንን በንስሐ በመምራት በመንፈሳዊ እንዲያድጉ በመርዳት 
+                      "የንስሐ አባት" ወሳኝ ሚና ይጫወታል። ይህንን ሚና በመረዳት እና በመቀበል፣ የእግዚአብሔርን ፍቅር ጥልቀት 
+                      እና ወደ እውነተኛ እርቅ እና ሰላም የሚወስደውን መንገድ በተሻለ ሁኔታ እናደንቃለን።
+                </p> 
+                </div>
                 <div class="album py-3 bg-light">
                     <div class="container">
                 
@@ -260,75 +264,73 @@
             </div>
             <div class="tab-pane fade" id="pills-Father" role="tabpanel" aria-labelledby="pills-Father-tab" tabindex="0">
                 <!--Listed Fatheres our church?-->
-                <div class="album py-5 bg-light">
-                    <div class="container">
-                
-                      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                        <div class="col">
-                            <div class="card shadow-sm">
-                              <img class="bd-placeholder-img card-img-top" 
-                              width="100%" height="225" 
-                              src="{% static "img/aboutUs/leaders-12.png" %}" 
-                              role="img" aria-label="Placeholder: Thumbnail" 
-                              preserveAspectRatio="xMidYMid slice" 
-                              focusable="false">
-                              <div class="card-body">
-                                <p class="card-text">This content is a little bit longer.</p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                  <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                                  </div>
-                                  <small class="text-muted">9 mins</small>
-                                </div>
-                              </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                          <div class="card shadow-sm">
-                            <img class="bd-placeholder-img card-img-top" 
-                            width="100%" height="225" 
-                            src="{% static "img/aboutUs/leaders-11.png" %}" 
-                            role="img" aria-label="Placeholder: Thumbnail" 
-                            preserveAspectRatio="xMidYMid slice" 
-                            focusable="false">
-                            <div class="card-body">
-                              <p class="card-text">This content is a little bit longer.</p>
-                              <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                                </div>
-                                <small class="text-muted">9 mins</small>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col">
-                            <div class="card shadow-sm">
-                              <img class="bd-placeholder-img card-img-top" 
-                              width="100%" height="225" 
-                              src="{% static "img/aboutUs/leaders-13.png" %}" 
-                              role="img" aria-label="Placeholder: Thumbnail" 
-                              preserveAspectRatio="xMidYMid slice" 
-                              focusable="false">
-                              <div class="card-body">
-                                <p class="card-text">This content is a little bit longer.</p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                  <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                                  </div>
-                                  <small class="text-muted">9 mins</small>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                      </div>
+                <div class="album py-4 bg-light">
+                  <div class="container">
+                    {% if fathers %}
+                    <div class="pb-1 mb-2 text-dark text-start card-body border-0">
+                      <h3 class="text-primary fs-6 text-center">የቤተ ክርስቲያናችን የንስሐ አባቶች ከዚህ በታች ተዘርዝረዋል። Our Church Fathers of Repentance are listed below.</h6> 
+                       <hr class="text-primary mb-1">
+                      <p class="m-0 text-break lh-base small "><strong class="text-primary">Note</strong> : Contact any with 'active' status using the provided communication 
+                      methods to begin or continue your journey in God's love and the path to true. </p>
+                      <p class="m-0 text-break lh-base small pb-1">የቀረበውን ግንኙነት በመጠቀም 'ገባሪ' ሁኔታ ያለውን ማንኛውንም ያነጋግሩ በእግዚአብሔር ፍቅር እና ወደ 
+                        እውነተኛው መንገድ ጉዞህን ለመጀመር ወይም ለመቀጠል ያስችሎታል ።
+                    </p>
+                    
                     </div>
+                    <hr>
+                      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mt-2 g-3">
+                          {% for father in fathers %}
+                          <div class="col">
+                              <div class="card shadow">
+                                <img class="bd-placeholder-img p-1"
+                                      src="{{ father.image.url }}" alt="{{ father.full_name }}"
+                                      width="100%" height="200">
+
+                                  <div class="card-body small">
+                                      <h6 class="card-title">{{ father.full_name }}</h6>
+                                      <hr>
+                                      <p class="card-text small">{{ father.experience_summary|truncatewords:20 }}</p>
+                                      <hr>
+                                      <div class="d-flex justify-content-between align-items-center">
+                                          <div class="btn-group">
+                                              <a href="{% url 'services:father_of_repentance_detail' father.slug %}" 
+                                                 class="btn btn-sm btn-outline-primary rounded-pill">View</a>
+                                          </div>
+                                          <small class="text-secondery small">
+                                            status: <span class="rounded-pill bg-success px-3 text-light small">{{ father.availability_states }}</span>
+                                          </small>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                          {% endfor %}
+                      </div>
+                      <div class="d-flex justify-content-center">
+                          {% if is_paginated %}
+                              <ul class="pagination">
+                                  {% if page_obj.has_previous %}
+                                      <li class="page-item"><a class="page-link" href="?page=1">&laquo;</a></li>
+                                      <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
+                                  {% endif %}
+                                  
+                                  <li class="page-item active">
+                                      <a class="page-link">{{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</a>
+                                  </li>
+                                  
+                                  {% if page_obj.has_next %}
+                                      <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a></li>
+                                      <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">&raquo;</a></li>
+                                  {% endif %}
+                              </ul>
+                          {% endif %}
+                      </div>
+                    {% endif %}
                   </div>
+              </div>
+              
             </div>
         </div>
     </main>
 </div>
+
 {% endblock %}
