@@ -31,7 +31,7 @@
     <div class="container py-5">
     <div class="row g-3">
         <div class="col-md-6">
-            <img src="{{ father.image.url }}" class="img-fluid rounded-3" alt="{{ father.full_name }}">
+            <img src="{{ father.image.url }}" class="img-fluid rounded-3 shadow mb-5 bg-body rounded" alt="{{ father.full_name }}">
         </div>
         <div class="col-md-6 small px-2">
             {% comment %} <h2>{{ father.full_name }}</h2> {% endcomment %}
@@ -55,7 +55,7 @@
                     {% for message in messages %}
                         <li class="list-group-item">
                             <small>Sent on: {{ message.sent_at|date:"F j, Y, g:i a" }}</small>
-                            <p class="py-4 px-3 text-break lh-lg small">{{ message.message }}</p>
+                            <p class="text-mute py-4 px-3 text-break lh-lg small">{{ message.message }}</p>
                         </li>
                     {% endfor %}
                 </ul>
