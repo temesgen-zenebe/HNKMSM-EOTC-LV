@@ -1,82 +1,102 @@
 {% extends "_base.html" %}
-
-{% block title %}ProposalDetail{% endblock %}
+{% load static %}
+{% block javascript %}
+   {% comment %} <script type="text/javascript" src="{% static '' %}" defer ></script> {% endcomment %}
+{% endblock %}
+{% block title %}Project Proposal Detail {% endblock %}
 {% block main %}
-<div class="mx-1 my-5">
-    <div class="text-start py-3">
-        <div class="row">
-          <div class="col-sm-8">
-            <div class="card">
-                <h5 class="card-header cardHeder">{{ object.title|title }}</h5>
-                <div class="card-body">
-                  <p class="card-text">{{ object.description }}</p>   
-            </div>
-            <div class="card-footer text-muted text-center">
-                <div class="btn-group gap-1 " role="group" aria-label="Basic mixed styles example">
-                    <form action="{% url 'projectVote:proposal_vote' object.id %}" method="post">
-                        {% csrf_token %}
-                        {% if user.is_authenticated %}
-                            <button type="submit" class="btn btn-sm {% if vote and vote.vote == 'LIKE' %}btn-success{% else %}btn-outline-success{% endif %}" name="vote" value="LIKE">Like</button>
-                            <button type="submit" class="btn btn-sm {% if vote and vote.vote == 'SUPPORT' %}btn-warning{% else %}btn-outline-warning{% endif %}" name="vote" value="SUPPORT">I support</button>
-                            <button type="submit" class="btn btn-sm {% if vote and vote.vote == 'UNLIKE' %}btn-danger{% else %}btn-outline-danger{% endif %}" name="vote" value="UNLIKE">Unlike</button>
-                            <button type="submit" class="btn btn-sm {% if vote and vote.vote == 'UNSURE' %}btn-secondary{% else %}btn-outline-secondary{% endif %}" name="vote" value="UNSURE">Unsure</button>
-                            <a type="button" href="{% url 'projectVote:proposal_list' %}" class="btn btn-sm btn-outline-secondary">Back</a>
-                        {% endif %}
-                    </form>
-                </div>
-              </div>
-          </div>
-          </div>
-          <div class="col-sm-4">
-            <div class="card">
-                <h6 class="card-header cardHeder" >Vote Result chart </h6>
-                <div class="card-body">
-                    <div calss="mx-auto" style="width: 80%;">
-                        <canvas id="vote-chart"></canvas>
-                    </div>
-                    <small class="text-muted text-center">{{object.updated}}</small>
-                </div>
-              </div>
-          </div>
+<div class="container mt-2">
+  <div class="container mx-auto wow bounceInUp rounded " style="background-image: url('{% static "img/heroAccount-13.png" %}');background-size: cover; background-position: center center; background-repeat: no-repeat; " alt="Church-at" data-wow-delay="0.1s">
+    <div class="container py-1 mt-0">
+        <div class="animated bounceInDown ">
+            <ol class="breadcrumb justify-content-start mb-0 animated bounceInDown">
+                <li class="small"><a href="{% url 'pages:homepage' %}">Home <span class="px-1">\</span></a></li>
+                <li class="small" aria-current="page"> <a href="{% url 'projectVote:proposal_list' %}">projectProposalLists<span class="px-1">\</span></a></li>
+            </ol>
         </div>
     </div>
-<!-- Load Chart.js library -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js@3.3.2"></script>
-<!-- Initialize the pie chart with the votes data -->
-<script>
-    var votes_data = {{ votes_data|safe }};
-    var vote_labels = votes_data.map(function(vote) {
-      return vote.vote;
-    });
-    var vote_counts = votes_data.map(function(vote) {
-      return vote.count;
-    });
+    <div class="text-center py-2">
+        <h3 class="mb-2 text-primary fs-4 ">Project Proposal Detail </h3>
+    </div>
+  </div>
 
-    var vote_chart = new Chart('vote-chart', {
-      type: 'doughnut',
-      data: {
-        labels: vote_labels,
-        datasets: [{
-          data: vote_counts,
-          backgroundColor: [
-            '#28a745',
-            '#ffc107',
-            '#dc3545',
-            '#6c757d',
-            '#28a745'
-          ]
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            position: 'bottom'
+  <div class="container mx-1 my-3">
+      <div class="text-start py-3">
+          <div class="row g-2">
+            <div class="col-sm-8">
+              <div class="card border-primary shadow">
+                  <h6 class="card-header bg-primary">{{ object.title|title }}</h6>
+                  <div class="card-body">
+                    <p class="card-text lh-lg small p-3">{{ object.description }}</p>   
+              </div>
+              <hr class="my-1">
+              <div class="text-muted text-center bg-white my-2">
+                  <div class="btn-group gap-1 " role="group" aria-label="Basic mixed styles example">
+                      <form action="{% url 'projectVote:proposal_vote' object.id %}" method="post">
+                          {% csrf_token %}
+                          {% if user.is_authenticated %}
+                              <button type="submit" class="btn btn-sm {% if vote and vote.vote == 'LIKE' %}btn-success{% else %}btn-outline-success{% endif %}" name="vote" value="LIKE">Like</button>
+                              <button type="submit" class="btn btn-sm {% if vote and vote.vote == 'SUPPORT' %}btn-warning{% else %}btn-outline-warning{% endif %}" name="vote" value="SUPPORT">I support</button>
+                              <button type="submit" class="btn btn-sm {% if vote and vote.vote == 'UNLIKE' %}btn-danger{% else %}btn-outline-danger{% endif %}" name="vote" value="UNLIKE">Unlike</button>
+                              <button type="submit" class="btn btn-sm {% if vote and vote.vote == 'UNSURE' %}btn-secondary{% else %}btn-outline-secondary{% endif %}" name="vote" value="UNSURE">Unsure</button>
+                              <a type="button" href="{% url 'projectVote:proposal_list' %}" class="btn btn-sm btn-outline-secondary">Back</a>
+                          {% endif %}
+                      </form>
+                  </div>
+                </div>
+            </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="card border-primary shadow">
+                  <h6 class="card-header bg-primary" >Vote Result chart </h6>
+                  <div class="card-body">
+                      <div calss="mx-auto" style="width: 80%;">
+                          <canvas id="vote-chart"></canvas>
+                      </div>
+                      <small class="text-muted text-center">{{object.updated}}</small>
+                  </div>
+                </div>
+            </div>
+          </div>
+      </div>
+    <!-- Load Chart.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.3.2"></script>
+    <!-- Initialize the pie chart with the votes data -->
+    <script>
+        var votes_data = {{ votes_data|safe }};
+        var vote_labels = votes_data.map(function(vote) {
+          return vote.vote;
+        });
+        var vote_counts = votes_data.map(function(vote) {
+          return vote.count;
+        });
+
+        var vote_chart = new Chart('vote-chart', {
+          type: 'doughnut',
+          data: {
+            labels: vote_labels,
+            datasets: [{
+              data: vote_counts,
+              backgroundColor: [
+                '#28a745',
+                '#ffc107',
+                '#dc3545',
+                '#6c757d',
+                '#28a745'
+              ]
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                position: 'bottom'
+              }
+            }
           }
-        }
-      }
-    });
-</script>
+        });
+    </script>
+  </div>
 </div>
 {% endblock %}

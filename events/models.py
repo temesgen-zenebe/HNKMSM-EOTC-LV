@@ -80,3 +80,37 @@ class PostEventImages(models.Model):
     def __str__(self):
         return f"Image for {self.event_gallery.thumbnail_title}"
     
+class NewsAndAnnouncements(models.Model):
+    ERGENCE_TYPE_CHOICES = [
+        ('urgent', 'Urgent'),
+        ('on_time', 'On-Time'),
+        ('as_quick_as', 'As Quick As'),
+    ]
+
+    CATEGORY_CHOICES = [
+        ('news', 'News'),
+        ('announcement', 'Announcement'),
+    ]
+
+    title = models.CharField(max_length=200)
+    description = models.TextField(blank=True, null=True)
+    image = models.ImageField(upload_to='newsAnnouncement_images/', blank=True, null=True)
+    link = models.URLField(max_length=200, blank=True, null=True)
+    announce_to = models.TextField(max_length=100,blank=True, null=True)
+    announcer = models.CharField(max_length=100,blank=True, null=True)
+    category = models.CharField(max_length=20, choices=CATEGORY_CHOICES, default='news')
+    emergence_type = models.CharField(max_length=20, choices=ERGENCE_TYPE_CHOICES, default='on_time')
+    reference_source = models.CharField(max_length=100,blank=True, null=True)
+    slug = models.SlugField(unique=True, blank=True, null=True)
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='news_announcements')
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            value = str(self.title[:50])
+            self.slug = unique_slug(value, type(self))
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f"{self.title} - {self.category.capitalize()} - {self.emergence_type.capitalize()}"

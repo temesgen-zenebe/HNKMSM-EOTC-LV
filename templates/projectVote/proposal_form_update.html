@@ -1,22 +1,42 @@
 {% extends "_base.html" %}
-
-{% block title %}Proposal creating form{% endblock %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block javascript %}
+   {% comment %} <script type="text/javascript" src="{% static '' %}" defer ></script> {% endcomment %}
+{% endblock %}
+{% block title %}Proposal Updating form{% endblock %}
 {% block main %}
-<div class="mx-4 my-5">
-    
-    <div class="card text-start">
-        <div class="card-header">
-            <h6>Update Proposaled Project </h6>
+
+<div class="container mt-2">
+  <div class="container mx-auto wow bounceInUp rounded " style="background-image: url('{% static "img/heroAccount-13.png" %}');background-size: cover; background-position: center center; background-repeat: no-repeat; " alt="Church-at" data-wow-delay="0.1s">
+    <div class="container py-1 mt-0">
+        <div class="animated bounceInDown ">
+            <ol class="breadcrumb justify-content-start mb-0 animated bounceInDown">
+                <li class="small"><a href="{% url 'pages:homepage' %}">Home <span class="px-1">\</span></a></li>
+                <li class="small" aria-current="page"> <a href="{% url 'projectVote:proposal_list' %}">projectProposalLists<span class="px-1">\</span></a></li>
+            </ol>
         </div>
-        <div class="card-body">
-           
-            <form method="post">
-              {% csrf_token %}
-              {{ form.as_p }}
-              <button type="submit" class="btn btn-primary">Update</button>
-              <a href="{% url 'projectVote:proposal_detail' object.pk %}" class="btn btn-secondary">Cancel</a>
-            </form>
+    </div>
+    <div class="text-center py-2">
+        <h3 class="mb-2 text-primary fs-4 ">Updating Project Proposal </h3>
+    </div>
+  </div>
+
+  <div class="container mx-2 my-4">
+        <div class="card text-start m-auto mb-3" style="max-width: 30rem">
+          <div class="card-header">
+              <h6>Update Proposaled Project </h6>
+          </div>
+          <div class="card-body">
+            
+              <form method="post">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <button type="submit" class="btn btn-sm btn-primary rounded-pill border border-primary py-2 px-2">Update</button>
+                <a href="{% url 'projectVote:proposal_detail' object.pk %}" class="btn btn-sm btn-outline-primary rounded-pill border border-primary py-2 px-2">Cancel</a>
+              </form>
+          </div>
         </div>
-      </div>
+  </div>
 </div>
 {% endblock %}

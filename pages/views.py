@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from django.views.generic import TemplateView,ListView,DetailView
 from django.contrib import messages 
 from blog.models import Blog
-from events.models import Event,EventGallery, EventsCategory, PostEventImages
+from events.models import Event,EventGallery, EventsCategory, PostEventImages,NewsAndAnnouncements
 from payments.models import PaymentCaseLists
 
 from django.utils import timezone
@@ -35,11 +35,16 @@ class HomePageView(TemplateView):
         latest_spiritualPoemSongs = SpiritualPoemSong.objects.order_by('-created_at')[:3]
         latest_testimonySalvations = TestimonyOfSalvation.objects.order_by('-created')[:3]
         latest_userManuals = UserManual.objects.order_by('-uploaded_at')[:3]
+        #payment
         payment_donation = PaymentCaseLists.objects.filter(category = 'donation')
         membership = MembersUpdateInformation.objects.get(user=request.user)
         print(membership.member_status)
+        #blog
         latest_blog = Blog.objects.order_by('-created_at')[:3]
+        #shop
         products = ShopProduct.objects.all().order_by('-created')
+        #news_list
+        news_list = NewsAndAnnouncements.objects.all().order_by('-created')
 
         context = {
              #membership
@@ -61,6 +66,8 @@ class HomePageView(TemplateView):
              #payment_donation
              'payment_donation':payment_donation,
              'products':products,
+             #news_list
+             'news_list':news_list,
           }
         return render(request, self.template_name, context)
    

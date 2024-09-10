@@ -23,7 +23,7 @@
             </div>  
         </div>
     </div>
-    <div class="row">
+    <div class="row g-3 mt-3">
         <div class="col-md-6">
             {% if product.image %}
                 <img src="{{ product.image.url }}" class="img-fluid" alt="{{ product.name }}">
@@ -48,25 +48,27 @@
             <p>Specification: {{ product.specification }}</p>
         </div>
     </div>
-    
-    <h3 class="text-primary fs-5 mt-4">Related Products</h3>
-<div class="row pt-2">
-    {% for related_product in related_products %}
-    <div class="col-md-3 mb-4">
-        <div class="card shadow-sm">
-            {% if related_product.image %}
-                <img src="{{ related_product.image.url }}" class="card-img-top" alt="{{ related_product.name }}">
-            {% else %}
-                <img src="{% static 'images/placeholder.png' %}" class="card-img-top" alt="Placeholder">
-            {% endif %}
-            <div class="card-body">
-                <h5 class="card-title">{{ related_product.name }}</h5>
-                <p class="card-text">{{ related_product.description|truncatewords:10 }}</p>
-                <a href="{% url 'shopProducts:shop_product_detail' related_product.slug %}" class="btn btn-sm btn-primary rounded-pill">View Details</a>
+    <hr>
+    <h3 class="text-primary fs-4 mt-4">Related Products</h3>
+    <hr>
+    <div class="row pt-2">
+        {% for related_product in related_products %}
+        <div class="col-md-3 mb-4">
+            <div class="card shadow border-primary">
+                {% if related_product.image %}
+                    <img src="{{ related_product.image.url }}" class="card-img-top" alt="{{ related_product.name }}">
+                {% else %}
+                    <img src="{% static 'images/placeholder.png' %}" class="card-img-top" alt="Placeholder">
+                {% endif %}
+                <div class="card-body">
+                    <h6 class="card-title">{{ related_product.name }}</h6>
+                    <hr>
+                    <p class="card-text small">{{ related_product.description|truncatewords:10 }}</p>
+                    <a href="{% url 'shopProducts:shop_product_detail' related_product.slug %}" class="btn btn-sm btn-primary rounded-pill">View Details</a>
+                </div>
             </div>
         </div>
+        {% endfor %}
     </div>
-    {% endfor %}
-</div>
 </div>
 {% endblock %}

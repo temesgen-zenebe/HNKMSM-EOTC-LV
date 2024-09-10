@@ -1,6 +1,8 @@
 # events/admin.py
 from django.contrib import admin
-from .models import Event, EventGallery, EventsCategory, PostEventImages
+from .models import Event, EventGallery, EventsCategory, PostEventImages,NewsAndAnnouncements
+
+admin.site.register(NewsAndAnnouncements)
 
 @admin.register(Event)
 class EventAdmin(admin.ModelAdmin):

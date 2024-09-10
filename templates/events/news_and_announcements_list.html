@@ -1,0 +1,77 @@
+{% extends "_base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}News & Announcements List{% endblock %}
+{% block main %}
+<div class="container mt-2">
+    <div class="mx-auto wow bounceInUp rounded my-2" 
+        style="background-image: url('{% static "img/heroAccount-13.png" %}');background-size: cover; background-position: center center; background-repeat: no-repeat; " alt="Church-at" data-wow-delay="0.1s">
+        <div class="container py-1 mt-0">
+            <div class="animated bounceInDown ">
+                <ol class="breadcrumb justify-content-start mb-0 animated bounceInDown">
+                    <li class="small"><a href="{% url 'pages:homepage' %}">Home <span class="px-1">\</span></a></li>
+                    <li class="small" aria-current="page"> <a href="{% url "events:NewsAndAnnouncements_list" %}">NewsAndAnnouncementsList<span class="px-1">\</span></a></li>
+                </ol>
+            </div>
+        </div>
+        <div class="text-center py-2">
+            <h3 class="mb-2 text-primary fs-4 ">News & Announcements List</h3>
+            <h3 class="mb-2 text-light fs-6">የዜና እና ማስታወቂያዎች ዝርዝር</h3>
+        </div>
+        {% comment %} <div class="text-center py-2 px-2 ">
+            <p class="small">ሁላችሁም ኦርቶዶክሳውያን በመጪው በሚከናወኑ ፕሮግራሞች ላይ እንድንሳተፍ  ቤተክርስቲያናችን በእግዚአብሔር ስም ጥሪ ታቀርባለች!!</p>
+            <p class="h2 fs-6 text-primary small">In the name of God, our church is inviting all of you Orthodox people to participate in the upcoming programs!!</p>
+        </div> {% endcomment %}
+    </div>
+
+    <!-- News & Announcements -->
+    <div class="container pb-2">
+        <h1 class="my-3 fs-4">News & Announcements</h1>
+        <hr>
+        <div class="row">
+            {% for news in news_list %}
+            <div class="col-md-6 mb-4">
+                <div class="card shadow">
+                    {% if news.image %}
+                    <img src="{{ news.image.url }}" class="card-img-top" alt="{{ news.title }}">
+                    {% endif %}
+                    <div class="card-body">
+                        <h6 class="card-title text-primary">{{ news.title }}</h6>
+                        <p class="m-0 small text-muted">category: {{ news.category}}</p>
+                        <hr>
+                        <p class="card-text small lb-lg">{{ news.description|truncatewords:30 }}</p>
+                        <a href="{% url 'events:NewsAndAnnouncements_detail' news.slug %}" class="btn btn-sm btn-outline-primary rounded-pill py-2 px-2">Read More</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <!-- Pagination -->
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                {% if news_list.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ news_list.previous_page_number }}" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                {% endif %}
+
+                {% for num in news_list.paginator.page_range %}
+                <li class="page-item {% if news_list.number == num %}active{% endif %}">
+                    <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                </li>
+                {% endfor %}
+
+                {% if news_list.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ news_list.next_page_number }}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+</div>
+{% endblock %}

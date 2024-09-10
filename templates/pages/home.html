@@ -12,8 +12,8 @@
                     <div class="col-lg-6 me-auto pt-4 text-start">
                         <h2 class="aos-init aos-animate" data-aos="fade-left"><span class="subheading">Welcome To</span></h2>
                         <div class="mb-4">
-                            <h4 data-aos="fade-left" class="aos-init aos-animate  animated bounceInDown text-light pb-2">በኢ/ኦ/ተ ሐመረ ኖኅ ኪዳነምህረት ወቅዱስ ሚካኤል ወአቡነ ተክለሃይማኖት ካቴድራል ላስ ቬጋስ</h4>
-                            <h5 data-aos="fade-left" class="mb-4 animated bounceInDown  text-light">HAMERE NOAH KIDANE MIHRET, ST MICHAEL & ABUNE TEKLEHIMANOT ETHIOPIAN ORTHODOX TEWAHEDO CATHEDRAL IN LAS VEGAS</h5>
+                            <h5 data-aos="fade-left" class="aos-init aos-animate  animated bounceInDown text-light pb-2">ሐመረ ኖህ ኪዳነ ምሕረት፣ ቅዱስ ሚካኤል እና አቡነ ተክለሃይማኖት የኢትዮጵያ ኦርቶዶክስ ተዋህዶ ካቴድራል በላስ ቬጋስ</h5>
+                            <h6 data-aos="fade-left" class="mb-4 animated bounceInDown  text-light">HAMERE NOAH KIDANE MIHRET, ST MICHAEL & ABUNE TEKLEHIMANOT ETHIOPIAN ORTHODOX TEWAHEDO CATHEDRAL IN LAS VEGAS</h6>
                         </div>
                         <div class="">
                             <a href="{% url "events:event_list" %}" class="btn btn-sm btn-primary border-0 rounded-pill py-2 px-2 px-md-5 me-4 animated bounceInLeft">Go to events</a>
@@ -115,10 +115,16 @@
         <!-- wisdom Start -->
         <div class="container-fluid bg-light py-6 my-5 mt-0">
             <div class="container">
-              <div class="row g-5">
-                  <div class="col-lg-7 col-md-12 ">
-                      <small class="d-inline-block fw-bold text-primary shadow text-uppercase bg-light border border-primary rounded-pill px-4 py-1 mb-4 animated bounceInDown">መቅደም</small>
-                      <div class="bg-light rounded  p-3 px-4 animated bounceInDown shadow">
+              <div class="row g-3">
+                <div class="col-lg-5 col-md-12 ">
+                    <img src="{% static "img/st.mary2.jpg" %}" class="img-fluid rounded animated zoomIn shadow-1" style="opacity: 0.8;" alt="">
+                </div>
+                <div class="col-lg-7 col-md-12 ">
+                     <div class="text-center ">
+                      <small class="d-inline-block fw-bold text-primary text-uppercase bg-light border border-primary rounded-pill px-5 py-2 mb-4 animated bounceInDown">ከሁሉም በፊት : Before all</small>
+                     <hr>
+                    </div>
+                      <div class="bg-light rounded  p-3 px-4 animated bounceInDown shadow-1">
                        <p class="small mb-4 fw-bold text-primary text-uppercase bg-light animated bounceInDown">
                         የጥበብ መጀመሪያ እግዚአብሔርን መፍራት ነው ትእዛዙንም የሚከተሉ ሁሉ መልካም ማስተዋል አላቸው። 
                         <span class="small">መዝሙር 111:10</span>
@@ -131,10 +137,8 @@
                        <p><span class="pb-3 text-church">The fear of the Lord is the beginning of wisdom; all who follow his precepts have good understanding." <small>Psalm 111:10</small></span></p>
                        <p><span class="pb-3 text-church">"The fear of the Lord is the beginning of knowledge; fools despise wisdom and instruction." <small>Proverbs 1:7</small></span></p>
                       </div>
-                  </div>
-                  <div class="col-lg-5 col-md-12 ">
-                      <img src="{% static "img/virginMary-5.png" %}" class="img-fluid rounded animated zoomIn shadow" style="opacity: 0.8;" alt="">
-                  </div>
+                </div>
+                
               </div>
             </div>
         </div>  
@@ -1040,7 +1044,7 @@
                                  </div>  
                             </div>
                             <div class="text-center py-4 small">
-                              <a href="{% url 'multimedia:books_library_list' %}" class="d-inline-block fw-bold text-dark text-uppercase bg-light border border-primary rounded-pill px-4 py-1 mb-3 small">see more books</a> 
+                              <a href="{% url 'multimedia:books_library_list' %}" class="btn btn-sm btn-primary rounded-pill px-4 py-1 mb-3 small">see more books</a> 
                             </div>
                         </div>
                         <div id="tab-7" class="tab-pane fade show p-0">
@@ -1089,7 +1093,7 @@
                                  </div>  
                             </div>
                             <div class="text-center py-4 small">
-                              <a href="{% url 'multimedia:gallery_list' %}" class="d-inline-block fw-bold text-dark text-uppercase bg-light border border-primary rounded-pill px-4 py-1 mb-3 small">see more Gallery List</a> 
+                              <a href="{% url 'multimedia:gallery_list' %}" class="btn btn-sm btn-primary rounded-pill px-4 py-1 mb-3 small">see more Gallery List</a> 
                             </div>
                         </div>
                         <div id="tab-8" class="tab-pane fade show p-0">
@@ -1130,7 +1134,7 @@
                                  </div>  
                             </div>
                             <div class="text-center py-4 small">
-                              <a href="{% url 'multimedia:user_manual_list' %}" class="d-inline-block fw-bold text-dark text-uppercase bg-light border border-primary rounded-pill px-4 py-1 mb-3 small">more user manual list</a> 
+                              <a href="{% url 'multimedia:user_manual_list' %}" class="btn btn-sm btn-primary rounded-pill px-4 py-1 mb-3 small">more user manual list</a> 
                             </div>
                         </div>
                         <div id="tab-9" class="tab-pane fade show p-0">
@@ -1171,7 +1175,7 @@
                                  </div>  
                             </div>
                             <div class="text-center py-4 small">
-                              <a href="{% url 'multimedia:praise_glory_list' %}" class="d-inline-block fw-bold text-dark text-uppercase bg-light border border-primary rounded-pill px-4 py-1 mb-3 small">more praise and glory detail</a> 
+                              <a href="{% url 'multimedia:praise_glory_list' %}" class="btn btn-sm btn-primary rounded-pill px-4 py-1 mb-3 small">more praise and glory detail</a> 
                             </div>
                         </div>
                         <div id="tab-10" class="tab-pane fade show p-0">
@@ -1216,7 +1220,7 @@
                                  </div>  
                             </div>
                             <div class="text-center py-4 small">
-                              <a href="{% url 'multimedia:testimony_of_salvation_list' %}" class="btn btn-sm d-inline-block fw-bold text-dark text-uppercase bg-light border border-primary rounded-pill px-4 py-1 mb-3 small">more testimony of salvation list</a> 
+                              <a href="{% url 'multimedia:testimony_of_salvation_list' %}" class="btn btn-sm btn-primary rounded-pill px-4 py-1 mb-3 small">more testimony of salvation list</a> 
                             </div>
                         </div>
                         <div id="tab-11" class="tab-pane fade show p-0">
@@ -1260,7 +1264,8 @@
                                 {% endif %}
                             </div>
                             <div class="text-center py-4 small">
-                                <a href="{% url 'multimedia:archive_link_list' %}" class="d-inline-block fw-bold text-dark text-uppercase bg-light border border-primary rounded-pill px-4 py-1 mb-3 small">see more archive Resources list</a> 
+                                <a href="{% url 'multimedia:archive_link_list' %}" 
+                                class="btn btn-sm btn-primary rounded-pill px-4 py-1 mb-3 small">see more archive Resources list</a> 
                             </div>
                         </div>
                     </div>
@@ -1436,13 +1441,46 @@
         <div class="container-fluid py-5">
             <div class="container">
                 <div class="text-center wow bounceInUp mt-2" data-wow-delay="0.1s">
-                    <small class="d-inline-block fw-bold text-dark text-uppercase bg-light border border-primary rounded-pill px-4 py-1 mb-3">Testimonial</small>
-                    <h4 class="mb-2 ">የዚህ ድረ ገጽ ተጠቃሚዎች ይህንን ይላሉ!</h4>
-                    <p><span class="py-3 mb-2  text-church">This is what the users of this website say</p>
-
+                    <small class="d-inline-block fw-bold text-dark text-uppercase bg-light border border-primary rounded-pill px-4 py-1 mb-3">testimony of salvation</small>
+                    <h4 class="mb-1">የመዳን ምስክርነት  ዝርዝር </h4>
+                    <p><span class="pt-2 mb-0  text-church">This is the amazing work God does for us, and we will share it with the world!</p>
+                        <p><span class="pt-0 mb-2 text-primary small">ይህ እግዚአብሔር ለእኛ የሚሠራው አስደናቂ ሥራ ነው፣ እኛም ለዓለም እናካፍላታለን!</p>
                 </div>
+                {% if latest_testimonySalvations %}
                 <div class="owl-carousel owl-theme testimonial-carousel testimonial-carousel-1 mb-4 wow bounceInUp" id="testCarouselImage" data-wow-delay="0.1s">
-                    <div class="testimonial-item rounded bg-light">
+                    
+                    {% for testimony in latest_testimonySalvations %}
+                    <div class="testimonial-item rounded bg-light shadow">
+                        <div class="d-flex mb-3">
+                            {% comment %} <img src="{% static 'img/vision-icon.png' %}" class="img-fluid rounded-circle flex-shrink-0" alt=""> {% endcomment %}
+                            <i class="fas fa-cross fa-2x  text-primary mb-4"></i>
+                            <div class="ps-3 my-auto">
+                                <h6 class="mb-0">{{testimony.title|truncatewords:4}}</h6>
+                                <p class="p-0 m-0 text-primary small">{{testimony.author}}</p>
+                                <span class="p-0 m-0 text-primary small">{{testimony.created}}</span>
+                            </div>
+                        </div>
+                        <hr>
+                         <div class="testimonial-content">
+                                <div class="d-flex small">
+                                    <i class="fas fa-star text-primary"></i>
+                                    <i class="fas fa-star text-primary"></i>
+                                    <i class="fas fa-star text-primary"></i>
+                                    <i class="fas fa-star text-primary"></i>
+                                    <i class="fas fa-star-half-alt text-primary"></i>
+                                </div>
+                                <small class="m-0 small">Links: <a class="text-success small" href="{{testimony.link}}">explore more</a></small>
+                                <hr class="m-0">
+                                <p class="m-0 pt-1 small">
+                                    {{testimony.testimony|truncatewords:10}}
+                                     <a href="{% url 'multimedia:testimony_of_salvation_detail' slug=testimony.slug %}"  class="small">Read More</a> </a>
+                                </p>
+                        </div>
+                        
+                    </div>
+                    {% endfor %}
+                    
+                    {% comment %} <div class="testimonial-item rounded bg-light">
                         <div class="d-flex mb-3">
                             <img src="{% static 'img/vision-icon.png' %}" class="img-fluid rounded-circle flex-shrink-0" alt="">
                             
@@ -1595,30 +1633,13 @@
                                 <p class="m-0 pt-3 small">Lorem ipsum dolor sit amet elit, sed do eiusmod tempor ut labore et dolore magna aliqua.</p>
                         </div>
                         
-                    </div>
-                    <div class="testimonial-item rounded bg-light">
-                        <div class="d-flex mb-3">
-                            <img src="{% static 'img/vision-icon.png' %}" class="img-fluid rounded-circle flex-shrink-0" alt="">
-                            
-                            <div class="ps-3 my-auto">
-                                <h5 class="mb-0">Person Name</h5>
-                                <small class="m-0">Profession</small>
-                                <small class="m-0 px-2">11/03/2024</small>
-                            </div>
-                        </div>
-                         <div class="testimonial-content">
-                                <div class="d-flex">
-                                    <i class="fas fa-star text-primary"></i>
-                                    <i class="fas fa-star text-primary"></i>
-                                    <i class="fas fa-star text-primary"></i>
-                                    <i class="fas fa-star text-primary"></i>
-                                    <i class="fas fa-star-half-alt text-primary"></i>
-                                </div>
-                                <p class="m-0 pt-3 small">Lorem ipsum dolor sit amet elit, sed do eiusmod tempor ut labore et dolore magna aliqua.</p>
-                        </div>
-                        
-                    </div>
+                    </div> {% endcomment %}
                 </div>
+                {% else %}
+                    <div class="text-center mt-2 card mx-auto" style="width:98%;" data-wow-delay="0.1s">
+                        <p><span class="pt-4 mb-0 text-danger">ooops! Sorry , No file found in the server!coming soon!</p>
+                    </div>
+                {% endif %}
                 {% comment %} <div class="owl-carousel testimonial-carousel testimonial-carousel-2 wow bounceInUp" data-wow-delay="0.3s">
                     <div class="testimonial-item rounded bg-light">
                         <div class="d-flex mb-3">
@@ -1867,7 +1888,7 @@
         <!-- Blog End -->
 
         <!-- product-list Start -->
-        <div class="container-fluid pt-3 pb-6 mb-3">
+        <div class="container-fluid pt-3 pb-4 mb-3">
             <div class="container">
                 <div class="text-center wow bounceInUp" data-wow-delay="0.1s">
                     <small class="d-inline-block fw-bold text-dark text-uppercase bg-light border border-primary rounded-pill px-4 py-1 mb-3">products</small>
@@ -1916,8 +1937,9 @@
                                     {% endif %}
                                     
                                 </div>
-                                <div class="d-flex justify-content-between gap-3"><a href="{{product.affiliate_link}}" class="btn btn-md-square btn-primary rounded-circle" target="_blank"><i class="fas fa-cart-plus fa-1x"></i></a>
-                                <a href="{% url 'shopProducts:shop_product_detail' product.slug %}" class="btn btn-md-square btn-primary rounded-pill p-2" target="_blank"><i class="fas fa-arrow-alt-circle-up fa-1x"></i></a> 
+                                <div class="d-flex justify-content-between gap-3">
+                                    <a href="{{product.affiliate_link}}" class="btn btn-md-square btn-primary rounded-circle" target="_blank"><i class="fas fa-cart-plus fa-1x"></i></a>
+                                    <a href="{% url 'shopProducts:shop_product_detail' product.slug %}" class="btn btn-md-square btn-primary rounded-pill p-2" target="_blank"><i class="fas fa-arrow-alt-circle-up fa-1x"></i></a> 
                                 </div>
                             </div>
                         </div>
@@ -2008,9 +2030,7 @@
                         
                     </div>
                 </div>
-
-                <a href="{% url 'shopProducts:shop_product_list' %}" class="d-inline-block fw-bold text-dark text-uppercase bg-light border border-primary rounded-pill px-4 py-1 mb-3">Explore More products</a>
-
+                
                 {% comment %} <div class="owl-carousel testimonial-carousel testimonial-carousel-2 wow bounceInUp" data-wow-delay="0.3s">
                     <div class="testimonial-item rounded bg-light">
                         
@@ -2122,7 +2142,43 @@
                     </div>
                 </div> {% endcomment %}
             </div>
+            
+            <div class="container text-center wow bounceInUp" data-wow-delay="0.1s">
+                <a href="{% url 'shopProducts:shop_product_list' %}" class="btn btn-sm btn-primary rounded-pill ">Explore More products</a>
+                <hr>
+            </div>
         </div>
         <!-- product-list End -->
+
+        <!-- News & Announcements -->
+        <div class="container-fluid menu bg-light py-6 my-3">
+            <div class="container">
+                <div class="text-center wow bounceInUp " data-wow-delay="0.1s">
+                    <small class="d-inline-block fw-bold text-dark text-uppercase bg-light border border-primary rounded-pill px-4 py-1 mb-3">Follow the News & Announcements</small> 
+                    <h3 class="fs-3 mb-1 text-primary">News & Announcements</h3>
+                    <p><span class="mb-4 px-4 text-church">Be the first to know about the News & Announcements planned, organized, and/or conducted by our cathedral related to the Ethiopian Orthodox faith.</p>
+                </div>
+                <hr>
+                <div class="row my-3">
+                    {% for news in news_list %}
+                    <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                        <div class="card shadow">
+                            {% if news.image %}
+                            <img src="{{ news.image.url }}" class="card-img-top" alt="{{ news.title }}">
+                            {% endif %}
+                            <div class="card-body">
+                                <h6 class="card-title text-primary">{{ news.title }}</h6>
+                                <p class="m-0 small text-muted">category: {{ news.category}}</p>
+                                <hr>
+                                <p class="card-text small lb-lg">{{ news.description|truncatewords:30 }}</p>
+                                <a href="{% url 'events:NewsAndAnnouncements_detail' news.slug %}" class="btn btn-sm btn-outline-primary rounded-pill py-2 px-2">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <!-- News & Announcements end -->
 </div>
 {% endblock %}

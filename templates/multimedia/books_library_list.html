@@ -3,7 +3,7 @@
 {% load crispy_forms_tags %}
 {% block title %}Books Library{% endblock %}
 {% block main %}
-<div class="container mt-1">
+<div class="container mt-2">
      <!-- breadcrumb -->
      <div class="event pb-4">
         <div class="mx-auto wow bounceInUp rounded-1" 
@@ -17,12 +17,16 @@
                     </ol>
                 </div>
             </div>
+            <!-- breadcrumb Start -->
+            <div class="text-center py-2">
+                <h1 class="mb-2 bolder text-light fs-4">Digetal Library</h1>
+            </div>
         </div>
     </div>
     <div class="d-flex justify-content-between ">
     <h1 class="fs-4 text-primary">Library Books List</h1>
     {% if user.is_authenticated %}
-    <a class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdropMYbookList">
+    <a class="btn btn-sm btn-primary rounded-pill px-3" data-bs-toggle="modal" data-bs-target="#staticBackdropMYbookList">
         <i class="fas fa-book fa-6 p-1"></i>Add your bast Books</a>
     {% endif %}
     </div>
@@ -31,16 +35,16 @@
         {% for book in books %}
         {% if book.visibility == 'public' %}
         <div class="col-md-4">
-            <div class="card mb-4 shadow rounded">
+            <div class="card mb-4 shadow ">
                 {% if book.cover_image %}
-                <img src="{{ book.cover_image.url }}" width="100%" height="160"  class="card-img-top rounded " alt="{{ book.title }}">
+                <img src="{{ book.cover_image.url }}" width="100%" height="240"  class="card-img-top rounded " alt="{{ book.title }}">
                 {% endif %}
                 <div class="card-body small">
                     <h5 class="card-title">{{ book.title }}</h5>
                     <hr/>
                     <p class="card-text small">{{ book.summary|truncatewords:30 }}</p>
                     <hr/>
-                    <a href="{% url 'multimedia:books_library_detail' slug=book.slug %}" class="btn btn-sm btn-outline-primary">Read More</a>
+                    <a href="{% url 'multimedia:books_library_detail' slug=book.slug %}" class="btn btn-sm rounded-pill px-3 btn-outline-primary">Read More</a>
                 </div>
             </div>
         </div>

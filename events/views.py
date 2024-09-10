@@ -1,6 +1,7 @@
 # events/views.py
 from django.views.generic import ListView, DetailView
-from .models import Event, EventGallery, PostEventImages
+from .models import Event, EventGallery, PostEventImages,NewsAndAnnouncements
+from django.shortcuts import get_object_or_404
 from django.utils import timezone
 
 class EventListView(ListView):
@@ -79,3 +80,20 @@ class EventGalleryDetailView(DetailView):
         context["postEvent_Images"] = PostEventImages.objects.filter(event_gallery=event_gallery)
         
         return context
+
+# ListView for News & Announcements
+class NewsAndAnnouncementsListView(ListView):
+    model = NewsAndAnnouncements
+    template_name = 'events/news_and_announcements_list.html'
+    context_object_name = 'news_list'
+    paginate_by = 10  # Adjust pagination as needed
+    ordering = ['-created']  # Orders by latest first
+
+# DetailView for News & Announcements
+class NewsAndAnnouncementsDetailView(DetailView):
+    model = NewsAndAnnouncements
+    template_name = 'events/news_and_announcements_detail.html'
+    context_object_name = 'news'
+
+    def get_object(self):
+        return get_object_or_404(NewsAndAnnouncements, slug=self.kwargs['slug'])

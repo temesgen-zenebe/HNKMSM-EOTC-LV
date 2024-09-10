@@ -1,20 +1,39 @@
 {% extends "_base.html" %}
 {% load crispy_forms_tags %}
-
+{% load static %}
+{% block javascript %}
+   {% comment %} <script type="text/javascript" src="{% static '' %}" defer ></script> {% endcomment %}
+{% endblock %}
 {% block title %}Proposal creating form{% endblock %}
 {% block main %}
-<div class="mx-2 my-5" >
-    
-    <div class="card text-start m-auto mb-3" style="max-width: 30rem">
-        <div class="card-header">
-            <h6>Create a New Project Proposal</h6>
+<div class="container mt-2">
+    <div class="container mx-auto wow bounceInUp rounded " style="background-image: url('{% static "img/heroAccount-13.png" %}');background-size: cover; background-position: center center; background-repeat: no-repeat; " alt="Church-at" data-wow-delay="0.1s">
+        <div class="container py-1 mt-0">
+            <div class="animated bounceInDown ">
+                <ol class="breadcrumb justify-content-start mb-0 animated bounceInDown">
+                    <li class="small"><a href="{% url 'pages:homepage' %}">Home <span class="px-1">\</span></a></li>
+                    <li class="small" aria-current="page"> <a href="{% url 'projectVote:proposal_list' %}">projectProposalLists<span class="px-1">\</span></a></li>
+                </ol>
+            </div>
         </div>
-        <div class="card-body ">
-            <form method="post" enctype="multipart/form-data" >
-                {% csrf_token %}
-                {{ form|crispy }}
-                <div class="text-center"><button type="submit" class="btn btn-sm btn-outline-warning ">Submit</button></div>
-            </form>
+        <div class="text-center py-2">
+            <h3 class="mb-2 text-primary fs-4 ">Create a New Project Proposal </h3>
+        </div>
+    </div>
+
+    <div class="container mx-2 my-5" >
+        
+        <div class="card text-start m-auto mb-3" style="max-width: 30rem">
+            <div class="card-header">
+                <h6>Create a New Project Proposal</h6>
+            </div>
+            <div class="card-body ">
+                <form method="post" enctype="multipart/form-data" >
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <div class="text-center"><button type="submit" class="btn btn-sm btn-outline-warning ">Submit</button></div>
+                </form>
+            </div>
         </div>
     </div>
 </div>
