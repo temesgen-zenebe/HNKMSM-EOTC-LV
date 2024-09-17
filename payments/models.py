@@ -3,6 +3,7 @@ from django.conf import settings
 from django.forms import ValidationError
 from common.utils.text import unique_slug
 from django.utils import timezone
+from ckeditor.fields import RichTextField
 import uuid
 
 class Categories(models.Model):
@@ -108,7 +109,7 @@ class PaymentCaseLists(models.Model):
         ('churchProjectSupportFree' ,'churchProjectSupportFree'), 
     )
     title = models.CharField(max_length=255)
-    description = models.TextField()
+    description = RichTextField()
     stripsPayment_link = models.URLField()
     payment_case_link = models.CharField(max_length=255, blank=True, null=True)
     QRCodeImage = models.ImageField(upload_to='payments/qrcodes/', blank=True, null=True)

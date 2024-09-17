@@ -44,7 +44,9 @@ class PaymentCaseDetailView(DetailView):
     model = PaymentCaseLists
     template_name = 'payments/payment_case_detail.html'  # Specify your detail view template
     context_object_name = 'payment_case'
-
+    
+    
+    
 class AddToPaymentCaseCartView(View):
     
     def post(self, request, slug):

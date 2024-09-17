@@ -3,7 +3,7 @@
 {% block javascript %}
    {% comment %} <script type="text/javascript" src="{% static '' %}" defer ></script> {% endcomment %}
 {% endblock %}
-{% block title %}payment cases List{% endblock %}
+{% block title %}payment cases Detail{% endblock %}
 {% block main %}
 <div class="container my-2">
 <!-- breadcrumb  Start -->
@@ -32,15 +32,16 @@
       <div class="col-md-8">
         <div class="card  p-2 border border-primary">
           <div class="card-body small">
+            
             <h3 class="card-title fs-4">{{ payment_case.title }}</h3>
             <hr />
             <p class="card-text text-success"><strong>Amount: ${{ payment_case.amount }}</strong></p>
-            <p class="card-text"><small class="text-muted">Category: {{ payment_case.category.title }}</small></p>
-            <p class="card-text"><small class="text-muted">Case Code: {{ payment_case.case_code }}</small></p>
-            <p class="card-text"><small class="text-muted">Created: {{ payment_case.created|date:"F d, Y" }}</small></p>
-            <p class="card-text"><small class="text-muted">Updated: {{ payment_case.updated|date:"F d, Y" }}</small></p>
+            <p class="card-text m-0"><small class="text-muted">Category: {{ payment_case.category.title }}</small></p>
+            <p class="card-text m-0"><small class="text-muted">Case Code: {{ payment_case.case_code }}</small></p>
+            <p class="card-text m-0"><small class="text-muted">Created: {{ payment_case.created|date:"F d, Y" }}</small></p>
+            <p class="card-text mt-1"><small class="text-muted">Updated: {{ payment_case.updated|date:"F d, Y" }}</small></p>
             <hr />
-            <p class="card-text">Description : {{ payment_case.description }}</p>
+            <p class="card-text">{{ payment_case.description|safe }}</p>
             <hr />
             <div class="btn-group gap-3">
                <a href="{{payment_case.stripsPayment_link}}" class="btn btn-sm px-4 py-2 rounded-pill btn-primary" target="_blank">Go to Payment </a>

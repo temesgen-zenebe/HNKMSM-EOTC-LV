@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
+    'ckeditor',
     
     # Third-party
     'crispy_forms',
@@ -162,6 +163,13 @@ ACCOUNT_SIGNUP_FORM_CLASS = 'users.forms.SignupForm'
 # AUTHENTICATION SETTINGS
 AUTH_USER_MODEL = 'users.CustomUser'
 
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# EMAIL_HOST_USER = 'your-email@gmail.com'  # Your Gmail account
+# EMAIL_HOST_PASSWORD = 'your-app-password'  # App password or account password
+# DEFAULT_FROM_EMAIL = 'your-email@gmail.com'
 
 # EMAIL
 SENDGRID_API_KEY = os.environ.get('SENDGRID_API_KEY')

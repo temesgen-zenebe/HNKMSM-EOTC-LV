@@ -104,8 +104,6 @@ class DonationListView(ListView):
         queryset = PaymentCaseLists.objects.filter(category='donation').order_by('created')
         return queryset
 
-  
-   
 class DonationCaseDetailView(DetailView): 
     model = PaymentCaseLists
     template_name = 'pages/donation_case_detail.html'  # Specify your detail view template

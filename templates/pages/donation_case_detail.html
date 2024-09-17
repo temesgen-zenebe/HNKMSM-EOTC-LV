@@ -34,13 +34,13 @@
           <div class="card-body small">
             <h3 class="card-title fs-4">{{ donation_case.title }}</h3>
             <hr />
-            <p class="card-text text-success"><strong>Amount: ${{ donation_case.amount }}</strong></p>
-            <p class="card-text"><small class="text-muted">Category: {{ donation_case.category.title }}</small></p>
-            <p class="card-text"><small class="text-muted">Case Code: {{ donation_case.case_code }}</small></p>
-            <p class="card-text"><small class="text-muted">Created: {{ donation_case.created|date:"F d, Y" }}</small></p>
-            <p class="card-text"><small class="text-muted">Updated: {{ donation_case.updated|date:"F d, Y" }}</small></p>
+            <p class="card-text text-success m-0"><strong>Amount: ${{ donation_case.amount }}</strong></p>
+            <p class="card-text m-0"><small class="text-muted">Category: {{ donation_case.category.title }}</small></p>
+            <p class="card-text m-0"><small class="text-muted">Case Code: {{ donation_case.case_code }}</small></p>
+            <p class="card-text m-0"><small class="text-muted">Created: {{ donation_case.created|date:"F d, Y" }}</small></p>
+            <p class="card-text mt-0"><small class="text-muted">Updated: {{ donation_case.updated|date:"F d, Y" }}</small></p>
             <hr />
-            <p class="card-text">Description : {{ donation_case.description }}</p>
+            <p class="card-text">Description : {{ donation_case.description|safe }}</p>
             <hr />
             <div class="btn-group gap-3">
                <a href="{{donation_case.stripsPayment_link}}" class="btn btn-sm px-4 py-2 rounded-pill btn-primary" target="_blank">Go to Payment </a>
