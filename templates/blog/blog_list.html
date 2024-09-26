@@ -32,7 +32,51 @@
         <div class="text-center wow bounceInUp" data-wow-delay="0.1s">
             <small class="d-inline-block fw-bold text-dark text-uppercase bg-light border border-primary rounded-pill px-4 py-1 mb-3">Our Blog</small>
         </div>
-        <div class="row g-3 justify-content-center">
+
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            {% if blogs %}
+            {% for blog in blogs %}
+            <div class="col">
+                <div class="card shadow-sm">
+                    <div class="overflow-hidden rounded">
+                        {% if blog.cover_image %}
+                        <img src="{{ blog.cover_image.url }}" class="bd-placeholder-img card-img-top" alt="{{ blog.title }}" style="height: 225px; width: 100%;">
+                        {% else %}
+                        <img src="{% static 'img/blog/ethiopianOrtodx.png' %}" class="bd-placeholder-img card-img-top" alt="ethiopianOrtodx" style="height: 225px; width: 100%;">
+                        {% endif %}
+                    </div>
+                    <div class="card-body">
+                        <h5 class="fs-6">{{ blog.title }}</h5>
+                        <hr>
+                        <p class="card-text small">{{ blog.content|safe|truncatewords:8 }}</p>
+                        <hr>
+                        <a href="{% url 'blog:blog_detail' blog.slug %}" class="btn btn-sm btn-primary">Read More</a>
+                    </div>
+                    <div class="card-footer bg-light d-flex justify-content-between align-items-center">
+                        <small><i class="fas fa-book-reader"></i> {{ blog.viewerCount }}</small>
+                        <small><i class="fas fa-calendar-day"></i> {{ blog.published_at }}</small>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            <div class="col">
+                <div class="card shadow-sm">
+                    <div class="overflow-hidden rounded">
+                        <img src="{% static 'img/blog/ethiopianOrtodx.png' %}" class="bd-placeholder-img card-img-top" alt="ethiopianOrtodx" style="height: 225px; width: 100%;">
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">Apologies, we couldn't find any blog data at the moment. Please try again later.</p>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+        
+        
+
+
+        {% comment %} <div class="row g-2">
             {% if blogs %}
             {% for blog in blogs %}
             <div class="col-md-6 col-lg-4 wow bounceInUp " data-wow-delay="0.5s">
@@ -44,17 +88,16 @@
                         <img src="{% static 'img/blog/ethiopianOrtodx.png' %}" class="img-fluid " alt="ethiopianOrtodx">
                         {% endif %}
                     </div>
-                    <div class="blog-content bg-light shadow">
+                    <div class="blog-content bg-light shadow small">
                         
-                        <div class="p-2 text-dark align-items-center justify-content-center ">
-                            <h5 class="px-2 fs-6">{{ blog.title }}</h5>
-                            <hr class="mx-3"/>
-                            <p class="px-2 small">{{ blog.content|truncatewords:12 }}</p>
-                            <hr class="mx-3 "/>
-                            <div class="text-center">
-                            <a href="{% url 'blog:blog_detail' blog.slug %}" class="btn btn-sm btn-primary p-2  m-3 rounded-pill">Read More</a>
-                            </div>
+                        <div class="p-2 text-dark text-center small">
+                            <h5 class="fs-6">{{ blog.title }}</h5>
+                            <hr class="mx-3">
+                            <p class="small">{{ blog.content|safe|truncatewords:8 }}</p>
+                            <hr class="mx-3">
+                            <a href="{% url 'blog:blog_detail' blog.slug %}" class="btn btn-sm btn-primary rounded-pill">Read More</a>
                         </div>
+                        
                         <div class="text-dark bg-primary ">
                             <div class="h-100  px-3 d-flex justify-content-between">
                                 <small class="mb-0"><i class="fas fa-book-reader fa-3 text-dark px-1"></i>{{blog.viewerCount }}</small>
@@ -83,7 +126,7 @@
                 </div>
             </div>
             {% endif %}
-        </div>
+        </div> {% endcomment %}
         {% include 'pages/pagination.html' with page_obj=page_obj %}
     </div>
   <!-- Blog End -->

@@ -30,7 +30,7 @@
  <div class="row g-2">
     <div class="col-sm-8">
       <div class="card p-2">
-        <div class="card-body">
+        <div class="card-body small">
           <h5 class="card-title">{{ blog.title }}</h5>
           <hr/>
           <div class="small">
@@ -39,7 +39,7 @@
           <p><strong>Viewer Count:</strong> {{ blog.viewerCount }}</p>
           </div>
           <hr/>
-          <p class="card-text p-2 lh-lg">{{ blog.content }}</p>
+          <p class="card-text p-2 lh-lg small">{{ blog.content|safe }}</p>
           {% if blog.web_link %}
           <ul class="small">
             <li><a href="{{blog.web_link}}" class="small" target="_blank">Related important link</a></li>
@@ -66,11 +66,12 @@
                  {% else %}
                   <img class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" src="{% static 'img/placeholder.png' %}" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false">
                   {% endif %}
-                  <p class="pb-3 mb-0 small lh-sm border-bottom">
-                    <strong class="d-block text-gray-dark small">{{blog.title}}</strong>
-                    <small>{{ blog.content|truncatewords:12 }}<a href="{% url "blog:blog_detail" slug=blog.slug %}">Read</a></small>
+                  <p class="pb-3 mb-0 small lh-sm ">
+                    <strong class="text-gray-dark small">{{blog.title}}</strong> 
+                    <a class="pb-3 mb-0 small lh-sm " href="{% url "blog:blog_detail" slug=blog.slug %}">Read..</a>
                   </p>
                 </div>
+                <hr>
                 {% endfor %}
                 {% else %}
                 <div class="d-flex text-muted pt-3">
@@ -91,3 +92,5 @@
   </div>
 </div>
 {% endblock %}
+
+

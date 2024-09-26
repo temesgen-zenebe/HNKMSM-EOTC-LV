@@ -24,8 +24,8 @@
             <section class="py-1 text-center bg-primary rounded">
             <div class="row py-lg-3">
                 <div class="col-lg-8 col-md-8 mx-auto">
-                    <h1 class="fw-light py-2">Welcome!user</h1>
-                    <h4 class="fw-light py-1">Cherche Fucher Project Proposals</h4>
+                    <h1 class="fw-light py-2">Welcome! user</h1>
+                    <h4 class="fw-light py-1">Church Future Project Proposals</h4>
                     <small class="text-dark text-start py-3 lh-lg">
                         Welcome to the Church's upcoming project proposals list page! We are excited to have you here and hope you find the information provided to be helpful and informative.
                         Thank you for taking the time to visit our Church's upcoming project proposals list page. We value your feedback and look forward to your support as we work towards
@@ -48,16 +48,16 @@
                     {% for proposal in proposals %}
                         <div class="col">
                             <div class="card shadow-sm">
-                            {% if proposal.image.url %}
+                            {% if proposal.image %}
                             <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="{{proposal.image.url}}" role="img">
                             {% else %}
                             <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
                             {% endif %}
                             
-                            <div class="card-body">
+                            <div class="card-body small">
                                 <h5 class="card-title" ><a href="{% url 'projectVote:proposal_detail' proposal.id %}" style="color:#7F6B00;">{{ proposal.title|title }}</a></h5>
                                 <hr>
-                                <p class="card-text lh-lg small">{{ proposal.description|truncatewords:60}} <a href="{% url 'projectVote:proposal_detail' proposal.id %}"   class="text-warning">Red more >></a></p>
+                                <p class="card-text lh-lg small">{{ proposal.description|truncatewords:60|safe}} <a href="{% url 'projectVote:proposal_detail' proposal.id %}"   class="text-warning">Red more >></a></p>
                                 <hr>
                                 <div class="d-flex justify-content-between align-items-center pt-3">
                                 <div class="btn-group gap-2">
