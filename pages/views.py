@@ -37,8 +37,15 @@ class HomePageView(TemplateView):
         latest_userManuals = UserManual.objects.order_by('-uploaded_at')[:3]
         #payment
         payment_donation = PaymentCaseLists.objects.filter(category = 'donation')
-        membership = MembersUpdateInformation.objects.get(user=request.user)
-        print(membership.member_status)
+        if request.user.is_authenticated:
+            # User is authenticated, proceed with fetching the membership
+            membership = MembersUpdateInformation.objects.get(user=request.user)
+            member_status = membership.member_status
+        else:
+            # Handle unauthenticated user (redirect or display an error)
+            member_status = 'undefined'
+            
+        print(member_status)
         #blog
         latest_blog = Blog.objects.order_by('-created_at')[:3]
         #shop
@@ -48,7 +55,7 @@ class HomePageView(TemplateView):
 
         context = {
              #membership
-             'membership' : membership,
+             'member_status' : member_status,
              'event': events,
              'eventGallery':eventGallery,
              'eventsCategory':eventsCategory,

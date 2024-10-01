@@ -62,12 +62,21 @@
                         <div class="navbar-nav mx-auto">
                             <a href="{% url 'pages:homepage' %}" class="nav-item nav-link active">Home</a>
                             <a href="{% url 'pages:about-us' %}" class="nav-item nav-link">About</a>
+                            {% if user.is_authenticated %}
                             <a href="{% url "services:service" %}" class="nav-item nav-link">Services</a>  
+                            {% else %}
+                            <a href="{% url 'account_login'%}" class="nav-item nav-link">Services</a>  
+                            {% endif %}
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Schools</a>
                                 <div class="dropdown-menu bg-light">
+                                    {% if user.is_authenticated %}
                                     <a href="{% url "schools:school" %}" class="dropdown-item">Sunday School</a>
                                     <a href="{% url "marriage:marriageSchool_welcome" %}" class="dropdown-item">Marriage School</a>
+                                    {% else %}
+                                    <a href="{% url 'account_login'%}" class="dropdown-item">Sunday School</a>
+                                    <a href="{% url 'account_login'%}" class="dropdown-item">Marriage School</a>
+                                    {% endif %}
                                 </div>
                             </div> 
                             <div class="nav-item dropdown">
