@@ -43,7 +43,11 @@
                                 <p class="mb-4 small">
                                     "እውነትን ማስተማር፣ ልብን አነሳሽ፣ ነፍሳትን ወደ መለኮታዊ ማስተዋል መምራት።" ማቴዎስ 5:2
                                 </p>
+                                {% if user.is_authenticated %}
                                 <a href="{% url "services:sermon_media_list" %}" class="btn btn-primary px-4 py-2 rounded-pill">Start</a>
+                                {% else %}
+                                <a href="{% url 'account_login'%}" class="btn btn-primary px-4 py-2 rounded-pill">Start</a>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
@@ -56,7 +60,11 @@
                                 <h6 class="mb-3">Baptism (ጥምቀት | ክርስትና)</h6>
                                 <p class="mb-4 small">የኃጢአት ስርየት እና የመንፈስ ጥምቀት።
                                     ንስሐ ግቡ እያንዳንዳችሁም ተጠመቁ። የሐዋርያት ሥራ 2:38 </p>
+                                {% if user.is_authenticated %}
                                 <a href="{% url "services:baptism_service" %}" class="btn btn-primary px-4 py-2 rounded-pill">Start</a>
+                                {% else %}
+                                <a href="{% url 'account_login'%}" class="btn btn-primary px-4 py-2 rounded-pill">Start</a>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
@@ -68,7 +76,11 @@
                                 <i class="fas fa-wine-glass-alt fa-3x text-primary mb-4"></i>
                                 <h5 class="mb-3"><h5 class="mb-3">sacrament(ቅዱስ ቁርባን)</h5>
                                 <p class="mb-4 small">ሥጋዬን የሚበላ ደሜንም የሚጠጣ የዘላለም ሕይወት አለው። ዮሐንስ 6:54</p>
+                                {% if user.is_authenticated %}
                                 <a href="{% url "services:holyCommunion" %}" class="btn btn-primary px-4 py-2 rounded-pill">Start</a>
+                                {% else %}
+                                <a href="{% url 'account_login'%}" class="btn btn-primary px-4 py-2 rounded-pill">Start</a>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
@@ -80,7 +92,11 @@
                                 <i class="fas fa-chess-king fa-3x text-primary mb-4"></i>
                                 <h5 class="mb-3">Wedding (ሰርግ)</h5>
                                 <p class="mb-4 small">ሁለት ልቦች አንድ ሆነዋል፣ የፍቅር ቃል ኪዳን ታትሟል፣ ደስታ ለዘላለም ይካፈላል።" ማርቆስ 10:9</p>
+                                {% if user.is_authenticated %}
                                 <a href="{% url "services:weddingServices" %}" class="btn btn-primary px-4 py-2 rounded-pill">Start</a>
+                                {% else %}
+                                <a href="{% url 'account_login'%}" class="btn btn-primary px-4 py-2 rounded-pill">Start</a>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
@@ -93,7 +109,11 @@
                                 <h5 class="mb-3">የንስሐ አባት</h5>
                                 <h5 class="mb-3">Father of repentance</h5>
                                 <p class="mb-4 small">አባካኙ ልጅ በአባት ፍቅር ታቅፎ፣ ያለ ምንም ቅድመ ሁኔታ ይቅርታ ተደረገለት።" ሉቃስ 15:20</p>
+                                {% if user.is_authenticated %}
                                 <a href="{% url "services:fatherOfRepentance" %}" class="btn btn-primary px-4 py-2 rounded-pill">Start</a>
+                                {% else %}
+                                <a href="{% url 'account_login'%}" class="btn btn-primary px-4 py-2 rounded-pill">Start</a>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
@@ -106,7 +126,11 @@
                                 {% comment %} <img src="{% static 'img/icon/matting_Church_justice_during_the_funeral.png' %}" class="img-fluid rounded text-primary mb-4" alt="">  {% endcomment %}
                                 <h5 class="mb-3">ፍተዓት አገልግሎት Funeral service</h5>
                                 <p class="mb-4 small">የቀብር  ፅሎተ  ፍተዓት  አገልግሎት "ጽድቅን አድርግ፥ ምሕረትን ውደድ፥ ከአምላክህ ጋር በትሕትና ተመላለስ።" ሚክያስ 6:8</p>
+                                {% if user.is_authenticated %}
                                 <a href="{% url "services:funeralServices" %}" class="btn btn-primary px-4 py-2 rounded-pill">Start</a>
+                                {% else %}
+                                <a href="{% url 'account_login'%}" class="btn btn-primary px-4 py-2 rounded-pill">Start</a>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
@@ -119,7 +143,11 @@
                                 {% comment %} <img src="{% static 'img/icon/matting_Church_justice_during_the_funeral.png' %}" class="img-fluid rounded text-primary mb-4" alt="">  {% endcomment %}
                                 <h5 class="mb-3">School | አብነት</h5>
                                 <p class="mb-4 small">ካቴድራላችን  ለልጆችና አዋቂዎች ሃይማኖታዊ ትምህርት አገልግሎት እንሰጣለን::</p>
+                                {% if user.is_authenticated %}
                                 <a href="{% url "schools:school" %}" class="btn btn-primary px-4 py-2 rounded-pill">Start</a>
+                                {% else %}
+                                <a href="{% url 'account_login'%}" class="btn btn-primary px-4 py-2 rounded-pill">Start</a>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
@@ -134,7 +162,11 @@
                                 <h5 class="mb-3">Marriage School</h5>
                                 <p class="mb-4 small"> 
                                     Pre-Marital and Post-Marital Counseling.<small>"Prepare hearts for union, nurture bonds, uphold vows, seek counsel, sustain love. - Ephesians 5:25-33"</small></p>
+                                {% if user.is_authenticated %}
                                 <a href="{% url "marriage:marriageSchool_welcome" %}" class="btn btn-primary px-4 py-2 rounded-pill">Start</a>
+                                {% else %}
+                                <a href="{% url 'account_login'%}" class="btn btn-primary px-4 py-2 rounded-pill">Start</a>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
