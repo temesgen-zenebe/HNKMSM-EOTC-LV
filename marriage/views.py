@@ -15,10 +15,9 @@ from .models import (Course, Quiz, Question,
                 )
 from .forms import SignupForSchoolForm,marriageSchoolQuationsAndAnswerForm
 
-
-class marriageSchoolWelcome(TemplateView):
+class marriageSchoolWelcome(LoginRequiredMixin,TemplateView):
     template_name = 'marriage/marriageView.html'
-
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         user = self.request.user

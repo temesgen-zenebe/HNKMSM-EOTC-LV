@@ -9,15 +9,15 @@
 {% endblock %}
 {% block title %}youth School {% endblock %}
 {% block main %}
-<div class=" ">
+<div class="container mt-2 ">
       <!-- Service Start -->
     <div class="service ">
-        <div class="mx-0 py-2  wow bounceInUp" height="100%"
+        <div class="mx-0 py-2  wow bounceInUp rounded" height="100%"
             style="background-image: url('{% static "img/heroAccount-13.png" %}');background-size: cover; background-position: center center; background-repeat: no-repeat; " alt="Church-at" data-wow-delay="0.1s">
              <!-- breadcrumb Start -->
             <div class="container animated bounceInDown py-1 mt-0">
                 <div class=" ">
-                    <ol class="breadcrumb justify-content-start mb-0 ">
+                    <ol class="breadcrumb justify-content-start mb-0 small">
                         <li class="small"><a href="{% url 'pages:homepage' %}">Home <span class="px-1">\</span></a></li>
                         <li class="small"><a href="{% url 'schools:school' %}">Schools<span class="px-1">\</span></a></li>
                         <li class="small" aria-current="page">youthSchool</li>
@@ -686,4 +686,4 @@
     </div>
     <!-- Service End -->
 </div>
-{% endblock %}
+{% endblock %}  
