@@ -44,8 +44,13 @@
             <p class="card-text">{{ payment_case.description|safe }}</p>
             <hr />
             <div class="btn-group gap-3">
-               <a href="{{payment_case.stripsPayment_link}}" class="btn btn-sm px-4 py-2 rounded-pill btn-primary" target="_blank">Go to Payment </a>
-               <a href="{% url 'payments:payment_case_list' %}" class="btn btn-sm px-4 py-2 rounded-pill btn-primary">Back to List</a>
+              <form action="{% url 'payments:addToPaymentCaseCart_view' slug=payment_case.slug %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-sm px-4 py-2 rounded-pill btn-primary">Add to Cart</button>
+              </form>
+            
+              <a href="{{payment_case.stripsPayment_link}}" class="btn btn-sm px-4 py-2 rounded-pill btn-primary" target="_blank">Go to Payment </a>
+              <a href="{% url 'payments:payment_case_list' %}" class="btn btn-sm px-4 py-2 rounded-pill btn-primary">Back to List</a>
              </div>
           </div>
         </div>

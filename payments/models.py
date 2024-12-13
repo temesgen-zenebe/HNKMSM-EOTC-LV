@@ -4,6 +4,7 @@ from django.forms import ValidationError
 from common.utils.text import unique_slug
 from django.utils import timezone
 from ckeditor.fields import RichTextField
+from decimal import Decimal
 import uuid
 
 class Categories(models.Model):
@@ -41,7 +42,7 @@ class PaymentCase(models.Model):
     # String representation
     def __str__(self):
         return self.title
-
+    
 class BillingInformation(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     address = models.CharField(max_length=255)
@@ -54,14 +55,6 @@ class BillingInformation(models.Model):
     def __str__(self):
         return f"{self.user}'s Billing Information"
 
-class PaymentCaseCartList(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    payment_case = models.ForeignKey('PaymentCase', on_delete=models.CASCADE)
-    quantity = models.PositiveIntegerField(default=1)
-    created = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return f"{self.quantity} of {self.payment_case.title}"
 
 class Payment(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -124,6 +117,38 @@ class PaymentCaseLists(models.Model):
     slug = models.SlugField(unique=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    
+    # Save method override to create slug
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            value = str(self.title)
+            self.slug = unique_slug(value, type(self))
+        super(PaymentCaseLists, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.title
+    
+class PaymentCaseCartList(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    payment_case = models.ForeignKey('PaymentCaseLists', on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
+    total = models.DecimalField(default=0.00, max_digits=10, decimal_places=2)
+    created = models.DateTimeField(auto_now_add=True)  
+    slug = models.SlugField(max_length=255, unique=False, null=True, blank=True)
+
+    
+    
+    # Save method override to create slug
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            value = str(self.payment_case)
+            self.slug = unique_slug(value, type(self))
+            
+        # Calculate subtotal and update total
+        if self.payment_case:
+            self.total = Decimal(self.payment_case.amount) * self.quantity
+            
+        super(PaymentCaseCartList, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return f"{self.quantity} of {self.payment_case.title}"   

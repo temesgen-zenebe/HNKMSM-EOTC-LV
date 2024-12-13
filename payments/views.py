@@ -44,19 +44,44 @@ class PaymentCaseDetailView(DetailView):
     model = PaymentCaseLists
     template_name = 'payments/payment_case_detail.html'  # Specify your detail view template
     context_object_name = 'payment_case'
-    
-    
-    
+     
 class AddToPaymentCaseCartView(View):
     
     def post(self, request, slug):
-        payment_case = get_object_or_404(PaymentCase, slug=slug)
+        payment_case = get_object_or_404(PaymentCaseLists, slug=slug)
         cart_item, created = PaymentCaseCartList.objects.get_or_create(user=request.user, payment_case=payment_case)
         if not created:
             cart_item.quantity += 1
             cart_item.save()
         return redirect('payments:paymentCaseCart_view')
     
+class PaymentCaseCartListView(ListView):
+    model = PaymentCaseCartList
+    template_name = 'payments/checkout.html'  # Specify your template name
+    context_object_name = 'payment_cases_cart'  # Specify the context object name to use in the template
+    paginate_by = 10  # Optional: to paginate the list if there are many items
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        # Fetching all cart items from the database
+        payment_cases_cart = self.get_queryset()
+
+        # Calculating total and adding computed values
+        for case in payment_cases_cart:
+            case.total = case.quantity * case.payment_case.amount  # Dynamically compute total for each item
+
+        # Aggregate values
+        total = sum(case.total for case in payment_cases_cart)
+        cart_count = payment_cases_cart.count()
+
+        # Update context with additional data
+        context['payment_cases_cart'] = payment_cases_cart
+        context['checkout_total'] = total
+        context['cart_count'] = cart_count
+
+        return context
+ 
 class PaymentsHistoryListView(LoginRequiredMixin,ListView):
     model = PaymentHistory
     template_name = 'payments/paymentHistory_list.html'
@@ -116,6 +141,10 @@ class CheckoutView(FormView):
 
 class PaymentConfirmationView(TemplateView):
     template_name = 'payments/payment_confirmation.html'
+    
+    
+    
+    
     
 # Set your secret key. Remember to switch to your live secret key in production.
 # This is your Stripe CLI webhook secret for testing your endpoint locally.
