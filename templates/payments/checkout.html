@@ -29,34 +29,59 @@
 </div>
 <div class="container mt-5">
     <div class="row g-5">
-      <div class="col-md-5 col-lg-4 order-md-last">
+      <div class="col-md-6 col-lg-5 order-md-last ">
         <h4 class="d-flex justify-content-between align-items-center mb-3">
-          <span class="text-primary">Your Checkout List</span>
+          <span class="text-dark">Checkout List</span>
           <span id="cart_count" class="badge bg-primary rounded-pill">{{cart_count}}</span>
         </h4>
-        <ul class="list-group mb-3">
+        <ul class="list-group mb-3 border border-primary">
           {% for cases in payment_cases_cart %}
-          <li class="list-group-item d-flex justify-content-between lh-sm">
-            <div>
-              <h6 class="my-0">{{cases.payment_case}}</h6>
-              <small class="text-muted">{{cases.quantity}} x {{cases.payment_case.amount}}</small>
+          <li class="list-group-item d-flex justify-content-between lh-sm small">
+            <div class="">
+              <p class="my-0">{{cases.payment_case}}</p>
+              <div class="d-flex justify-content-start py-1">
+                <small class="text-muted">{{cases.quantity}} x {{cases.payment_case.amount}}</small>
+                <small class="text-muted small px-3">
+                  <a href="{% url 'payments:DeleteCaseCart' slug=cases.slug %}" ><i class="text-primary bi-trash-fill px-1"></i></a>
+                  <a href="{% url 'payments:UpdatedCaseCart' slug=cases.slug %}"><i class="text-primary bi-pencil-square "></i></a>
+                </small>
+              </div>
             </div>
+            
             <span class="text-muted {{cases.id}}">${{cases.total}}</span>
           </li>
           
           {% endfor %}
-          <li class="list-group-item d-flex justify-content-between">
-            <span>Total (USD)$</span>
+          <li class="list-group-item d-flex justify-content-between bg-light px-3 py-2 text-primary  bg-opacity-10">
             <strong>
-              <span class="checkoutTotal" id='checkout_total'>${{checkout_total}}</span>
+              <span>Total (USD)$</span>
+            </strong>
+            <strong>
+              <span class="checkoutTotal bg-seconder" id='checkout_total'>$ {{checkout_total}}</span>
             </strong>
           </li>
         </ul>
       </div>
-      <div class="col-md-7 col-lg-8">
-        <h4 class="mb-3">Billing address</h4>
-        <form class="needs-validation" novalidate="">
-          <div class="row g-3">
+      <div class="col-md-6 col-lg-7">
+        <h5 class="mb-3">members Information</h5>
+        <ul class="list-group mb-5 border border-primary">
+          <li class="list-group-item d-flex justify-content-between lh-sm small">
+            <div class="">
+              <p class="my-0">Full Name:</p>
+            </div>
+            <span class="text-muted">{{membership.full_name}}</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between lh-sm small">
+            <div class="">
+              <p class="my-0">membership ID:</p>
+            </div>
+            <span class="text-muted">{{membership.member_id}}</span>
+          </li>
+        </ul>
+        
+        <h4 class="my-3 py-2">Billing address</h4>
+        <form class="needs-validation " novalidate="">
+          <div class="row g-3 small border border-primary p-3 rounded">
             <div class="col-sm-6">
               <label for="firstName" class="form-label">First name</label>
               <input type="text" class="form-control" id="firstName" placeholder="" value="" required="">
@@ -73,7 +98,7 @@
               </div>
             </div>
 
-            <div class="col-12">
+            <div class="col-sm-6">
               <label for="username" class="form-label">Username</label>
               <div class="input-group has-validation">
                 <span class="input-group-text">@</span>
@@ -84,7 +109,7 @@
               </div>
             </div>
 
-            <div class="col-12">
+            <div class="col-sm-6">
               <label for="email" class="form-label">Email <span class="text-muted">(Optional)</span></label>
               <input type="email" class="form-control" id="email" placeholder="you@example.com">
               <div class="invalid-feedback">
@@ -92,7 +117,7 @@
               </div>
             </div>
 
-            <div class="col-12">
+            <div class="col-sm-6">
               <label for="address" class="form-label">Address</label>
               <input type="text" class="form-control" id="address" placeholder="1234 Main St" required="">
               <div class="invalid-feedback">
@@ -100,7 +125,7 @@
               </div>
             </div>
 
-            <div class="col-12">
+            <div class="col-sm-6">
               <label for="address2" class="form-label">Address 2 <span class="text-muted">(Optional)</span></label>
               <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">
             </div>
@@ -134,117 +159,81 @@
                 Zip code required.
               </div>
             </div>
-          </div>
+          
 
           <hr class="my-4">
-
-          <div class="form-check">
-            <input type="checkbox" class="form-check-input" id="same-address">
-            <label class="form-check-label" for="same-address">Shipping address is the same as my billing address</label>
-          </div>
-
-          <div class="form-check">
-            <input type="checkbox" class="form-check-input" id="save-info">
-            <label class="form-check-label" for="save-info">Save this information for next time</label>
-          </div>
-
-          <hr class="my-4">
-
-          <h4 class="mb-3">Payment</h4>
-
-          <div class="my-3">
+          <div class="col-md-6">
             <div class="form-check">
-              <input id="credit" name="paymentMethod" type="radio" class="form-check-input" checked="" required="">
-              <label class="form-check-label" for="credit">Credit card</label>
+              <input type="checkbox" class="form-check-input" id="same-address">
+              <label class="form-check-label" for="same-address">Shipping address is the same as my billing address</label>
             </div>
+
             <div class="form-check">
-              <input id="debit" name="paymentMethod" type="radio" class="form-check-input" required="">
-              <label class="form-check-label" for="debit">Debit card</label>
+              <input type="checkbox" class="form-check-input" id="save-info">
+              <label class="form-check-label" for="save-info">Save this information for next time</label>
             </div>
-            <div class="form-check">
-              <input id="paypal" name="paymentMethod" type="radio" class="form-check-input" required="">
-              <label class="form-check-label" for="paypal">PayPal</label>
+          </div>
+        </div>
+         
+
+          <h5 class="my-3 py-3">Payment</h5>
+          <div class="g-3 small border border-primary p-3 rounded">
+            <div class="my-3 d-flex justify-content-between lh-sm ">
+              <div class="form-check">
+                <input id="credit" name="paymentMethod" type="radio" class="form-check-input" checked="" required="">
+                <label class="form-check-label" for="credit">Credit card</label>
+              </div>
+              <div class="form-check">
+                <input id="debit" name="paymentMethod" type="radio" class="form-check-input" required="">
+                <label class="form-check-label" for="debit">Debit card</label>
+              </div>
+              <div class="form-check">
+                <input id="paypal" name="paymentMethod" type="radio" class="form-check-input" required="">
+                <label class="form-check-label" for="paypal">PayPal</label>
+              </div>
+            </div>
+            <hr class="my-3">
+            <div class="row gy-3">
+              <div class="col-md-6">
+                <label for="cc-name" class="form-label">Name on card</label>
+                <input type="text" class="form-control form-control-sm" id="cc-name" placeholder="" required="">
+                <small class="text-muted">Full name as displayed on card</small>
+                <div class="invalid-feedback">
+                  Name on card is required
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label for="cc-number" class="form-label">Credit card number</label>
+                <input type="text" class="form-control form-control-sm" id="cc-number" placeholder="" required="">
+                <div class="invalid-feedback">
+                  Credit card number is required
+                </div>
+              </div>
+
+              <div class="col-md-3">
+                <label for="cc-expiration" class="form-label">Expiration</label>
+                <input type="text" class="form-control form-control-sm" id="cc-expiration" placeholder="" required="">
+                <div class="invalid-feedback">
+                  Expiration date required
+                </div>
+              </div>
+
+              <div class="col-md-3">
+                <label for="cc-cvv" class="form-label">CVV</label>
+                <input type="text" class="form-control form-control-sm" id="cc-cvv" placeholder="" required="">
+                <div class="invalid-feedback">
+                  Security code required
+                </div>
+              </div>
             </div>
           </div>
 
-          <div class="row gy-3">
-            <div class="col-md-6">
-              <label for="cc-name" class="form-label">Name on card</label>
-              <input type="text" class="form-control" id="cc-name" placeholder="" required="">
-              <small class="text-muted">Full name as displayed on card</small>
-              <div class="invalid-feedback">
-                Name on card is required
-              </div>
-            </div>
-
-            <div class="col-md-6">
-              <label for="cc-number" class="form-label">Credit card number</label>
-              <input type="text" class="form-control" id="cc-number" placeholder="" required="">
-              <div class="invalid-feedback">
-                Credit card number is required
-              </div>
-            </div>
-
-            <div class="col-md-3">
-              <label for="cc-expiration" class="form-label">Expiration</label>
-              <input type="text" class="form-control" id="cc-expiration" placeholder="" required="">
-              <div class="invalid-feedback">
-                Expiration date required
-              </div>
-            </div>
-
-            <div class="col-md-3">
-              <label for="cc-cvv" class="form-label">CVV</label>
-              <input type="text" class="form-control" id="cc-cvv" placeholder="" required="">
-              <div class="invalid-feedback">
-                Security code required
-              </div>
-            </div>
-          </div>
-
-          <hr class="my-4">
-
-          <button class="w-100 btn btn-primary btn-lg" type="submit">Continue to checkout</button>
+          <button class="w-100 btn-lg btn btn-sm btn-primary px-4 py-2 my-4 rounded-pill" type="submit">Continue to checkout</button>
         </form>
       </div>
     </div>
 
-
-    <h2>Checkout</h2>
-    <form method="post" novalidate>
-      {% csrf_token %}
-      <div class="row">
-        <div class="col-md-6 border">
-          <h4>payment_case Information</h4>
-          {% for cases in payment_cases_cart %}
-          {{cases.quantity}} -
-          {{cases.payment_case}}
-          {{cases.total}}
-          {% endfor %}
-        </div>
-        <div class="col-md-6">
-          <h4>Billing Information</h4>
-          {{ form|crispy }}
-          <input type="hidden" name="{{ form.payment_case.name }}" value="{{ form.payment_case.value }}">
-        </div>
-        <div class="col-md-6">
-          <h4>Card Information</h4>
-          <div class="form-group">
-            <label for="card_number">Card Number</label>
-            <input type="text" id="card_number" class="form-control" placeholder="Card Number">
-          </div>
-          <div class="form-group">
-            <label for="expiry_date">Expiry Date</label>
-            <input type="text" id="expiry_date" class="form-control" placeholder="MM/YY">
-          </div>
-          <div class="form-group">
-            <label for="cvc">CVC</label>
-            <input type="text" id="cvc" class="form-control" placeholder="CVC">
-          </div>
-        </div>
-      </div>
-      <button type="submit" class="btn btn-success mt-3">Submit Payment</button>
-    </form>
 </div>
 
 </div>

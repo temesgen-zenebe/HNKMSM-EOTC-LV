@@ -3,6 +3,8 @@ from django.urls import path
 from . import views  # Import your view handling the webhook
 from .views import (
     AddToPaymentCaseCartView,
+    PaymentCaseCartDeleteView, 
+    PaymentCaseCartUpdateView,
     PaymentCaseCartListView,
     CheckoutView, 
     PaymentsHistoryListView, 
@@ -20,6 +22,8 @@ urlpatterns = [
     path('payment-cases/<slug:slug>/detail/', PaymentCaseDetailView.as_view(), name='payment_case_detail'),
     path('payment-cases/addToPaymentCaseCartView/<slug:slug>/', AddToPaymentCaseCartView.as_view(), name='addToPaymentCaseCart_view'),
     path('payment-cases/paymentCaseCartView/', PaymentCaseCartListView.as_view(), name='paymentCaseCart_view'),
+    path('payment-cases/delete/<slug:slug>/', PaymentCaseCartDeleteView.as_view(), name='DeleteCaseCart'),
+    path('payment-cases/update/<slug:slug>/', PaymentCaseCartUpdateView.as_view(), name='UpdatedCaseCart'),
     path('paymentsHistoryList/', PaymentsHistoryListView.as_view(), name='paymentsHistoryList'),
     path('checkout/', CheckoutView.as_view(), name='checkout_view'),
     path('confirmation/', PaymentConfirmationView.as_view(), name='payment_confirmation'),
@@ -27,3 +31,4 @@ urlpatterns = [
 
     # Add other URL patterns as needed
 ]
+

@@ -1,6 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView,ListView,DetailView
+from django.views.generic.edit import DeleteView, UpdateView
 from django.views import View
 from django.shortcuts import get_object_or_404, redirect
 from .models import PaymentCase, PaymentCaseCartList,BillingInformation, Payment,PaymentHistory, PaymentCaseLists
@@ -8,7 +9,7 @@ from members.models import MembersUpdateInformation
 from django.views.generic import FormView
 from .forms import BillingForm, CardInformationForm
 import uuid
-import json
+
 import stripe
 import logging
 from datetime import datetime
@@ -17,6 +18,9 @@ from django.conf import settings
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
+from django.urls import reverse_lazy
+from .models import PaymentCaseCartList
+from .forms import PaymentCaseCartForm  # Assume you have created a form for updating
 
 class PaymentMenuView(ListView):
     model = PaymentCaseLists
@@ -55,18 +59,21 @@ class AddToPaymentCaseCartView(View):
             cart_item.save()
         return redirect('payments:paymentCaseCart_view')
     
-class PaymentCaseCartListView(ListView):
+class PaymentCaseCartListView(LoginRequiredMixin,ListView):
     model = PaymentCaseCartList
     template_name = 'payments/checkout.html'  # Specify your template name
     context_object_name = 'payment_cases_cart'  # Specify the context object name to use in the template
-    paginate_by = 10  # Optional: to paginate the list if there are many items
-
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
         # Fetching all cart items from the database
         payment_cases_cart = self.get_queryset()
 
+        # Membership information
+        membership = MembersUpdateInformation.objects.filter(user=self.request.user).first()
+
+        
         # Calculating total and adding computed values
         for case in payment_cases_cart:
             case.total = case.quantity * case.payment_case.amount  # Dynamically compute total for each item
@@ -79,9 +86,31 @@ class PaymentCaseCartListView(ListView):
         context['payment_cases_cart'] = payment_cases_cart
         context['checkout_total'] = total
         context['cart_count'] = cart_count
+        context['membership'] = membership
 
         return context
- 
+
+
+class PaymentCaseCartDeleteView(LoginRequiredMixin,DeleteView):
+    model = PaymentCaseCartList
+    template_name = 'payments/delete_case_cart.html'  # Template for confirmation (optional)
+    success_url = reverse_lazy('payments:paymentCaseCart_view')  # Redirect to the cart list view after deletion
+
+    def get_queryset(self):
+        # Optional: Filter queryset if needed, e.g., by user
+        return super().get_queryset()
+
+class PaymentCaseCartUpdateView(LoginRequiredMixin, UpdateView):
+    model = PaymentCaseCartList
+    form_class = PaymentCaseCartForm  # Form for updating the cart case
+    template_name = 'payments/update_case_cart.html'  # Template for updating
+    success_url = reverse_lazy('payments:paymentCaseCart_view')  # Redirect to the cart list view after update
+
+    def get_queryset(self):
+        # Optional: Filter queryset if needed, e.g., by user
+        return super().get_queryset()
+
+
 class PaymentsHistoryListView(LoginRequiredMixin,ListView):
     model = PaymentHistory
     template_name = 'payments/paymentHistory_list.html'

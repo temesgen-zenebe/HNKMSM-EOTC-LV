@@ -1,6 +1,7 @@
 from django import forms
 from .models import BillingInformation, PaymentCaseCartList
 
+
 class BillingForm(forms.ModelForm):
     payment_case = forms.CharField(widget=forms.HiddenInput(), required=False)
 
@@ -27,3 +28,20 @@ class CardInformationForm(forms.Form):
     card_number = forms.CharField(max_length=16, min_length=16, widget=forms.NumberInput(attrs={'placeholder': 'Card Number'}))
     expiry_date = forms.CharField(max_length=5, widget=forms.TextInput(attrs={'placeholder': 'MM/YY'}))
     cvc = forms.CharField(max_length=4, widget=forms.NumberInput(attrs={'placeholder': 'CVC'}))
+
+
+
+class PaymentCaseCartForm(forms.ModelForm):
+    class Meta:
+        model = PaymentCaseCartList
+        fields = ['quantity']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['quantity'].widget.attrs.update({
+            'min': 1,  # Enforce minimum value
+            'class': 'form-control form-control-sm',  # Add Bootstrap style
+        })
+        # self.fields['payment_case'].widget.attrs.update({
+        #     'class': 'form-control form-control-sm',  # Add Bootstrap style
+        # })
