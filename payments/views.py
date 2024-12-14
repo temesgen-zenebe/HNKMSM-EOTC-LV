@@ -42,6 +42,7 @@ class PaymentCaseListView(ListView):
         context = super().get_context_data(**kwargs)
         context['payment_service_cases'] = PaymentCaseLists.objects.filter(category='service')
         context['payment_Other_cases'] = PaymentCaseLists.objects.exclude(category='service')
+        context['payment_donation_cases'] = PaymentCaseLists.objects.filter(category='donation')
         return context
 
 class PaymentCaseDetailView(DetailView): 

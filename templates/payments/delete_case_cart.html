@@ -32,8 +32,8 @@
         <hr>
         <form method="post">
           {% csrf_token %}
-          <button type="submit" class="btn btn-danger btn-sm">Confirm</button>
-          <a href="{% url 'payments:paymentCaseCart_view' %}" class="btn btn-secondary btn-sm">Cancel</a>
+          <button type="submit" class="btn btn-danger btn-sm px-4 py-1 rounded-pill">Confirm</button>
+          <a href="{% url 'payments:paymentCaseCart_view' %}" class="btn btn-secondary btn-sm                                                               px-4 py-2 rounded-pill">Cancel</a>
         </form>
     </div>
 </div>

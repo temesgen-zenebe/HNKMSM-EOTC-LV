@@ -57,7 +57,7 @@
   {% endif %}
   
   {% if payment_Other_cases %} 
-    <div class="px-3 my-4 border-primary  border-bottom text-primary">
+    <div class="px-3 px-4 my-5 border-primary  border-bottom text-primary">
       <h3 class="text-primary fs-5">Other Payment-Related Fees </h3>
         <span class="small px-6">ከሌሎች ጉዳዮች ጋር የተያያዙ ክፍያዎች</span>
     </div>
@@ -86,6 +86,41 @@
             </div>
             {% endif %}
           {% endfor %}
+    </div>
+    {% endif %}
+    {% if payment_donation_cases %}
+    <div class="px-3 py-4 my-5 border-primary  border-bottom text-primary">
+      <h3 class="text-primary fs-3">Donation cases List</h3>
+        <span class="small px-6"></span>
+    </div>
+    <div class="row row-cols-1 row-cols-md-3 g-2 my-2">
+      {% for case in payment_donation_cases %}
+      <div class="col">
+          <div class="card shadow border border-primary">
+              {% if case.image %}
+              <img src="{{ case.image.url }}" class="img-fluid rounded-top img-fixed-size " alt="{{ case.title }}">
+              {% endif %}
+              <div class="card-body small">
+                  <h3 class="card-title fs-5">{{ case.title }}</h3>
+                  <hr />
+                  <div class="card-text small">Description: {{ case.description|truncatewords:10|safe }}</div>
+                  <hr />
+                  <p class="card-text text-success"><strong>Amount: ${{ case.amount }}</strong></p>
+                  <hr />
+                  <div class="btn-group gap-3">
+                      <a href="{% url 'pages:donation-detail' case.slug %}" class="btn btn-sm px-4 py-2 rounded-pill btn-primary">Details</a>
+                  </div>
+                  <a href="{{ case.stripsPayment_link }}" class="btn btn-sm btn-primary px-4 py-2 rounded-pill" target="_blank">Go to Payment</a> 
+              </div>
+          </div>
+      </div>
+      {% empty %}
+          <div class="col">
+              <div class="card shadow border border-primary p-3">
+                  <h3 class="fs-5 small">Sorry! No donation cases list found, try other time.Thanks</h3>
+              </div>
+          </div>
+      {% endfor %}
     </div>
     {% endif %}
   {% else %}

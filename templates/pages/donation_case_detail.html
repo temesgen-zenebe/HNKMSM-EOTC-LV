@@ -43,8 +43,12 @@
             <p class="card-text">Description : {{ donation_case.description|safe }}</p>
             <hr />
             <div class="btn-group gap-3">
-               <a href="{{donation_case.stripsPayment_link}}" class="btn btn-sm px-4 py-2 rounded-pill btn-primary" target="_blank">Go to Payment </a>
-               <a href="{% url 'pages:donation-caseList' %}" class="btn btn-sm px-4 py-2 rounded-pill btn-primary">Back to List</a>
+              <form action="{% url 'payments:addToPaymentCaseCart_view' slug=donation_case.slug %}" method="post">
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-sm px-4 py-2 rounded-pill btn-primary">Add to Cart</button>
+              </form>
+              <a href="{{donation_case.stripsPayment_link}}" class="btn btn-sm px-4 py-2 rounded-pill btn-primary" target="_blank">Go to Payment </a>
+              <a href="{% url 'pages:donation-caseList' %}" class="btn btn-sm px-4 py-2 rounded-pill btn-primary">Back to List</a>
              </div>
           </div>
         </div>

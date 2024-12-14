@@ -30,10 +30,11 @@
 <div class="container mt-5">
     <div class="row g-5">
       <div class="col-md-6 col-lg-5 order-md-last ">
-        <h4 class="d-flex justify-content-between align-items-center mb-3">
+        <h3 class="d-flex justify-content-between align-items-center mb-3">
           <span class="text-dark">Checkout List</span>
           <span id="cart_count" class="badge bg-primary rounded-pill">{{cart_count}}</span>
-        </h4>
+          
+        </h3>
         <ul class="list-group mb-3 border border-primary">
           {% for cases in payment_cases_cart %}
           <li class="list-group-item d-flex justify-content-between lh-sm small">
@@ -61,9 +62,14 @@
             </strong>
           </li>
         </ul>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+          <a href="{% url "payments:payment_case_list" %}" class="w-100 btn btn-sm btn-primary px-4 py-2 my-1 rounded-pill">Add more payment </a>
+          {% comment %} <button class="w-100 btn btn-sm btn-primary px-4 py-2 my-1 rounded-pill" type="button">Button</button> {% endcomment %}
+        </div>
+        
       </div>
       <div class="col-md-6 col-lg-7">
-        <h5 class="mb-3">members Information</h5>
+        <h3 class="mb-3">members Information</h3>
         <ul class="list-group mb-5 border border-primary">
           <li class="list-group-item d-flex justify-content-between lh-sm small">
             <div class="">
@@ -79,7 +85,7 @@
           </li>
         </ul>
         
-        <h4 class="my-3 py-2">Billing address</h4>
+        <h3 class="my-3 py-2">Billing address</h3>
         <form class="needs-validation " novalidate="">
           <div class="row g-3 small border border-primary p-3 rounded">
             <div class="col-sm-6">
@@ -175,8 +181,7 @@
           </div>
         </div>
          
-
-          <h5 class="my-3 py-3">Payment</h5>
+          <h3 class="my-3 py-3">Payment</h3>
           <div class="g-3 small border border-primary p-3 rounded">
             <div class="my-3 d-flex justify-content-between lh-sm ">
               <div class="form-check">
