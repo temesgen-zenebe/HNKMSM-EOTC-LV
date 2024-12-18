@@ -6,6 +6,7 @@ from django.utils import timezone
 from ckeditor.fields import RichTextField
 from decimal import Decimal
 import uuid
+from members.models import MembersUpdateInformation
 
 class Categories(models.Model):
     title = models.CharField(max_length=255)
@@ -55,13 +56,12 @@ class BillingInformation(models.Model):
     def __str__(self):
         return f"{self.user}'s Billing Information"
 
-
 class Payment(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     billing_info = models.ForeignKey(BillingInformation, on_delete=models.CASCADE)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     payment_case = models.CharField(blank=True, null=True)
-    payment_id = models.CharField(max_length=100, unique=True)
+    
     status = models.CharField(max_length=50)
     created = models.DateTimeField(auto_now_add=True)
 
@@ -69,15 +69,45 @@ class Payment(models.Model):
         return f"Payment {self.payment_id} by {self.user}"
 
 
+    
+class PaymentCaseCartList(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    membersID = models.ForeignKey(MembersUpdateInformation, on_delete=models.CASCADE,blank=True, null=True)
+    payment_case = models.ForeignKey('PaymentCaseLists', on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
+    total = models.DecimalField(default=0.00, max_digits=10, decimal_places=2)
+    created = models.DateTimeField(auto_now_add=True)  
+    slug = models.SlugField(max_length=255, unique=True, blank=True)
+    # payment_status = models.CharField(max_length=50, default='pending')  # pending, paid, failed
 
+    
+    
+    # Save method override to create slug
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            value = str(self.payment_case)
+            self.slug = unique_slug(value, type(self))
+            
+        # Calculate subtotal and update total
+        if self.payment_case:
+            self.total = Decimal(self.payment_case.amount) * self.quantity
+            
+        super(PaymentCaseCartList, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return f"{self.quantity} of {self.payment_case.title}"   
 
 class PaymentHistory(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    billing_info = models.ForeignKey(BillingInformation, on_delete=models.CASCADE,blank=True, null=True)
     payment_email = models.EmailField(blank=True, null=True)
     paymentConfirmation = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
+    PaymentCaseCart = models.OneToOneField(PaymentCaseCartList, on_delete=models.CASCADE,blank=True, null=True)
     payment_case = models.ForeignKey('PaymentCaseLists', on_delete=models.CASCADE)
+    is_paid = models.BooleanField(default=False)
     payment_date = models.DateTimeField(editable=False)
+    payment_id = models.CharField(max_length=100, blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True)
     slug = models.SlugField(max_length=255, unique=True)
 
@@ -91,7 +121,8 @@ class PaymentHistory(models.Model):
         
     def __str__(self):
         return f"Payment of {self.amount} by {self.user.username}"
-
+    
+#new strip integration  
 class PaymentCaseLists(models.Model):
     Category = (
         ('service', 'service'),
@@ -127,28 +158,53 @@ class PaymentCaseLists(models.Model):
 
     def __str__(self):
         return self.title
-    
-class PaymentCaseCartList(models.Model):
+       
+       
+class CartPaymentCase(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    payment_case = models.ForeignKey('PaymentCaseLists', on_delete=models.CASCADE)
+    membersID = models.ForeignKey(MembersUpdateInformation, on_delete=models.CASCADE,blank=True, null=True)
+    payment_cases = models.ForeignKey(PaymentCaseLists, on_delete=models.CASCADE, blank=True,null=True)
     quantity = models.PositiveIntegerField(default=1)
     total = models.DecimalField(default=0.00, max_digits=10, decimal_places=2)
-    created = models.DateTimeField(auto_now_add=True)  
-    slug = models.SlugField(max_length=255, unique=False, null=True, blank=True)
-
-    
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    slug = models.SlugField(unique=True)
     
     # Save method override to create slug
     def save(self, *args, **kwargs):
         if not self.slug:
-            value = str(self.payment_case)
-            self.slug = unique_slug(value, type(self))
-            
-        # Calculate subtotal and update total
-        if self.payment_case:
-            self.total = Decimal(self.payment_case.amount) * self.quantity
-            
-        super(PaymentCaseCartList, self).save(*args, **kwargs)
+            value = f"cart-{self.user.username}-{self.created}"
+            self.slug = unique_slug(value, type(self)) 
+    
+        # Calculate total if `payment_cases` exists
+        if self.payment_cases:
+            self.total = Decimal(self.payment_cases.amount) * self.quantity
+        
+        # Save the object
+        super(CartPaymentCase, self).save(*args, **kwargs)
 
     def __str__(self):
-        return f"{self.quantity} of {self.payment_case.title}"   
+        return f"Cart for {self.quantity} of {self.payment_cases}"
+
+        
+
+    
+  
+  
+class OrderPaymentCase(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    cart_payment = models.OneToOneField(CartPaymentCase, on_delete=models.CASCADE)
+    payment_intent_id = models.CharField(max_length=255,blank=True, null=True)
+    is_paid = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    slug = models.SlugField(unique=True)
+    
+    # Save method override to create slug
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            value = str(self.cart_payment.membersID)
+            self.slug = unique_slug(value, type(self)) 
+        super(OrderPaymentCase, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return self.payment_intent_id  

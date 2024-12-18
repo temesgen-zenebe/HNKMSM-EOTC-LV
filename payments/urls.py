@@ -28,7 +28,10 @@ urlpatterns = [
     path('checkout/', CheckoutView.as_view(), name='checkout_view'),
     path('confirmation/', PaymentConfirmationView.as_view(), name='payment_confirmation'),
     path('stripe_webhook/', views.stripe_webhook, name='stripe_webhook'),
-
+    #create_checkout_session
+    # path('create-checkout-session/<slug:slug>/', views.create_checkout_session, name='create_checkout_session'),
+    # path('success/', views.success_view, name='success'),
+    # path('cancel/', views.cancel_view, name='cancel'),
     # Add other URL patterns as needed
 ]
 

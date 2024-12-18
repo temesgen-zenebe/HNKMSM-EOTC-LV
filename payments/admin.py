@@ -6,7 +6,12 @@ from .models import (
     PaymentCaseCartList,
     PaymentHistory,
     PaymentCaseLists,
+    
+    OrderPaymentCase,
+    CartPaymentCase
     )
+admin.site.register(OrderPaymentCase)
+admin.site.register(CartPaymentCase)
 
 @admin.register(Categories)
 class CategoriesAdmin(admin.ModelAdmin):

@@ -1,3 +1,4 @@
+from pyexpat.errors import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView,ListView,DetailView
@@ -9,7 +10,8 @@ from members.models import MembersUpdateInformation
 from django.views.generic import FormView
 from .forms import BillingForm, CardInformationForm
 import uuid
-
+from django.http import JsonResponse
+import json
 import stripe
 import logging
 from datetime import datetime
@@ -17,9 +19,7 @@ from django.utils import timezone
 from django.conf import settings
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-import json
-from django.urls import reverse_lazy
-from .models import PaymentCaseCartList
+from .models import PaymentCaseCartList,CartPaymentCase
 from .forms import PaymentCaseCartForm  # Assume you have created a form for updating
 
 class PaymentMenuView(ListView):
@@ -50,18 +50,26 @@ class PaymentCaseDetailView(DetailView):
     template_name = 'payments/payment_case_detail.html'  # Specify your detail view template
     context_object_name = 'payment_case'
      
-class AddToPaymentCaseCartView(View):
+class AddToPaymentCaseCartView(LoginRequiredMixin ,View):
     
     def post(self, request, slug):
         payment_case = get_object_or_404(PaymentCaseLists, slug=slug)
-        cart_item, created = PaymentCaseCartList.objects.get_or_create(user=request.user, payment_case=payment_case)
+        membership = MembersUpdateInformation.objects.filter(user=request.user).first()
+        
+        cart_item, created = CartPaymentCase.objects.get_or_create(
+            user=request.user,
+            membersID=membership,  # Ensure this is the correct instance
+            payment_cases=payment_case,  # Pass the correct ForeignKey instance
+            defaults={'quantity': 1}
+        )
         if not created:
             cart_item.quantity += 1
             cart_item.save()
         return redirect('payments:paymentCaseCart_view')
-    
+
+
 class PaymentCaseCartListView(LoginRequiredMixin,ListView):
-    model = PaymentCaseCartList
+    model = CartPaymentCase
     template_name = 'payments/checkout.html'  # Specify your template name
     context_object_name = 'payment_cases_cart'  # Specify the context object name to use in the template
     
@@ -77,7 +85,7 @@ class PaymentCaseCartListView(LoginRequiredMixin,ListView):
         
         # Calculating total and adding computed values
         for case in payment_cases_cart:
-            case.total = case.quantity * case.payment_case.amount  # Dynamically compute total for each item
+            case.total = case.quantity * case.payment_cases.amount  # Dynamically compute total for each item
 
         # Aggregate values
         total = sum(case.total for case in payment_cases_cart)
@@ -91,9 +99,8 @@ class PaymentCaseCartListView(LoginRequiredMixin,ListView):
 
         return context
 
-
 class PaymentCaseCartDeleteView(LoginRequiredMixin,DeleteView):
-    model = PaymentCaseCartList
+    model = CartPaymentCase
     template_name = 'payments/delete_case_cart.html'  # Template for confirmation (optional)
     success_url = reverse_lazy('payments:paymentCaseCart_view')  # Redirect to the cart list view after deletion
 
@@ -102,7 +109,7 @@ class PaymentCaseCartDeleteView(LoginRequiredMixin,DeleteView):
         return super().get_queryset()
 
 class PaymentCaseCartUpdateView(LoginRequiredMixin, UpdateView):
-    model = PaymentCaseCartList
+    model = CartPaymentCase
     form_class = PaymentCaseCartForm  # Form for updating the cart case
     template_name = 'payments/update_case_cart.html'  # Template for updating
     success_url = reverse_lazy('payments:paymentCaseCart_view')  # Redirect to the cart list view after update
@@ -110,7 +117,6 @@ class PaymentCaseCartUpdateView(LoginRequiredMixin, UpdateView):
     def get_queryset(self):
         # Optional: Filter queryset if needed, e.g., by user
         return super().get_queryset()
-
 
 class PaymentsHistoryListView(LoginRequiredMixin,ListView):
     model = PaymentHistory
@@ -172,10 +178,8 @@ class CheckoutView(FormView):
 class PaymentConfirmationView(TemplateView):
     template_name = 'payments/payment_confirmation.html'
     
-    
-    
-    
-    
+
+  
 # Set your secret key. Remember to switch to your live secret key in production.
 # This is your Stripe CLI webhook secret for testing your endpoint locally.
 stripe.api_key = settings.STRIPE_SECRET_KEY

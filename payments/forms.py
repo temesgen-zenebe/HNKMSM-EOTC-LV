@@ -1,5 +1,5 @@
 from django import forms
-from .models import BillingInformation, PaymentCaseCartList
+from .models import BillingInformation, PaymentCaseCartList,CartPaymentCase
 
 
 class BillingForm(forms.ModelForm):
@@ -29,11 +29,9 @@ class CardInformationForm(forms.Form):
     expiry_date = forms.CharField(max_length=5, widget=forms.TextInput(attrs={'placeholder': 'MM/YY'}))
     cvc = forms.CharField(max_length=4, widget=forms.NumberInput(attrs={'placeholder': 'CVC'}))
 
-
-
 class PaymentCaseCartForm(forms.ModelForm):
     class Meta:
-        model = PaymentCaseCartList
+        model = CartPaymentCase
         fields = ['quantity']
 
     def __init__(self, *args, **kwargs):

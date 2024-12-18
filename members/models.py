@@ -53,7 +53,7 @@ class MembersUpdateInformation(models.Model):
         
     
     def __str__(self):
-        return self.full_name
+        return self.member_id
 
 class Child(models.Model):
     GENDER = (

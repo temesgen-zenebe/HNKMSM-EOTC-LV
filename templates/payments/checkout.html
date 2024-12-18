@@ -39,9 +39,9 @@
           {% for cases in payment_cases_cart %}
           <li class="list-group-item d-flex justify-content-between lh-sm small">
             <div class="">
-              <p class="my-0">{{cases.payment_case}}</p>
+              <p class="my-0">{{cases.payment_cases}}</p>
               <div class="d-flex justify-content-start py-1">
-                <small class="text-muted">{{cases.quantity}} x {{cases.payment_case.amount}}</small>
+                <small class="text-muted">{{cases.quantity}} x {{cases.payment_cases.amount}}</small>
                 <small class="text-muted small px-3">
                   <a href="{% url 'payments:DeleteCaseCart' slug=cases.slug %}" ><i class="text-primary bi-trash-fill px-1"></i></a>
                   <a href="{% url 'payments:UpdatedCaseCart' slug=cases.slug %}"><i class="text-primary bi-pencil-square "></i></a>
@@ -68,6 +68,7 @@
         </div>
         
       </div>
+      <!--members Information,Billing address,Payment -->
       <div class="col-md-6 col-lg-7">
         <h3 class="mb-3">members Information</h3>
         <ul class="list-group mb-5 border border-primary">
