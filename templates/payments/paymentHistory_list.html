@@ -32,7 +32,7 @@
         <div class="card-header bg-primary small">
           <h3 class="card-title fs-5">All Payment History</h3>
         </div>
-        {% if paymentHistoryList %}
+        {% if paymentHistoryList1 %}
         <div class="card-body small">
           <table class="table table-striped">
             <thead>
@@ -44,7 +44,7 @@
               </tr>
             </thead>
             <tbody>
-              {% for history in paymentHistoryList %}
+              {% for history in paymentHistoryList1 %}
               <tr>
                 <td>{{ history.payment_email }}</td>
                 <td>{{ history.payment_case }}</td>

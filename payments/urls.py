@@ -6,8 +6,6 @@ from .views import (
     PaymentCaseCartDeleteView, 
     PaymentCaseCartUpdateView,
     PaymentCaseCartListView,
-    CheckoutView, 
-    PaymentsHistoryListView, 
     PaymentCaseListView, 
     PaymentCaseDetailView, 
     PaymentConfirmationView, 
@@ -24,8 +22,6 @@ urlpatterns = [
     path('payment-cases/paymentCaseCartView/', PaymentCaseCartListView.as_view(), name='paymentCaseCart_view'),
     path('payment-cases/delete/<slug:slug>/', PaymentCaseCartDeleteView.as_view(), name='DeleteCaseCart'),
     path('payment-cases/update/<slug:slug>/', PaymentCaseCartUpdateView.as_view(), name='UpdatedCaseCart'),
-    path('paymentsHistoryList/', PaymentsHistoryListView.as_view(), name='paymentsHistoryList'),
-    path('checkout/', CheckoutView.as_view(), name='checkout_view'),
     path('confirmation/', PaymentConfirmationView.as_view(), name='payment_confirmation'),
     path('stripe_webhook/', views.stripe_webhook, name='stripe_webhook'),
     #create_checkout_session

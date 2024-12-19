@@ -29,45 +29,6 @@
 </div>
 <div class="container mt-5">
     <div class="row g-5">
-      <div class="col-md-6 col-lg-5 order-md-last ">
-        <h3 class="d-flex justify-content-between align-items-center mb-3">
-          <span class="text-dark">Checkout List</span>
-          <span id="cart_count" class="badge bg-primary rounded-pill">{{cart_count}}</span>
-          
-        </h3>
-        <ul class="list-group mb-3 border border-primary">
-          {% for cases in payment_cases_cart %}
-          <li class="list-group-item d-flex justify-content-between lh-sm small">
-            <div class="">
-              <p class="my-0">{{cases.payment_cases}}</p>
-              <div class="d-flex justify-content-start py-1">
-                <small class="text-muted">{{cases.quantity}} x {{cases.payment_cases.amount}}</small>
-                <small class="text-muted small px-3">
-                  <a href="{% url 'payments:DeleteCaseCart' slug=cases.slug %}" ><i class="text-primary bi-trash-fill px-1"></i></a>
-                  <a href="{% url 'payments:UpdatedCaseCart' slug=cases.slug %}"><i class="text-primary bi-pencil-square "></i></a>
-                </small>
-              </div>
-            </div>
-            
-            <span class="text-muted {{cases.id}}">${{cases.total}}</span>
-          </li>
-          
-          {% endfor %}
-          <li class="list-group-item d-flex justify-content-between bg-light px-3 py-2 text-primary  bg-opacity-10">
-            <strong>
-              <span>Total (USD)$</span>
-            </strong>
-            <strong>
-              <span class="checkoutTotal bg-seconder" id='checkout_total'>$ {{checkout_total}}</span>
-            </strong>
-          </li>
-        </ul>
-        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-          <a href="{% url "payments:payment_case_list" %}" class="w-100 btn btn-sm btn-primary px-4 py-2 my-1 rounded-pill">Add more payment </a>
-          {% comment %} <button class="w-100 btn btn-sm btn-primary px-4 py-2 my-1 rounded-pill" type="button">Button</button> {% endcomment %}
-        </div>
-        
-      </div>
       <!--members Information,Billing address,Payment -->
       <div class="col-md-6 col-lg-7">
         <h3 class="mb-3">members Information</h3>
@@ -85,8 +46,49 @@
             <span class="text-muted">{{membership.member_id}}</span>
           </li>
         </ul>
-        
-        <h3 class="my-3 py-2">Billing address</h3>
+        <!--Checkout List -->
+        <div>
+          <h3 class="d-flex justify-content-between align-items-center mb-3">
+            <span class="text-dark">Checkout List</span>
+            <span id="cart_count" class="badge bg-primary rounded-pill">{{cart_count}}</span>
+            
+          </h3>
+          <ul class="list-group mb-3 border border-primary">
+            {% for cases in payment_cases_cart %}
+            <li class="list-group-item d-flex justify-content-between lh-sm small">
+              <div class="">
+                <p class="my-0">{{cases.payment_cases}}</p>
+                <div class="d-flex justify-content-start py-1">
+                  <small class="text-muted">{{cases.quantity}} x {{cases.payment_cases.amount}}</small>
+                  <small class="text-muted small px-3">
+                    <a href="{% url 'payments:DeleteCaseCart' slug=cases.slug %}" ><i class="text-primary bi-trash-fill px-1"></i></a>
+                    <a href="{% url 'payments:UpdatedCaseCart' slug=cases.slug %}"><i class="text-primary bi-pencil-square "></i></a>
+                  </small>
+                </div>
+              </div>
+              
+              <span class="text-muted {{cases.id}}">${{cases.total}}</span>
+            </li>
+            
+            {% endfor %}
+            <li class="list-group-item d-flex justify-content-between bg-light px-3 py-2 text-primary  bg-opacity-10">
+              <strong>
+                <span>Total (USD)$</span>
+              </strong>
+              <strong>
+                <span class="checkoutTotal bg-seconder" id='checkout_total'>$ {{checkout_total}}</span>
+              </strong>
+            </li>
+          </ul>
+          <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <a href="{% url "payments:payment_case_list" %}" class="w-100 btn btn-sm btn-primary px-4 py-2 my-1 rounded-pill">Add more payment </a>
+            {% comment %} <button class="w-100 btn btn-sm btn-primary px-4 py-2 my-1 rounded-pill" type="button">Button</button> {% endcomment %}
+          </div>
+          <button class="w-100 btn-lg btn btn-sm btn-primary px-4 py-2 my-4 rounded-pill" type="submit">Continue to checkout</button>
+        </div>
+        <!--end  Checkout List -->
+        {% comment %} 
+        <h3 class="my-5 py-2">Billing address</h3>
         <form class="needs-validation " novalidate="">
           <div class="row g-3 small border border-primary p-3 rounded">
             <div class="col-sm-6">
@@ -233,10 +235,10 @@
                 </div>
               </div>
             </div>
-          </div>
-
-          <button class="w-100 btn-lg btn btn-sm btn-primary px-4 py-2 my-4 rounded-pill" type="submit">Continue to checkout</button>
-        </form>
+          </div> 
+        </form> {% endcomment %}
+          
+        
       </div>
     </div>
 
