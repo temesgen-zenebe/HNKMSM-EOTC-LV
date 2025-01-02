@@ -4,11 +4,10 @@ from django.urls import reverse_lazy
 from django.views.generic import TemplateView,ListView,DetailView
 from django.views.generic.edit import DeleteView, UpdateView
 from django.views import View
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import get_object_or_404, redirect, render
 from members.models import MembersUpdateInformation
 from django.views.generic import FormView
 import uuid
-from django.http import JsonResponse
 import json
 import stripe
 import logging
@@ -17,8 +16,10 @@ from django.utils import timezone
 from django.conf import settings
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from .models import PaymentCaseLists, CartPaymentCase
+from .models import PaymentCaseLists, CartPaymentCase,PaymentCaseCart
 from .forms import PaymentCaseCartForm  # Assume you have created a form for updating
+from decimal import Decimal
+from .models import PaymentCases,CartPayment,CartPaymentCases,Category
 
 class PaymentMenuView(ListView):
     model = PaymentCaseLists
@@ -31,43 +32,94 @@ class PaymentMenuView(ListView):
         return context
 
 class PaymentCaseListView(ListView):
-    model = PaymentCaseLists
+    model = PaymentCases
     template_name = 'payments/payment_case_list.html'  # Specify your template name
     context_object_name = 'payment_cases'  # Specify the context object name to use in the template
     paginate_by = 10  # Optional: to paginate the list if there are many items
     
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     context['payment_service_cases'] = PaymentCases.objects.filter(category='service')
+    #     context['payment_Other_cases'] = PaymentCases.objects.exclude(category='service')
+    #     context['payment_donation_cases'] = PaymentCases.objects.filter(category='donation')
+    #     context['payment'] = PaymentCases.objects.all()
+    #     return context
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['payment_service_cases'] = PaymentCaseLists.objects.filter(category='service')
-        context['payment_Other_cases'] = PaymentCaseLists.objects.exclude(category='service')
-        context['payment_donation_cases'] = PaymentCaseLists.objects.filter(category='donation')
+        payment_cases = PaymentCases.objects.all()
+
+        context.update({
+            'payment_service_cases': payment_cases.filter(category__title='service'),
+            'payment_donation_cases': payment_cases.filter(category__title='donation'),
+            'payment_other_cases': payment_cases.exclude(category__title='service'),
+        })
+
         return context
 
 class PaymentCaseDetailView(DetailView): 
-    model = PaymentCaseLists
+    model = PaymentCases
     template_name = 'payments/payment_case_detail.html'  # Specify your detail view template
     context_object_name = 'payment_case'
      
-class AddToPaymentCaseCartView(LoginRequiredMixin ,View):
-    
+class AddToPaymentCaseCartView(LoginRequiredMixin, View):
     def post(self, request, slug):
-        payment_case = get_object_or_404(PaymentCaseLists, slug=slug)
+        # Fetch the PaymentCase instance by slug
+        payment_case = get_object_or_404(PaymentCases, slug=slug)
+        
+        # Get the user's membership information
         membership = MembersUpdateInformation.objects.filter(user=request.user).first()
         
-        cart_item, created = CartPaymentCase.objects.get_or_create(
+        # Ensure the user has only one active cart; create if none exists
+        cart, _ = CartPayment.objects.get_or_create(
             user=request.user,
-            membersID=membership,  # Ensure this is the correct instance
-            payment_cases=payment_case,  # Pass the correct ForeignKey instance
-            defaults={'quantity': 1}
+            membersID=membership  # Ensure this is the correct membership instance
         )
+        
+        # Check if the item already exists in the cart
+        cart_item, created = CartPaymentCases.objects.get_or_create(
+            cart=cart,
+            user=request.user,
+            payment_case=payment_case,  # Link the PaymentCase instance
+            defaults={'quantity': 1}  # Set default quantity for new cart item
+        )
+        
+        # If the cart item already exists, increment the quantity
         if not created:
             cart_item.quantity += 1
             cart_item.save()
+
+        # Redirect to the cart view after processing
         return redirect('payments:paymentCaseCart_view')
 
 
+
+
+# class AddToPaymentCaseCartView(LoginRequiredMixin ,View):
+    
+#     def post(self, request, slug):
+#         payment_cases = get_object_or_404(PaymentCases, slug=slug)
+#         membership = MembersUpdateInformation.objects.filter(user=request.user).first()
+        
+#         cart, created = CartPayment.objects.get_or_create(
+#             user=request.user,
+#             membersID=membership,  # Ensure this is the correct instance
+#         )
+#         if cart:
+#             cart_item, created = CartPaymentCases.objects.get_or_create(
+#                 cart = cart,
+#                 user=request.user,
+#                 # membersID=membership,  # Ensure this is the correct instance
+#                 payment_case=payment_cases,  # Pass the correct ForeignKey instance
+#                 defaults={'quantity': 1}
+#             )
+#             if not created:
+#                 cart_item.quantity += 1
+#                 cart_item.save()
+#         return redirect('payments:paymentCaseCart_view')
+
 class PaymentCaseCartListView(LoginRequiredMixin, ListView):
-    model = CartPaymentCase  # Use the correct model
+    model = CartPaymentCases  # Use the correct model
     template_name = 'payments/checkout.html'  # Specify your template
     context_object_name = 'payment_cases_cart'  # The name used in the template
 
@@ -75,7 +127,7 @@ class PaymentCaseCartListView(LoginRequiredMixin, ListView):
         """
         Override get_queryset to filter cart items by the logged-in user.
         """
-        return CartPaymentCase.objects.filter(user=self.request.user)
+        return CartPaymentCases.objects.filter(user=self.request.user)
 
     def get_context_data(self, **kwargs):
         """
@@ -91,9 +143,9 @@ class PaymentCaseCartListView(LoginRequiredMixin, ListView):
 
         # Calculate totals and enrich context
         for case in payment_cases_cart:
-            case.total = case.quantity * case.payment_cases.amount
+            case.total_price = case.quantity * case.payment_case.amount
 
-        total = sum(case.total for case in payment_cases_cart)
+        total = sum(case.total_price for case in payment_cases_cart)
         cart_count = payment_cases_cart.count()
 
         # Add data to the context
@@ -133,6 +185,22 @@ class PaymentCaseCartUpdateView(LoginRequiredMixin, UpdateView):
 
 #     def get_queryset(self):
 #         return PaymentHistory.objects.filter(user=self.request.user)
+ 
+
+class PaymentsCaseCartListView(ListView, LoginRequiredMixin):
+    model = PaymentCaseCart
+    template_name = "payments/checkout.html"
+    context_object_name = "payments_cases_cart"
+
+    def get_queryset(self):
+        # Filter the queryset for the logged-in user
+        return PaymentCaseCart.objects.filter(user=self.request.user)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Calculate the total for the cart
+        context['checkout_total'] = sum(cart.total for cart in self.get_queryset())
+        return context
     
 
 
