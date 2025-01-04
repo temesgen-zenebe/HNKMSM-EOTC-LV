@@ -15,6 +15,8 @@ class ShopProduct(models.Model):
     category =models.CharField(max_length=50, choices=CATEGORY, default='inOurStore')
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     seller = models.CharField(max_length=200, blank=True, null=True)
+    paymentCaseCode= models.CharField(max_length=200, blank=True, null=True,
+      help_text="if the produce from in OurStore than the paymentCaseCode will be slug of PaymentCases,else leave it blank")
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     slug = models.SlugField(max_length=255, unique=True, blank=True)

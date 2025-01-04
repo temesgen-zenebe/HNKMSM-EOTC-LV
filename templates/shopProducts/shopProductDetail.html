@@ -40,8 +40,15 @@
             <p>Rating: {{ product.rating_number }}/5</p>
             <p>Seller: {{ product.seller }}</p>
             <p>Last Updated: {{ product.updated|date:"F j, Y, g:i a" }}</p>
-            <div class='btn-group gap-2'>  
+            <div class='btn-group gap-2'> 
+                {% if product.category == 'inOurStore' %}
+                <form action="{% url 'payments:addToPaymentCaseCart_view' slug=product.paymentCaseCode %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-sm px-4 py-2 rounded-pill btn-primary">Add to Cart</button>
+                </form>
+                {% else %}
                 <p><a href="{{ product.affiliate_link }}" class="btn btn-sm btn-primary rounded-pill px-2" target="_blank">Buy Now</a></p>
+                {% endif %} 
                 <p><a href="{% url 'shopProducts:shop_product_list' %}" class="btn btn-sm btn-outline-pri rounded-pill px-2">Back to list</a></p>
             </div>
             <hr>

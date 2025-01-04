@@ -37,14 +37,6 @@ class PaymentCaseListView(ListView):
     context_object_name = 'payment_cases'  # Specify the context object name to use in the template
     paginate_by = 10  # Optional: to paginate the list if there are many items
     
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     context['payment_service_cases'] = PaymentCases.objects.filter(category='service')
-    #     context['payment_Other_cases'] = PaymentCases.objects.exclude(category='service')
-    #     context['payment_donation_cases'] = PaymentCases.objects.filter(category='donation')
-    #     context['payment'] = PaymentCases.objects.all()
-    #     return context
-    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         payment_cases = PaymentCases.objects.all()
@@ -132,7 +124,6 @@ class PaymentCaseCartListView(LoginRequiredMixin, ListView):
         })
 
         return context
-
 
 class PaymentCaseCartDeleteView(LoginRequiredMixin,DeleteView):
     model = CartPaymentCases

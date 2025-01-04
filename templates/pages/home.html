@@ -1835,249 +1835,57 @@
                 </div>
                 <div class="owl-carousel owl-theme testimonial-carousel testimonial-carousel-1 mb-4 wow bounceInUp" data-wow-delay="0.1s">
                     {% if products %}
-                    {% for product in products %}
-                    <div class="testimonial-item rounded bg-light">
-                        
-                        <div class="d-flex mb-3">
-                            <img src="{{product.image.url}}" class="img-fluid rounded-circle flex-shrink-0" alt="">
+                        {% for product in products %}
+                        <div class="testimonial-item rounded bg-light">
+                            
+                            <div class="d-flex mb-3">
+                                <img src="{{product.image.url}}" class="img-fluid rounded-circle flex-shrink-0" alt="">
 
-                            <div class="ps-3 my-auto">
-                                <h6 class="mb-0">{{product.name}}</h6>
-                                <small class="m-0">{{product.seller}}</small>
-                            </div>
-                        </div>
-                        <div><p><span class="py-2 mb-1 small">Products related to the Ethiopian Orthodox Religion can be bought to help our cathedral.</p></div>
-                        <div class="testimonial-content my-1">
-                            <div class="d-flex justify-content-between">
-                                <div class="d-flex">
-                                    {% if  product.rating_number == 5 %}
-                                    <i class="fas fa-star text-primary"></i>
-                                    <i class="fas fa-star text-primary"></i>
-                                    <i class="fas fa-star text-primary"></i>
-                                    <i class="fas fa-star text-primary"></i>
-                                    <i class="fas fa-star text-primary"></i>
-                                    {% elif product.rating_number == 4 %} 
-                                    <i class="fas fa-star text-primary"></i>
-                                    <i class="fas fa-star text-primary"></i>
-                                    <i class="fas fa-star text-primary"></i>
-                                    <i class="fas fa-star text-primary"></i>
-                                    <i class="fas fa-star-half-alt text-primary"></i>
-                                    {% elif product.rating_number == 3 %}
-                                    <i class="fas fa-star text-primary"></i>
-                                    <i class="fas fa-star text-primary"></i>
-                                    <i class="fas fa-star text-primary"></i>
-                                    {% elif product.rating_number == 2 %}
-                                    <i class="fas fa-star text-primary"></i>
-                                    <i class="fas fa-star text-primary"></i>
-                                    {% else %}
-                                    <i class="fas fa-star text-primary"></i>
-                                    {% endif %}
-                                    
-                                </div>
-                                <div class="d-flex justify-content-between gap-3">
-                                    <a href="{{product.affiliate_link}}" class="btn btn-md-square btn-primary rounded-circle" target="_blank"><i class="fas fa-cart-plus fa-1x"></i></a>
-                                    <a href="{% url 'shopProducts:shop_product_detail' product.slug %}" class="btn btn-md-square btn-primary rounded-pill p-2" target="_blank"><i class="fas fa-arrow-alt-circle-up fa-1x"></i></a> 
+                                <div class="ps-3 my-auto">
+                                    <h6 class="mb-0">{{product.name}}</h6>
+                                    <small class="m-0">{{product.seller}}</small>
                                 </div>
                             </div>
+                            <div><p><span class="py-2 mb-1 small">Products related to the Ethiopian Orthodox Religion can be bought to help our cathedral.</p></div>
+                            <div class="testimonial-content my-1">
+                                <div class="d-flex justify-content-between">
+                                    <div class="d-flex">
+                                        {% if  product.rating_number == 5 %}
+                                        <i class="fas fa-star text-primary"></i>
+                                        <i class="fas fa-star text-primary"></i>
+                                        <i class="fas fa-star text-primary"></i>
+                                        <i class="fas fa-star text-primary"></i>
+                                        <i class="fas fa-star text-primary"></i>
+                                        {% elif product.rating_number == 4 %} 
+                                        <i class="fas fa-star text-primary"></i>
+                                        <i class="fas fa-star text-primary"></i>
+                                        <i class="fas fa-star text-primary"></i>
+                                        <i class="fas fa-star text-primary"></i>
+                                        <i class="fas fa-star-half-alt text-primary"></i>
+                                        {% elif product.rating_number == 3 %}
+                                        <i class="fas fa-star text-primary"></i>
+                                        <i class="fas fa-star text-primary"></i>
+                                        <i class="fas fa-star text-primary"></i>
+                                        {% elif product.rating_number == 2 %}
+                                        <i class="fas fa-star text-primary"></i>
+                                        <i class="fas fa-star text-primary"></i>
+                                        {% else %}
+                                        <i class="fas fa-star text-primary"></i>
+                                        {% endif %}
+                                        
+                                    </div>
+                                    <div class="d-flex justify-content-between gap-3">
+                                        <a href="{{product.affiliate_link}}" class="btn btn-md-square btn-primary rounded-circle" target="_blank"><i class="fas fa-cart-plus fa-1x"></i></a>
+                                        <a href="{% url 'shopProducts:shop_product_detail' product.slug %}" class="btn btn-md-square btn-primary rounded-pill p-2" target="_blank"><i class="fas fa-arrow-alt-circle-up fa-1x"></i></a> 
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    {% endfor %}
+                        {% endfor %}
                     {% else %}
                       no products
                     {% endif %}
-                    <div class="testimonial-item rounded bg-light">
-                        
-                        <div class="d-flex mb-3">
-                            <img src="https://m.media-amazon.com/images/I/71tPDU-dsXL._AC_SX679_.jpg" class="img-fluid rounded-circle flex-shrink-0" alt="">
-
-                            <div class="ps-3 my-auto">
-                                <h6 class="mb-0">Ethiopian Orthodox 18K Gold cross</h6>
-                                <small class="m-0">amazon.com</small>
-                            </div>
-                        </div>
-                        <div><p><span class="py-2 mb-1 small">Products related to the Ethiopian Orthodox Religion can be bought to help our cathedral.</p></div>
-                        <div class="testimonial-content my-1">
-                            <div class="d-flex justify-content-between">
-                                <div class="d-flex">
-                                    <i class="fas fa-star text-primary"></i>
-                                    <i class="fas fa-star text-primary"></i>
-                                    <i class="fas fa-star text-primary"></i>
-                                    <i class="fas fa-star text-primary"></i>
-                                    <i class="fas fa-star-half-alt text-primary"></i>
-                                </div>
-                                <div><a href="https://a.co/d/4WYkrEH" class="btn btn-md-square btn-primary rounded-circle" target="_blank"><i class="fas fa-cart-plus fa-1x"></i></a></div>
-
-                            </div>
-                            
-                        </div>
-                        
-                    </div>
-                    <div class="testimonial-item rounded bg-light">
-                        
-                        <div class="d-flex mb-3">
-                            <img src="https://m.media-amazon.com/images/I/71tPDU-dsXL._AC_SX679_.jpg" class="img-fluid rounded-circle flex-shrink-0" alt="">
-
-                            <div class="ps-3 my-auto">
-                                <h6 class="mb-0">Ethiopian Orthodox 18K Gold cross</h6>
-                                <small class="m-0">amazon.com</small>
-                            </div>
-                        </div>
-                        <div><p><span class="py-2 mb-1 small">Products related to the Ethiopian Orthodox Religion can be bought to help our cathedral.</p></div>
-                        <div class="testimonial-content my-1">
-                            <div class="d-flex justify-content-between">
-                                <div class="d-flex">
-                                    <i class="fas fa-star text-primary"></i>
-                                    <i class="fas fa-star text-primary"></i>
-                                    <i class="fas fa-star text-primary"></i>
-                                    <i class="fas fa-star text-primary"></i>
-                                    <i class="fas fa-star-half-alt text-primary"></i>
-                                </div>
-                                <div><a href="https://a.co/d/4WYkrEH" class="btn btn-md-square btn-primary rounded-circle" target="_blank"><i class="fas fa-cart-plus fa-1x"></i></a></div>
-
-                            </div>
-                            
-                        </div>
-                        
-                    </div>
-                    <div class="testimonial-item rounded bg-light">
-                        
-                        <div class="d-flex mb-3">
-                            <img src="https://m.media-amazon.com/images/I/71tPDU-dsXL._AC_SX679_.jpg" class="img-fluid rounded-circle flex-shrink-0" alt="">
-
-                            <div class="ps-3 my-auto">
-                                <h6 class="mb-0">Ethiopian Orthodox 18K Gold cross</h6>
-                                <small class="m-0">amazon.com</small>
-                            </div>
-                        </div>
-                        <div><p><span class="py-2 mb-1 small">Products related to the Ethiopian Orthodox Religion can be bought to help our cathedral.</p></div>
-                        <div class="testimonial-content my-1">
-                            <div class="d-flex justify-content-between">
-                                <div class="d-flex">
-                                    <i class="fas fa-star text-primary"></i>
-                                    <i class="fas fa-star text-primary"></i>
-                                    <i class="fas fa-star text-primary"></i>
-                                    <i class="fas fa-star text-primary"></i>
-                                    <i class="fas fa-star-half-alt text-primary"></i>
-                                </div>
-                                <div><a href="https://a.co/d/4WYkrEH" class="btn btn-md-square btn-primary rounded-circle" target="_blank"><i class="fas fa-cart-plus fa-1x"></i></a></div>
-
-                            </div>
-                            
-                        </div>
-                        
-                    </div>
                 </div>
-                
-                {% comment %} <div class="owl-carousel testimonial-carousel testimonial-carousel-2 wow bounceInUp" data-wow-delay="0.3s">
-                    <div class="testimonial-item rounded bg-light">
-                        
-                        <div class="d-flex mb-3">
-                            <img src="https://m.media-amazon.com/images/I/71tPDU-dsXL._AC_SX679_.jpg" class="img-fluid rounded-circle flex-shrink-0" alt="">
-
-                            <div class="ps-3 my-auto">
-                                <h6 class="mb-0">Ethiopian Orthodox 18K Gold cross</h6>
-                                <small class="m-0">amazon.com</small>
-                            </div>
-                        </div>
-                        <div><p><span class="py-2 mb-1 small">Products related to the Ethiopian Orthodox Religion can be bought to help our cathedral.</p></div>
-                        <div class="testimonial-content my-1">
-                            <div class="d-flex justify-content-between">
-                                <div class="d-flex">
-                                    <i class="fas fa-star text-primary"></i>
-                                    <i class="fas fa-star text-primary"></i>
-                                    <i class="fas fa-star text-primary"></i>
-                                    <i class="fas fa-star text-primary"></i>
-                                    <i class="fas fa-star-half-alt text-primary"></i>
-                                </div>
-                                <div><a href="https://a.co/d/4WYkrEH" class="btn btn-md-square btn-primary rounded-circle" target="_blank"><i class="fas fa-cart-plus fa-1x"></i></a></div>
-
-                            </div>
-                            
-                        </div>
-                        
-                    </div>
-                    <div class="testimonial-item rounded bg-light">
-                        
-                        <div class="d-flex mb-3">
-                            <img src="https://m.media-amazon.com/images/I/71tPDU-dsXL._AC_SX679_.jpg" class="img-fluid rounded-circle flex-shrink-0" alt="">
-
-                            <div class="ps-3 my-auto">
-                                <h6 class="mb-0">Ethiopian Orthodox 18K Gold cross</h6>
-                                <small class="m-0">amazon.com</small>
-                            </div>
-                        </div>
-                        <div><p><span class="py-2 mb-1 small">Products related to the Ethiopian Orthodox Religion can be bought to help our cathedral.</p></div>
-                        <div class="testimonial-content my-1">
-                            <div class="d-flex justify-content-between">
-                                <div class="d-flex">
-                                    <i class="fas fa-star text-primary"></i>
-                                    <i class="fas fa-star text-primary"></i>
-                                    <i class="fas fa-star text-primary"></i>
-                                    <i class="fas fa-star text-primary"></i>
-                                    <i class="fas fa-star-half-alt text-primary"></i>
-                                </div>
-                                <div><a href="https://a.co/d/4WYkrEH" class="btn btn-md-square btn-primary rounded-circle" target="_blank"><i class="fas fa-cart-plus fa-1x"></i></a></div>
-
-                            </div>
-                            
-                        </div>
-                        
-                    </div>
-                    <div class="testimonial-item rounded bg-light">
-                        
-                        <div class="d-flex mb-3">
-                            <img src="https://m.media-amazon.com/images/I/71tPDU-dsXL._AC_SX679_.jpg" class="img-fluid rounded-circle flex-shrink-0" alt="">
-
-                            <div class="ps-3 my-auto">
-                                <h6 class="mb-0">Ethiopian Orthodox 18K Gold cross</h6>
-                                <small class="m-0">amazon.com</small>
-                            </div>
-                        </div>
-                        <div><p><span class="py-2 mb-1 small">Products related to the Ethiopian Orthodox Religion can be bought to help our cathedral.</p></div>
-                        <div class="testimonial-content my-1">
-                            <div class="d-flex justify-content-between">
-                                <div class="d-flex">
-                                    <i class="fas fa-star text-primary"></i>
-                                    <i class="fas fa-star text-primary"></i>
-                                    <i class="fas fa-star text-primary"></i>
-                                    <i class="fas fa-star text-primary"></i>
-                                    <i class="fas fa-star-half-alt text-primary"></i>
-                                </div>
-                                <div><a href="https://a.co/d/4WYkrEH" class="btn btn-md-square btn-primary rounded-circle" target="_blank"><i class="fas fa-cart-plus fa-1x"></i></a></div>
-
-                            </div>
-                            
-                        </div>
-                        
-                    </div>
-                    <div class="testimonial-item rounded bg-light">
-                        
-                        <div class="d-flex mb-3">
-                            <img src="https://m.media-amazon.com/images/I/71tPDU-dsXL._AC_SX679_.jpg" class="img-fluid rounded-circle flex-shrink-0" alt="">
-
-                            <div class="ps-3 my-auto">
-                                <h6 class="mb-0">Ethiopian Orthodox 18K Gold cross</h6>
-                                <small class="m-0">amazon.com</small>
-                            </div>
-                        </div>
-                        <div><p><span class="py-2 mb-1 small">Products related to the Ethiopian Orthodox Religion can be bought to help our cathedral.</p></div>
-                        <div class="testimonial-content my-1">
-                            <div class="d-flex justify-content-between">
-                                <div class="d-flex">
-                                    <i class="fas fa-star text-primary"></i>
-                                    <i class="fas fa-star text-primary"></i>
-                                    <i class="fas fa-star text-primary"></i>
-                                    <i class="fas fa-star text-primary"></i>
-                                    <i class="fas fa-star-half-alt text-primary"></i>
-                                </div>
-                                <div><a href="https://a.co/d/4WYkrEH" class="btn btn-md-square btn-primary rounded-circle" target="_blank"><i class="fas fa-cart-plus fa-1x"></i></a></div>
-
-                            </div>
-                            
-                        </div>
-                        
-                    </div>
-                </div> {% endcomment %}
             </div>
             
             <div class="container text-center wow bounceInUp" data-wow-delay="0.1s">
