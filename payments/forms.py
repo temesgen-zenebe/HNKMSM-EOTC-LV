@@ -1,10 +1,10 @@
 from django import forms
-from .models import CartPaymentCase
+from .models import CartPaymentCases
 
 
 class PaymentCaseCartForm(forms.ModelForm):
     class Meta:
-        model = CartPaymentCase
+        model = CartPaymentCases
         fields = ['quantity']
 
     def __init__(self, *args, **kwargs):

@@ -3,7 +3,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from .models import MembersUpdateInformation, Child, Relative
-from payments.models import PaymentCaseLists
+from payments.models import PaymentCases
 from .forms import MembersUpdateInformationForm, ChildFormSet, RelativeFormSet
 from .forms import ChildForm, RelativeForm
 from django.views.generic.edit import UpdateView
@@ -52,7 +52,7 @@ class MemberListView(LoginRequiredMixin, ListView):
         context = super().get_context_data(**kwargs)
         context['child_form'] = ChildForm()
         context['relative_form'] = RelativeForm()
-        context['payment_cases_membership'] = PaymentCaseLists.objects.filter(title='membership')
+        context['payment_cases_membership'] = PaymentCases.objects.filter(title='membership')
         return context
 
 class ChildCreateView(LoginRequiredMixin, CreateView):

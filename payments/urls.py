@@ -10,7 +10,7 @@ from .views import (
     PaymentCaseDetailView, 
     PaymentConfirmationView, 
     PaymentMenuView,
-    PaymentsCaseCartListView,
+    
 )
 
 app_name = 'payments' 
@@ -25,7 +25,7 @@ urlpatterns = [
     path('payment-cases/update/<slug:slug>/', PaymentCaseCartUpdateView.as_view(), name='UpdatedCaseCart'),
     path('confirmation/', PaymentConfirmationView.as_view(), name='payment_confirmation'),
     path('stripe_webhook/', views.stripe_webhook, name='stripe_webhook'),
-    path('checkout/', PaymentsCaseCartListView.as_view(), name='checkout'),
+    
     
     #create_checkout_session
     # path('create-checkout-session/<slug:slug>/', views.create_checkout_session, name='create_checkout_session'),

@@ -16,19 +16,19 @@ from django.utils import timezone
 from django.conf import settings
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from .models import PaymentCaseLists, CartPaymentCase,PaymentCaseCart
+# from .models import PaymentCaseLists, CartPaymentCase,PaymentCaseCart
 from .forms import PaymentCaseCartForm  # Assume you have created a form for updating
 from decimal import Decimal
 from .models import PaymentCases,CartPayment,CartPaymentCases,Category
 
 class PaymentMenuView(ListView):
-    model = PaymentCaseLists
+    model = PaymentCases
     template_name = 'payments/paymentMenu.html'
     context_object_name = 'paymentLink'
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['payment_cases'] = PaymentCaseLists.objects.filter(slug='membership')
+        context['payment_cases'] = PaymentCases.objects.filter(slug='membership')
         return context
 
 class PaymentCaseListView(ListView):
@@ -53,6 +53,7 @@ class PaymentCaseListView(ListView):
             'payment_service_cases': payment_cases.filter(category__title='service'),
             'payment_donation_cases': payment_cases.filter(category__title='donation'),
             'payment_other_cases': payment_cases.exclude(category__title='service'),
+            'payment_products_cases': payment_cases.filter(category__title='product'),
         })
 
         return context
@@ -91,32 +92,6 @@ class AddToPaymentCaseCartView(LoginRequiredMixin, View):
 
         # Redirect to the cart view after processing
         return redirect('payments:paymentCaseCart_view')
-
-
-
-
-# class AddToPaymentCaseCartView(LoginRequiredMixin ,View):
-    
-#     def post(self, request, slug):
-#         payment_cases = get_object_or_404(PaymentCases, slug=slug)
-#         membership = MembersUpdateInformation.objects.filter(user=request.user).first()
-        
-#         cart, created = CartPayment.objects.get_or_create(
-#             user=request.user,
-#             membersID=membership,  # Ensure this is the correct instance
-#         )
-#         if cart:
-#             cart_item, created = CartPaymentCases.objects.get_or_create(
-#                 cart = cart,
-#                 user=request.user,
-#                 # membersID=membership,  # Ensure this is the correct instance
-#                 payment_case=payment_cases,  # Pass the correct ForeignKey instance
-#                 defaults={'quantity': 1}
-#             )
-#             if not created:
-#                 cart_item.quantity += 1
-#                 cart_item.save()
-#         return redirect('payments:paymentCaseCart_view')
 
 class PaymentCaseCartListView(LoginRequiredMixin, ListView):
     model = CartPaymentCases  # Use the correct model
@@ -158,8 +133,9 @@ class PaymentCaseCartListView(LoginRequiredMixin, ListView):
 
         return context
 
+
 class PaymentCaseCartDeleteView(LoginRequiredMixin,DeleteView):
-    model = CartPaymentCase
+    model = CartPaymentCases
     template_name = 'payments/delete_case_cart.html'  # Template for confirmation (optional)
     success_url = reverse_lazy('payments:paymentCaseCart_view')  # Redirect to the cart list view after deletion
 
@@ -168,7 +144,7 @@ class PaymentCaseCartDeleteView(LoginRequiredMixin,DeleteView):
         return super().get_queryset()
 
 class PaymentCaseCartUpdateView(LoginRequiredMixin, UpdateView):
-    model = CartPaymentCase
+    model = CartPaymentCases
     form_class = PaymentCaseCartForm  # Form for updating the cart case
     template_name = 'payments/update_case_cart.html'  # Template for updating
     success_url = reverse_lazy('payments:paymentCaseCart_view')  # Redirect to the cart list view after update
@@ -186,24 +162,6 @@ class PaymentCaseCartUpdateView(LoginRequiredMixin, UpdateView):
 #     def get_queryset(self):
 #         return PaymentHistory.objects.filter(user=self.request.user)
  
-
-class PaymentsCaseCartListView(ListView, LoginRequiredMixin):
-    model = PaymentCaseCart
-    template_name = "payments/checkout.html"
-    context_object_name = "payments_cases_cart"
-
-    def get_queryset(self):
-        # Filter the queryset for the logged-in user
-        return PaymentCaseCart.objects.filter(user=self.request.user)
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        # Calculate the total for the cart
-        context['checkout_total'] = sum(cart.total for cart in self.get_queryset())
-        return context
-    
-
-
 class PaymentConfirmationView(TemplateView):
     template_name = 'payments/payment_confirmation.html'
     

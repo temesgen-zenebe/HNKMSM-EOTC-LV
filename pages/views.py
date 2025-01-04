@@ -3,8 +3,8 @@ from django.views.generic import TemplateView,ListView,DetailView
 from django.contrib import messages 
 from blog.models import Blog
 from events.models import Event,EventGallery, EventsCategory, PostEventImages,NewsAndAnnouncements
-from payments.models import PaymentCaseLists
-
+from payments.models import PaymentCases
+from django.db.models import Q
 from django.utils import timezone
 from multimedia.models import (
     BooksLibrary, Gallery, UserManual, 
@@ -36,7 +36,10 @@ class HomePageView(TemplateView):
         latest_testimonySalvations = TestimonyOfSalvation.objects.order_by('-created')[:3]
         latest_userManuals = UserManual.objects.order_by('-uploaded_at')[:3]
         #payment
-        payment_donation = PaymentCaseLists.objects.filter(category = 'donation')
+        # Filter for PaymentCases with the 'donation' category
+        payment_donation = PaymentCases.objects.filter(Q(category__title='donation'))
+
+        # payment_donation = PaymentCases.objects.filter(category = 'donation')
         if request.user.is_authenticated:
             # User is authenticated, proceed with fetching the membership
             membership = MembersUpdateInformation.objects.get(user=request.user)
@@ -102,16 +105,17 @@ class ChildCare(TemplateView):
      template_name = 'pages/childCare.html'
      
 class DonationListView(ListView):
-    model = PaymentCaseLists
+    model = PaymentCases
     template_name = 'pages/donationList.html'
     context_object_name = 'payment_cases_donation_list'
     paginate_by = 6
 
     def get_queryset(self):
-        queryset = PaymentCaseLists.objects.filter(category='donation').order_by('created')
+        # Use Q for filtering by related field
+        queryset = PaymentCases.objects.filter(Q(category__title='donation')).order_by('created')
         return queryset
-
+    
 class DonationCaseDetailView(DetailView): 
-    model = PaymentCaseLists
+    model = PaymentCases
     template_name = 'pages/donation_case_detail.html'  # Specify your detail view template
     context_object_name = 'donation_case'

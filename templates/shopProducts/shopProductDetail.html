@@ -38,7 +38,7 @@
             <hr>
             <h4 class="text-success">${{ product.price }}</h4>
             <p>Rating: {{ product.rating_number }}/5</p>
-            <p>Seller: {{ product.seller.username }}</p>
+            <p>Seller: {{ product.seller }}</p>
             <p>Last Updated: {{ product.updated|date:"F j, Y, g:i a" }}</p>
             <div class='btn-group gap-2'>  
                 <p><a href="{{ product.affiliate_link }}" class="btn btn-sm btn-primary rounded-pill px-2" target="_blank">Buy Now</a></p>
