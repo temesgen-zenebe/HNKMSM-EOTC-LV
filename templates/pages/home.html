@@ -1875,7 +1875,14 @@
                                         
                                     </div>
                                     <div class="d-flex justify-content-between gap-3">
+                                        {% if product.category == 'inOurStore' %}
+                                        <form action="{% url 'payments:addToPaymentCaseCart_view' slug=product.paymentCaseCode %}" method="post">
+                                            {% csrf_token %}
+                                            <button type="submit" class="btn btn-md-square btn-primary rounded-circle"><i class="fas fa-cart-plus fa-1x"></i></button>
+                                        </form>
+                                        {% else %}
                                         <a href="{{product.affiliate_link}}" class="btn btn-md-square btn-primary rounded-circle" target="_blank"><i class="fas fa-cart-plus fa-1x"></i></a>
+                                        {% endif %}
                                         <a href="{% url 'shopProducts:shop_product_detail' product.slug %}" class="btn btn-md-square btn-primary rounded-pill p-2" target="_blank"><i class="fas fa-arrow-alt-circle-up fa-1x"></i></a> 
                                     </div>
                                 </div>

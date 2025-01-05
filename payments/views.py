@@ -108,21 +108,24 @@ class PaymentCaseCartListView(LoginRequiredMixin, ListView):
         # Membership information (assuming one-to-one relation with user)
         membership = MembersUpdateInformation.objects.filter(user=self.request.user).first()
 
+        # Determine if any item requires delivery
+        requires_delivery = payment_cases_cart.filter(payment_case__requires_delivery=True).exists()
+        
         # Calculate totals and enrich context
         for case in payment_cases_cart:
             case.total_price = case.quantity * case.payment_case.amount
 
         total = sum(case.total_price for case in payment_cases_cart)
-        cart_count = payment_cases_cart.count()
-
+        cart_count = sum(case.quantity for case in payment_cases_cart)
+        
         # Add data to the context
         context.update({
-            'payment_cases_cart': payment_cases_cart,
-            'checkout_total': total,
-            'cart_count': cart_count,
-            'membership': membership,
+            'payment_cases_cart': payment_cases_cart,  # List of items in the cart
+            'checkout_total': total,                  # Total price of all items
+            'cart_count': cart_count,                 # Number of items in the cart
+            'membership': membership,                 # Membership information
+            'requires_delivery': requires_delivery,   # Delivery requirement flag
         })
-
         return context
 
 class PaymentCaseCartDeleteView(LoginRequiredMixin,DeleteView):
