@@ -47,27 +47,26 @@
           </li>
         </ul>
         <!--shipping-address-->
-        {% if not requires_delivery %}
+        {% if requires_delivery %}
         <div class="shipping-address mb-5">
-          <h3 class="my-3 p-2">shipping address</h3>
-          <form class="needs-validation small" novalidate="">
+          <h3 class="my-3 p-2">Shipping Address</h3>
+          <form id="shipping-form" method="post" class="needs-validation small" novalidate="">
+            {% csrf_token %}
             <div class="row g-2 small border border-primary mx-2 p-2 rounded">
               <div class="col-sm-6">
                 <label for="address" class="form-label">Address</label>
-                <input type="text" class="form-control form-control-sm" id="address" placeholder="1234 Main St" required="">
+                <input type="text" class="form-control form-control-sm" id="address" name="address" placeholder="1234 Main St" required>
                 <div class="invalid-feedback">
                   Please enter your shipping address.
                 </div>
               </div>
-
               <div class="col-sm-6">
                 <label for="address2" class="form-label">Address 2 <span class="text-muted">(Optional)</span></label>
-                <input type="text" class="form-control form-control-sm" id="address2" placeholder="Apartment or suite">
+                <input type="text" class="form-control form-control-sm" id="address2" name="address2" placeholder="Apartment or suite">
               </div>
-
               <div class="col-md-5">
                 <label for="country" class="form-label">Country</label>
-                <select class="form-select form-select-sm" id="country" required="">
+                <select class="form-select form-select-sm" id="country" name="country" required>
                   <option value="">Choose...</option>
                   <option>United States</option>
                 </select>
@@ -75,10 +74,9 @@
                   Please select a valid country.
                 </div>
               </div>
-
               <div class="col-md-4">
                 <label for="state" class="form-label">State</label>
-                <select class="form-select form-select-sm" id="state" required="">
+                <select class="form-select form-select-sm" id="state" name="state" required>
                   <option value="">Choose...</option>
                   <option>California</option>
                 </select>
@@ -86,30 +84,18 @@
                   Please provide a valid state.
                 </div>
               </div>
-
               <div class="col-md-3">
                 <label for="zip" class="form-label">Zip</label>
-                <input type="text" class="form-control form-control-sm" id="zip" placeholder="" required="">
+                <input type="text" class="form-control form-control-sm" id="zip" name="zip" placeholder="" required>
                 <div class="invalid-feedback">
                   Zip code required.
                 </div>
               </div>
-            <hr class="my-4">
-            <div class="col-md-6">
-              <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="same-address">
-                <label class="form-check-label" for="same-address">Shipping address is the same as my billing address</label>
-              </div>
-
-              <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="save-info">
-                <label class="form-check-label" for="save-info">Save this information for next time</label>
-              </div>
             </div>
-          </div>
-          </form> 
+          </form>
         </div>
         {% endif %}
+
         <!--Checkout List -->
         <div class="CheckoutList">
           <h3 class="d-flex justify-content-between align-items-center mb-3">
@@ -135,8 +121,8 @@
                 <div class="">
                   <p class="my-0">{{cases.payment_case}}</p>
                   <div class="d-flex justify-content-start py-1">
-                    <small class="text-muted">{{cases.quantity}} x {{cases.payment_case.amount}}</small>
-                    <p id="cases_slug" class="text-muted d-none">{{cases.slug}}</p>
+                    <small class="text-muted">{{cases.quantity}} x {{cases.payment_case.amount}} + shipping({{cases.payment_case.shipping_cost}})</small>
+                    {% comment %} <p id="cases_slug" class="text-muted d-none">{{cases.slug}}</p> {% endcomment %}
                     <small class="text-muted small px-3">
                       <a class="{{cases.slug}}" href="{% url 'payments:DeleteCaseCart' slug=cases.slug %}" ><i class="text-primary bi-trash-fill px-1"></i></a>
                       <a class="{{cases.slug}}" href="{% url 'payments:UpdatedCaseCart' slug=cases.slug %}"><i class="text-primary bi-pencil-square "></i></a>
@@ -146,8 +132,16 @@
               </div>
               <span class="text-muted {{cases.id}}">${{cases.total_price}}</span>
             </li>
-            
+          
             {% endfor %}
+            {% if requires_delivery %}
+            <li class="list-group-item d-flex justify-content-between lh-sm small">
+              <p class="my-0">Shipping cost:</p>
+              <strong>
+                <span class="shipping bg-seconder" id='shipping_total'>{{shipping_cost}}</span>
+              </strong>
+            </li>
+            {% endif %}
             <li class="list-group-item d-flex justify-content-between bg-light px-3 py-4 text-primary  bg-opacity-10">
               <strong>
                 <span>Total (USD)$</span>
@@ -161,7 +155,7 @@
             <a href="{% url "payments:payment_case_list" %}" class="w-100 btn btn-sm btn-primary px-4 py-2 my-1 rounded-pill">Add more payment </a>
             {% comment %} <button class="w-100 btn btn-sm btn-primary px-4 py-2 my-1 rounded-pill" type="button">Button</button> {% endcomment %}
           </div>
-          <button class="w-100 btn-lg btn btn-sm btn-primary px-4 py-2 my-4 rounded-pill" type="submit">Continue to checkout</button>
+          <button id="continue-checkout" class="w-100 btn-lg btn btn-sm btn-primary px-4 py-2 my-4 rounded-pill" type="submit">Continue to checkout</button>
         </div>
         <!--end  Checkout List -->
        
@@ -228,5 +222,37 @@
 </div>
 
 </div>
+<script>
+  document.getElementById('continue-checkout').addEventListener('click', function () {
+    const shippingForm = document.getElementById('shipping-form');
+    const formData = new FormData(shippingForm);
+
+    const shippingData = {
+      address: formData.get('address'),
+      address2: formData.get('address2'),
+      country: formData.get('country'),
+      state: formData.get('state'),
+      zip: formData.get('zip'),
+    };
+
+    fetch("{% url 'payments:checkout_action' %}", {
+      method: "POST",
+      headers: {
+        "X-CSRFToken": "{{ csrf_token }}",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(shippingData),
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.sessionId) {
+        const stripe = Stripe("{{ STRIPE_PUBLIC_KEY }}");
+        stripe.redirectToCheckout({ sessionId: data.sessionId });
+      } else {
+        alert(data.error || "An error occurred");
+      }
+    });
+  });
+</script>
 
 {% endblock %}

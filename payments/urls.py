@@ -7,10 +7,12 @@ from .views import (
     PaymentCaseCartUpdateView,
     PaymentCaseCartListView,
     PaymentCaseListView, 
-    PaymentCaseDetailView, 
-    PaymentConfirmationView, 
+    PaymentCaseDetailView,  
     PaymentMenuView,
-    
+    CheckoutActionView,
+    PaymentSuccessView, 
+    PaymentCancelView, 
+    stripe_webhook,
 )
 
 app_name = 'payments' 
@@ -23,8 +25,10 @@ urlpatterns = [
     path('payment-cases/paymentCaseCartView/', PaymentCaseCartListView.as_view(), name='paymentCaseCart_view'),
     path('payment-cases/delete/<slug:slug>/', PaymentCaseCartDeleteView.as_view(), name='DeleteCaseCart'),
     path('payment-cases/update/<slug:slug>/', PaymentCaseCartUpdateView.as_view(), name='UpdatedCaseCart'),
-    path('confirmation/', PaymentConfirmationView.as_view(), name='payment_confirmation'),
-    path('stripe_webhook/', views.stripe_webhook, name='stripe_webhook'),
+    path('checkout-action/', CheckoutActionView.as_view(), name='checkout_action'),
+    path('success/', PaymentSuccessView.as_view(), name='success'),
+    path('cancel/', PaymentCancelView.as_view(), name='cancel'),
+    path('webhook/', stripe_webhook, name='webhook'),
     
     
     #create_checkout_session
@@ -32,5 +36,7 @@ urlpatterns = [
     # path('success/', views.success_view, name='success'),
     # path('cancel/', views.cancel_view, name='cancel'),
     # Add other URL patterns as needed
+    #path('confirmation/', PaymentConfirmationView.as_view(), name='payment_confirmation'),
+    # path('stripe_webhook/', views.stripe_webhook, name='stripe_webhook'),
 ]
 

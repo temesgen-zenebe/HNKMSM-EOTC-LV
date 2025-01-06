@@ -4,7 +4,7 @@
 {% block javascript %}
    {% comment %} <script type="text/javascript" src="{% static '' %}" defer ></script> {% endcomment %}
 {% endblock %}
-{% block title %}cart Delete case paymentCases{% endblock %}
+{% block title %}Payment Canceled{% endblock %}
 {% block main %}
 <div class="container my-2">
     <!-- Sermon  Start -->
@@ -16,25 +16,21 @@
                     <ol class="breadcrumb justify-content-start mb-0 animated bounceInDown">
                         <li class="small"><a href="{% url 'pages:homepage' %}">Home <span class="px-1">\</span></a></li>
                         <li class="small"><a href="{% url "payments:payment_case_list" %}">paymentCaseList<span class="px-1">\</span></a></li>
-                        <li class="small"><a href="{% url "payments:paymentCaseCart_view" %}">paymentCaseCartview<span class="px-1">\</span></a></li>
-                        <li class="small" aria-current="page">updatedCase<span class="px-1">\</span></li>
+                        {% comment %} <li class="small"><a href="{% url "payments:paymentCaseCart_view" %}">paymentCaseCartview<span class="px-1">\</span></a></li>
+                        <li class="small" aria-current="page">updatedCase<span class="px-1">\</span></li> {% endcomment %}
                     </ol>   
                 </div>
             </div>
             <div class="text-center py-2">
-                <h3 class="mb-2 bolder text-light fs-4">Delete Case Cart</h3>
+                <h3 class="mb-2 bolder text-light fs-4">Payment Canceled</h3>
                 <h3 class="mb-2 text-primary fs-5"></h1>
             </div>
         </div>
     </div>
     <div class="container mt-2  border border-primary rounded shadow p-3" style="max-width: 50rem" >
-        <h6>Are you sure you want to delete "{{ object.payment_case }}"? form the Checkout list</h6>
+        <h6>Your payment has been canceled. You can try again or contact support if needed.</h6>
         <hr>
-        <form method="post">
-          {% csrf_token %}
-          <button type="submit" class="btn btn-danger btn-sm px-4 py-1 rounded-pill">Confirm</button>
-          <a href="{% url 'payments:paymentCaseCart_view' %}" class="btn btn-secondary btn-sm px-4 py-2 rounded-pill">Cancel</a>
-        </form>
+        <a href="{% url 'payments:paymentCaseCart_view' %}" class="btn btn-secondary btn-sm px-4 py-2 rounded-pill">Cancel</a>
     </div>
 </div>
 {% endblock %}
