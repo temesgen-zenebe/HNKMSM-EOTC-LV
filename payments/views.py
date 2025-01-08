@@ -16,6 +16,7 @@ from django.utils import timezone
 from django.conf import settings
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
 from .forms import PaymentCaseCartForm  # Assume you have created a form for updating
 from decimal import Decimal
 from .models import (
@@ -133,6 +134,7 @@ class PaymentCaseCartListView(LoginRequiredMixin, ListView):
             'membership': membership,                 # Membership information
             'requires_delivery': requires_delivery,   # Delivery requirement flag
             'shipping_cost':shipping_cost,
+            "STRIPE_PUBLIC_KEY": settings.STRIPE_PUBLISHABLE_KEY
         })
         return context
 
@@ -177,56 +179,90 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 endpoint_secret = settings.STRIPE_WEBHOOK_SECRET
 logger = logging.getLogger(__name__)
 
-
+# CheckoutActionView checkout session create
+@method_decorator(csrf_exempt, name='dispatch')
 class CheckoutActionView(View):
     def post(self, request, *args, **kwargs):
-        # Retrieve cart items and calculate total price
-        cart_items = CartPaymentCases.objects.filter(user=request.user)
-        if not cart_items.exists():
-            return JsonResponse({'error': 'Cart is empty'}, status=400)
+        try:
+            # Parse the shipping data from the request body
+            data = json.loads(request.body.decode("utf-8"))
+            address = data.get("address", "").strip()
+            address2 = data.get("address2", "").strip()
+            country = data.get("country", "").strip()
+            state = data.get("state", "").strip()
+            zip_code = data.get("zip", "").strip()
 
-        total_amount = sum(item.payment_case.amount * item.quantity for item in cart_items)
-        
-        # Determine if any items require delivery
-        requires_delivery = any(item.payment_case.requires_delivery for item in cart_items)
-        
-        #calculating total_delivery
-        if requires_delivery :
-           total_delivery = 10 #sum(item.payment_case.shipping_cost for item in cart_items)
-        else : total_delivery=0
-        
-        # Prepare shipping details conditionally
-        shipping_address_collection = {
-            "allowed_countries": ["US", "CA", "GB", "DE", "AU", "FR", "IN", "ET"]
-        } if requires_delivery else {}
+            # Retrieve cart items and calculate total price
+            cart_items = CartPaymentCases.objects.filter(user=request.user)
+            if not cart_items.exists():
+                return JsonResponse({'error': 'Cart is empty'}, status=400)
 
-        shipping_options = [
-            {
-                "shipping_rate_data": {
-                    "type": "fixed_amount",
-                    "fixed_amount": {"amount": total_delivery, "currency": "usd"},
-                    "display_name": "Standard Shipping",
-                    "delivery_estimate": {
-                        "minimum": {"unit": "business_day", "value": 3},
-                        "maximum": {"unit": "business_day", "value": 7},
-                    },
-                    "metadata": {
-                        "shipping_type": "Standard",
-                        "estimated_delivery": "3-7 business days",
+            total_amount = sum(item.payment_case.amount * item.quantity for item in cart_items)
+
+            # Determine if any items require delivery
+            requires_delivery = any(item.payment_case.requires_delivery for item in cart_items)
+            total_delivery = 10 if requires_delivery else 0
+
+            # Prepare shipping details conditionally
+            shipping_address_collection = {
+                "allowed_countries": ["US", "CA", "GB", "DE", "AU", "FR", "IN", "ET"]
+            } if requires_delivery else {}
+
+            shipping_options = [
+                {
+                    "shipping_rate_data": {
+                        "type": "fixed_amount",
+                        "fixed_amount": {"amount": total_delivery * 100, "currency": "usd"},
+                        "display_name": "Standard Shipping",
+                        "delivery_estimate": {
+                            "minimum": {"unit": "business_day", "value": 3},
+                            "maximum": {"unit": "business_day", "value": 7},
+                        },
+                        "metadata": {
+                            "shipping_type": "Standard",
+                            "estimated_delivery": "3-7 business days",
+                        },
                     },
                 },
-            },
-        ] if requires_delivery else []
+            ] if requires_delivery else []
 
-        # Create a new order
-        order = Order.objects.create(
-            user=request.user,
-            total_amount=total_amount,
-            payment_status="pending"
-        )
+            # Create a new order
+            order = Order.objects.create(
+                user=request.user,
+                total_amount=total_amount + total_delivery,
+                payment_status="pending"
+            )
 
-        # Create a Stripe checkout session
-        try:
+            # Handle ShippingInformation if delivery is required
+            shipping_info = None
+            if requires_delivery:
+                if not address or not country or not state or not zip_code:
+                    return JsonResponse({'error': 'Incomplete shipping details provided.'}, status=400)
+
+                shipping_info, created = ShippingInformation.objects.update_or_create(
+                    user=request.user,
+                    defaults={
+                        "address": address,
+                        "address2": address2,
+                        "country": country,
+                        "state": state,
+                        "zip_code": zip_code,
+                    },
+                )
+
+            # Create OrderCase instances only if order is created
+            if order:
+                for item in cart_items:
+                    OrderCase.objects.create(
+                        order=order,
+                        payment_case=item.payment_case,
+                        shipping_information=shipping_info if requires_delivery else None,
+                        quantity=item.quantity,
+                        total_price=item.payment_case.amount * item.quantity,
+                        delivery_state="pending" if requires_delivery else "delivered",
+                    )
+
+            # Create a Stripe checkout session
             session = stripe.checkout.Session.create(
                 payment_method_types=["card"],
                 line_items=[
@@ -247,66 +283,207 @@ class CheckoutActionView(View):
                 shipping_options=shipping_options,
                 metadata={
                     "order_id": str(order.order_id),
-                    # "membersID": cart_items.cart.membersID
                 },  # Pass order ID for webhook
             )
 
-            return JsonResponse({"checkout_url": session.url})
+            return JsonResponse({"sessionId": session.id})
 
         except stripe.error.StripeError as e:
             return JsonResponse({"error": str(e)}, status=400)
 
+        except json.JSONDecodeError:
+            return JsonResponse({"error": "Invalid JSON payload."}, status=400)
+
+        except Exception as e:
+            return JsonResponse({"error": f"An unexpected error occurred: {str(e)}"}, status=500)
+
+# # CheckoutActionView checkout session create
+# class CheckoutActionView(View):
+#     def post(self, request, *args, **kwargs):
+#         # Retrieve cart items and calculate total price
+#         cart_items = CartPaymentCases.objects.filter(user=request.user)
+#         if not cart_items.exists():
+#             return JsonResponse({'error': 'Cart is empty'}, status=400)
+
+#         total_amount = sum(item.payment_case.amount * item.quantity for item in cart_items)
+        
+#         # Determine if any items require delivery
+#         requires_delivery = any(item.payment_case.requires_delivery for item in cart_items)
+        
+#         #calculating total_delivery
+#         if requires_delivery :
+#            total_delivery = 10 #sum(item.payment_case.shipping_cost for item in cart_items)
+#         else : total_delivery=0
+        
+#         # Prepare shipping details conditionally
+#         shipping_address_collection = {
+#             "allowed_countries": ["US", "CA", "GB", "DE", "AU", "FR", "IN", "ET"]
+#         } if requires_delivery else {}
+
+#         shipping_options = [
+#             {
+#                 "shipping_rate_data": {
+#                     "type": "fixed_amount",
+#                     "fixed_amount": {"amount": total_delivery*100, "currency": "usd"},
+#                     "display_name": "Standard Shipping",
+#                     "delivery_estimate": {
+#                         "minimum": {"unit": "business_day", "value": 3},
+#                         "maximum": {"unit": "business_day", "value": 7},
+#                     },
+#                     "metadata": {
+#                         "shipping_type": "Standard",
+#                         "estimated_delivery": "3-7 business days",
+#                     },
+#                 },
+#             },
+#         ] if requires_delivery else []
+
+#         # Create a new order
+#         order = Order.objects.create(
+#             user=request.user,
+#             total_amount=total_amount,
+#             payment_status="pending"
+#         )
+#         if order and requires_delivery :
+#             shippingInformation, created = ShippingInformation.objects.update_or_create(
+#                 user=request.user,
+#                 address = '',# that come from my form not from strip,
+#                 address2 ='', # that come from my form not from strip,
+#                 country = '',# that come from my form not from strip,
+#                 state = '',# that come from my form not from strip
+#                 zip_code = '',# that come from my form not from strip
+#             )
+#         if order :
+#             shippingInfo = ShippingInformation.objects.filter(user=request.user).first()
+#             for item in cart_items :
+#                 orderCase = OrderCase.objects.create(
+#                     order=order,
+#                     payment_case = item.payment_case,
+#                     shipping_information = shippingInfo,
+#                     quantity=item.quantity,
+#                     total_price=item.total_price,
+#                     delivery_state ="pending"
+#                 )
+#         # Create a Stripe checkout session
+#         try:
+#             session = stripe.checkout.Session.create(
+#                 payment_method_types=["card"],
+#                 line_items=[
+#                     {
+#                         "price_data": {
+#                             "currency": "usd",
+#                             "product_data": {"name": item.payment_case.title},
+#                             "unit_amount": int(item.payment_case.amount * 100),  # Convert to cents
+#                         },
+#                         "quantity": item.quantity,
+#                     }
+#                     for item in cart_items
+#                 ],
+#                 mode="payment",
+#                 success_url=request.build_absolute_uri(reverse("payments:success")),
+#                 cancel_url=request.build_absolute_uri(reverse("payments:cancel")),
+#                 shipping_address_collection=shipping_address_collection,
+#                 shipping_options=shipping_options,
+#                 metadata={
+#                     "order_id": str(order.order_id),
+#                     # "membersID": cart_items.cart.membersID
+#                 },  # Pass order ID for webhook
+#             )
+
+#             return JsonResponse({"sessionId": session.id})
+
+#         except stripe.error.StripeError as e:
+#             return JsonResponse({"error": str(e)}, status=400)
+        
+# Stripe Webhook
 @csrf_exempt
 def stripe_webhook(request):
     payload = request.body
     sig_header = request.META.get("HTTP_STRIPE_SIGNATURE")
-    endpoint_secret = settings.STRIPE_WEBHOOK_SECRET  # Add your Stripe webhook secret in settings
+    endpoint_secret = settings.STRIPE_WEBHOOK_SECRET  # Ensure this is correctly configured in settings.py
 
     try:
+        # Verify the webhook signature
         event = stripe.Webhook.construct_event(payload, sig_header, endpoint_secret)
     except ValueError as e:
+        logger.error(f"Invalid payload: {e}")
         return JsonResponse({"error": "Invalid payload"}, status=400)
     except stripe.error.SignatureVerificationError as e:
+        logger.error(f"Invalid signature: {e}")
         return JsonResponse({"error": "Invalid signature"}, status=400)
 
-    # Handle the checkout.session.completed event
-    if event["type"] == "checkout.session.completed":
-        session = event["data"]["object"]
+    try:
+        # Handle the `checkout.session.completed` event
+        if event["type"] == "checkout.session.completed":
+            session = event["data"]["object"]
+            handle_checkout_session(session)
+        return JsonResponse({"status": "success"})
+    except Exception as e:
+        # Log unexpected errors
+        logger.error(f"Webhook processing failed: {str(e)}")
+        return JsonResponse({"error": "Webhook processing failed"}, status=500)
 
+def handle_checkout_session(session):
+    """
+    Handles the logic for processing a Stripe checkout session.
+    """
+    try:
         # Retrieve order_id from session metadata
-        order_id = session["metadata"]["order_id"]
+        order_id = session["metadata"].get("order_id")
+        if not order_id:
+            logger.error("Order ID not found in session metadata.")
+            return
 
-        # Update order status to "completed"
+        # Fetch the associated order
         order = Order.objects.filter(order_id=order_id).first()
-        if order:
-            order.payment_status = "completed"
-            order.save()
+        if not order:
+            logger.error(f"Order {order_id} not found.")
+            return
 
-            # Update OrderCase information
-            order_cases = OrderCase.objects.filter(order=order)
-            for order_case in order_cases:
-                if order_case.payment_case.requires_delivery:
-                    order_case.delivery_state = "pending"  # Mark as pending for delivery
-                else:
-                    order_case.delivery_state = "delivered"  # No delivery required
-                order_case.save()
+        # Update the payment status of the order
+        order.payment_status = "completed"
+        order.save()
+        logger.info(f"Order {order_id} marked as completed.")
 
+        # Process further updates only if payment status is successfully marked as completed
+        if order.payment_status == "completed":
             # Update or create ShippingInformation
+            shipping_info = None
             if session.get("shipping"):
                 shipping_details = session["shipping"]["address"]
                 shipping_info, created = ShippingInformation.objects.update_or_create(
                     user=order.user,
                     defaults={
-                        "address": shipping_details.get("line1"),
-                        "address2": shipping_details.get("line2"),
-                        "country": shipping_details.get("country"),
-                        "state": shipping_details.get("state"),
-                        "zip_code": shipping_details.get("postal_code"),
+                        "address": shipping_details.get("line1", ""),
+                        "address2": shipping_details.get("line2", ""),
+                        "country": shipping_details.get("country", ""),
+                        "state": shipping_details.get("state", ""),
+                        "zip_code": shipping_details.get("postal_code", ""),
                     },
                 )
+                logger.info(f"ShippingInformation {'created' if created else 'updated'} for user {order.user.id}.")
 
-    return JsonResponse({"status": "success"})
+            # Ensure shipping_info exists before updating OrderCase
+            if shipping_info:
+                # Update or create OrderCase instances
+                order_cases = OrderCase.objects.filter(order=order)
+                for order_case in order_cases:
+                    order_case.shipping_information = shipping_info
+                    if order_case.payment_case.requires_delivery:
+                        order_case.delivery_state = "pending"  # Mark for delivery
+                    else:
+                        order_case.delivery_state = "delivered"  # No delivery required
+                    order_case.save()
+                    logger.info(f"OrderCase {order_case.id} updated with new ShippingInformation.")
 
+
+        
+        if order.payment_status == "completed":
+            pass # create or Update related ShippingInformation, and than create or Update  OrderCase since cases that actual 'order.payment_status = "completed"'
+                
+
+    except Exception as e:
+        logger.error(f"Error handling checkout session: {e}")
 
 # @csrf_exempt
 # def stripe_webhook(request):

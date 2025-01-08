@@ -3,6 +3,7 @@
 {% load crispy_forms_tags %}
 {% block javascript %}
    {% comment %} <script type="text/javascript" src="{% static '' %}" defer ></script> {% endcomment %}
+   <script src="https://js.stripe.com/v3/"></script>
 {% endblock %}
 {% block title %}paymentCases cart List{% endblock %}
 {% block main %}
@@ -109,7 +110,7 @@
             <li class="list-group-item d-flex justify-content-between lh-sm small">
               <div class="d-flex justify-content-start lh-sm small gap-2">
                 <!-- Display the payment case image -->
-                {% if cases.payment_case.image.url %}
+                {% if cases.payment_case.image %}
                   <img 
                   src="{{ cases.payment_case.image.url }}" 
                   alt="{{ cases.payment_case.name }}" 
@@ -245,13 +246,22 @@
     })
     .then(response => response.json())
     .then(data => {
-      if (data.sessionId) {
+      if (data.sessionId) { 
         const stripe = Stripe("{{ STRIPE_PUBLIC_KEY }}");
-        stripe.redirectToCheckout({ sessionId: data.sessionId });
+        stripe.redirectToCheckout({ sessionId: data.sessionId })
+          .then(function(result) {
+            if (result.error) {
+              // Display the error message to the user if there's an issue with the checkout redirection
+              alert(result.error.message);
+            }
+          });
       } else {
-        alert(data.error || "An error occurred");
+        // Log the error if there's no sessionId returned
+        console.error('Error:', data.error || 'An unknown error occurred');
+        alert(data.error || 'An error occurred');
       }
     });
+    
   });
 </script>
 
