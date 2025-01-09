@@ -150,7 +150,15 @@ class Order(models.Model):
 class OrderCase(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='order_cases')
     payment_case = models.ForeignKey('PaymentCases', on_delete=models.CASCADE, related_name='ordered_cases')
-    shipping_information = models.ForeignKey(ShippingInformation, on_delete=models.CASCADE, related_name='order_cases')
+    shipping_information = models.ForeignKey(
+        ShippingInformation, 
+        on_delete=models.CASCADE, 
+        related_name='order_cases',
+        null=True,  # Shipping information is optional
+        blank=True,
+        default=None, # Default to None if no value is provided
+        help_text='you can pass it'
+        )
     quantity = models.PositiveIntegerField(default=1)
     total_price = models.DecimalField(max_digits=10, decimal_places=2)
     delivery_state = models.CharField(

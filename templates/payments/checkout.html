@@ -223,7 +223,7 @@
 </div>
 
 </div>
-<script>
+{% comment %} <script>
   document.getElementById('continue-checkout').addEventListener('click', function () {
     const shippingForm = document.getElementById('shipping-form');
     const formData = new FormData(shippingForm);
@@ -263,6 +263,6 @@
     });
     
   });
-</script>
+</script> {% endcomment %}
 
 {% endblock %}

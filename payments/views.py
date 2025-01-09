@@ -256,10 +256,10 @@ class CheckoutActionView(View):
                     OrderCase.objects.create(
                         order=order,
                         payment_case=item.payment_case,
-                        shipping_information=shipping_info if requires_delivery else None,
+                        shipping_information=shipping_info if item.payment_case.requires_delivery else None,
                         quantity=item.quantity,
                         total_price=item.payment_case.amount * item.quantity,
-                        delivery_state="pending" if requires_delivery else "delivered",
+                        delivery_state="pending" if item.payment_case.requires_delivery else "delivered",
                     )
 
             # Create a Stripe checkout session
@@ -446,41 +446,93 @@ def handle_checkout_session(session):
         logger.info(f"Order {order_id} marked as completed.")
 
         # Process further updates only if payment status is successfully marked as completed
-        if order.payment_status == "completed":
-            # Update or create ShippingInformation
-            shipping_info = None
-            if session.get("shipping"):
-                shipping_details = session["shipping"]["address"]
-                shipping_info, created = ShippingInformation.objects.update_or_create(
-                    user=order.user,
-                    defaults={
-                        "address": shipping_details.get("line1", ""),
-                        "address2": shipping_details.get("line2", ""),
-                        "country": shipping_details.get("country", ""),
-                        "state": shipping_details.get("state", ""),
-                        "zip_code": shipping_details.get("postal_code", ""),
-                    },
-                )
-                logger.info(f"ShippingInformation {'created' if created else 'updated'} for user {order.user.id}.")
-
-            # Ensure shipping_info exists before updating OrderCase
-            if shipping_info:
-                # Update or create OrderCase instances
-                order_cases = OrderCase.objects.filter(order=order)
-                for order_case in order_cases:
-                    order_case.shipping_information = shipping_info
-                    if order_case.payment_case.requires_delivery:
-                        order_case.delivery_state = "pending"  # Mark for delivery
-                    else:
-                        order_case.delivery_state = "delivered"  # No delivery required
-                    order_case.save()
-                    logger.info(f"OrderCase {order_case.id} updated with new ShippingInformation.")
-
-
-        
-        if order.payment_status == "completed":
-            pass # create or Update related ShippingInformation, and than create or Update  OrderCase since cases that actual 'order.payment_status = "completed"'
+        # create or Update related ShippingInformation, and than create or Update  OrderCase 
+        # since cases that actual 'order.payment_status = "completed"'
                 
+        # if order.payment_status == "completed":
+        # # Update or create ShippingInformation
+        #     order_cases = OrderCase.objects.filter(order=order)
+        #     if order_cases.exists():
+        #         for order_case in order_cases:
+        #             # Ensure shipping_info exists before updating OrderCase
+        #             if order_case.shipping_information == 'none':
+        #                 pass
+        #             else :
+        #                 shipping_info = None
+        #                 if session.get("shipping"):
+        #                     shipping_details = session["shipping"]["address"]
+        #                     shipping_info, created = ShippingInformation.objects.update_or_create(
+        #                         user=order.user,
+        #                         defaults={
+        #                             "address": shipping_details.get("line1", ""),
+        #                             "address2": shipping_details.get("line2", ""),
+        #                             "country": shipping_details.get("country", ""),
+        #                             "state": shipping_details.get("state", ""),
+        #                             "zip_code": shipping_details.get("postal_code", ""),
+        #                         },
+        #                     )
+        #                     logger.info(f"ShippingInformation {'created' if created else 'updated'} for user {order.user.id}.")
+        #                 if shipping_info:
+        #                     order_case.shipping_information = shipping_info
+        #                     if order_case.payment_case.requires_delivery:
+        #                         order_case.delivery_state = "pending"  # Mark for needs delivery
+        #                     else:
+        #                         order_case.delivery_state = "delivered"  # No delivery required
+        #                     order_case.save()
+        #                     logger.info(f"OrderCase {order_case.id} updated with new ShippingInformation.")
+        #         # Clear cart items after successfully updating OrderCase
+        #         cart_items = CartPaymentCases.objects.filter(user=order.user)
+        #         print(cart_items)
+        #         if cart_items.exists():
+        #             cart_items.delete()
+        #             logger.info(f"Cart items cleared for user {order.user.id}.")
+        #         else:
+        #             logger.info(f"Cart items not exists for user {order.user.id}.")   
+        #     else:
+        #         logger.warning(f"No OrderCase instances found for Order {order.id}.") 
+           
+        if order.payment_status == "completed":
+            # Update ShippingInformation for OrderCases if needed
+            order_cases = OrderCase.objects.filter(order=order)
+            if order_cases.exists():
+                for order_case in order_cases:
+                    if order_case.payment_case.requires_delivery :
+                        # Create or update ShippingInformation if session data exists
+                        shipping_info = None
+                        if session.get("shipping"):
+                            shipping_details = session["shipping"]["address"]
+                            shipping_info, created = ShippingInformation.objects.update_or_create(
+                                user=order.user,
+                                defaults={
+                                    "address": shipping_details.get("line1", ""),
+                                    "address2": shipping_details.get("line2", ""),
+                                    "country": shipping_details.get("country", ""),
+                                    "state": shipping_details.get("state", ""),
+                                    "zip_code": shipping_details.get("postal_code", ""),
+                                },
+                            )
+                            logger.info(f"ShippingInformation {'created' if created else 'updated'} for user {order.user.id}.")
+
+                        # Assign updated ShippingInformation to the OrderCase
+                        if shipping_info:
+                            order_case.shipping_information = shipping_info
+                            order_case.delivery_state = "pending"  # Mark as pending delivery
+                            order_case.save()
+                            logger.info(f"OrderCase {order_case.id} updated with new ShippingInformation.")
+
+                # Clear cart items after successfully updating OrderCases
+                cart_items = CartPaymentCases.objects.filter(user=order.user)
+                if cart_items.exists():
+                    # Clear related CartPaymentCases and associated CartPayments
+                    cart_payment_ids = cart_items.values_list('cart_id', flat=True)
+                    cart_items.delete()
+                    CartPayment.objects.filter(id__in=cart_payment_ids).delete()
+                    logger.info(f"Cart items and related cart payments cleared for user {order.user.id}.")
+                else:
+                    logger.info(f"No CartPaymentCases found for user {order.user.id}.")
+            else:
+                logger.warning(f"No OrderCase instances found for Order {order.id}.")
+        
 
     except Exception as e:
         logger.error(f"Error handling checkout session: {e}")
