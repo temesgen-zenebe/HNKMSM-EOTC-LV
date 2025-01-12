@@ -25,12 +25,100 @@
         </div>
     </div>
 </div>
-  <div class="container mt-1">
+  <div class="mt-1">
     <div class="row row-cols-1 row-cols-md-1 g-4">
       <div class="col">
         <div class="card shadow border border-primary">
-          <div class="card-header bg-primary small">
-            <h3 class="card-title fs-5">All Payment History</h3>
+          <div class="card-header bg-dark small">
+            <h3 class="card-title text-white fs-5">All Payment History</h3>
+          </div>
+         
+          <div class="card-body small">
+            <!-- Table -->
+            {% if user_orders %}
+            <div class="table-responsive mt-3">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Username</th>
+                    <th scope="col">OrderID</th>
+                    <th scope="col">checkout Total </th>
+                    <th scope="col">Payment Status</th>
+                    <th scope="col">Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for history in user_orders %}
+                  <tr>
+                    <td>{{ history.user.username }}</td>
+                    <td><a class="text-success" data-bs-toggle="modal" data-bs-target="#Modal{{history.slug}}" >{{ history.order_id }}</a></td>
+                    <td>$-{{ history.total_amount }}</td>
+                    <td>{{ history.payment_status }}</td>
+                    <td>{{ history.updated_at }}</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+            {% for history in user_orders %}             
+              <!-- Modal Search Start -->
+                  <div class="modal fade " id="Modal{{history.slug}}" tabindex="-1" aria-labelledby="ModalLabel{{history.slug}}" aria-hidden="true">
+                      <div class="modal-dialog modal-lg">
+                          <div class="modal-content rounded-1">
+                              <div class="modal-header ">
+                                  <p class="modal-title " id="ModalLabel{{history.slug}}">{{ history.user.username }} Detail payment history </p>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body d-flex align-items-center ">
+                                <div class="table-responsive mt-3 mx-auto">
+                                  <table class="table table-striped">
+                                    <thead>
+                                      <tr>
+                                        <th scope="col">Case</th>
+                                        <th scope="col">Quantity</th>
+                                        <th scope="col">Total Price</th>
+                                        <th scope="col">shipping_information</th>  
+                                        <th scope="col">Delivery Status</th>
+                                        <th scope="col">Date</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      {% for case in orderCase %}
+                                        {% if case.order.id == history.id %}
+                                        <tr>
+                                          <td>{{ case.payment_case.title }}</td>
+                                          <td>{{ case.quantity }}</td>
+                                          <td>$-{{ case.total_price }}</td>
+                                          <td>{{ case.shipping_information }}</td>
+                                          <td>{{ case.delivery_state }}</td>
+                                          <td>{{ case.updated_at }}</td>
+                                        </tr>
+                                        {% endif %}
+                                      {% endfor %}
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <!-- Modal Search End -->
+              {% endfor %}
+            
+            {% else %}
+            <h3 class="card-title fs-6 mt-3">Oops! No payment history found for now.</h3>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> 
+  <div class="my-5">
+    <div class="row row-cols-1 row-cols-md-1 g-4">
+      <div class="col">
+        <div class="card shadow border border-primary">
+          <div class="card-header bg-dark small">
+            <h3 class="card-title text-white fs-5">Order Case Payment history List</h3>
           </div>
           <div class="card-header small">
             <div class="row g-3">
@@ -51,18 +139,17 @@
               
             </div>
             
-          </div>
+          </div> 
           <div class="card-body small">
-            <!-- Table -->
-            {% if paymentHistoryList %}
+          {% if paymentHistoryList %}
             <div class="table-responsive mt-3">
               <table class="table table-striped">
                 <thead>
                   <tr>
                     <th scope="col">Username</th>
-                    <th scope="col">Total Amount</th>
+                    <th scope="col">checkout Total </th>
                     <th scope="col">Case</th>
-                    <th scope="col">Amount</th>
+                    <th scope="col">Quantity</th>
                     <th scope="col">Total Price</th>
                     <th scope="col">Delivery Status</th>
                     <th scope="col">Date</th>
@@ -82,8 +169,7 @@
                   {% endfor %}
                 </tbody>
               </table>
-            </div>
-            
+            </div> 
             <!-- Pagination -->
             <div class="pagination">
               <span class="page-links">
@@ -95,7 +181,7 @@
                 <a href="?{% if selected_payment_case %}payment_case={{ selected_payment_case }}&{% endif %}page={{ paymentHistoryList.next_page_number }}">Next</a>
                 {% endif %}
               </span>
-            </div>
+            </div> 
             {% else %}
             <h3 class="card-title fs-6 mt-3">Oops! No payment history found for now.</h3>
             {% endif %}
@@ -103,6 +189,7 @@
         </div>
       </div>
     </div>
-  </div> 
+  </div>
+
 </div>
 {% endblock %}

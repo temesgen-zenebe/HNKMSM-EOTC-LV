@@ -167,7 +167,8 @@ class PaymentsHistoryListView(LoginRequiredMixin, ListView):
     template_name = 'payments/paymentHistory_list.html'
     context_object_name = 'paymentHistoryList'
     #paginate_by = 10  # Display 10 records per page
-
+    
+    
     def get_queryset(self):
         # Filter OrderCase by logged-in user's orders and optional payment_case
         user_orders = Order.objects.filter(user=self.request.user)
@@ -178,21 +179,40 @@ class PaymentsHistoryListView(LoginRequiredMixin, ListView):
             queryset = queryset.filter(payment_case__id=payment_case_filter)
 
         return queryset
-
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        
+        user_orders = Order.objects.filter(user=self.request.user)
+        orderCase = OrderCase.objects.filter(order__in=user_orders).order_by('-created_at')
         # Add available payment cases for the dropdown
         available_payment_cases = PaymentCases.objects.all()
         
         # Include the selected payment case in the context for retaining selection
         selected_payment_case = self.request.GET.get('payment_case', '')
-
         context.update({
+            'user_orders': user_orders,
+            'orderCase': orderCase,
             'available_payment_cases': available_payment_cases,
             'selected_payment_case': selected_payment_case,
         })
         return context
+
+    
+
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+        
+    #     # Add available payment cases for the dropdown
+    #     available_payment_cases = PaymentCases.objects.all()
+        
+    #     # Include the selected payment case in the context for retaining selection
+    #     selected_payment_case = self.request.GET.get('payment_case', '')
+
+    #     context.update({
+    #         'available_payment_cases': available_payment_cases,
+    #         'selected_payment_case': selected_payment_case,
+    #     })
+    #     return context
 
 
 
@@ -460,135 +480,7 @@ def handle_checkout_session(session):
     except Exception as e:
         logger.error(f"Error handling checkout session: {e}")
 
-# @csrf_exempt
-# def stripe_webhook(request):
-#     payload = request.body
-#     sig_header = request.META.get('HTTP_STRIPE_SIGNATURE')
-#     event = None
 
-#     # Log the received payload
-#     logger.info(f"Received payload: {payload}")
-    
-#     if sig_header is None:
-#         logger.error("Missing Stripe-Signature header")
-#         return JsonResponse({'error': 'Missing Stripe-Signature header'}, status=400)
-
-#     try:
-#         event = stripe.Webhook.construct_event(
-#             payload, sig_header, settings.STRIPE_WEBHOOK_SECRET
-#         )
-#         logger.info("Signature verification succeeded.")
-#     except ValueError as e:
-#         logger.error(f"Invalid payload: {e}")
-#         return HttpResponse(status=400)
-#     except stripe.error.SignatureVerificationError as e:
-#         logger.error(f"Invalid signature: {e}")
-#         return HttpResponse(status=400)
-
-#     logger.info(f"Received event type: {event['type']}")
-
-#     if event['type'] == 'checkout.session.completed':
-#         session = event['data']['object']
-#         logger.info(f"Checkout session completed: {json.dumps(session, indent=2)}")
-#         handle_checkout_session(session)
-
-#     return HttpResponse(status=200)
-
-# def handle_checkout_session(session):
-#     try:
-        
-#         print(session)
-#         # Retrieve the user or customer email from the session
-#         customer_email = session.get('customer_details', {}).get('email')
-#         print(customer_email)
-#         # Retrieve the membershipID from the session's custom_fields
-#         custom_fields = session.get('custom_fields', [])
-#         # Initialize membershipID as None in case it is not found
-#         membershipID = None
-#         # Iterate over the custom_fields to find the one with key 'membershipid'
-#         for field in custom_fields:
-#             if field.get('key') == 'membershipid':
-#               membershipID = field.get('text', {}).get('value')
-#               break  # Exit loop once the membershipID is found
-#         # Now, membershipID will contain the value or None if not found
-#         print("membershipID : " + membershipID)
-        
-#            # Retrieve and process amount and created timestamp
-#         amount = session['amount_total'] / 100  # Amount in dollars
-#         print(f"Amount: ${amount:.2f}")
-
-#         created_timestamp = session['created']
-#         created_date = datetime.fromtimestamp(created_timestamp).strftime('%Y-%m-%d %H:%M:%S')
-#         print(f"Created: {created_date}")
-        
-#         payment_intent_id = session.get('payment_intent')
-#         payment_case_link = session.get('payment_link')  # Adjust this based on actual session structure
-        
-#         print(payment_case_link)
-#         if not payment_case_link:
-#             logger.error(f"No valid payment link found in session object: {json.dumps(session, indent=2)}")
-#             return
-
-#         payment_case = PaymentCaseLists.objects.get(payment_case_link=payment_case_link)
-#         print(payment_case)
-        
-#         # # Create a Stripe Checkout session
-#         # checkout_session = stripe.checkout.Session.create(
-#         #     mode="payment",
-#         #     invoice_creation={"enabled": True},
-#         #     line_items=[{"price": "price_1PXL9PP9YIWmSYJtvyb5XX4k", "quantity": 1}],  # Replace with your actual price ID
-#         #     success_url="http://127.0.0.1:8000/payments/confirmation/",
-#         #     #cancel_url="https://yourwebsite.com/cancel",
-#         #     customer_email=customer_email  # Automatically fill the email in the Stripe checkout
-#         # )
-        
-        
-#         # Assuming the use of Django ORM and MembersUpdateInformation model
-#         user = None
-#         if membershipID:
-#             #print(f"Searching for member with membershipID: {membershipID}")
-#             try:
-#                 #Retrieve the first member that matches the membershipID
-#                 member = MembersUpdateInformation.objects.filter(member_id=membershipID).first()
-        
-#                 # Check if a member was found and get the user associated with the member
-#                 if member:
-#                     #print(f"Member found: {member.full_name}")
-#                     user = member.user
-#                     if payment_case.title == 'membership':
-#                         #print(f"Updating member status to active for member: {member.full_name}")
-#                         member.member_status = 'active'
-#                         member.save()
-#                    # Print the user information
-#                     print(f"user: {user}")
-                   
-#                 if member.member_status == 'pending':
-#                     print(f"member_status change to: {member.member_status}")
-                    
-#             except Exception as e:
-#                 print(f"An error occurred: {e}")
-#         else:
-#             print("No membershipID found.")
-        
-#         # PaymentHistory.objects.create(
-#         #     user = user,
-#         #     payment_email=customer_email,
-#         #     #paymentConfirmation=payment_intent_id,
-#         #     amount=amount,
-#         #     payment_case=payment_case,
-#         #     payment_date=timezone.now() #created_date 
-           
-#         # )
-        
-#         logger.info("PaymentHistory record created successfully.")
-        
-#         # Redirect the user to the Stripe-hosted payment_confirmation page
-#         return redirect('http://127.0.0.1:8000/payments/confirmation/')
-
-#     except PaymentCaseLists.DoesNotExist:
-#         logger.error(f"No PaymentCaseLists found with stripsPayment_link: {payment_case_link}")
-#     except Exception as e:
-#         logger.error(f"Error handling checkout session: {e}")
 
 
 
