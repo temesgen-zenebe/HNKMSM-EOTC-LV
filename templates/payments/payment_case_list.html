@@ -12,11 +12,12 @@
         style="background-image: url('{% static "img/heroAccount-13.png" %}');background-size: cover; background-position: center center; background-repeat: no-repeat; " alt="Church-at" data-wow-delay="0.1s">
         <div class="container py-1 mt-0">
             <div class="animated bounceInDown ">
+              <div>
                 <ol class="breadcrumb justify-content-start mb-0 animated bounceInDown small">
                     <li class="small"><a href="{% url 'pages:homepage' %}">Home <span class="px-1">\</span></a></li>
                     <li class="small"><a href="{% url "payments:payment_menu" %}">payment_menu<span class="px-1">\</span></a></li>
                     <li class="small" aria-current="page">paymentCaseList \</li>
-                </ol>   
+                </ol>       
             </div>
         </div>
         <div class="text-center py-2">
@@ -27,10 +28,23 @@
 </div>
 {% if payment_cases %}
   {% if payment_service_cases %}
-  <div class="p-2 my-4 border-primary border-bottom ">
-    <h3 class="text-primary fs-4">Church services related Fees</h3>
-    <small class="text-primary small">ከቤተክርስቲያን አገልግሎቶች ጋር የተያያዙ ክፍያዎች</small>
+  <div class="d-flex justify-content-between my-3">
+    <div class="p-2 my-1">
+      <h3 class="text-primary fs-4">Church services related Fees</h3>
+      <small class="text-primary small">ከቤተክርስቲያን አገልግሎቶች ጋር የተያያዙ ክፍያዎች</small>
+    </div>
+    
+    {% if user.is_authenticated %}
+    <div class="p-2 my-1">
+      <a href="{% url "payments:paymentCaseCart_view" %}"
+            class="nav-item nav-link btn btn-primary  rounded-3" >
+            <span id="cart_link" class="small text-white">Go Checkout [1] </span>
+            <i class="fas fa-shopping-cart small text-white"></i>
+    </a>
+    </div>
   </div>
+  <hr class="p-1 my-4 bg-primary border-primary">
+{% endif %} 
   <div class="row row-cols-1 row-cols-md-3 mb-5 g-4">
         {% for case in payment_service_cases %}
           <div class="col">
