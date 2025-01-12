@@ -35,12 +35,12 @@
     </div>
     
     {% if user.is_authenticated %}
-    <div class="p-2 my-1">
+    <div class="p-2 my-1 mx-2">
       <a href="{% url "payments:paymentCaseCart_view" %}"
-            class="nav-item nav-link btn btn-primary  rounded-3" >
-            <span id="cart_link" class="small text-white">Go Checkout [1] </span>
+            class="btn btn-sm btn-primary px-3 py-2 rounded-pill" >
+            <span id="cart_link" class="small text-white">Go to Checkout ( {{cart_count}} ) </span>
             <i class="fas fa-shopping-cart small text-white"></i>
-    </a>
+      </a>
     </div>
   </div>
   <hr class="p-1 my-4 bg-primary border-primary">
@@ -61,8 +61,12 @@
                 <hr />
                 <div class="btn-group gap-3">
                   <a href="{% url 'payments:payment_case_detail' case.slug %}" class="btn btn-sm px-4 py-2 rounded-pill btn-primary">Details</a>
+                  <form action="{% url 'payments:addToPaymentCaseCart_view' slug=case.slug %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-sm px-4 py-2 rounded-pill btn-primary">Add to Cart</button>
+                  </form>
                 </div>
-                <a href="{{case.stripsPayment_link}}" class="btn btn-sm btn-primary px-3 py-2 rounded-pill" target="_blank">Go pay</a> 
+                {% comment %} <a href="{{case.stripsPayment_link}}" class="btn btn-sm btn-primary px-3 py-2 rounded-pill" target="_blank">Go pay</a>  {% endcomment %}
               </div>
             </div>
           </div>

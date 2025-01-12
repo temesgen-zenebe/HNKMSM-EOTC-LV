@@ -19,6 +19,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 from .forms import PaymentCaseCartForm  # Assume you have created a form for updating
 from decimal import Decimal
+from django.core.paginator import Paginator
+from django.db.models import Prefetch
 from .models import (
     PaymentCases,
     CartPayment,
@@ -39,7 +41,7 @@ class PaymentMenuView(ListView):
         context['payment_cases'] = PaymentCases.objects.filter(slug='membership')
         return context
 
-class PaymentCaseListView(ListView):
+class PaymentCaseListView(ListView, LoginRequiredMixin):
     model = PaymentCases
     template_name = 'payments/payment_case_list.html'  # Specify your template name
     context_object_name = 'payment_cases'  # Specify the context object name to use in the template
@@ -48,12 +50,13 @@ class PaymentCaseListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         payment_cases = PaymentCases.objects.all()
-
+        payment_cases_cart = CartPaymentCases.objects.filter(user=self.request.user)
         context.update({
             'payment_service_cases': payment_cases.filter(category__title='service'),
             'payment_donation_cases': payment_cases.filter(category__title='donation'),
             'payment_other_cases': payment_cases.exclude(category__title='service'),
             'payment_products_cases': payment_cases.filter(category__title='product'),
+            'cart_count':sum(case.quantity for case in payment_cases_cart)
         })
 
         return context
@@ -157,14 +160,42 @@ class PaymentCaseCartUpdateView(LoginRequiredMixin, UpdateView):
         # Optional: Filter queryset if needed, e.g., by user
         return super().get_queryset()
 
-# class PaymentsHistoryListView(LoginRequiredMixin,ListView):
-#     model = PaymentHistory
-#     template_name = 'payments/paymentHistory_list.html'
-#     context_object_name = 'paymentHistoryList'
-#     #success_url = reverse_lazy('payments:payment_confirmation')
 
-#     def get_queryset(self):
-#         return PaymentHistory.objects.filter(user=self.request.user)
+
+class PaymentsHistoryListView(LoginRequiredMixin, ListView):
+    model = OrderCase
+    template_name = 'payments/paymentHistory_list.html'
+    context_object_name = 'paymentHistoryList'
+    #paginate_by = 10  # Display 10 records per page
+
+    def get_queryset(self):
+        # Filter OrderCase by logged-in user's orders and optional payment_case
+        user_orders = Order.objects.filter(user=self.request.user)
+        payment_case_filter = self.request.GET.get('payment_case')  # Get filter from dropdown
+
+        queryset = OrderCase.objects.filter(order__in=user_orders).order_by('-created_at')
+        if payment_case_filter:  # Apply filtering if selected
+            queryset = queryset.filter(payment_case__id=payment_case_filter)
+
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        
+        # Add available payment cases for the dropdown
+        available_payment_cases = PaymentCases.objects.all()
+        
+        # Include the selected payment case in the context for retaining selection
+        selected_payment_case = self.request.GET.get('payment_case', '')
+
+        context.update({
+            'available_payment_cases': available_payment_cases,
+            'selected_payment_case': selected_payment_case,
+        })
+        return context
+
+
+
    
 class PaymentCancelView(TemplateView):
     template_name = "payments/cancel.html"
@@ -302,104 +333,7 @@ class CheckoutActionView(View):
         except Exception as e:
             return JsonResponse({"error": f"An unexpected error occurred: {str(e)}"}, status=500)
 
-# # CheckoutActionView checkout session create
-# class CheckoutActionView(View):
-#     def post(self, request, *args, **kwargs):
-#         # Retrieve cart items and calculate total price
-#         cart_items = CartPaymentCases.objects.filter(user=request.user)
-#         if not cart_items.exists():
-#             return JsonResponse({'error': 'Cart is empty'}, status=400)
-
-#         total_amount = sum(item.payment_case.amount * item.quantity for item in cart_items)
-        
-#         # Determine if any items require delivery
-#         requires_delivery = any(item.payment_case.requires_delivery for item in cart_items)
-        
-#         #calculating total_delivery
-#         if requires_delivery :
-#            total_delivery = 10 #sum(item.payment_case.shipping_cost for item in cart_items)
-#         else : total_delivery=0
-        
-#         # Prepare shipping details conditionally
-#         shipping_address_collection = {
-#             "allowed_countries": ["US", "CA", "GB", "DE", "AU", "FR", "IN", "ET"]
-#         } if requires_delivery else {}
-
-#         shipping_options = [
-#             {
-#                 "shipping_rate_data": {
-#                     "type": "fixed_amount",
-#                     "fixed_amount": {"amount": total_delivery*100, "currency": "usd"},
-#                     "display_name": "Standard Shipping",
-#                     "delivery_estimate": {
-#                         "minimum": {"unit": "business_day", "value": 3},
-#                         "maximum": {"unit": "business_day", "value": 7},
-#                     },
-#                     "metadata": {
-#                         "shipping_type": "Standard",
-#                         "estimated_delivery": "3-7 business days",
-#                     },
-#                 },
-#             },
-#         ] if requires_delivery else []
-
-#         # Create a new order
-#         order = Order.objects.create(
-#             user=request.user,
-#             total_amount=total_amount,
-#             payment_status="pending"
-#         )
-#         if order and requires_delivery :
-#             shippingInformation, created = ShippingInformation.objects.update_or_create(
-#                 user=request.user,
-#                 address = '',# that come from my form not from strip,
-#                 address2 ='', # that come from my form not from strip,
-#                 country = '',# that come from my form not from strip,
-#                 state = '',# that come from my form not from strip
-#                 zip_code = '',# that come from my form not from strip
-#             )
-#         if order :
-#             shippingInfo = ShippingInformation.objects.filter(user=request.user).first()
-#             for item in cart_items :
-#                 orderCase = OrderCase.objects.create(
-#                     order=order,
-#                     payment_case = item.payment_case,
-#                     shipping_information = shippingInfo,
-#                     quantity=item.quantity,
-#                     total_price=item.total_price,
-#                     delivery_state ="pending"
-#                 )
-#         # Create a Stripe checkout session
-#         try:
-#             session = stripe.checkout.Session.create(
-#                 payment_method_types=["card"],
-#                 line_items=[
-#                     {
-#                         "price_data": {
-#                             "currency": "usd",
-#                             "product_data": {"name": item.payment_case.title},
-#                             "unit_amount": int(item.payment_case.amount * 100),  # Convert to cents
-#                         },
-#                         "quantity": item.quantity,
-#                     }
-#                     for item in cart_items
-#                 ],
-#                 mode="payment",
-#                 success_url=request.build_absolute_uri(reverse("payments:success")),
-#                 cancel_url=request.build_absolute_uri(reverse("payments:cancel")),
-#                 shipping_address_collection=shipping_address_collection,
-#                 shipping_options=shipping_options,
-#                 metadata={
-#                     "order_id": str(order.order_id),
-#                     # "membersID": cart_items.cart.membersID
-#                 },  # Pass order ID for webhook
-#             )
-
-#             return JsonResponse({"sessionId": session.id})
-
-#         except stripe.error.StripeError as e:
-#             return JsonResponse({"error": str(e)}, status=400)
-        
+       
 # Stripe Webhook
 @csrf_exempt
 def stripe_webhook(request):
@@ -460,59 +394,6 @@ def handle_checkout_session(session):
         # create or Update related ShippingInformation, and than create or Update  OrderCase 
         # since cases that actual 'order.payment_status = "completed"'
                 
-        # if order.payment_status == "completed":
-        #     # Update ShippingInformation for OrderCases if needed
-            
-        #     order_cases = OrderCase.objects.filter(order=order)
-        #     if order_cases.exists():
-        #         for order_case in order_cases:
-        #             if order_case.payment_case.requires_delivery :
-        #                 # Create or update ShippingInformation if session data exists
-        #                 shipping_info = None
-        #                 if session.get("shipping"):
-        #                     shipping_details = session["shipping"]["address"]
-        #                     shipping_info, created = ShippingInformation.objects.update_or_create(
-        #                         user=order.user,
-        #                         defaults={
-        #                             "address": shipping_details.get("line1", ""),
-        #                             "address2": shipping_details.get("line2", ""),
-        #                             "country": shipping_details.get("country", ""),
-        #                             "state": shipping_details.get("state", ""),
-        #                             "zip_code": shipping_details.get("postal_code", ""),
-        #                         },
-        #                     )
-        #                     logger.info(f"ShippingInformation {'created' if created else 'updated'} for user {order.user.id}.")
-
-        #                 # Assign updated ShippingInformation to the OrderCase
-        #                 if shipping_info:
-        #                     order_case.shipping_information = shipping_info
-        #                     order_case.delivery_state = "pending"  # Mark as pending delivery
-        #                     order_case.save()
-        #                     logger.info(f"OrderCase {order_case.id} updated with new ShippingInformation.")
-
-        #         # Clear cart items after successfully updating OrderCases
-        #         cart_items = CartPaymentCases.objects.filter(user=order.user)
-        #         if cart_items.exists():
-        #             # Clear related CartPaymentCases and associated CartPayments
-        #             cart_payment_ids = cart_items.values_list('cart_id', flat=True)
-                    
-        #             cartPayment= CartPayment.objects.filter(id__in=cart_payment_ids)
-        #             member = MembersUpdateInformation.objects.filter(member_id=cartPayment.membersID.member_id).first()
-        #             if member :
-        #                if cart_items.payment_case.payment_case == 'membership':# check the payment case membership to update membership model
-        #                 member.member_status = 'active'
-        #                 member.save()
-        #             print("membershipID : " + member.member_id)
-        #             print("membership status: " + member.member_status + cart_items.payment_case.payment_case)   
-        #             cart_items.delete()    
-        #             cartPayment.delete()
-        #             logger.info(f"Cart items and related cart payments cleared for user {order.user.id}.")
-                    
-        #         else:
-        #             logger.info(f"No CartPaymentCases found for user {order.user.id}.")
-        #     else:
-        #         logger.warning(f"No OrderCase instances found for Order {order.id}.")
-        
         if order.payment_status == "completed":
             try:
                 # Update ShippingInformation for OrderCases if needed

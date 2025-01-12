@@ -120,7 +120,7 @@
                   <span class=""><i class="bi bi-bag-plus-fill text-primary " style="font-size: 1.8rem;"></i></span>
                 {% endif %}
                 <div class="">
-                  <p class="my-0">{{cases.payment_case}}</p>
+                  <p class="my-0"><a class="{{cases.slug}}" href="{% url 'payments:payment_case_detail' slug=cases.payment_case.slug %}" >{{cases.payment_case}}</a></p>
                   <div class="d-flex justify-content-start py-1">
                     <small class="text-muted">{{cases.quantity}} x {{cases.payment_case.amount}} + shipping({{cases.payment_case.shipping_cost}})</small>
                     {% comment %} <p id="cases_slug" class="text-muted d-none">{{cases.slug}}</p> {% endcomment %}

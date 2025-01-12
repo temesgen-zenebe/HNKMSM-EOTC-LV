@@ -40,10 +40,14 @@
                     <hr />
                     <p class="card-text text-success"><strong>Amount: ${{ case.amount }}</strong></p>
                     <hr />
-                    <div class="btn-group gap-3">
-                        <a href="{% url 'pages:donation-detail' case.slug %}" class="btn btn-sm px-4 py-2 rounded-pill btn-primary">Details</a>
+                    <div class="btn-group gap-1 small">
+                        <a href="{% url 'pages:donation-detail' case.slug %}" class="btn btn-sm px-2 py-2 rounded-pill btn-primary">Details</a>
+                        <form action="{% url 'payments:addToPaymentCaseCart_view' slug=case.slug %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-sm px-2 py-2 rounded-pill btn-primary">Add to Cart</button>
+                          </form>
+                        {% comment %} <a href="{{ case.stripsPayment_link }}" class="btn btn-sm btn-primary px-4 py-2 rounded-pill" target="_blank">Pay Now</a>  {% endcomment %}
                     </div>
-                    <a href="{{ case.stripsPayment_link }}" class="btn btn-sm btn-primary px-4 py-2 rounded-pill" target="_blank">Go to Payment</a> 
                 </div>
             </div>
         </div>
