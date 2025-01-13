@@ -6,190 +6,116 @@
 {% block title %}payment History List{% endblock %}
 {% block main %}
 <div class="container my-2">
-<!-- Sermon  Start -->
-<div class="event pb-3">
-    <div class="mx-auto wow bounceInUp rounded" 
-        style="background-image: url('{% static "img/heroAccount-13.png" %}');background-size: cover; background-position: center center; background-repeat: no-repeat; " alt="Church-at" data-wow-delay="0.1s">
-        <div class="container py-1 mt-0">
-            <div class="animated bounceInDown ">
-                <ol class="breadcrumb justify-content-start mb-0 animated bounceInDown small">
-                    <li class="small"><a href="{% url 'pages:homepage' %}">Home <span class="px-1">\</span></a></li>
-                    <li class="small"><a href="{% url "payments:payment_menu" %}">payment_menu<span class="px-1">\</span></a></li>
-                    <li class="small" aria-current="page">paymentHistorytList \</li>
-                </ol>   
-            </div>
-        </div>
-        <div class="text-center py-2">
-            <h3 class="mb-2 bolder text-light fs-4">Your Payment History List</h3>
-            <h3 class="mb-2 text-primary fs-5">Payment History List to Explore your financial participation.</h1>
-        </div>
-    </div>
-</div>
-  <div class="mt-1">
-    <div class="row row-cols-1 row-cols-md-1 g-4">
-      <div class="col">
-        <div class="card shadow border border-primary">
-          <div class="card-header bg-dark small">
-            <h3 class="card-title text-white fs-5">All Payment History</h3>
-          </div>
-         
-          <div class="card-body small">
-            <!-- Table -->
-            {% if user_orders %}
-            <div class="table-responsive mt-3">
-              <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <th scope="col">Username</th>
-                    <th scope="col">OrderID</th>
-                    <th scope="col">checkout Total </th>
-                    <th scope="col">Payment Status</th>
-                    <th scope="col">Date</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {% for history in user_orders %}
-                  <tr>
-                    <td>{{ history.user.username }}</td>
-                    <td><a class="text-success" data-bs-toggle="modal" data-bs-target="#Modal{{history.slug}}" >{{ history.order_id }}</a></td>
-                    <td>$-{{ history.total_amount }}</td>
-                    <td>{{ history.payment_status }}</td>
-                    <td>{{ history.updated_at }}</td>
-                  </tr>
-                  {% endfor %}
-                </tbody>
-              </table>
-            </div>
-            {% for history in user_orders %}             
-              <!-- Modal Search Start -->
-                  <div class="modal fade " id="Modal{{history.slug}}" tabindex="-1" aria-labelledby="ModalLabel{{history.slug}}" aria-hidden="true">
-                      <div class="modal-dialog modal-lg">
-                          <div class="modal-content rounded-1">
-                              <div class="modal-header ">
-                                  <p class="modal-title " id="ModalLabel{{history.slug}}">{{ history.user.username }} Detail payment history </p>
-                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                              </div>
-                              <div class="modal-body d-flex align-items-center ">
-                                <div class="table-responsive mt-3 mx-auto">
-                                  <table class="table table-striped">
-                                    <thead>
-                                      <tr>
-                                        <th scope="col">Case</th>
-                                        <th scope="col">Quantity</th>
-                                        <th scope="col">Total Price</th>
-                                        <th scope="col">shipping_information</th>  
-                                        <th scope="col">Delivery Status</th>
-                                        <th scope="col">Date</th>
-                                      </tr>
-                                    </thead>
-                                    <tbody>
-                                      {% for case in orderCase %}
-                                        {% if case.order.id == history.id %}
-                                        <tr>
-                                          <td>{{ case.payment_case.title }}</td>
-                                          <td>{{ case.quantity }}</td>
-                                          <td>$-{{ case.total_price }}</td>
-                                          <td>{{ case.shipping_information }}</td>
-                                          <td>{{ case.delivery_state }}</td>
-                                          <td>{{ case.updated_at }}</td>
-                                        </tr>
-                                        {% endif %}
-                                      {% endfor %}
-                                    </tbody>
-                                  </table>
-                                </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                  <!-- Modal Search End -->
-              {% endfor %}
-            
-            {% else %}
-            <h3 class="card-title fs-6 mt-3">Oops! No payment history found for now.</h3>
-            {% endif %}
-          </div>
-        </div>
-      </div>
-    </div>
-  </div> 
-  <div class="my-5">
-    <div class="row row-cols-1 row-cols-md-1 g-4">
-      <div class="col">
-        <div class="card shadow border border-primary">
-          <div class="card-header bg-dark small">
-            <h3 class="card-title text-white fs-5">Order Case Payment history List</h3>
-          </div>
-          <div class="card-header small">
-            <div class="row g-3">
-              <div class="col-sm-5">
-                <!-- Dropdown Filter Form -->
-                <form method="get" action="{% url 'payments:payment_history' %}">
-                  <label for="payment_case">Filter by Payment Case:</label>
-                  <select name="payment_case" id="payment_case" class="form-select from-select-sm" onchange="this.form.submit();">
-                    <option value="">-- All Payment Cases --</option>
-                    {% for case in available_payment_cases %}
-                    <option value="{{ case.id }}" {% if case.id|stringformat:"s" == selected_payment_case %}selected{% endif %}>
-                      {{ case.title }}
-                    </option>
-                    {% endfor %}
-                  </select>
-                </form>
+  <!-- Sermon  Start -->
+  <div class="event pb-3">
+      <div class="mx-auto wow bounceInUp rounded" 
+          style="background-image: url('{% static "img/heroAccount-13.png" %}');background-size: cover; background-position: center center; background-repeat: no-repeat; " alt="Church-at" data-wow-delay="0.1s">
+          <div class="container py-1 mt-0">
+              <div class="animated bounceInDown ">
+                  <ol class="breadcrumb justify-content-start mb-0 animated bounceInDown small">
+                      <li class="small"><a href="{% url 'pages:homepage' %}">Home <span class="px-1">\</span></a></li>
+                      <li class="small"><a href="{% url "payments:payment_menu" %}">payment_menu<span class="px-1">\</span></a></li>
+                      <li class="small" aria-current="page">paymentHistorytList \</li>
+                  </ol>   
               </div>
-              
-            </div>
-            
-          </div> 
-          <div class="card-body small">
-          {% if paymentHistoryList %}
-            <div class="table-responsive mt-3">
-              <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <th scope="col">Username</th>
-                    <th scope="col">checkout Total </th>
-                    <th scope="col">Case</th>
-                    <th scope="col">Quantity</th>
-                    <th scope="col">Total Price</th>
-                    <th scope="col">Delivery Status</th>
-                    <th scope="col">Date</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {% for history in paymentHistoryList %}
-                  <tr>
-                    <td>{{ history.order.user.username }}</td>
-                    <td>$-{{ history.order.total_amount }}</td>
-                    <td>{{ history.payment_case.title }}</td>
-                    <td>{{ history.quantity }}</td>
-                    <td>$-{{ history.total_price }}</td>
-                    <td>{{ history.delivery_state }}</td>
-                    <td>{{ history.updated_at }}</td>
-                  </tr>
-                  {% endfor %}
-                </tbody>
-              </table>
+          </div>
+          <div class="text-center py-2">
+              <h3 class="mb-2 bolder text-light fs-4">Your Payment History List</h3>
+              <h3 class="mb-2 text-primary fs-5">Payment History List to Explore your financial participation.</h1>
+          </div>
+      </div>
+  </div>
+ <!-- Table  user orders-->
+    <div class="row g-2">
+      <div class="col-sm-12 mb-3 mb-sm-0">
+        <div class="card">
+          <div class="card-header bg-dark small d-flex justify-content-between">
+            <h3 class="card-title text-primary fs-5">All Payment of Orders History</h3>
+            <a href="{% url "payments:payment_case_history" %}" class="btn btn-sm px-2 py-2 rounded-pill btn-primary small">Explore more as payment cases</a>
+          </div>
+          <div class="card-body">
+            <div class="mt-1">
+                <div class="small">
+                      <!-- Table -->
+                      {% if user_orders %}
+                      <div class="table-responsive mt-3">
+                        <table class="table table-striped">
+                          <thead>
+                            <tr>
+                              <th scope="col">Username</th>
+                              <th scope="col">OrderID</th>
+                              <th scope="col">checkout Total </th>
+                              <th scope="col">Payment Status</th>
+                              <th scope="col">Date</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {% for history in user_orders %}
+                            <tr>
+                              <td>{{ history.user.username }}</td>
+                              <td><a class="text-success" data-bs-toggle="modal" data-bs-target="#Modal{{history.slug}}" >{{ history.order_id }}</a></td>
+                              <td>$-{{ history.total_amount }}</td>
+                              <td>{{ history.payment_status }}</td>
+                              <td>{{ history.updated_at }}</td>
+                            </tr>
+                            {% endfor %}
+                          </tbody>
+                        </table>
+                      </div>
+                      {% for history in user_orders %}             
+                        <!-- Modal Search Start -->
+                            <div class="modal fade " id="Modal{{history.slug}}" tabindex="-1" aria-labelledby="ModalLabel{{history.slug}}" aria-hidden="true">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content rounded-1">
+                                        <div class="modal-header ">
+                                            <p class="modal-title " id="ModalLabel{{history.slug}}">{{ history.user.username }} Detail payment history </p>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body d-flex align-items-center ">
+                                          <div class="table-responsive mt-3 mx-auto">
+                                            <table class="table table-striped">
+                                              <thead>
+                                                <tr>
+                                                  <th scope="col">Case</th>
+                                                  <th scope="col">Quantity</th>
+                                                  <th scope="col">Total Price</th>
+                                                  <th scope="col">shipping_information</th>  
+                                                  <th scope="col">Delivery Status</th>
+                                                  <th scope="col">Date</th>
+                                                </tr>
+                                              </thead>
+                                              <tbody>
+                                                {% for case in orderCase %}
+                                                  {% if case.order.id == history.id %}
+                                                  <tr>
+                                                    <td>{{ case.payment_case.title }}</td>
+                                                    <td>{{ case.quantity }}</td>
+                                                    <td>$-{{ case.total_price }}</td>
+                                                    <td>{{ case.shipping_information }}</td>
+                                                    <td>{{ case.delivery_state }}</td>
+                                                    <td>{{ case.updated_at }}</td>
+                                                  </tr>
+                                                  {% endif %}
+                                                {% endfor %}
+                                              </tbody>
+                                            </table>
+                                          </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Modal Search End -->
+                        {% endfor %}
+                      
+                      {% else %}
+                      <h3 class="card-title fs-6 mt-3">Oops! No payment history found for now.</h3>
+                      {% endif %}
+                </div>
             </div> 
-            <!-- Pagination -->
-            <div class="pagination">
-              <span class="page-links">
-                {% if paymentHistoryList.has_previous %}
-                <a href="?{% if selected_payment_case %}payment_case={{ selected_payment_case }}&{% endif %}page={{ paymentHistoryList.previous_page_number }}">Previous</a>
-                {% endif %}
-                <span>Page {{ paymentHistoryList.number }} of {{ paymentHistoryList.paginator.num_pages }}</span>
-                {% if paymentHistoryList.has_next %}
-                <a href="?{% if selected_payment_case %}payment_case={{ selected_payment_case }}&{% endif %}page={{ paymentHistoryList.next_page_number }}">Next</a>
-                {% endif %}
-              </span>
-            </div> 
-            {% else %}
-            <h3 class="card-title fs-6 mt-3">Oops! No payment history found for now.</h3>
-            {% endif %}
           </div>
         </div>
       </div>
     </div>
-  </div>
 
 </div>
 {% endblock %}

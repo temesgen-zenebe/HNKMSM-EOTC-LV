@@ -1,0 +1,108 @@
+{% extends "_base.html" %}
+{% load static %}
+{% block javascript %}
+   {% comment %} <script type="text/javascript" src="{% static '' %}" defer ></script> {% endcomment %}
+{% endblock %}
+{% block title %}payment History List{% endblock %}
+{% block main %}
+<div class="container my-2">
+  <!-- Sermon  Start -->
+  <div class="event pb-3">
+      <div class="mx-auto wow bounceInUp rounded" 
+          style="background-image: url('{% static "img/heroAccount-13.png" %}');background-size: cover; background-position: center center; background-repeat: no-repeat; " alt="Church-at" data-wow-delay="0.1s">
+          <div class="container py-1 mt-0">
+              <div class="animated bounceInDown ">
+                  <ol class="breadcrumb justify-content-start mb-0 animated bounceInDown small">
+                      <li class="small"><a href="{% url 'pages:homepage' %}">Home <span class="px-1">\</span></a></li>
+                      <li class="small"><a href="{% url "payments:payment_menu" %}">payment_menu<span class="px-1">\</span></a></li>
+                      <li class="small" aria-current="page">paymentHistorytList \</li>
+                  </ol>   
+              </div>
+          </div>
+          <div class="text-center py-2">
+              <h3 class="mb-2 bolder text-light fs-4">Your Payment History List</h3>
+              <h3 class="mb-2 text-primary fs-5">Payment History List to Explore your financial participation.</h1>
+          </div>
+      </div>
+  </div>
+   <!-- Table  user orders case list-->
+  <div class="mt-1">
+      <div class="row row-cols-1 row-cols-md-1 g-4">
+        <div class="col">
+          <div class="card shadow border border-primary">
+            <div class="card-header bg-dark small d-flex justify-content-between">
+              <h3 class="card-title text-primary fs-6">Order Case Payment history List</h3>
+              <a href="{% url "payments:payment_history" %}" class="btn btn-sm px-2 py-2 rounded-pill btn-primary small">Back Orders payment history</a>
+            </div>
+            <div class="card-header small">
+              <div class="row g-3">
+                <div class="col-sm-5">
+                  <!-- Dropdown Filter Form -->
+                  <form method="get" action="{% url 'payments:payment_case_history' %}">
+                    <label for="payment_case">Filter by Payment Case:</label>
+                    <select name="payment_case" id="payment_case" class="form-select from-select-sm" onchange="this.form.submit();">
+                      <option value="">-- All Payment Cases --</option>
+                      {% for case in available_payment_cases %}
+                      <option value="{{ case.id }}" {% if case.id|stringformat:"s" == selected_payment_case %}selected{% endif %}>
+                        {{ case.title }}
+                      </option>
+                      {% endfor %}
+                    </select>
+                  </form>
+                </div>
+                
+              </div>
+              
+            </div> 
+            <div class="card-body small">
+            {% if paymentHistoryCaseList %}
+              <div class="table-responsive mt-3">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th scope="col">Username</th>
+                      <th scope="col">checkout Total </th>
+                      <th scope="col">Case</th>
+                      <th scope="col">Quantity</th>
+                      <th scope="col">Total Price</th>
+                      <th scope="col">Delivery Status</th>
+                      <th scope="col">Date</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for history in paymentHistoryCaseList %}
+                    <tr>
+                      <td>{{ history.order.user.username }}</td>
+                      <td>$-{{ history.order.total_amount }}</td>
+                      <td>{{ history.payment_case.title }}</td>
+                      <td>{{ history.quantity }}</td>
+                      <td>$-{{ history.total_price }}</td>
+                      <td>{{ history.delivery_state }}</td>
+                      <td>{{ history.updated_at }}</td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div> 
+              <!-- Pagination -->
+              <div class="pagination">
+                <span class="page-links">
+                  {% if paymentHistoryCaseList.has_previous %}
+                  <a href="?{% if selected_payment_case %}payment_case={{ selected_payment_case }}&{% endif %}page={{ paymentHistoryCaseList.previous_page_number }}">Previous</a>
+                  {% endif %}
+                  <span>Page {{ paymentHistoryCaseList.number }} of {{ paymentHistoryCaseList.paginator.num_pages }}</span>
+                  {% if paymentHistoryCaseList.has_next %}
+                  <a href="?{% if selected_payment_case %}payment_case={{ selected_payment_case }}&{% endif %}page={{ paymentHistoryCaseList.next_page_number }}">Next</a>
+                  {% endif %}
+                </span>
+              </div> 
+              {% else %}
+              <h3 class="card-title fs-6 mt-3">Oops! No payment history found for now.</h3>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+{% endblock %}

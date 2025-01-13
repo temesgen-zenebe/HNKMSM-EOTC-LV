@@ -199,21 +199,41 @@ class PaymentsHistoryListView(LoginRequiredMixin, ListView):
 
     
 
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-        
-    #     # Add available payment cases for the dropdown
-    #     available_payment_cases = PaymentCases.objects.all()
-        
-    #     # Include the selected payment case in the context for retaining selection
-    #     selected_payment_case = self.request.GET.get('payment_case', '')
 
-    #     context.update({
-    #         'available_payment_cases': available_payment_cases,
-    #         'selected_payment_case': selected_payment_case,
-    #     })
-    #     return context
+class PaymentsCaseHistoryListView(LoginRequiredMixin, ListView):
+    model = OrderCase
+    template_name = 'payments/paymentHistoryPerOrderCase.html'
+    context_object_name = 'paymentHistoryCaseList'
+    #paginate_by = 10  # Display 10 records per page
+    
+    
+    def get_queryset(self):
+        # Filter OrderCase by logged-in user's orders and optional payment_case
+        user_orders = Order.objects.filter(user=self.request.user)
+        payment_case_filter = self.request.GET.get('payment_case')  # Get filter from dropdown
 
+        queryset = OrderCase.objects.filter(order__in=user_orders).order_by('-created_at')
+        if payment_case_filter:  # Apply filtering if selected
+            queryset = queryset.filter(payment_case__id=payment_case_filter)
+
+        return queryset
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # user_orders = Order.objects.filter(user=self.request.user)
+        # orderCase = OrderCase.objects.filter(order__in=user_orders).order_by('-created_at')
+        # Add available payment cases for the dropdown
+        available_payment_cases = PaymentCases.objects.all()
+        
+        # Include the selected payment case in the context for retaining selection
+        selected_payment_case = self.request.GET.get('payment_case', '')
+        context.update({
+            # 'user_orders': user_orders,
+            # 'orderCase': orderCase,
+            'available_payment_cases': available_payment_cases,
+            'selected_payment_case': selected_payment_case,
+        })
+        return context
 
 
    
