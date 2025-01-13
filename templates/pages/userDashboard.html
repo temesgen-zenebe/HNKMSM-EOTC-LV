@@ -27,6 +27,7 @@
           <div class="col-sm-6 ">
             <a  href="{% url 'my-account' %}" class="card btn btn-sm btn-outline-primary shadow border border-primary">
               <div class="card-body">
+                <i class="fas fa-user-circle  fa-2x px-2 "></i>
                 <h3 class="card-title fs-4">Manage Account</h3>
                 <p class="card-text ">Access your account info and Manage as you required.</p>
                 <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
@@ -36,6 +37,7 @@
           <div class="col-sm-6 ">
             <a  href="{% url "members:member_list" %}" class="card btn btn-sm btn-outline-primary shadow border border-primary">
               <div class="card-body">
+                <i class="fas fa-layer-group fa-2x px-2 "></i>
                 <h1 class="card-title fs-4">Manage Membership</h1>
                 <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
                 <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
@@ -45,6 +47,7 @@
           <div class="col-sm-6">
             <a  href="{% url "pages:donation-caseList" %}" class="card btn btn-sm btn-outline-primary shadow border border-primary">
               <div class="card-body">
+                <i class="fas fa-donate fa-2x px-2 "></i>
                 <h1 class="card-title fs-4">Donations</h1>
                 <p class="card-text">This the bast chance to do the blessings support that our church Listed out for you.</p>
               </div>
@@ -53,26 +56,29 @@
           <div class="col-sm-6">
             <a  href="{% url "payments:payment_menu" %}" class="card btn btn-sm btn-outline-primary shadow border border-primary">
               <div class="card-body">
-                <h1 class="card-title fs-4">Payments Managment</h1>
-                <p class="card-text">All payments you want to payed</p>
+                <i class="fas fa-money-bill fa-2x px-2 "></i>
+                <h1 class="card-title fs-4">Payments Management</h1>
+                <p class="card-text">Go Explore all payments you want to pay</p>
               </div>
             </a>
           </div>
           <div class="col-sm-6">
             <a  href="{% url "massaging:massage_list" %}" class="card btn btn-sm btn-outline-primary shadow border border-primary">
               <div class="card-body">
+                {% comment %} <i class="fas fa-massages fa-2x px-2 "></i> {% endcomment %}
+                <i class="bi bi-envelope-at-fill fa-2x px-2"></i>
                 <h1 class="card-title fs-4">Massages</h1>
-                <p class="card-text">Reciving imporatnt massages from our church.</p>
-                <small>you have 100 massages</small>
+                <p class="card-text">Receiving important massages from our church.</p>
+                <small>you have {{massage_count}} massages</small>
               </div>
             </a>
           </div>
           <div class="col-sm-6">
-            <a  href="#" class="card btn btn-sm btn-outline-primary shadow border border-primary">
+            <a  href="{% url "events:event_list" %}" class="card btn btn-sm btn-outline-primary shadow border border-primary">
               <div class="card-body">
-                <h1 class="card-title fs-4">Connact</h1>
-                <p class="card-text">Be connact with memabers to share resourse from this Application</p>
-              
+                <i class="bi bi-calendar2-minus-fill fa-2x px-2"></i>
+                <h1 class="card-title fs-4">Events</h1>
+                <p class="card-text">In the name of God, our church is inviting all of you Orthodox people to participate in the upcoming programs!!</p>
               </div>
             </a>
           </div>

@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect
 from django.views.generic import TemplateView,ListView,DetailView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages 
 from blog.models import Blog
 from events.models import Event,EventGallery, EventsCategory, PostEventImages,NewsAndAnnouncements
@@ -11,6 +12,7 @@ from multimedia.models import (
     PraiseGlory, TestimonyOfSalvation, 
     ArchiveLink,SpiritualPoemSong 
 )
+from massaging.models import Massage
 from members.models import MembersUpdateInformation
 from shopProducts.models import ShopProduct
 
@@ -98,8 +100,17 @@ class Contact(TemplateView):
 class TermAndCondition(TemplateView):
      template_name = 'pages/termAndCondition.html'
      
-class UserDashboard(TemplateView):
-     template_name = 'pages/userDashboard.html' 
+class UserDashboard(TemplateView,LoginRequiredMixin):
+    template_name = 'pages/userDashboard.html' 
+    
+    def get(self, request, *args, **kwargs):
+        massage = Massage.objects.filter(recipient=self.request.user).order_by('-created')
+        massage_count = massage.count()
+        context = {
+            'massage':massage,
+            'massage_count':massage_count,
+        }
+        return render(request, self.template_name, context)
      
 class ChildCare(TemplateView):
      template_name = 'pages/childCare.html'
