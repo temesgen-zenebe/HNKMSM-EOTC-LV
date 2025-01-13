@@ -230,8 +230,6 @@ LOGGING = {
     },
 }
 
-
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # BOTTOM OF settings.py
 

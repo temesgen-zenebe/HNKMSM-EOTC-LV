@@ -197,9 +197,7 @@ class PaymentsHistoryListView(LoginRequiredMixin, ListView):
         })
         return context
 
-    
-
-
+# payment case history
 class PaymentsCaseHistoryListView(LoginRequiredMixin, ListView):
     model = OrderCase
     template_name = 'payments/paymentHistoryPerOrderCase.html'
@@ -273,10 +271,10 @@ class CheckoutActionView(View):
             members_ID=MembersUpdateInformation.objects.filter(user=request.user).first()
            
             total_amount = sum(item.payment_case.amount * item.quantity for item in cart_items)
-
+            total_delivery_cost = sum(item.payment_case.shipping_cost for item in cart_items)
             # Determine if any items require delivery
             requires_delivery = any(item.payment_case.requires_delivery for item in cart_items)
-            total_delivery = 10 if requires_delivery else 0
+            total_delivery = total_delivery_cost if requires_delivery else 0
 
             # Prepare shipping details conditionally
             shipping_address_collection = {
@@ -287,7 +285,7 @@ class CheckoutActionView(View):
                 {
                     "shipping_rate_data": {
                         "type": "fixed_amount",
-                        "fixed_amount": {"amount": total_delivery * 100, "currency": "usd"},
+                        "fixed_amount": {"amount": int(float(total_delivery) * 100), "currency": "usd"},
                         "display_name": "Standard Shipping",
                         "delivery_estimate": {
                             "minimum": {"unit": "business_day", "value": 3},
