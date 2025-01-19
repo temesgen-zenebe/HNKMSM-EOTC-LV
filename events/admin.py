@@ -1,6 +1,6 @@
 # events/admin.py
 from django.contrib import admin
-from .models import Event, EventGallery, EventsCategory, PostEventImages,NewsAndAnnouncements
+from .models import Event, EventGallery, EventsCategory, PostEventImages,NewsAndAnnouncements,RemindMeUpcomingEvent
 
 admin.site.register(NewsAndAnnouncements)
 
@@ -64,3 +64,7 @@ class PostEventImagesAdmin(admin.ModelAdmin):
     list_display = ('event_gallery', 'image')
     search_fields = ('event_gallery__title',)
     list_filter = ('event_gallery',)
+    
+@admin.register(RemindMeUpcomingEvent)
+class RemindMeUpcomingEventAdmin(admin.ModelAdmin):
+    list_display = ('event', 'your_name', 'is_passed')

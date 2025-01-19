@@ -7,8 +7,8 @@
     <div class="mx-auto wow bounceInUp rounded my-3" 
         style="background-image: url('{% static "img/heroAccount-13.png" %}');background-size: cover; background-position: center center; background-repeat: no-repeat; " alt="Church-at" data-wow-delay="0.1s">
         <div class="container py-1 mt-0">
-            <div class="animated bounceInDown ">
-                <ol class="breadcrumb justify-content-start mb-0 animated bounceInDown">
+            <div class="animated bounceInDown small">
+                <ol class="breadcrumb justify-content-start mb-0 animated bounceInDown small">
                     <li class="small"><a href="{% url 'pages:homepage' %}">Home <span class="px-1">\</span></a></li>
                     <li class="small"> <a href="{% url "events:event_list" %}">EventsLists<span class="px-1">\</span></a></li>
                     <li class="small" aria-current="page">EventsDetails<span class="px-1">\</span></li>
@@ -39,20 +39,22 @@
               </div>
             </div>
             <div class="col-sm-6">
-              <div class="card">
-                <div class="card-body">
-                    <p class="card-title ">Event : <span class="h2 fs-5 px-2 text-primary">{{ event.title }}</span></p>
-                    <p class="card-text">Description :<small class=" px-2 text-primary">{{ event.description }}</small></p>
-                    <p class="card-text">Location: <small class="px-2 text-primary">{{ event.location }}</small></p>
-                    <p class="card-text">Start Time: <small class="px-2 text-primary"> {{ event.start_time }}</small></p>
-                    <p class="card-text">End Time:  <small class="px-2 text-primary">{{ event.end_time }}</small></p>
-                    <p class="card-text">Special Guests:  <small class="px-2 text-primary">{{ event.special_guests }}</small></p>
-                    <p class="card-text">Notices:  <small class="px-2 text-primary">{{ event.notices }}</small></p>
+              <div class="card sm">
+                <div class="card-body small">
+                    <p class="card-title small">Event : <span class="h2 fs-6 px-2 text-primary">{{ event.title }}</span></p>
+                    <p class="card-title small">Description :<small class=" px-2 text-primary">{{ event.description }}</small></p>
+                    <p class="card-title small">Location: <small class="px-2 text-primary">{{ event.location }}</small></p>
+                    <p class="card-title small">Start Time: <small class="px-2 text-primary"> {{ event.start_time }}</small></p>
+                    <p class="card-title small">End Time:  <small class="px-2 text-primary">{{ event.end_time }}</small></p>
+                    <p class="card-title small">Special Guests:  <small class="px-2 text-primary">{{ event.special_guests }}</small></p>
+                    <p class="card-title small">Notices:  <small class="px-2 text-primary">{{ event.notices }}</small></p>
                 </div>
-                <div class="card-body">
-                    <a href="{% url 'events:event_list' %}" class="btn btn-sm btn-outline-primary">Back to Event List</a>
-                    <a href="{% url 'events:event_list' %}" class="btn btn-sm btn-outline-primary">Add to remind me</a> 
-                    <a href="{% url 'events:event_list' %}" class="btn btn-sm btn-outline-primary">share</a>
+                <div class="card-body small">
+                    <div class="btn-group btn-sm small gap-1">
+                        <a href="{% url 'events:event_list' %}" class="btn btn-sm btn-outline-primary "><small class="px-2 ">Back</small></a>
+                        <a href="{% url 'events:event_list' %}" class="btn btn-sm btn-outline-primary"><small class="px-2 ">Remind Me</small></a> 
+                        <a href="{% url 'events:event_list' %}" class="btn btn-sm btn-outline-primary"><small class="px-2 ">Share</small></a>
+                    </div>
                 </div>
               </div>
             </div>

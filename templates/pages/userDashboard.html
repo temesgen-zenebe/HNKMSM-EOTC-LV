@@ -24,9 +24,9 @@
      <!-- Example Code -->
      <div class="container pt-3"> 
         <div class="row g-2 ">
-          <div class="col-sm-6 ">
-            <a  href="{% url 'my-account' %}" class="card btn btn-sm btn-outline-primary shadow border border-primary">
-              <div class="card-body">
+          <div class="col-sm-6 sh">
+            <a  href="{% url 'my-account' %}" class="card btn btn-sm btn-outline-primary shadow-2 border border-primary">
+              <div class="card-body ">
                 <i class="fas fa-user-circle  fa-2x px-2 "></i>
                 <h3 class="card-title fs-4">Manage Account</h3>
                 <p class="card-text ">Access your account info and Manage as you required.</p>
@@ -57,8 +57,8 @@
             <a  href="{% url "payments:payment_menu" %}" class="card btn btn-sm btn-outline-primary shadow border border-primary">
               <div class="card-body">
                 <i class="fas fa-money-bill fa-2x px-2 "></i>
-                <h1 class="card-title fs-4">Payments Management</h1>
-                <p class="card-text">Go Explore all payments you want to pay</p>
+                <h1 class="card-title fs-4 py-2">Payments Management</h1>
+                <p class="card-text">Go Explore all payments you want to pay and Manage you payments.</p>
               </div>
             </a>
           </div>
@@ -77,8 +77,18 @@
             <a  href="{% url "events:event_list" %}" class="card btn btn-sm btn-outline-primary shadow border border-primary">
               <div class="card-body">
                 <i class="bi bi-calendar2-minus-fill fa-2x px-2"></i>
-                <h1 class="card-title fs-4">Events</h1>
+                <h1 class="card-title fs-4 py-2">Events</h1>
                 <p class="card-text">In the name of God, our church is inviting all of you Orthodox people to participate in the upcoming programs!!</p>
+              </div>
+            </a>
+          </div>
+          <div class="col-sm-6">
+            <a  href="{% url "events:event_list" %}" class="card btn btn-sm btn-outline-primary shadow border border-primary">
+              <div class="card-body">
+                <i class="bi bi-calendar2-minus-fill fa-2x px-2"></i>
+                <h1 class="card-title fs-4 py-2">Notification</h1>
+                <p class="card-text small">In the name of God, our church is inviting all of you Orthodox people to participate in the upcoming event!!</p>
+                <small>You have {{remind_count}} Remind me Notification</small>
               </div>
             </a>
           </div>

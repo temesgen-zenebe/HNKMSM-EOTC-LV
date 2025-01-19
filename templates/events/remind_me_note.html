@@ -1,0 +1,28 @@
+{% extends "_base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}Events List{% endblock %}
+{% block main %}
+<div class="container">
+    <div class="mx-auto wow bounceInUp rounded my-2" 
+        style="background-image: url('{% static "img/heroAccount-13.png" %}');background-size: cover; background-position: center center; background-repeat: no-repeat; " alt="Church-at" data-wow-delay="0.1s">
+        <div class="container py-1 mt-0">
+            <div class="animated bounceInDown ">
+                <ol class="breadcrumb justify-content-start mb-0 animated bounceInDown">
+                    <li class="small"><a href="{% url 'pages:homepage' %}">Home <span class="px-1">\</span></a></li>
+                    <li class="small" aria-current="page"> <a href="{% url "events:event_list" %}">events List<span class="px-1">\</span></a></li>
+                </ol>
+            </div>
+        </div>
+        <div class="text-center py-2">
+            <h3 class="mb-2 text-light fs-4">መጪ ፕሮግራሞች (ክስተቶች) ዝርዝር</h3>
+            <h3 class="mb-2 text-light fs-4 ">The upcoming  events List </h3>
+        </div>
+        <div class="text-center py-2 px-2 ">
+            <p class="small">ሁላችሁም ኦርቶዶክሳውያን በመጪው በሚከናወኑ ፕሮግራሞች ላይ እንድንሳተፍ  ቤተክርስቲያናችን በእግዚአብሔር ስም ጥሪ ታቀርባለች!!</p>
+            <p class="h2 fs-6 text-primary small">In the name of God, our church is inviting all of you Orthodox people to participate in the upcoming programs!!</p>
+        </div>
+    </div>
+   
+</div>
+{% endblock %}

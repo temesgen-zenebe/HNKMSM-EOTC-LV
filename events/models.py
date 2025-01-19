@@ -114,3 +114,27 @@ class NewsAndAnnouncements(models.Model):
 
     def __str__(self):
         return f"{self.title} - {self.category.capitalize()} - {self.emergence_type.capitalize()}"
+    
+    
+class RemindMeUpcomingEvent(models.Model):
+    event = models.ForeignKey(Event, on_delete=models.CASCADE,related_name='event')
+    your_name = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='remainder')
+    massage = models.TextField(default="Upcoming Event Tomorrow:This is a polite reminder that the scheduled event will take place tomorrow. Please ensure you are prepared & ready to participate.")
+    is_passed = models.BooleanField(default=False)
+    slug = models.SlugField(unique=True, blank=True, null=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            value = str(self.your_name)
+            self.slug = unique_slug(value, type(self))
+        now = timezone.now()
+        
+        if self.event.end_time < now:
+            self.is_passed = True
+        
+        super().save(*args, **kwargs)
+    
+    def __str__(self):
+        return f"Remainder:{self.event.title} coming tomorrow start_time {self.event.start_time}"

@@ -160,8 +160,6 @@ class PaymentCaseCartUpdateView(LoginRequiredMixin, UpdateView):
         # Optional: Filter queryset if needed, e.g., by user
         return super().get_queryset()
 
-
-
 class PaymentsHistoryListView(LoginRequiredMixin, ListView):
     model = OrderCase
     template_name = 'payments/paymentHistory_list.html'
@@ -233,15 +231,12 @@ class PaymentsCaseHistoryListView(LoginRequiredMixin, ListView):
         })
         return context
 
-
-   
 class PaymentCancelView(TemplateView):
     template_name = "payments/cancel.html"
     
 class PaymentSuccessView(TemplateView):
     template_name = "payments/success.html"
    
-    
 # Set your secret key. Remember to switch to your live secret key in production.
 # This is your Stripe CLI webhook secret for testing your endpoint locally.
 stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -370,8 +365,7 @@ class CheckoutActionView(View):
 
         except Exception as e:
             return JsonResponse({"error": f"An unexpected error occurred: {str(e)}"}, status=500)
-
-       
+  
 # Stripe Webhook
 @csrf_exempt
 def stripe_webhook(request):
