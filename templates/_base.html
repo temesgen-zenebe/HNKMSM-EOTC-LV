@@ -28,7 +28,7 @@
         <!-- Customized Bootstrap Stylesheet -->
         <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
 
-        <!-- Template Stylesheet -->
+        <!-- Template Stylesheet _base.html-->
         {% comment %} <link href="css/style.css" rel="stylesheet"> {% endcomment %}
         <link rel="stylesheet" href="{% static 'css/style.css' %}">
         {% block css %}{% endblock %}
@@ -100,32 +100,52 @@
                             {% endif %}
                             <a href="{% url 'pages:contact-us' %}" class="nav-item nav-link me-4">Contact</a> 
                             <button class="nav-item nav-link btn-search btn btn-primary btn-md-square me-2 rounded-circle d-none d-lg-inline-flex" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search"></i></button>
-                            {% if not user.is_authenticated %}
-                            <a href="{% url 'account_login'%}" class="nav-item nav-link btn btn-primary py-2 px-3 me-3 rounded-pill small">Log in</a>
+                            <!--Donations-->
+                            {% if user.is_authenticated %}
+                            <a href="{% url "pages:donation-caseList" %}" class="nav-item nav-link btn btn-primary py-2 px-3 d-none me-2  d-xl-inline-block rounded-pill small">Donation</a>
                             {% else %}
-                            <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle btn btn-sm btn-primary py-2 px-4 me-3 rounded-pill " data-bs-toggle="dropdown">
-                                     <i class="fas fa-user px-1"></i><small>welcome {{ user.username|slice:":1"|capfirst }}</small></a> 
-                                <div class="dropdown-menu bg-light border border-primary small">
+                            <a href="{% url 'account_login'%}" class="nav-item nav-link btn btn-sm btn-primary py-2 px-2 me-2  d-none d-xl-inline-block rounded-pill"><span class="small">Donation</span></a>
+                            {% endif %}
+                            <!--UserDashboard-->
+                            {% if not user.is_authenticated %}
+                            <a href="{% url 'account_login'%}" class="nav-item nav-link btn btn-sm btn-primary py-2 px-3 me-3 rounded-pill small">Log in</a>
+                            {% else %}
+                            <div class="nav-item dropdown small">
+                                <a href="#" class="nav-link dropdown-toggle btn btn-sm btn-primary rounded-pill me-2" data-bs-toggle="dropdown">
+                                    {% if not notification_count == 0 %}
+                                    <span class="badge rounded-pill "><i class="bi bi-megaphone"></i><span class="small"> {{ notification_count }}</span></span>|
+                                    {% endif %}
+                                    {% if not cart_count == 0 %}
+                                    <span class="badge rounded-pill "><i class="bi bi-cart"></i><span class="small"> {{ cart_count }}</span></span> 
+                                    {% endif %}
+                                    {% if user.avatar and not form.avatar.errors %}
+                                        <img src="{{ user.avatar.url }}" alt="Avatar"
+                                            class="img-fluid rounded-circle my-0 mx-auto" style="max-width: 20px"/>
+                                    {% else %}
+                                    <i class="fas fa-user"></i>
+                                    {% endif %}
+                                    {% comment %} <small>Hi{{ user.username|slice:":1"|capfirst }}</small> {% endcomment %}
+                                    
+                                </a> 
+                                <div class="dropdown-menu bg-light border-3 border-primary small">
                                     <a class="dropdown-item"><i class="fas fa-user px-1"></i> {{ user.username|capfirst }}</a>
                                     <hr class="m-0" />
-                                    <a href="{% url "pages:user-dashboard" %}" class="dropdown-item">Dashboard</a>
-                                    <a href="{% url "members:member_list" %}" class="dropdown-item">Membership</a>
-                                    <a href="{% url "payments:payment_menu" %}" class="dropdown-item">Payment</a>
-                                    <a href="{% url 'my-account' %}" class="dropdown-item">my account</a>
+                                    <a href="{% url "pages:user-dashboard" %}" class="dropdown-item small">Dashboard</a>
+                                    <a href="{% url "members:member_list" %}" class="dropdown-item small">Membership</a>
+                                    <a href="{% url "payments:payment_menu" %}" class="dropdown-item small">Payment</a>
+                                    <a href="{% url 'my-account' %}" class="dropdown-item small">my account</a>
+                                    <hr class="m-0" />
+                                    <a href="{% url "pages:user-dashboard" %}" class="dropdown-item small"><i class="bi bi-megaphone "></i> Notification</a>
+                                    <a href="{% url "pages:user-dashboard" %}" class="dropdown-item small"><i class="bi bi-cart "></i> cart</a>
                                     <hr class="m-0" />
                                     <form action="{% url 'account_logout' %}" method="post">
                                         {% csrf_token %}
-                                        <button class="btn btn-primary dropdown-item">Logout</button>
+                                        <button class="btn btn-primary dropdown-item small">Logout</button>
                                     </form>
                                 </div>
                             </div>
                             {% endif %}
-                            {% if user.is_authenticated %}
-                            <a href="{% url "pages:donation-caseList" %}" class="nav-item nav-link btn btn-primary py-2 px-3 d-none d-xl-inline-block rounded-pill small">Donation</a>
-                            {% else %}
-                            <a href="{% url 'account_login'%}" class="nav-item nav-link btn btn-primary py-2 px-3 d-none d-xl-inline-block rounded-pill small">Donation</a>
-                            {% endif %}
+                            
                             {% comment %} <span class="nav-item nav-link btn btn-primary py-2 px-3 d-none d-xl-inline-block rounded-pill small" data-bs-toggle="modal" data-bs-target="#all-payments">Donation</span> {% endcomment %}
                         </div>
                        

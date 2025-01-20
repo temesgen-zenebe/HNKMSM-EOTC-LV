@@ -95,6 +95,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                
+                # Add your context processor
+                'pages.context_processors.cart_and_notifications',
             ],
         },
     },
