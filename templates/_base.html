@@ -113,39 +113,38 @@
                             <div class="nav-item dropdown small">
                                 <a href="#" class="nav-link dropdown-toggle btn btn-sm btn-primary rounded-pill me-2" data-bs-toggle="dropdown">
                                     {% if not notification_count == 0 %}
-                                    <span class="badge rounded-pill "><i class="bi bi-megaphone"></i><span class="small"> {{ notification_count }}</span></span>|
+                                    <span class="badge rounded-pill "><i class="bi bi-megaphone px-1"></i><strong class="small">{{ notification_count }}</strong></span>|
                                     {% endif %}
                                     {% if not cart_count == 0 %}
-                                    <span class="badge rounded-pill "><i class="bi bi-cart"></i><span class="small"> {{ cart_count }}</span></span> 
-                                    {% endif %}
+                                    <span class="badge rounded-pill text-bold"><i class="fas fa-shopping-cart px-1 "></i><span class="small">{{ cart_count }}</span></span> 
+                                    {% endif %} 
                                     {% if user.avatar and not form.avatar.errors %}
                                         <img src="{{ user.avatar.url }}" alt="Avatar"
-                                            class="img-fluid rounded-circle my-0 mx-auto" style="max-width: 20px"/>
+                                            class="img-fluid rounded-circle my-0 mx-auto" style="max-width: 23px"/>
                                     {% else %}
                                     <i class="fas fa-user"></i>
                                     {% endif %}
                                     {% comment %} <small>Hi{{ user.username|slice:":1"|capfirst }}</small> {% endcomment %}
                                     
                                 </a> 
-                                <div class="dropdown-menu bg-light border-3 border-primary small">
+                                <div class="dropdown-menu bg-light border-2 border-primary small">
                                     <a class="dropdown-item"><i class="fas fa-user px-1"></i> {{ user.username|capfirst }}</a>
                                     <hr class="m-0" />
-                                    <a href="{% url "pages:user-dashboard" %}" class="dropdown-item small">Dashboard</a>
-                                    <a href="{% url "members:member_list" %}" class="dropdown-item small">Membership</a>
-                                    <a href="{% url "payments:payment_menu" %}" class="dropdown-item small">Payment</a>
-                                    <a href="{% url 'my-account' %}" class="dropdown-item small">my account</a>
+                                    <a href="{% url "pages:user-dashboard" %}" class="dropdown-item small"><i class="fas fa-clipboard px-1"></i>Dashboard</a>
+                                    <a href="{% url "members:member_list" %}" class="dropdown-item small"><i class="fas fa-users px-1"></i>Membership</a>
+                                    <a href="{% url "payments:payment_menu" %}" class="dropdown-item small"><i class="fas fa-money-check px-1"></i>Payment</a>
+                                    <a href="{% url 'my-account' %}" class="dropdown-item small"><i class="fas fa-user px-1"></i>my account</a>
                                     <hr class="m-0" />
-                                    <a href="{% url "pages:user-dashboard" %}" class="dropdown-item small"><i class="bi bi-megaphone "></i> Notification</a>
-                                    <a href="{% url "pages:user-dashboard" %}" class="dropdown-item small"><i class="bi bi-cart "></i> cart</a>
+                                    <a href="{% url "events:user-notification" %}" class="dropdown-item small"><i class="bi bi-megaphone px-1"></i>Notification</a>
+                                    <a href="{% url "payments:paymentCaseCart_view" %}" class="dropdown-item small"><i class="fas fa-shopping-cart px-1"></i>cart</a>
                                     <hr class="m-0" />
                                     <form action="{% url 'account_logout' %}" method="post">
                                         {% csrf_token %}
-                                        <button class="btn btn-primary dropdown-item small">Logout</button>
+                                        <button class="btn btn-primary dropdown-item small"><i class="fas fa-sign-out-alt px-1"></i>Logout</button>
                                     </form>
                                 </div>
                             </div>
                             {% endif %}
-                            
                             {% comment %} <span class="nav-item nav-link btn btn-primary py-2 px-3 d-none d-xl-inline-block rounded-pill small" data-bs-toggle="modal" data-bs-target="#all-payments">Donation</span> {% endcomment %}
                         </div>
                        

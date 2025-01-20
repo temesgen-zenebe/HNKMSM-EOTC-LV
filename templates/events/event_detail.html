@@ -52,7 +52,10 @@
                 <div class="card-body small">
                     <div class="btn-group btn-sm small gap-1">
                         <a href="{% url 'events:event_list' %}" class="btn btn-sm btn-outline-primary "><small class="px-2 ">Back</small></a>
-                        <a href="{% url 'events:event_list' %}" class="btn btn-sm btn-outline-primary"><small class="px-2 ">Remind Me</small></a> 
+                        <form action="{% url 'events:add_remind_me' slug=event.slug %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-sm btn-outline-primary "><small class="px-2 ">Remind Me</small></button>
+                          </form>
                         <a href="{% url 'events:event_list' %}" class="btn btn-sm btn-outline-primary"><small class="px-2 ">Share</small></a>
                     </div>
                 </div>

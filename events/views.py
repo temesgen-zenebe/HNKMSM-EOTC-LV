@@ -1,7 +1,9 @@
 # events/views.py
-from django.views.generic import ListView, DetailView
-from .models import Event, EventGallery, PostEventImages,NewsAndAnnouncements
-from django.shortcuts import get_object_or_404
+from pyexpat.errors import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import ListView, DetailView, CreateView
+from .models import Event, EventGallery, PostEventImages,NewsAndAnnouncements,RemindMeUpcomingEvent
+from django.shortcuts import get_object_or_404, redirect
 from django.utils import timezone
 
 class EventListView(ListView):
@@ -97,3 +99,27 @@ class NewsAndAnnouncementsDetailView(DetailView):
 
     def get_object(self):
         return get_object_or_404(NewsAndAnnouncements, slug=self.kwargs['slug'])
+    
+class UserNotificationListView(LoginRequiredMixin, ListView):
+    model = RemindMeUpcomingEvent
+    template_name = 'events/remind_me_note.html'
+    context_object_name = 'remind_me_note'
+    
+    def get_queryset(self):
+        return RemindMeUpcomingEvent.objects.filter(your_name=self.request.user, is_passed = False)
+    
+class AddRemindMeNotificationCreateView(LoginRequiredMixin, CreateView):
+   
+    def post(self, request, slug):
+        # Fetch the upcoming event
+        upcoming_event = get_object_or_404(Event, slug=slug)
+
+        # Check if the RemindMeUpcomingEvent already exists
+        remind_me_event, created = RemindMeUpcomingEvent.objects.get_or_create(
+            event=upcoming_event,
+            your_name=request.user,
+        )
+
+        # Redirect to the event list view after processing
+        return redirect('events:event_list')
+        

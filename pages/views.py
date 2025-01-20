@@ -3,7 +3,7 @@ from django.views.generic import TemplateView,ListView,DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages 
 from blog.models import Blog
-from events.models import Event,EventGallery, EventsCategory, PostEventImages,NewsAndAnnouncements
+from events.models import Event,EventGallery, EventsCategory, PostEventImages,NewsAndAnnouncements, RemindMeUpcomingEvent
 from payments.models import PaymentCases
 from django.db.models import Q
 from django.utils import timezone
@@ -106,9 +106,11 @@ class UserDashboard(TemplateView,LoginRequiredMixin):
     def get(self, request, *args, **kwargs):
         massage = Massage.objects.filter(recipient=self.request.user).order_by('-created')
         massage_count = massage.count()
+        remind_count = RemindMeUpcomingEvent.objects.filter(your_name=self.request.user, is_passed = False).count()
         context = {
             'massage':massage,
             'massage_count':massage_count,
+            'remind_count':remind_count
         }
         return render(request, self.template_name, context)
      

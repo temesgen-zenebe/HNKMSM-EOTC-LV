@@ -83,12 +83,12 @@
             </a>
           </div>
           <div class="col-sm-6">
-            <a  href="{% url "events:event_list" %}" class="card btn btn-sm btn-outline-primary shadow border border-primary">
+            <a  href="{% url "events:user-notification" %}" class="card btn btn-sm btn-outline-primary shadow border border-primary">
               <div class="card-body">
                 <i class="bi bi-calendar2-minus-fill fa-2x px-2"></i>
                 <h1 class="card-title fs-4 py-2">Notification</h1>
                 <p class="card-text small">In the name of God, our church is inviting all of you Orthodox people to participate in the upcoming event!!</p>
-                <small>You have {{remind_count}} Remind me Notification</small>
+                <small>You have ({{remind_count}}) Remind me Notification</small>
               </div>
             </a>
           </div>

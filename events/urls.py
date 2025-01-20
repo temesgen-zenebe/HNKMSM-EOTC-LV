@@ -4,7 +4,9 @@ from .views import (
     EventListView, EventDetailView, 
     EventGalleryListView, EventGalleryDetailView,
     NewsAndAnnouncementsListView, 
-    NewsAndAnnouncementsDetailView
+    NewsAndAnnouncementsDetailView,
+    UserNotificationListView,
+    AddRemindMeNotificationCreateView,
     )
 
 app_name = 'events' 
@@ -16,4 +18,7 @@ urlpatterns = [
     path('gallery/<slug:slug>/', EventGalleryDetailView.as_view(), name='event_gallery_detail'),
     path('NewsAndAnnouncements/', NewsAndAnnouncementsListView.as_view(), name='NewsAndAnnouncements_list'),
     path('NewsAndAnnouncements/<slug:slug>/', NewsAndAnnouncementsDetailView.as_view(), name='NewsAndAnnouncements_detail'),
+    path('user/userNotification/', UserNotificationListView.as_view(), name='user-notification'),
+    path('user/<slug:slug>/add-to-remind-me/', AddRemindMeNotificationCreateView.as_view(), name='add_remind_me'),
+
 ]
