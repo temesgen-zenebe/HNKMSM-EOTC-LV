@@ -256,6 +256,8 @@
                 {% endif %}
             {% endif %}
             {% endfor %}
+            {% else %}
+            <div class="small text-center py-4 "><a href="{% url 'members:member_create' %}" class="btn btn-sm btn-primary rounded-pill px-3 py-2">Start to Create and Active Your Membership</a></div>
             {% endif %}
             </div>
         </div>

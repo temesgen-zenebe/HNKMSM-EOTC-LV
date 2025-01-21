@@ -3,7 +3,6 @@ from django.conf import settings
 from django.forms import ValidationError
 from common.utils.text import unique_slug
 from django.utils import timezone
-from ckeditor.fields import RichTextField # eg. description = RichTextField()
 from decimal import Decimal
 import uuid
 from members.models import MembersUpdateInformation

@@ -135,8 +135,12 @@
                                     <a href="{% url "payments:payment_menu" %}" class="dropdown-item small"><i class="fas fa-money-check px-1"></i>Payment</a>
                                     <a href="{% url 'my-account' %}" class="dropdown-item small"><i class="fas fa-user px-1"></i>my account</a>
                                     <hr class="m-0" />
+                                    {% if not notification_count == 0 %}
                                     <a href="{% url "events:user-notification" %}" class="dropdown-item small"><i class="bi bi-megaphone px-1"></i>Notification</a>
+                                    {% endif %}
+                                    {% if not cart_count == 0 %}
                                     <a href="{% url "payments:paymentCaseCart_view" %}" class="dropdown-item small"><i class="fas fa-shopping-cart px-1"></i>cart</a>
+                                    {% endif %}
                                     <hr class="m-0" />
                                     <form action="{% url 'account_logout' %}" method="post">
                                         {% csrf_token %}
@@ -367,8 +371,9 @@
         <!-- Back to Top -->
          
         <a href="#" class="btn btn-md-square btn-primary rounded-circle back-to-top"><i class="fa fa-arrow-up"></i></a>   
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.2.0/js/bootstrap.bundle.min.js"></script>
+        {% comment %} <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.2.0/js/bootstrap.bundle.min.js"></script>
         <!-- JavaScript Libraries -->
+
         <script src="{% static 'js/ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js' %}"></script>
         <script src="{% static 'js/cdn.jsdelivr.net/npm/bootstrap%405.0.0/dist/js/bootstrap.bundle.min.js' %}"></script>
         <script src="{% static 'lib/wow/wow.min.js' %}"></script>
@@ -377,10 +382,27 @@
         <script src="{% static 'lib/counterup/counterup.min.js' %}"></script>
         <script src="{% static 'lib/lightbox/js/lightbox.min.js' %}"></script>
         <script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
+        <script src="{% static 'css/cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js' %}"></script>
 
         <!-- Template Javascript -->
         <script type="text/javascript"  src="{% static 'js/main.js' %}" async></script>
-        
+         {% endcomment %}
+         <!-- Load Bootstrap from CDN -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+        {% comment %} <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script> {% endcomment %}
+
+        <!-- JavaScript Libraries -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="{% static 'lib/wow/wow.min.js' %}"></script>
+        <script src="{% static 'lib/easing/easing.min.js' %}"></script>
+        <script src="{% static 'lib/waypoints/waypoints.min.js' %}"></script>
+        <script src="{% static 'lib/counterup/counterup.min.js' %}"></script>
+        <script src="{% static 'lib/lightbox/js/lightbox.min.js' %}"></script>
+        <script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
+
+        <!-- Template Javascript -->
+        <script type="text/javascript" src="{% static 'js/main.js' %}" async></script>
+
     </body>
 
 

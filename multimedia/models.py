@@ -73,7 +73,7 @@ class UserManual(models.Model):
     version = models.CharField(max_length=20, default=1)
     usage_description = models.TextField(default=300, blank=True, null=True)
     file = models.FileField(upload_to='multimedia/userManuals/')
-    published_by = models.CharField(blank=True, null=True)
+    published_by = models.CharField(max_length=200, blank=True, null=True)
     published_date = models.DateField(blank=True, null=True)
     uploaded_at = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)

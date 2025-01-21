@@ -2,7 +2,9 @@ from django.db import models
 from django.conf import settings
 from django.utils import timezone
 from django.urls import reverse
-from ckeditor.fields import RichTextField
+# from ckeditor.fields import RichTextField 
+#    e.g content = RichTextField(blank=True, null=True)
+
 from common.utils.text import unique_slug  # Assuming you have a utility for generating unique slugs
 
 class BlogCategory(models.Model):
@@ -26,7 +28,7 @@ class Blog(models.Model):
         ('private', 'private'),
     ]
     title = models.CharField(max_length=200)
-    content = RichTextField(blank=True, null=True)
+    content = models.TextField(blank=True, null=True)
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True)
     published_at = models.DateTimeField(default=timezone.now)
     published_by = models.CharField(max_length=100, blank=True, null=True)

@@ -41,13 +41,16 @@ class HomePageView(TemplateView):
         # Filter for PaymentCases with the 'donation' category
         payment_donation = PaymentCases.objects.filter(Q(category__title='donation'))
 
-        # payment_donation = PaymentCases.objects.filter(category = 'donation')
         if request.user.is_authenticated:
-            # User is authenticated, proceed with fetching the membership
-            membership = MembersUpdateInformation.objects.get(user=request.user)
-            member_status = membership.member_status
+            # User is authenticated, check for membership record
+            try:
+                membership = MembersUpdateInformation.objects.get(user=request.user)
+                member_status = membership.member_status
+            except MembersUpdateInformation.DoesNotExist:
+                # Handle the case where no membership record exists
+                member_status = 'undefined'
         else:
-            # Handle unauthenticated user (redirect or display an error)
+            # Handle unauthenticated user
             member_status = 'undefined'
             
         print(member_status)

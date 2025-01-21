@@ -13,21 +13,33 @@ import os
 from pathlib import Path
 import dj_database_url  
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 # Initialise environment variables
 
-DEBUG=(bool, False)
+#Your DEBUG setting should correctly evaluate to False in production:
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+# ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['HNKMSMEOTCAPP.up.railway.app', '127.0.0.1', 'localhost']
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
+#CROSS_ALLOWED_ORIGEN
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:8000",  
+    "http://127.0.0.1:8000",
+    "https://HNKMSMEOTCAPP.up.railway.app",
+]
+
+#Set this to True to avoid transmitting the CSRF cookie over HTTP accidentally.
+CSRF_COOKIE_SECURE = True
+
+#Set this to True to avoid transmitting the session cookie over HTTP accidentally.
+SESSION_COOKIE_SECURE= True
 
 # Application definition
-
 INSTALLED_APPS = [
     # Built-in Django apps
     'django.contrib.admin',
@@ -39,6 +51,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
+    'corsheaders',
     'ckeditor',
     
     # Third-party
@@ -74,7 +87,9 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -105,19 +120,26 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'HNKMSMEOTCAPP.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-"""
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}"""
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
+
 
 #DATABASES = { 'default' : dj_database_url.config()}
-DATABASES = { 'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))}
+DATABASES = { 
+    'default': dj_database_url.config(
+        default=os.environ.get('DATABASE_URL'),
+        conn_max_age=600,
+        ssl_require=False
+        )
+    }
+
 
 AUTHENTICATION_BACKENDS = (
 # Needed to login by username in Django admin, even w/o `allauth`
@@ -199,18 +221,21 @@ TIME_ZONE = 'UTC'  # or your desired timezone
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [BASE_DIR / 'static',]
+
+# STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+MIDDLEWARE.insert(1, "whitenoise.middleware.WhiteNoiseMiddleware")
+WHITENOISE_MANIFEST_STRICT = False
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
-STATICFILES_DIRS = [
-    BASE_DIR / 'static',
-]
-
-#STATIC_ROOT = BASE_DIR / 'static'
-
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')#BASE_DIR / 'media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -219,17 +244,24 @@ STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY')
 STRIPE_PUBLISHABLE_KEY = os.environ.get('STRIPE_PUBLISHABLE_KEY')
 STRIPE_WEBHOOK_SECRET = os.environ.get('STRIPE_WEBHOOK_SECRET')
 STRIPE_ENDPOINT_SECRET = os.environ.get('STRIPE_ENDPOINT_SECRET')
+
+#Error Logging: You could add logging handlers to capture errors in production:
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'handlers': {
-        'console': {
-            'class': 'logging.StreamHandler',
+        'file': {
+            'level': 'ERROR',
+            'class': 'logging.FileHandler',
+            'filename': BASE_DIR / 'errors.log',
         },
     },
-    'root': {
-        'handlers': ['console'],
-        'level': 'DEBUG',
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
     },
 }
 
